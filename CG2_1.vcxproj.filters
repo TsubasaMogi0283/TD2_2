@@ -201,6 +201,18 @@
     <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp">
       <Filter>Project\Scene\Sample</Filter>
     </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp">
+      <Filter>Project\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\ResultScene.cpp">
+      <Filter>Project\Scene\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
+      <Filter>Project\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -375,6 +387,18 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h">
       <Filter>Project\Scene\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h">
+      <Filter>Project\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\ResultScene.h">
+      <Filter>Project\Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
+      <Filter>Project\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
+      <Filter>Project\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

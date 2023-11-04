@@ -120,7 +120,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Ellysia\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\AllGameScene\GameManager\GameManager.cpp" />
+    <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\Result\ResultScene.cpp" />
     <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -197,7 +201,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Ellysia\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Project\AllGameScene\GameManager\GameManager.h" />
     <ClInclude Include="Project\AllGameScene\GameManager\IGameScene.h" />
+    <ClInclude Include="Project\AllGameScene\Game\GameScene.h" />
+    <ClInclude Include="Project\AllGameScene\Result\ResultScene.h" />
     <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h" />
+    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h" />
+    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Ellysia\externals\imGui\LICENSE.txt" />

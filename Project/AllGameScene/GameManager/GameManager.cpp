@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
 #include "AllGameScene/SampleScene/SampleScene.h"
+#include "AllGameScene/Title/TitleScene.h"
 
 //コンストラクタ
 GameManager::GameManager() {
@@ -34,7 +35,7 @@ void GameManager::Initialize() {
 	audio_->Initialize();
 
 	//シーンごとに動作確認したいときはここを変えてね
-	currentGamaScene_ = new SampleScene();
+	currentGamaScene_ = new TitleScene();
 	currentGamaScene_->Initialize(this);
 
 }
