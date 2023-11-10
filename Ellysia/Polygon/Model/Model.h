@@ -130,11 +130,15 @@ private:
 
 
 	//構築するModelData
-	ModelData modelData;
+	//ModelData modelData;
 
 
 	//色関係のメンバ変数
 	Vector4 color_;
 
-	
+	//struct ModelData {
+	//	std::vector<Mesh::VertexData> vertices;
+	//	MaterialData material;
+	//	std::string name;
+	//};
 };

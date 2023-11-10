@@ -23,7 +23,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE Model::GetGPUDescriptorHandle(ComPtr<ID3D12Descripto
 //モデルデータの読み込み
 ModelData Model::LoadObjectFile(const std::string& directoryPath,const std::string& fileName) {
 	//1.中で必要となる変数の宣言
-	
+	ModelData modelData;
 	//位置
 	std::vector<Vector4> positions;
 	//法線
@@ -357,8 +357,8 @@ void Model::Draw(Transform transform) {
 	directXSetup_->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
 	//SRVのDescriptorTableの先頭を設定。2はrootParameter[2]である
 	
-	if (modelData.textureIndex  != 0) {
-		TextureManager::TexCommand(modelData.textureIndex );
+	if (modelData_.textureIndex  != 0) {
+		TextureManager::TexCommand(modelData_.textureIndex );
 
 	}
 	

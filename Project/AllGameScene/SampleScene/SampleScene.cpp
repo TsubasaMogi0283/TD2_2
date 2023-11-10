@@ -15,8 +15,10 @@ SampleScene::SampleScene() {
 /// 初期化
 /// </summary>
 void SampleScene::Initialize(GameManager* gameManager) {
-	model_ = new Model();
-	model_->CreateObject("Resources/05_02","plane.obj");
+	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
+		model_[i] = new Model();
+		model_[i]->CreateObject("Resources/05_02", "plane.obj");
+	}
 	modelTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 
 	spriteTransform_ = { {0.5f,0.5f,0.5f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
@@ -50,7 +52,9 @@ void SampleScene::Update(GameManager* gameManager) {
 /// 描画
 /// </summary>
 void SampleScene::Draw(GameManager* gameManager) {
-	model_->Draw(modelTransform_);
+	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
+		model_[i]->Draw(modelTransform_);
+	}
 	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
 		sprite_[i]->DrawRect(spriteTransform_);
 	}
@@ -60,7 +64,9 @@ void SampleScene::Draw(GameManager* gameManager) {
 /// デストラクタ
 /// </summary>
 SampleScene::~SampleScene() {
-	delete model_;
+	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
+		delete model_[i];
+	}
 	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
 		delete sprite_[i];
 	}
