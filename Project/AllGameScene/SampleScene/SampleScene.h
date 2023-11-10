@@ -33,8 +33,9 @@ private:
 	Model* model_ = nullptr;
 	Transform modelTransform_ = {};
 
+	static const int SPRITE_AMOUNT_ = 10;
 
-	Sprite* sprite = nullptr;
+	Sprite* sprite_[SPRITE_AMOUNT_] = { nullptr };
 	Transform spriteTransform_ = {};
 
 };

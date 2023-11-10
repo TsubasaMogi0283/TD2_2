@@ -20,11 +20,16 @@ void SampleScene::Initialize(GameManager* gameManager) {
 	modelTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 
 	spriteTransform_ = { {0.5f,0.5f,0.5f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
-	sprite = new Sprite();
 	uint32_t textureHandle = TextureManager::LoadTexture("Resources/monsterBall.png");
-	sprite->LoadTextureHandle(textureHandle);
-	sprite->SetAllPosition({ { 0.0f,0.0f }, { 0.0f,600.0f }, { 1200.0f,0.0f, }, { 1200.0f,600.0f} });
 
+	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
+		sprite_[i] = new Sprite();
+	
+		sprite_[i]->LoadTextureHandle(textureHandle);
+		sprite_[i]->SetAllPosition({ { 0.0f,0.0f }, { 0.0f,600.0f }, { 1200.0f,0.0f, }, { 1200.0f,600.0f} });
+
+	}
+	
 
 }
 
@@ -46,7 +51,9 @@ void SampleScene::Update(GameManager* gameManager) {
 /// </summary>
 void SampleScene::Draw(GameManager* gameManager) {
 	model_->Draw(modelTransform_);
-	sprite->DrawRect(spriteTransform_);
+	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
+		sprite_[i]->DrawRect(spriteTransform_);
+	}
 }
 
 /// <summary>
@@ -54,5 +61,7 @@ void SampleScene::Draw(GameManager* gameManager) {
 /// </summary>
 SampleScene::~SampleScene() {
 	delete model_;
-	delete sprite;
+	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
+		delete sprite_[i];
+	}
 }
