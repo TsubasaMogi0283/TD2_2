@@ -95,6 +95,7 @@ private:
 
 	//モデルの読み込み
 	ModelData modelData_;
+	std::list<ModelData> multipleModeldata_;
 
 	//頂点リソースを作る
 	ComPtr<ID3D12Resource> vertexResource_ = nullptr;
@@ -126,12 +127,7 @@ private:
 
 	uint32_t descriptorSizeSRV_ = 0u;
 
-	ComPtr<ID3D12Resource> resource_ = nullptr;
-
-
-	//構築するModelData
-	//ModelData modelData;
-
+	
 
 	//色関係のメンバ変数
 	Vector4 color_;
