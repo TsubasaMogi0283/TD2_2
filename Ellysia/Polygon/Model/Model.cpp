@@ -124,10 +124,7 @@ ModelData Model::LoadObjectFile(const std::string& directoryPath,const std::stri
 
 	}
 
-	////ここで問題
-	//インデックス作った方がよさそう
-	modelData.textureIndex = TextureManager::GetInstance()->LoadTexture(modelData.material.textureFilePath);
-
+	
 	
 	
 
@@ -255,20 +252,23 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 	
 	this->directXSetup_ = DirectXSetup::GetInstance();
 
-	//PSOの設定
-	//全部のブレンドモードに対応させたい
-	//switch文でやるのが良いかなと思った。切り替えが楽だから
+	//ModelData modelData;
 
+	//モデルの読み込み
+	modelData_ = LoadObjectFile(directoryPath, fileName);
+	modelData_.name = fileName;
+	
 
-
+	//ここで名前を保存
+	//modelData = LoadObjectFile(directoryPath, fileName);
+	//modelData_.name = fileName;
+	
 
 	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
 	materialResource_=CreateBufferResource(sizeof(Material)).Get();
 
-	//モデルの読み込み
-	//この２つ外に出した方がよさそう
-	modelData_ = LoadObjectFile(directoryPath, fileName);
-	//textureあった
+	//テクスチャの読み込み
+	modelData_.textureIndex = TextureManager::GetInstance()->LoadTexture(modelData_.material.textureFilePath);
 
 	//頂点リソースを作る
 	//モデルの頂点の数によって変わるよ
@@ -290,7 +290,7 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 
 	color_ = { 1.0f,1.0f,1.0f,1.0f };
 	
-	
+	//multipleModeldata_.push_back(modelData);
 
 }
 
