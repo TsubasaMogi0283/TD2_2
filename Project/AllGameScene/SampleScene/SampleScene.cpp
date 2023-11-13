@@ -16,8 +16,8 @@ SampleScene::SampleScene() {
 /// </summary>
 void SampleScene::Initialize(GameManager* gameManager) {
 	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
-		model_[i] = new Model();
-		model_[i]->CreateObject("Resources/05_02", "plane.obj");
+		model_[i].reset(Model::CreateObject("Resources/05_02", "plane.obj"));
+		//model_[i]->CreateObject("Resources/05_02", "plane.obj");
 	}
 	modelTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 
@@ -64,9 +64,7 @@ void SampleScene::Draw(GameManager* gameManager) {
 /// デストラクタ
 /// </summary>
 SampleScene::~SampleScene() {
-	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
-		delete model_[i];
-	}
+	
 	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
 		delete sprite_[i];
 	}

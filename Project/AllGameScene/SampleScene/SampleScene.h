@@ -29,11 +29,11 @@ public:
 	void Draw(GameManager* gameManager)override;
 
 private:
-	static const int SPRITE_AMOUNT_ = 100;
-	Model* model_[SPRITE_AMOUNT_] = { nullptr };
+	static const int SPRITE_AMOUNT_ = 1;
+	//Model* model_[SPRITE_AMOUNT_] = { nullptr };
 	Transform modelTransform_ = {};
 
-	
+	std::unique_ptr<Model> model_[SPRITE_AMOUNT_] = { nullptr };
 
 	Sprite* sprite_[SPRITE_AMOUNT_] = { nullptr };
 	Transform spriteTransform_ = {};
