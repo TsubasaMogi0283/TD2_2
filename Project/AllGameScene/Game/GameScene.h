@@ -2,6 +2,8 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Input/Input.h"
 
+#include "GameObject/Player/Player.h"
+
 
 class GameScene : public IGameScene{
 public:
@@ -20,6 +22,10 @@ private:
 
 private:
 	Input* input_ = nullptr;
+
+
+	// Player
+	std::unique_ptr<Player> player_ = nullptr;
 
 
 };

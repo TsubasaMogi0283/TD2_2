@@ -10,6 +10,13 @@ GameScene::GameScene(){
 
 void GameScene::Initialize(GameManager* gamaManager){
 	input_ = Input::GetInstance();
+
+
+	/* ---------- プレイヤー ---------- */
+
+	player_ = std::make_unique<Player>();
+	player_->Initialize();
+
 }
 
 void GameScene::ShowImGui(){
@@ -28,9 +35,18 @@ void GameScene::Update(GameManager* gamaManager){
 	}
 
 
+	/* ---------- プレイヤー ---------- */
+
+	player_->Update();
+
+
 }
 
 void GameScene::Draw(GameManager* gamaManager){
+
+	/* ---------- プレイヤー ---------- */
+
+	player_->Draw();
 
 }
 
