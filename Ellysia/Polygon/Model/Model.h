@@ -78,8 +78,6 @@ private:
 	//Resource作成の関数化
 	ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
 
-	//頂点バッファビューを作成する
-	void GenerateVertexBufferView();
 
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index);
 	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index);
@@ -99,9 +97,7 @@ private:
 
 	//頂点リソースを作る
 	ComPtr<ID3D12Resource> vertexResource_ = nullptr;
-	//関数用
-	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
-	D3D12_RESOURCE_DESC vertexResourceDesc_{};
+	
 
 	//頂点バッファビューを作成する
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_;

@@ -193,11 +193,13 @@ ComPtr<ID3D12Resource> Model::CreateBufferResource(size_t sizeInBytes) {
 	
 	////VertexResourceを生成
 	//頂点リソース用のヒープを設定
+	//関数用
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
 	
 	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD;
 
 	//頂点リソースの設定
-	
+	D3D12_RESOURCE_DESC vertexResourceDesc_{};
 	//バッファリソース。テクスチャの場合はまた別の設定をする
 	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 	vertexResourceDesc_.Width = sizeInBytes;
@@ -227,20 +229,7 @@ ComPtr<ID3D12Resource> Model::CreateBufferResource(size_t sizeInBytes) {
 	return resource;
 }
 
-//頂点バッファビューを作成する
-void Model::GenerateVertexBufferView() {
-	
 
-	//vertexResourceがnullらしい
-	//リソースの先頭のアドレスから使う
-	vertexBufferView_.BufferLocation = vertexResource_->GetGPUVirtualAddress();
-	//使用するリソースは頂点のサイズ
-	vertexBufferView_.SizeInBytes = UINT(sizeof(VertexData) * modelData_.vertices.size());
-	//１頂点あたりのサイズ
-	vertexBufferView_.StrideInBytes = sizeof(VertexData);
-	
-
-}
 
 
 
@@ -275,7 +264,13 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 	vertexResource_ = CreateBufferResource(sizeof(VertexData) * modelData_.vertices.size()).Get();
 	
 	//読み込みのところでバッファインデックスを作った方がよさそう
-	GenerateVertexBufferView();
+	//vertexResourceがnullらしい
+	//リソースの先頭のアドレスから使う
+	vertexBufferView_.BufferLocation = vertexResource_->GetGPUVirtualAddress();
+	//使用するリソースは頂点のサイズ
+	vertexBufferView_.SizeInBytes = UINT(sizeof(VertexData) * modelData_.vertices.size());
+	//１頂点あたりのサイズ
+	vertexBufferView_.StrideInBytes = sizeof(VertexData);
 	
 	//Sprite用のTransformationMatrix用のリソースを作る。
 	//Matrix4x4 1つ分サイズを用意する
