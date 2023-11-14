@@ -87,7 +87,6 @@ private:
 
 private:
 
-
 	//モデルの読み込み
 	ModelData modelData_;
 
