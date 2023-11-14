@@ -10,6 +10,7 @@ struct PlayerProperty {
 	std::unique_ptr<Model> model = nullptr;
 	Transform transform{};
 	Vector3 velocity{};
+	float size;
 };
 struct GravityProperty {
 	Vector3 velocity{}; // 加算速度
@@ -27,6 +28,9 @@ struct InitProperty {
 class Player {
 
 public:
+
+	Player() {};
+	~Player() {};
 
 	/// <summary>
 	/// 初期化処理

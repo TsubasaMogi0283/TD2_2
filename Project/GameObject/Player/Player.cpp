@@ -17,12 +17,15 @@ void Player::Initialize() {
 	init_.transform = {
 		{1.0f, 1.0f, 1.0f},
 		{0.0f, 0.0f, 0.0f},
-		{0.0f, 0.0f, 50.0f},
+		{0.0f, 10.0f, 50.0f},
 	};
 	pla_.transform = init_.transform;
 
 	// 速度
 	pla_.velocity = { 1.0f, 1.0f, 1.0f };
+
+	//サイズ
+	pla_.size = 2.0f;
 
 	// 重力
 	gravity_.enable = false;

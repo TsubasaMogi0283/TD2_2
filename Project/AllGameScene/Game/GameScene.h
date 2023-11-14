@@ -1,8 +1,10 @@
 #pragma once
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Input/Input.h"
+#include "Camera/Camera.h"
 
 #include "GameObject/Player/Player.h"
+#include "GameObject/DemoGround/DemoGround.h"
 
 
 class GameScene : public IGameScene{
@@ -23,9 +25,15 @@ private:
 private:
 	Input* input_ = nullptr;
 
+	Vector3 cameraPos_{};
+	Vector3 cameraRotate_{};
+
 
 	// Player
 	std::unique_ptr<Player> player_ = nullptr;
+
+	// DemoGround
+	std::unique_ptr<DemoGround> demoGround_ = nullptr;
 
 
 };
