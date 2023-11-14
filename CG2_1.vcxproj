@@ -127,6 +127,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp" />
+    <ClCompile Include="Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -195,6 +196,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Ellysia\Polygon\Model\Material\CreateMaterial.h" />
     <ClInclude Include="Ellysia\Polygon\Model\Mesh\Mesh.h" />
     <ClInclude Include="Ellysia\Polygon\Model\Model.h" />
+    <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h" />
     <ClInclude Include="Ellysia\Polygon\Sphere\Sphere.h" />
     <ClInclude Include="Ellysia\Polygon\Sprite\Sprite.h" />
     <ClInclude Include="Ellysia\Polygon\Triangle\Triangle.h" />

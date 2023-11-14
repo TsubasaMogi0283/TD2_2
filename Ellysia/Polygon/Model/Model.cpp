@@ -328,10 +328,10 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 
 	//Sprite用のTransformationMatrix用のリソースを作る。
 	//Matrix4x4 1つ分サイズを用意する
-	transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
+	//transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
 	
-
-
+	transformation_=std::make_unique<Transformation>();
+	transformation_->Initialize();
 
 	//Lighting
 	//directionalLightResource_ = CreateBufferResource(sizeof(DirectionalLight)).Get();
@@ -344,7 +344,10 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 	directionalLight_=std::make_unique<CreateDirectionalLight>();
 	directionalLight_->Initialize();
 
+
+
 	//初期は白色
+	//モデル個別に色を変更できるようにこれは外に出しておく
 	color_ = { 1.0f,1.0f,1.0f,1.0f };
 
 
@@ -358,11 +361,7 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 
 //描画
 void Model::Draw(Transform transform) {
-	//書き込むためのデータを書き込む
 	
-	//頂点データをリソースにコピー
-	
-	transformationMatrixResource_->Map(0, nullptr, reinterpret_cast<void**>(&transformationMatrixData_));
 	
 
 	
@@ -377,20 +376,35 @@ void Model::Draw(Transform transform) {
 
 
 
-
-	//新しく引数作った方が良いかも
-	Matrix4x4 worldMatrixSphere = MakeAffineMatrix(transform.scale,transform.rotate,transform.translate);
-	//遠視投影行列
-	Matrix4x4 viewMatrixSphere = MakeIdentity4x4();
+	//書き込むためのデータを書き込む
 	
-	Matrix4x4 projectionMatrixSphere = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::GetInstance()->GetClientWidth()), float(WinApp::GetInstance()->GetClientHeight()), 0.0f, 100.0f);
+	//頂点データをリソースにコピー
 	
-	//WVP行列を作成
-	Matrix4x4 worldViewProjectionMatrixSphere = Multiply(worldMatrixSphere, Multiply(Camera::GetInstance()->GetViewMatrix(), Camera::GetInstance()->GetProjectionMatrix_()));
+	//transformationMatrixResource_->Map(0, nullptr, reinterpret_cast<void**>(&transformationMatrixData_));
+	//
+	//
+	//
+	//
+	////新しく引数作った方が良いかも
+	//Matrix4x4 worldMatrixSphere = MakeAffineMatrix(transform.scale,transform.rotate,transform.translate);
+	////遠視投影行列
+	//Matrix4x4 viewMatrixSphere = MakeIdentity4x4();
+	//
+	//Matrix4x4 projectionMatrixSphere = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::GetInstance()->GetClientWidth()), float(WinApp::GetInstance()->GetClientHeight()), 0.0f, 100.0f);
+	//
+	////WVP行列を作成
+	//Matrix4x4 worldViewProjectionMatrixSphere = Multiply(worldMatrixSphere, Multiply(Camera::GetInstance()->GetViewMatrix(), Camera::GetInstance()->GetProjectionMatrix_()));
+	//
+	//
+	//transformationMatrixData_->WVP = worldViewProjectionMatrixSphere;
+	//transformationMatrixData_->World =MakeIdentity4x4();
 
 
-	transformationMatrixData_->WVP = worldViewProjectionMatrixSphere;
-	transformationMatrixData_->World =MakeIdentity4x4();
+
+
+
+	transformation_->SetInformation(transform);
+
 
 
 
@@ -430,7 +444,21 @@ void Model::Draw(Transform transform) {
 
 
 
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
+	//DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
+
+
+	transformation_->SetGraphicCommand();
+
+
+
+
+
+
+
+
+
+
+
 	//SRVのDescriptorTableの先頭を設定。2はrootParameter[2]である
 	
 	if (textureHandle_!= 0) {

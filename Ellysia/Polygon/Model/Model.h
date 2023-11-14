@@ -33,6 +33,7 @@
 #include "Polygon/Model/Mesh/Mesh.h"
 #include "Polygon/Model/Material/CreateMaterial.h"
 #include "DirectionalLight/CreateDirectionalLight.h"
+#include "Transformation/Transformation.h"
 
 
 class Model {
@@ -120,6 +121,7 @@ private:
 	//Model用のTransformationMatrix用のリソースを作る。
 	ComPtr<ID3D12Resource> transformationMatrixResource_ = nullptr;
 	TransformationMatrix* transformationMatrixData_ = nullptr;
+	std::unique_ptr<Transformation> transformation_ = nullptr;
 
 	//マテリアル用のリソースを作る
 	//ComPtr<ID3D12Resource> materialResource_ = nullptr;
