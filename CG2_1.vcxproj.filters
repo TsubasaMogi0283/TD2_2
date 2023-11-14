@@ -216,6 +216,9 @@
     <ClCompile Include="Ellysia\Polygon\Model\Material\CreateMaterial.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -404,6 +407,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\Material\CreateMaterial.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

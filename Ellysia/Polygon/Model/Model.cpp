@@ -309,9 +309,6 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 
 
 	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
-	//materialResource_=CreateBufferResource(sizeof(Material)).Get();
-
-
 	material_= std::make_unique<CreateMaterial>();
 	material_->Initialize();
 
@@ -322,19 +319,6 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 
 
 	//頂点リソースを作る
-	//モデルの頂点の数によって変わるよ
-	//vertexResource_ = CreateBufferResource(sizeof(VertexData) * modelDataNew.vertices.size()).Get();
-	
-	//読み込みのところでバッファインデックスを作った方がよさそう
-	//vertexResourceがnullらしい
-	//リソースの先頭のアドレスから使う
-	//vertexBufferView_.BufferLocation =vertexResource_->GetGPUVirtualAddress();
-	//使用するリソースは頂点のサイズ
-	//vertexBufferView_.SizeInBytes = UINT(sizeof(VertexData) * modelDataNew.vertices.size());
-	//１頂点あたりのサイズ
-	//vertexBufferView_.StrideInBytes = sizeof(VertexData);
-	
-
 	mesh_ = std::make_unique<Mesh>();
 	mesh_->Initialize(modelDataNew.vertices);
 
@@ -346,12 +330,19 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 	//Matrix4x4 1つ分サイズを用意する
 	transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
 	
+
+
+
 	//Lighting
-	directionalLightResource_ = CreateBufferResource(sizeof(DirectionalLight)).Get();
-	directionalLightResource_->Map(0, nullptr, reinterpret_cast<void**>(&directionalLightData_));
-	directionalLightData_->color={ 1.0f,1.0f,1.0f,1.0f };
-	directionalLightData_->direction = { 0.0f,-1.0f,0.0f };
-	directionalLightData_->intensity = 3.0f;
+	//directionalLightResource_ = CreateBufferResource(sizeof(DirectionalLight)).Get();
+	//directionalLightResource_->Map(0, nullptr, reinterpret_cast<void**>(&directionalLightData_));
+	//directionalLightData_->color={ 1.0f,1.0f,1.0f,1.0f };
+	//directionalLightData_->direction = { 0.0f,-1.0f,0.0f };
+	//directionalLightData_->intensity = 3.0f;
+
+
+	directionalLight_=std::make_unique<CreateDirectionalLight>();
+	directionalLight_->Initialize();
 
 	//初期は白色
 	color_ = { 1.0f,1.0f,1.0f,1.0f };
@@ -368,13 +359,9 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 //描画
 void Model::Draw(Transform transform) {
 	//書き込むためのデータを書き込む
-	//modelInformation_[modelIndex].vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&modelInformation_[modelIndex].vertexData_));
-
+	
 	//頂点データをリソースにコピー
-	//std::memcpy(modelInformation_[modelIndex].vertexData_, modelInformation_[modelIndex].modelData_.vertices.data(), sizeof(VertexData) * modelInformation_[modelIndex].modelData_.vertices.size());
 	
-	
-
 	transformationMatrixResource_->Map(0, nullptr, reinterpret_cast<void**>(&transformationMatrixData_));
 	
 
@@ -382,11 +369,6 @@ void Model::Draw(Transform transform) {
 	////マテリアルにデータを書き込む
 	////書き込むためのアドレスを取得
 	////reinterpret_cast...char* から int* へ、One_class* から Unrelated_class* へなどの変換に使用
-	//materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
-	//materialData_->color = color_;
-	//materialData_->enableLighting=false;
-	//
-	//materialData_->uvTransform = MakeIdentity4x4();
 
 	material_->SetInformation(color_);
 
@@ -458,9 +440,9 @@ void Model::Draw(Transform transform) {
 	
 
 	//Light
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLightResource_->GetGPUVirtualAddress());
+	//DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLightResource_->GetGPUVirtualAddress());
 
-
+	directionalLight_->SetGraphicsCommand();
 
 
 

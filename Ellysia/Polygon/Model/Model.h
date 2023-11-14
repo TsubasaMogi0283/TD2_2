@@ -32,6 +32,7 @@
 
 #include "Polygon/Model/Mesh/Mesh.h"
 #include "Polygon/Model/Material/CreateMaterial.h"
+#include "DirectionalLight/CreateDirectionalLight.h"
 
 
 class Model {
@@ -121,14 +122,16 @@ private:
 	TransformationMatrix* transformationMatrixData_ = nullptr;
 
 	//マテリアル用のリソースを作る
-	ComPtr<ID3D12Resource> materialResource_ = nullptr;
-	Material* materialData_ = nullptr;
+	//ComPtr<ID3D12Resource> materialResource_ = nullptr;
+	//Material* materialData_ = nullptr;
 
 	std::unique_ptr<CreateMaterial> material_ = nullptr;
 
 	//Lighting用
-	ComPtr<ID3D12Resource> directionalLightResource_ = nullptr;
-	DirectionalLight* directionalLightData_ = nullptr;
+	//ComPtr<ID3D12Resource> directionalLightResource_ = nullptr;
+	//DirectionalLight* directionalLightData_ = nullptr;
+
+	std::unique_ptr<CreateDirectionalLight> directionalLight_ = nullptr;
 
 
 	uint32_t textureHandle_ = 0;
