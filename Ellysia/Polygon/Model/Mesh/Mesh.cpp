@@ -28,7 +28,6 @@ ComPtr<ID3D12Resource> Mesh::CreateBufferResource(size_t sizeInBytes) {
 	vertexResourceDesc_.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	//実際に頂点リソースを作る
-	//ID3D12Resource* vertexResource_ = nullptr;
 	
 	//次はここで問題
 	//hrは調査用
