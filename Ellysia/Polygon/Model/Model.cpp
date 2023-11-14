@@ -2,7 +2,7 @@
 #include <Camera/Camera.h>
 #include <TextureManager/TextureManager.h>
 #include <PipelineManager/PipelineManager.h>
-
+#include "Common/DirectX/DirectXSetup.h"
 
 Model::Model() {
 
@@ -218,7 +218,7 @@ ComPtr<ID3D12Resource> Model::CreateBufferResource(size_t sizeInBytes) {
 	//次はここで問題
 	//hrは調査用
 	HRESULT hr;
-	hr = directXSetup_->GetDevice()->CreateCommittedResource(
+	hr = DirectXSetup::GetInstance()->GetDevice()->CreateCommittedResource(
 		&uploadHeapProperties_,
 		D3D12_HEAP_FLAG_NONE,
 		&vertexResourceDesc_,
@@ -238,10 +238,6 @@ ComPtr<ID3D12Resource> Model::CreateBufferResource(size_t sizeInBytes) {
 
 //初期化
 void Model::CreateObject(const std::string& directoryPath,const std::string& fileName) {
-	
-	this->directXSetup_ = DirectXSetup::GetInstance();
-
-	//ModelData modelData;
 
 	//モデルの読み込み
 	modelData_ = LoadObjectFile(directoryPath, fileName);
@@ -336,20 +332,20 @@ void Model::Draw(Transform transform) {
 
 	//コマンドを積む
 
-	directXSetup_->GetCommandList()->SetGraphicsRootSignature(PipelineManager::GetInstance()->GetModelRootSignature().Get());
-	directXSetup_->GetCommandList()->SetPipelineState(PipelineManager::GetInstance()->GetModelGraphicsPipelineState().Get());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootSignature(PipelineManager::GetInstance()->GetModelRootSignature().Get());
+	DirectXSetup::GetInstance()->GetCommandList()->SetPipelineState(PipelineManager::GetInstance()->GetModelGraphicsPipelineState().Get());
 
 
 	//RootSignatureを設定。PSOに設定しているけど別途設定が必要
-	directXSetup_->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);
+	DirectXSetup::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えよう
-	directXSetup_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	DirectXSetup::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	//CBVを設定する
-	directXSetup_->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
 
 
-	directXSetup_->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
 	//SRVのDescriptorTableの先頭を設定。2はrootParameter[2]である
 	
 	if (modelData_.textureIndex  != 0) {
@@ -359,10 +355,10 @@ void Model::Draw(Transform transform) {
 	
 
 	//Light
-	directXSetup_->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLightResource_->GetGPUVirtualAddress());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLightResource_->GetGPUVirtualAddress());
 
 
-	directXSetup_->GetCommandList()->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
+	DirectXSetup::GetInstance()->GetCommandList()->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
 
 
 }

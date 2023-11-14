@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 
-#include "Common/DirectX/DirectXSetup.h"
 #include "ConvertFunction/ConvertLog/LogConvert.h"
 #include "externals/DirectXTex/DirectXTex.h"
 #include "ImGuiManager/ImGuiManager.h"
@@ -86,9 +85,6 @@ private:
 
 
 private:
-
-	//DirectX内にある情報を取り入れる
-	DirectXSetup* directXSetup_ = nullptr;
 
 
 	//モデルの読み込み
