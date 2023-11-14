@@ -210,6 +210,9 @@
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
       <Filter>Project</Filter>
     </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Mesh\Mesh.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -393,6 +396,9 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
       <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Mesh\Mesh.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

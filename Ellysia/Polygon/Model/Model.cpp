@@ -238,100 +238,123 @@ Model* Model::Create(const std::string& directoryPath, const std::string& fileNa
 
 	}
 
+	//モデルの読み込み
+	ModelData modelDataNew = model->LoadObjectFile(directoryPath, fileName);
+	modelDataNew.name = fileName;
+	modelInformationList_.push_back(modelDataNew);
+	
+	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
+	materialResource_=CreateBufferResource(sizeof(Material)).Get();
+
+	//テクスチャの読み込み
+	textureHandle_ = TextureManager::GetInstance()->LoadTexture(modelDataNew.material.textureFilePath);
+
+
+
+
+
+
+	//頂点リソースを作る
+	//モデルの頂点の数によって変わるよ
+	vertexResource_ = CreateBufferResource(sizeof(VertexData) * modelDataNew.vertices.size()).Get();
+	
+	//読み込みのところでバッファインデックスを作った方がよさそう
+	//vertexResourceがnullらしい
+	//リソースの先頭のアドレスから使う
+	vertexBufferView_.BufferLocation =vertexResource_->GetGPUVirtualAddress();
+	//使用するリソースは頂点のサイズ
+	vertexBufferView_.SizeInBytes = UINT(sizeof(VertexData) * modelDataNew.vertices.size());
+	//１頂点あたりのサイズ
+	vertexBufferView_.StrideInBytes = sizeof(VertexData);
+	
+
+	mesh_ = std::make_unique<Mesh>();
+	mesh_->Initialize(modelDataNew.vertices);
+
+
+
+
+
+	//Sprite用のTransformationMatrix用のリソースを作る。
+	//Matrix4x4 1つ分サイズを用意する
+	transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
+	
+	//Lighting
+	directionalLightResource_ = CreateBufferResource(sizeof(DirectionalLight)).Get();
+	directionalLightResource_->Map(0, nullptr, reinterpret_cast<void**>(&directionalLightData_));
+	directionalLightData_->color={ 1.0f,1.0f,1.0f,1.0f };
+	directionalLightData_->direction = { 0.0f,-1.0f,0.0f };
+	directionalLightData_->intensity = 3.0f;
+
+	//初期は白色
+	color_ = { 1.0f,1.0f,1.0f,1.0f };
+
+
+
+
+
 	return model;
 }
 
 
-//void Model::CreateObject(const std::string& directoryPath,const std::string& fileName) {
-//
-//	for (int i = 0; i < MODEL_MAX_AMOUNT_; i++) {
-//		//同じモデルの場合
-//		if (modelInformation_[modelIndex].modelData_.name == fileName) {
-//			
-//			//モデルの読み込み
-//			//modelInformation_[i].modelData_ = LoadObjectFile(directoryPath, fileName);
-//
-//			////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
-//			modelInformation_[i].materialResource_=CreateBufferResource(sizeof(Material)).Get();
-//
-//			//テクスチャの読み込み
-//			modelInformation_[i].textureHandle_ = TextureManager::GetInstance()->LoadTexture(modelInformation_[i].modelData_.material.textureFilePath);
-//
-//			//頂点リソースを作る
-//			//モデルの頂点の数によって変わるよ
-//			modelInformation_[i].vertexResource_ = CreateBufferResource(sizeof(VertexData) * modelInformation_[i].modelData_.vertices.size()).Get();
-//			
-//			//読み込みのところでバッファインデックスを作った方がよさそう
-//			//vertexResourceがnullらしい
-//			//リソースの先頭のアドレスから使う
-//			modelInformation_[i].vertexBufferView_.BufferLocation = modelInformation_[i].vertexResource_->GetGPUVirtualAddress();
-//			//使用するリソースは頂点のサイズ
-//			modelInformation_[i].vertexBufferView_.SizeInBytes = UINT(sizeof(VertexData) * modelInformation_[i].modelData_.vertices.size());
-//			//１頂点あたりのサイズ
-//			modelInformation_[i].vertexBufferView_.StrideInBytes = sizeof(VertexData);
-//			
-//			//Sprite用のTransformationMatrix用のリソースを作る。
-//			//Matrix4x4 1つ分サイズを用意する
-//			modelInformation_[i].transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
-//			
-//			//Lighting
-//			modelInformation_[i].directionalLightResource_ = CreateBufferResource(sizeof(DirectionalLight)).Get();
-//			modelInformation_[i].directionalLightResource_->Map(0, nullptr, reinterpret_cast<void**>(&modelInformation_[i].directionalLightData_));
-//			modelInformation_[i].directionalLightData_->color={ 1.0f,1.0f,1.0f,1.0f };
-//			modelInformation_[i].directionalLightData_->direction = { 0.0f,-1.0f,0.0f };
-//			modelInformation_[i].directionalLightData_->intensity = 3.0f;
-//
-//			//初期は白色
-//			color_ = { 1.0f,1.0f,1.0f,1.0f };
-//			break;
-//
-//
-//		}
-//	}
-//
-//
-//
-//	//モデルの読み込み
-//	modelInformation_[modelIndex].modelData_ = LoadObjectFile(directoryPath, fileName);
-//	modelInformation_[modelIndex].modelData_.name = fileName;
-//
-//	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
-//	modelInformation_[modelIndex].materialResource_=CreateBufferResource(sizeof(Material)).Get();
-//
-//	//テクスチャの読み込み
-//	modelInformation_[modelIndex].textureHandle_ = TextureManager::GetInstance()->LoadTexture(modelInformation_[modelIndex].modelData_.material.textureFilePath);
-//
-//	//頂点リソースを作る
-//	//モデルの頂点の数によって変わるよ
-//	modelInformation_[modelIndex].vertexResource_ = CreateBufferResource(sizeof(VertexData) * modelInformation_[modelIndex].modelData_.vertices.size()).Get();
-//	
-//	//読み込みのところでバッファインデックスを作った方がよさそう
-//	//vertexResourceがnullらしい
-//	//リソースの先頭のアドレスから使う
-//	modelInformation_[modelIndex].vertexBufferView_.BufferLocation = modelInformation_[modelIndex].vertexResource_->GetGPUVirtualAddress();
-//	//使用するリソースは頂点のサイズ
-//	modelInformation_[modelIndex].vertexBufferView_.SizeInBytes = UINT(sizeof(VertexData) * modelInformation_[modelIndex].modelData_.vertices.size());
-//	//１頂点あたりのサイズ
-//	modelInformation_[modelIndex].vertexBufferView_.StrideInBytes = sizeof(VertexData);
-//	
-//	//Sprite用のTransformationMatrix用のリソースを作る。
-//	//Matrix4x4 1つ分サイズを用意する
-//	modelInformation_[modelIndex].transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
-//	
-//	//Lighting
-//	modelInformation_[modelIndex].directionalLightResource_ = CreateBufferResource(sizeof(DirectionalLight)).Get();
-//	modelInformation_[modelIndex].directionalLightResource_->Map(0, nullptr, reinterpret_cast<void**>(&modelInformation_[modelIndex].directionalLightData_));
-//	modelInformation_[modelIndex].directionalLightData_->color={ 1.0f,1.0f,1.0f,1.0f };
-//	modelInformation_[modelIndex].directionalLightData_->direction = { 0.0f,-1.0f,0.0f };
-//	modelInformation_[modelIndex].directionalLightData_->intensity = 3.0f;
-//
-//	//初期は白色
-//	color_ = { 1.0f,1.0f,1.0f,1.0f };
-//
-//
-//	
-//
-//}
+void Model::CreateObject(const std::string& directoryPath,const std::string& fileName) {
+
+	//モデルの読み込み
+	ModelData modelDataNew = LoadObjectFile(directoryPath, fileName);
+	modelDataNew.name = fileName;
+	modelInformationList_.push_back(modelDataNew);
+	
+	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
+	materialResource_=CreateBufferResource(sizeof(Material)).Get();
+
+	//テクスチャの読み込み
+	textureHandle_ = TextureManager::GetInstance()->LoadTexture(modelDataNew.material.textureFilePath);
+
+
+
+
+
+
+	//頂点リソースを作る
+	//モデルの頂点の数によって変わるよ
+	vertexResource_ = CreateBufferResource(sizeof(VertexData) * modelDataNew.vertices.size()).Get();
+	
+	//読み込みのところでバッファインデックスを作った方がよさそう
+	//vertexResourceがnullらしい
+	//リソースの先頭のアドレスから使う
+	vertexBufferView_.BufferLocation =vertexResource_->GetGPUVirtualAddress();
+	//使用するリソースは頂点のサイズ
+	vertexBufferView_.SizeInBytes = UINT(sizeof(VertexData) * modelDataNew.vertices.size());
+	//１頂点あたりのサイズ
+	vertexBufferView_.StrideInBytes = sizeof(VertexData);
+	
+
+	mesh_ = std::make_unique<Mesh>();
+	mesh_->Initialize(modelDataNew.vertices);
+
+
+
+
+
+	//Sprite用のTransformationMatrix用のリソースを作る。
+	//Matrix4x4 1つ分サイズを用意する
+	transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
+	
+	//Lighting
+	directionalLightResource_ = CreateBufferResource(sizeof(DirectionalLight)).Get();
+	directionalLightResource_->Map(0, nullptr, reinterpret_cast<void**>(&directionalLightData_));
+	directionalLightData_->color={ 1.0f,1.0f,1.0f,1.0f };
+	directionalLightData_->direction = { 0.0f,-1.0f,0.0f };
+	directionalLightData_->intensity = 3.0f;
+
+	//初期は白色
+	color_ = { 1.0f,1.0f,1.0f,1.0f };
+
+
+
+	
+
+}
 
 
 
@@ -339,25 +362,25 @@ Model* Model::Create(const std::string& directoryPath, const std::string& fileNa
 //描画
 void Model::Draw(Transform transform) {
 	//書き込むためのデータを書き込む
-	modelInformation_[modelIndex].vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&modelInformation_[modelIndex].vertexData_));
+	//modelInformation_[modelIndex].vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&modelInformation_[modelIndex].vertexData_));
 
 	//頂点データをリソースにコピー
-	std::memcpy(modelInformation_[modelIndex].vertexData_, modelInformation_[modelIndex].modelData_.vertices.data(), sizeof(VertexData) * modelInformation_[modelIndex].modelData_.vertices.size());
-
+	//std::memcpy(modelInformation_[modelIndex].vertexData_, modelInformation_[modelIndex].modelData_.vertices.data(), sizeof(VertexData) * modelInformation_[modelIndex].modelData_.vertices.size());
+	
 	
 
 
-	modelInformation_[modelIndex].transformationMatrixResource_->Map(0, nullptr, reinterpret_cast<void**>(&modelInformation_[modelIndex].transformationMatrixData_));
+	transformationMatrixResource_->Map(0, nullptr, reinterpret_cast<void**>(&transformationMatrixData_));
 	
 
 	//マテリアルにデータを書き込む
 	//書き込むためのアドレスを取得
 	//reinterpret_cast...char* から int* へ、One_class* から Unrelated_class* へなどの変換に使用
-	modelInformation_[modelIndex].materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&modelInformation_[modelIndex].materialData_));
-	modelInformation_[modelIndex].materialData_->color = color_;
-	modelInformation_[modelIndex].materialData_->enableLighting=false;
+	materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
+	materialData_->color = color_;
+	materialData_->enableLighting=false;
 
-	modelInformation_[modelIndex].materialData_->uvTransform = MakeIdentity4x4();
+	materialData_->uvTransform = MakeIdentity4x4();
 
 
 
@@ -372,8 +395,8 @@ void Model::Draw(Transform transform) {
 	Matrix4x4 worldViewProjectionMatrixSphere = Multiply(worldMatrixSphere, Multiply(Camera::GetInstance()->GetViewMatrix(), Camera::GetInstance()->GetProjectionMatrix_()));
 
 
-	modelInformation_[modelIndex].transformationMatrixData_->WVP = worldViewProjectionMatrixSphere;
-	modelInformation_[modelIndex].transformationMatrixData_->World =MakeIdentity4x4();
+	transformationMatrixData_->WVP = worldViewProjectionMatrixSphere;
+	transformationMatrixData_->World =MakeIdentity4x4();
 
 
 
@@ -385,31 +408,37 @@ void Model::Draw(Transform transform) {
 	DirectXSetup::GetInstance()->GetCommandList()->SetPipelineState(PipelineManager::GetInstance()->GetModelGraphicsPipelineState().Get());
 
 
-	//RootSignatureを設定。PSOに設定しているけど別途設定が必要
-	DirectXSetup::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &modelInformation_[modelIndex].vertexBufferView_);
-	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えよう
-	DirectXSetup::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	////RootSignatureを設定。PSOに設定しているけど別途設定が必要
+	//DirectXSetup::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &modelInformation_[modelIndex].vertexBufferView_);
+	////形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えよう
+	//DirectXSetup::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+
+	mesh_->SetGraphicsCommand();
 
 	//CBVを設定する
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, modelInformation_[modelIndex].materialResource_->GetGPUVirtualAddress());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
 
 
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, modelInformation_[modelIndex].transformationMatrixResource_->GetGPUVirtualAddress());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
 	//SRVのDescriptorTableの先頭を設定。2はrootParameter[2]である
 	
-	if (modelInformation_[modelIndex].textureHandle_!= 0) {
-		TextureManager::TexCommand(modelInformation_[modelIndex].textureHandle_ );
+	if (textureHandle_!= 0) {
+		TextureManager::TexCommand(textureHandle_ );
 
 	}
 	
 
 	//Light
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(3, modelInformation_[modelIndex].directionalLightResource_->GetGPUVirtualAddress());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLightResource_->GetGPUVirtualAddress());
 
 
-	DirectXSetup::GetInstance()->GetCommandList()->DrawInstanced(UINT(modelInformation_[modelIndex].modelData_.vertices.size()), 1, 0, 0);
 
 
+
+	//DirectXSetup::GetInstance()->GetCommandList()->DrawInstanced(UINT(modelInformation_[modelIndex].modelData_.vertices.size()), 1, 0, 0);
+
+	mesh_->DrawCall();
 }
 
 
