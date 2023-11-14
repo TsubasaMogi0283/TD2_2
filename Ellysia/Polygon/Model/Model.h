@@ -38,6 +38,8 @@ public:
 	//Initializeも兼ねているよ
 	void CreateObject(const std::string& directoryPath,const std::string& fileName);
 
+	Model* Create(const std::string& directoryPath,const std::string& fileName);
+
 private:
 #pragma region モデルの読み込み関係の関数
 	//モデルデータの読み込み
@@ -85,6 +87,48 @@ private:
 
 
 
+public:
+	struct ModelInformation {
+		//モデルの読み込み
+		ModelData modelData_;
+
+		//頂点リソースを作る
+		ComPtr<ID3D12Resource> vertexResource_ = nullptr;
+		
+
+		//頂点バッファビューを作成する
+		D3D12_VERTEX_BUFFER_VIEW vertexBufferView_;
+
+
+		//貯y店リソースにデータを書き込む
+		VertexData* vertexData_;
+
+
+		//Sprite用のTransformationMatrix用のリソースを作る。
+		//Matrix4x4 1つ分サイズを用意する
+		ComPtr<ID3D12Resource> transformationMatrixResource_ = nullptr;
+		TransformationMatrix* transformationMatrixData_ = nullptr;
+
+		//マテリアル用のリソースを作る
+		ComPtr<ID3D12Resource> materialResource_ = nullptr;
+		Material* materialData_ = nullptr;
+
+
+		//Lighting用
+		ComPtr<ID3D12Resource> directionalLightResource_ = nullptr;
+		DirectionalLight* directionalLightData_ = nullptr;
+
+
+		uint32_t textureHandle_ = 0;
+
+
+		//色関係のメンバ変数
+		Vector4 color_;
+
+	};
+
+
+
 private:
 
 	//モデルの読み込み
@@ -122,6 +166,12 @@ private:
 
 	//色関係のメンバ変数
 	Vector4 color_;
+
+
+
+
+
+	//TextureManagerを参考にする
 	static const int MODEL_MAX_AMOUNT_ = 512;
-	//std::array<ModelInformation, MODEL_MAX_AMOUNT_> textureInformation_{};
+	std::array<ModelInformation, MODEL_MAX_AMOUNT_> textureInformation_{};
 };

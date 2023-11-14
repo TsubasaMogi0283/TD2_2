@@ -279,6 +279,52 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 
 }
 
+Model* Model::Create(const std::string& directoryPath,const std::string& fileName){
+
+	Model* model = nullptr;
+
+	//モデルの読み込み
+	modelData_ = LoadObjectFile(directoryPath, fileName);
+	modelData_.name = fileName;
+
+	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
+	materialResource_=CreateBufferResource(sizeof(Material)).Get();
+
+	//テクスチャの読み込み
+	textureHandle_ = TextureManager::GetInstance()->LoadTexture(modelData_.material.textureFilePath);
+
+	//頂点リソースを作る
+	//モデルの頂点の数によって変わるよ
+	vertexResource_ = CreateBufferResource(sizeof(VertexData) * modelData_.vertices.size()).Get();
+	
+	//読み込みのところでバッファインデックスを作った方がよさそう
+	//vertexResourceがnullらしい
+	//リソースの先頭のアドレスから使う
+	vertexBufferView_.BufferLocation = vertexResource_->GetGPUVirtualAddress();
+	//使用するリソースは頂点のサイズ
+	vertexBufferView_.SizeInBytes = UINT(sizeof(VertexData) * modelData_.vertices.size());
+	//１頂点あたりのサイズ
+	vertexBufferView_.StrideInBytes = sizeof(VertexData);
+	
+	//Sprite用のTransformationMatrix用のリソースを作る。
+	//Matrix4x4 1つ分サイズを用意する
+	transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
+	
+	//Lighting
+	directionalLightResource_ = CreateBufferResource(sizeof(DirectionalLight)).Get();
+	directionalLightResource_->Map(0, nullptr, reinterpret_cast<void**>(&directionalLightData_));
+	directionalLightData_->color={ 1.0f,1.0f,1.0f,1.0f };
+	directionalLightData_->direction = { 0.0f,-1.0f,0.0f };
+	directionalLightData_->intensity = 3.0f;
+
+	//初期は白色
+	color_ = { 1.0f,1.0f,1.0f,1.0f };
+	
+
+
+	return model;
+}
+
 
 
 //描画
