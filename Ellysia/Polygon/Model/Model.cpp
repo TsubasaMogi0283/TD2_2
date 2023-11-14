@@ -242,18 +242,12 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 	//モデルの読み込み
 	modelData_ = LoadObjectFile(directoryPath, fileName);
 	modelData_.name = fileName;
-	
-
-	//ここで名前を保存
-	//modelData = LoadObjectFile(directoryPath, fileName);
-	//modelData_.name = fileName;
-	
 
 	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
 	materialResource_=CreateBufferResource(sizeof(Material)).Get();
 
 	//テクスチャの読み込み
-	modelData_.textureIndex = TextureManager::GetInstance()->LoadTexture(modelData_.material.textureFilePath);
+	textureHandle_ = TextureManager::GetInstance()->LoadTexture(modelData_.material.textureFilePath);
 
 	//頂点リソースを作る
 	//モデルの頂点の数によって変わるよ
@@ -279,9 +273,9 @@ void Model::CreateObject(const std::string& directoryPath,const std::string& fil
 	directionalLightData_->direction = { 0.0f,-1.0f,0.0f };
 	directionalLightData_->intensity = 3.0f;
 
+	//初期は白色
 	color_ = { 1.0f,1.0f,1.0f,1.0f };
 	
-	//multipleModeldata_.push_back(modelData);
 
 }
 
@@ -348,8 +342,8 @@ void Model::Draw(Transform transform) {
 	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
 	//SRVのDescriptorTableの先頭を設定。2はrootParameter[2]である
 	
-	if (modelData_.textureIndex  != 0) {
-		TextureManager::TexCommand(modelData_.textureIndex );
+	if (textureHandle_!= 0) {
+		TextureManager::TexCommand(textureHandle_ );
 
 	}
 	

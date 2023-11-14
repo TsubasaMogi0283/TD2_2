@@ -3,6 +3,7 @@
 #include <cassert>
 #include <fstream>
 #include <sstream>
+#include <array>
 
 #include "ConvertFunction/ConvertLog/LogConvert.h"
 #include "externals/DirectXTex/DirectXTex.h"
@@ -89,7 +90,6 @@ private:
 
 	//モデルの読み込み
 	ModelData modelData_;
-	std::list<ModelData> multipleModeldata_;
 
 	//頂点リソースを作る
 	ComPtr<ID3D12Resource> vertexResource_ = nullptr;
@@ -117,16 +117,12 @@ private:
 	ComPtr<ID3D12Resource> directionalLightResource_ = nullptr;
 	DirectionalLight* directionalLightData_ = nullptr;
 
-	uint32_t descriptorSizeSRV_ = 0u;
 
-	
+	uint32_t textureHandle_ = 0;
+
 
 	//色関係のメンバ変数
 	Vector4 color_;
-
-	//struct ModelData {
-	//	std::vector<Mesh::VertexData> vertices;
-	//	MaterialData material;
-	//	std::string name;
-	//};
+	static const int MODEL_MAX_AMOUNT_ = 512;
+	//std::array<ModelInformation, MODEL_MAX_AMOUNT_> textureInformation_{};
 };
