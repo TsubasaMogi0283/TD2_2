@@ -125,8 +125,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp" />
+    <ClCompile Include="Project\Collider\CollisionManager\CollisionManager.cpp" />
     <ClCompile Include="Project\GameObject\DemoGround\DemoGround.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerCollisionState\Front\IPlayerCollisionFrontState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -208,8 +210,12 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h" />
     <ClInclude Include="Project\AllGameScene\Select\SelectScene.h" />
     <ClInclude Include="Project\AllGameScene\Title\TitleScene.h" />
+    <ClInclude Include="Project\Collider\Collider.h" />
+    <ClInclude Include="Project\Collider\CollisionManager\CollisionManager.h" />
+    <ClInclude Include="Project\Collider\ICollisionState.h" />
     <ClInclude Include="Project\GameObject\DemoGround\DemoGround.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerCollisionState\Front\IPlayerCollisionFrontState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Ellysia\externals\imGui\LICENSE.txt" />

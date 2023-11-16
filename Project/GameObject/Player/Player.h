@@ -3,6 +3,10 @@
 #include "Input/Input.h"
 #include "Polygon/Model/Model.h"
 #include "WorldTransform/WorldTransform.h"
+#include "Collider/Collider.h"
+
+#include "Collider/ICollisionState.h"
+#include "GameObject/Player/PlayerCollisionState/Front/IPlayerCollisionFrontState.h"
 
 
 
@@ -25,7 +29,7 @@ struct InitProperty {
 
 
 /* Playerクラス */
-class Player {
+class Player : public Collider {
 
 public:
 
@@ -46,6 +50,22 @@ public:
 	/// 描画処理
 	/// </summary>
 	void Draw();
+
+	/// <summary>
+	/// 衝突時コールバック処理
+	/// </summary>
+	void onCollision(CollisionType type) override;
+
+
+#pragma region Get
+
+	/// <summary>
+	/// AABBの取得
+	/// </summary>
+	AABB GetAABB() override { return aabb_; }
+
+#pragma endregion 
+
 
 private:
 
@@ -70,9 +90,14 @@ private:
 	// 初期値
 	InitProperty init_;
 
-
+	// コライダー
+	std::unique_ptr<ICollisionState> collisionState_[10];
 
 	// インプット
 	Input* input = nullptr;
+
+	// 
+	AABB aabb_;
+
 
 };

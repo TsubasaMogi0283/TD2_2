@@ -21,9 +21,15 @@ void GameScene::Initialize(GameManager* gamaManager){
 	player_->Initialize();
 
 
-	/* ---------- 床---------- */
+	/* ---------- 床　---------- */
 	demoGround_ = std::make_unique<DemoGround>();
 	demoGround_->Initialize();
+
+
+	/* ---------- CollisionManager　---------- */
+	collisionManager_ = std::make_unique<CollisionManager>();
+
+
 
 }
 
@@ -51,8 +57,15 @@ void GameScene::Update(GameManager* gamaManager){
 	player_->Update();
 
 
-	/* ---------- 床---------- */
+	/* ---------- 床 ---------- */
 	demoGround_->Update();
+
+
+
+
+	/* ---------- 衝突判定 ---------- */
+
+	CheckAllCollision();
 
 
 
@@ -84,3 +97,30 @@ GameScene::~GameScene(){
 }
 
 
+
+/// <summary>
+/// 衝突判定と応答
+/// </summary>
+void GameScene::CheckAllCollision() {
+
+	// コライダーリストをクリアにする関数
+	collisionManager_->ColliderClear();
+
+
+	// 設定するコライダー
+	std::list<Collider*> colliders_;
+
+	// コライダーを設定する
+	// Player
+	collisionManager_->ColliderPushBack(player_.get());
+
+	// Enemy
+
+
+	// Map
+
+
+
+	// コライダーの衝突判定
+	collisionManager_->CheckAllCollision();
+}

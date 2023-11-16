@@ -5,6 +5,8 @@
 
 #include "GameObject/Player/Player.h"
 #include "GameObject/DemoGround/DemoGround.h"
+#include "Collider/Collider.h"
+#include "Collider/CollisionManager/CollisionManager.h"
 
 
 class GameScene : public IGameScene{
@@ -21,6 +23,11 @@ public:
 private:
 	void ShowImGui();
 
+	/// <summary>
+	/// 衝突判定と応答
+	/// </summary>
+	void CheckAllCollision();
+
 
 private:
 	Input* input_ = nullptr;
@@ -35,6 +42,9 @@ private:
 	// DemoGround
 	std::unique_ptr<DemoGround> demoGround_ = nullptr;
 
+
+	// CollisionManager
+	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
 };
 

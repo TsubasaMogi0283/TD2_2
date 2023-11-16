@@ -115,6 +115,18 @@
     <Filter Include="Project\GameObject\DemoGround">
       <UniqueIdentifier>{65ffc862-b747-48dd-b135-ba6a37b81d51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Collider">
+      <UniqueIdentifier>{30ce7ed3-c694-49f8-9a10-ce8c27852558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Collider\CollisionManager">
+      <UniqueIdentifier>{0445bb82-37e4-4067-9cba-e631118f4d68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player\PlayerCollisionState">
+      <UniqueIdentifier>{d736532b-f167-4538-9469-5fb315b8fc49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player\PlayerCollisionState\Front">
+      <UniqueIdentifier>{bd11ef6e-6681-42d1-952c-0152f668082f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -227,6 +239,12 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\DemoGround\DemoGround.cpp">
       <Filter>Project\GameObject\DemoGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Collider\CollisionManager\CollisionManager.cpp">
+      <Filter>Project\Collider\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerCollisionState\Front\IPlayerCollisionFrontState.cpp">
+      <Filter>Project\GameObject\Player\PlayerCollisionState\Front</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -420,6 +438,18 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\DemoGround\DemoGround.h">
       <Filter>Project\GameObject\DemoGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Collider\CollisionManager\CollisionManager.h">
+      <Filter>Project\Collider\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Collider\Collider.h">
+      <Filter>Project\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Collider\ICollisionState.h">
+      <Filter>Project\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerCollisionState\Front\IPlayerCollisionFrontState.h">
+      <Filter>Project\GameObject\Player\PlayerCollisionState\Front</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

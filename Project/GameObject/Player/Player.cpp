@@ -33,6 +33,10 @@ void Player::Initialize() {
 	gravity_.accel = 0.1f;
 	gravity_.maxVel = -1.0f;
 
+
+	// コライダーの配に各衝突判定ステートを設定する
+	collisionState_[FRONT] = std::make_unique<IPlayerCollisionFrontState>();
+
 }
 
 
@@ -71,6 +75,16 @@ void Player::Draw() {
 
 	pla_.model->Draw(pla_.transform);
 
+}
+
+
+
+/// <summary>
+/// 衝突時コールバック処理
+/// </summary>
+void Player::onCollision(CollisionType type) {
+
+	collisionState_[type]->onCollision();
 }
 
 
