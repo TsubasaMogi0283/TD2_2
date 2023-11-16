@@ -219,7 +219,7 @@
     <ClCompile Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Transformation.cpp">
+    <ClCompile Include="Ellysia\Polygon\Model\Transformation\Transformation.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -355,12 +355,6 @@
     <ClInclude Include="Ellysia\Polygon\Model\Model.h">
       <Filter>ヘッダー ファイル\Polygone\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Ellysia\TextureManager\MaterialData\MaterialData.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\TextureManager\ModelData\ModelData.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\PipelineManager\PipelineManager.h">
       <Filter>ヘッダー ファイル\Pipeline</Filter>
     </ClInclude>
@@ -417,6 +411,12 @@
     </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\MaterialData\MaterialData.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\ModelData\ModelData.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
