@@ -15,23 +15,13 @@ SampleScene::SampleScene() {
 /// 初期化
 /// </summary>
 void SampleScene::Initialize(GameManager* gameManager) {
-	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
-		model_[i] = new Model();
-		model_[i]->CreateObject("Resources/05_02", "plane.obj");
-		//model_[i]->Create("Resources/05_02", "plane.obj");
-	}
-	modelTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
-
-	spriteTransform_ = { {0.5f,0.5f,0.5f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
-	uint32_t textureHandle = TextureManager::LoadTexture("Resources/monsterBall.png");
-
-	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
-		sprite_[i] = new Sprite();
+	for (int i = 0; i < MODEL_AMOUNT_; i++) {
+		model_[i] = Model::Create("Resources/05_02", "plane.obj");
 	
-		sprite_[i]->LoadTextureHandle(textureHandle);
-		sprite_[i]->SetAllPosition({ { 0.0f,0.0f }, { 0.0f,600.0f }, { 1200.0f,0.0f, }, { 1200.0f,600.0f} });
-
 	}
+
+	uint32_t textureHandle = TextureManager::LoadTexture("Resources/uvChecker.png");
+	sprite=Sprite::Create(textureHandle, {0.0f,0.0f});
 	
 
 }
@@ -41,34 +31,65 @@ void SampleScene::Initialize(GameManager* gameManager) {
 /// </summary>
 void SampleScene::Update(GameManager* gameManager) {
 
-	modelTransform_.rotate.y += 0.05f;
+#pragma region Sprite
 
+	
+
+	sprite->SetScale(scale_);
+	sprite->SetRotate(rotate);
+	sprite->SetPosition(position_);
+
+	sprite->SetColor(color_);
+
+	ImGui::Begin("Sprite");
+	ImGui::SliderFloat4("color", &color_.x, 0.0f, 1.0f);
+	ImGui::SliderFloat2("Scale", &scale_.x, 0.0f, 3.0f);
+	ImGui::SliderFloat("Rotate", &rotate, 0.0f,3.0f);
+	ImGui::SliderFloat2("Position", &position_.x, 0.0f,1000.0f);
+	
+	
+
+
+	ImGui::End();
+
+
+#pragma endregion
+
+	
+	for (int i = 0; i < MODEL_AMOUNT_; i++) {
+		model_[i]->SetColor(modelColor_);
+		model_[i]->SetTranslate(modelTranslate_);
+	}
 	ImGui::Begin("Plane");
-	ImGui::SliderFloat3("Translate", &modelTransform_.translate.x, -10.0f, 10.0f);
+	ImGui::SliderFloat3("Translate", &modelTranslate_.x, -10.0f, 10.0f);
+	ImGui::SliderFloat4("Color", &modelColor_.x, 0.0f, 1.0f);
+	
+
 	ImGui::End();
 	
+
+	
+
+
 }
 
 /// <summary>
 /// 描画
 /// </summary>
 void SampleScene::Draw(GameManager* gameManager) {
-	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
-		model_[i]->Draw(modelTransform_);
+	for (int i = 0; i < MODEL_AMOUNT_; i++) {
+		model_[i]->Draw();
+	
 	}
-	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
-		sprite_[i]->DrawRect(spriteTransform_);
-	}
+	sprite->Draw();
 }
 
 /// <summary>
 /// デストラクタ
 /// </summary>
 SampleScene::~SampleScene() {
-	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
+	for (int i = 0; i < MODEL_AMOUNT_; i++) {
 		delete model_[i];
 	}
-	for (int i = 0; i < SPRITE_AMOUNT_; i++) {
-		delete sprite_[i];
-	}
+	delete sprite;
 }

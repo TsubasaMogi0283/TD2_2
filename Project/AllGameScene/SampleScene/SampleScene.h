@@ -2,12 +2,11 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 
 #include "Polygon/Sprite/Sprite.h"
-#include <Math/Vector/SpritePosition.h>
 #include "Math/Vector/Transform.h"
 
 #include "Polygon/Model/Model.h"
 
-//StatePatternをル買う時は必ず前方宣言をするように
+//StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
 
 class SampleScene : public IGameScene {
@@ -29,17 +28,30 @@ public:
 	void Draw(GameManager* gameManager)override;
 
 private:
-	static const int SPRITE_AMOUNT_ = 100;
-	Model* model_[SPRITE_AMOUNT_] = { nullptr };
-	Transform modelTransform_ = {};
+	static const int MODEL_AMOUNT_ = 10;
 
-	
+	Model* model_[MODEL_AMOUNT_] = { nullptr };
+	Vector3 modelTranslate_ = {};
 
-	Sprite* sprite_[SPRITE_AMOUNT_] = { nullptr };
-	Transform spriteTransform_ = {};
+	Vector2 position_ = { 0.0f,0.0f };
+	Vector2 scale_ = { 1.0f,1.0f };
+	float rotate = 0.0f;
+
+	Vector2 anchorPoint = { 0.0f,0.0f };
+	Sprite* sprite = nullptr;
+	Vector4 color_ = { 1.0f,1.0f,1.0f,1.0f };
+
+	Vector4 modelColor_ = { 1.0f,1.0f,1.0f,1.0f };
+
+	bool flipX_ = false;
+	bool flipY_ = false;
+
+	bool isInvisible_ = false;
+
+
+	Vector2 leftTop_ = { 0.0f,0.0f };
+	Vector2 size_ = { 100.0f,100.0f };
+
 
 };
-
-
-
 

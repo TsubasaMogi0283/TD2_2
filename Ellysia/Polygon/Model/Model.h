@@ -62,7 +62,7 @@ private:
 
 public:
 	//描画
-	void Draw(Transform transform);
+	void Draw();
 
 
 	//デストラクタ
@@ -74,6 +74,32 @@ public:
 public:
 	//アクセッサのまとめ
 
+	//SRT
+	//Scale
+	void SetScale(Vector3 scale) {
+		this->scale_ = scale;
+	}
+	const Vector3 GetScale() {
+		return scale_;
+	}
+	//Rotate
+	void SetRotate(Vector3 rotate) {
+		this->rotate_ = rotate;
+	}
+	const Vector3 GetRotate() {
+		return rotate_;
+	}
+	//Translate
+	void SetTranslate(Vector3 translate) {
+		this->translate_ = translate;
+	}
+	const Vector3 GetTranslate() {
+		return translate_;
+	}
+
+
+
+	
 	//透明度の変更
 	void SetColor(Vector4 color) {
 		this->color_ = color;
@@ -118,7 +144,11 @@ private:
 
 	uint32_t textureHandle_ = 0;
 
-	
+	//SRT
+	Vector3 scale_ = { 1.0f,1.0f,1.0f };
+	Vector3 rotate_ = { 0.0f,0.0f,0.0f };
+	Vector3 translate_ = { 0.0f,0.0f,0.0f };
+
 
 
 	//色関係のメンバ変数

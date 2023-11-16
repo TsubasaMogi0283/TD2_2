@@ -42,16 +42,14 @@ public:
 
 	static void TexCommand(uint32_t texHandle);
 
-	//解放
-	void Release();
 
 
+
+	/// テクスチャの情報を取得
+	const D3D12_RESOURCE_DESC GetResourceDesc(uint32_t textureHandle);
 
 private:
 
-
-	//Resource作成の関数化
-	ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
 
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index);
 	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index);

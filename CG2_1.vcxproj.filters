@@ -337,9 +337,6 @@
     <ClInclude Include="Ellysia\Input\Mouse\MouseInformation.h">
       <Filter>ヘッダー ファイル\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\SpritePosition.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\Audio\ChunkHeader\ChunkHeader.h">
       <Filter>ヘッダー ファイル\Audio</Filter>
     </ClInclude>
@@ -400,22 +397,22 @@
     <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
       <Filter>Project\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\Mesh\Mesh.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\Material\CreateMaterial.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\MaterialData\MaterialData.h">
       <Filter>ヘッダー ファイル\Polygone\Model</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\ModelData\ModelData.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Material\CreateMaterial.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Mesh\Mesh.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h">
       <Filter>ヘッダー ファイル\Polygone\Model</Filter>
     </ClInclude>
   </ItemGroup>

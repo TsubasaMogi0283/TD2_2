@@ -75,8 +75,6 @@ void GameManager::Release() {
 
 	audio_->Release();
 	//
-	textureManager_->Release();
-	//
 	pipelineManager_->Release();
 	//
 	imGuiManager_->Release();
