@@ -106,6 +106,9 @@
     <Filter Include="Project\Gamemanager">
       <UniqueIdentifier>{6783ae0e-f5a0-4867-a365-1d65f9d0e07e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Scene\Game\Map">
+      <UniqueIdentifier>{973fb82b-cf7d-43da-9151-7cdbfeacf4c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -212,6 +215,12 @@
     </ClCompile>
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
       <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Game\Map\MapChip.cpp">
+      <Filter>Project\Scene\Game\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Game\Map\MapManager.cpp">
+      <Filter>Project\Scene\Game\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +408,12 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
       <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Game\Map\MapChip.h">
+      <Filter>Project\Scene\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Game\Map\MapManager.h">
+      <Filter>Project\Scene\Game\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

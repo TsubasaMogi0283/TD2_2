@@ -6,7 +6,6 @@
 
 SelectScene::SelectScene(){
 
-
 }
 
 void SelectScene::Initialize(GameManager* gamaManager){
