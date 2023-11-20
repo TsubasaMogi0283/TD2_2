@@ -1,10 +1,12 @@
 #pragma once
 #include "AllGameScene/GameManager/IGameScene.h"
 
-#include "Polygon/Sprite/Sprite.h"
-#include "Math/Vector/Transform.h"
+#include <memory>
 
+#include "Polygon/Sprite/Sprite.h"
 #include "Polygon/Model/Model.h"
+
+#include "Object/Oven/Oven.h"
 
 //StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
@@ -28,30 +30,33 @@ public:
 	void Draw(GameManager* gameManager)override;
 
 private:
-	static const int MODEL_AMOUNT_ = 10;
 
-	Model* model_[MODEL_AMOUNT_] = { nullptr };
-	Vector3 modelTranslate_ = {};
+	//とうもろこし
+	Model* corn_ =  nullptr ;
+	Vector3 cornPosition_ = {};
+	Vector3 cornRotate_ = {};
 
-	Vector2 position_ = { 0.0f,0.0f };
-	Vector2 scale_ = { 1.0f,1.0f };
-	float rotate = 0.0f;
-
-	Vector2 anchorPoint = { 0.0f,0.0f };
-	Sprite* sprite = nullptr;
-	Vector4 color_ = { 1.0f,1.0f,1.0f,1.0f };
-
-	Vector4 modelColor_ = { 1.0f,1.0f,1.0f,1.0f };
-
-	bool flipX_ = false;
-	bool flipY_ = false;
-
-	bool isInvisible_ = false;
+	
 
 
-	Vector2 leftTop_ = { 0.0f,0.0f };
-	Vector2 size_ = { 100.0f,100.0f };
+	//オーブン
+	std::unique_ptr<Oven> oven_ = nullptr;
+	
+	
+	Model* lamp_ = nullptr;
+	Vector3 lampPosition_ = {};
+	Vector3 lampScale_ = {};
+	Vector3 lampRotate_ = {};
+	Vector4 lampColor_ = {};
 
+	Vector4 cornColor_ = {};
+
+
+
+
+	//カメラ
+	Vector3 cameraPosition_ = {};
+	Vector3 cameraRotate_ = {};
 
 };
 

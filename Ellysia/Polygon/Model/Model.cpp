@@ -296,7 +296,7 @@ void Model::Draw() {
 	////書き込むためのアドレスを取得
 	////reinterpret_cast...char* から int* へ、One_class* から Unrelated_class* へなどの変換に使用
 
-	material_->SetInformation(color_);
+	material_->SetInformation(color_,isEnableLighting_);
 
 
 

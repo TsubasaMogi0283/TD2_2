@@ -22,7 +22,6 @@
 
 class Sprite {
 public:
-
 	//コンストラクタ
 	Sprite();
 

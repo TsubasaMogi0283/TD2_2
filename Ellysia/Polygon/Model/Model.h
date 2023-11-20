@@ -111,6 +111,12 @@ public:
 
 
 
+	//Lightingの設定
+	void SetLighting(bool enableLighting) {
+		this->isEnableLighting_ = enableLighting;
+	}
+
+
 private:
 
 	
@@ -137,6 +143,8 @@ private:
 
 	//マテリアル用のリソースを作る
 	std::unique_ptr<CreateMaterial> material_ = nullptr;
+	//基本はtrueで
+	bool isEnableLighting_ = true;
 
 	//Lighting用
 	std::unique_ptr<CreateDirectionalLight> directionalLight_ = nullptr;

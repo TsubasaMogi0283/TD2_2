@@ -106,6 +106,21 @@
     <Filter Include="Project\Gamemanager">
       <UniqueIdentifier>{6783ae0e-f5a0-4867-a365-1d65f9d0e07e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{87bdb518-d077-4291-aa52-d10916f80521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Camera">
+      <UniqueIdentifier>{8b50bdd8-5385-4b4a-97aa-55bb324810c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\Select">
+      <UniqueIdentifier>{7c084db6-7b30-4685-8b0e-c263ffca4327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Object">
+      <UniqueIdentifier>{175b34b3-a960-4997-82e4-448e3778545e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Object\Oven">
+      <UniqueIdentifier>{f6ecefa3-855c-48a1-8449-25a234c5d63e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -171,9 +186,6 @@
     <ClCompile Include="Ellysia\Input\Input.cpp">
       <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Ellysia\Camera\Camera.cpp">
-      <Filter>ソース ファイル\Polygone</Filter>
-    </ClCompile>
     <ClCompile Include="Project\AllGameScene\GameManager\GameManager.cpp">
       <Filter>Project\Gamemanager</Filter>
     </ClCompile>
@@ -207,9 +219,6 @@
     <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
       <Filter>Project\Scene\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
-      <Filter>Project</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\Polygon\Model\Mesh\Mesh.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -220,6 +229,15 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Ellysia\Polygon\Model\Transformation\Transformation.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Camera\Camera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
+      <Filter>Project\Scene\Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Oven\Oven.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -364,9 +382,6 @@
     <ClInclude Include="Ellysia\TextureManager\TextureManager.h">
       <Filter>ヘッダー ファイル\TextureManager</Filter>
     </ClInclude>
-    <ClInclude Include="Ellysia\Camera\Camera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\DebugCamera\DebugCamera.h">
       <Filter>ソース ファイル\DebugCamera</Filter>
     </ClInclude>
@@ -394,9 +409,6 @@
     <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
       <Filter>Project\Scene\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
-      <Filter>Project\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\MaterialData\MaterialData.h">
       <Filter>ヘッダー ファイル\Polygone\Model</Filter>
     </ClInclude>
@@ -414,6 +426,15 @@
     </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h">
       <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Camera\Camera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
+      <Filter>Project\Scene\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Oven\Oven.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

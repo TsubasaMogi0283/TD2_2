@@ -8,7 +8,7 @@ public:
 
 	void Initialize();
 
-	void SetInformation(Vector4 setColor);
+	void SetInformation(Vector4 setColor,bool enableLighting);
 
 	void SetGraphicsCommand();
 
@@ -21,7 +21,7 @@ private:
 		
 
 	Material* materialData_ = nullptr;
-
+	
 
 };
 

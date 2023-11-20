@@ -2,6 +2,8 @@
 #include "AllGameScene/GameManager/GameManager.h"
 #include "TextureManager/TextureManager.h"
 
+#include "Camera/Camera.h"
+
 /// <summary>
 	/// コンストラクタ
 	/// </summary>
@@ -15,13 +17,28 @@ SampleScene::SampleScene() {
 /// 初期化
 /// </summary>
 void SampleScene::Initialize(GameManager* gameManager) {
-	for (int i = 0; i < MODEL_AMOUNT_; i++) {
-		model_[i] = Model::Create("Resources/05_02", "plane.obj");
-	
-	}
+	//とうもろこし
+	corn_ = Model::Create("Resources/Corn", "Corn.obj");
+	cornPosition_ = { -0.3f,0.0f,0.0f };
+	cornRotate_ = { 0.0f,0.0f,0.0f };
+	cornColor_ = { 1.0f,1.0f,0.2f,1.0f };
 
-	uint32_t textureHandle = TextureManager::LoadTexture("Resources/uvChecker.png");
-	sprite=Sprite::Create(textureHandle, {0.0f,0.0f});
+	//オーブン
+	oven_ = std::make_unique<Oven>();
+	oven_->Initialize();
+
+	//オーブンの電熱線
+	//ランプって表記している
+	lamp_ = Model::Create("Resources/Lamp", "Lamp.obj");
+	lampPosition_ = { 0.0f,4.0f,3.7f };
+	lampScale_ = { 1.0f,1.0f,1.0f };
+	lampRotate_ = { 4.0f,0.0f,0.0f };
+	lampColor_ = { 1.0f,1.0f,1.0f,1.0f };
+
+	//カメラ
+	cameraPosition_ = {0.0f,2.2f,-8.0f};
+	cameraRotate_ = { 0.015f,0.0f,0.0f };
+
 	
 
 }
@@ -31,42 +48,46 @@ void SampleScene::Initialize(GameManager* gameManager) {
 /// </summary>
 void SampleScene::Update(GameManager* gameManager) {
 
-#pragma region Sprite
+	//カメラ
+	Camera::GetInstance()->SetRotate(cameraRotate_);
+	Camera::GetInstance()->SetTranslate(cameraPosition_);
+
+
+	corn_->SetColor(cornColor_);
+	corn_->SetTranslate(cornPosition_);
+	corn_->SetRotate(cornRotate_);
 
 	
 
-	sprite->SetScale(scale_);
-	sprite->SetRotate(rotate);
-	sprite->SetPosition(position_);
+	lamp_->SetTranslate(lampPosition_);
+	lamp_->SetScale(lampScale_);
+	lamp_->SetRotate(lampRotate_);
+	lamp_->SetColor(lampColor_);
 
-	sprite->SetColor(color_);
-
-	ImGui::Begin("Sprite");
-	ImGui::SliderFloat4("color", &color_.x, 0.0f, 1.0f);
-	ImGui::SliderFloat2("Scale", &scale_.x, 0.0f, 3.0f);
-	ImGui::SliderFloat("Rotate", &rotate, 0.0f,3.0f);
-	ImGui::SliderFloat2("Position", &position_.x, 0.0f,1000.0f);
+	ImGui::Begin("Corn");
+	ImGui::SliderFloat3("Translate", &cornPosition_.x, -10.0f, 10.0f);
+	ImGui::SliderFloat3("Rotate", &cornRotate_.x, -4.0f, 4.0f);
+	ImGui::SliderFloat4("Color", &cornColor_.x, 0.0f, 1.0f);
+	ImGui::End();
 	
+	//オーブンの更新
+	oven_->Update();
+
 	
 
+	ImGui::Begin("Lamp");
+	ImGui::SliderFloat3("Translate", &lampPosition_.x, -10.0f, 10.0f);
+	ImGui::SliderFloat3("Rotate", &lampRotate_.x, -4.0f, 4.0f);
+	ImGui::SliderFloat4("Color", &lampColor_.x, 0.0f, 1.0f);
 
 	ImGui::End();
 
-
-#pragma endregion
-
-	
-	for (int i = 0; i < MODEL_AMOUNT_; i++) {
-		model_[i]->SetColor(modelColor_);
-		model_[i]->SetTranslate(modelTranslate_);
-	}
-	ImGui::Begin("Plane");
-	ImGui::SliderFloat3("Translate", &modelTranslate_.x, -10.0f, 10.0f);
-	ImGui::SliderFloat4("Color", &modelColor_.x, 0.0f, 1.0f);
-	
-
+	ImGui::Begin("Camera");
+	ImGui::SliderFloat3("Translate", &cameraPosition_.x, -20.0f, 10.0f);
+	ImGui::SliderFloat3("Rotate", &cameraRotate_.x, -5.0f, 5.0f);
 	ImGui::End();
-	
+
+
 
 	
 
@@ -77,19 +98,17 @@ void SampleScene::Update(GameManager* gameManager) {
 /// 描画
 /// </summary>
 void SampleScene::Draw(GameManager* gameManager) {
-	for (int i = 0; i < MODEL_AMOUNT_; i++) {
-		model_[i]->Draw();
+	corn_->Draw();
+	oven_->Draw();
+	lamp_->Draw();
 	
-	}
-	sprite->Draw();
 }
 
 /// <summary>
 /// デストラクタ
 /// </summary>
 SampleScene::~SampleScene() {
-	for (int i = 0; i < MODEL_AMOUNT_; i++) {
-		delete model_[i];
-	}
-	delete sprite;
+	delete corn_;
+	
+	delete lamp_;
 }
