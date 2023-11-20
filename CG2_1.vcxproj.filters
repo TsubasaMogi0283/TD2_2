@@ -121,6 +121,21 @@
     <Filter Include="Project\Object\Oven">
       <UniqueIdentifier>{f6ecefa3-855c-48a1-8449-25a234c5d63e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Object\Corn">
+      <UniqueIdentifier>{93289f95-18ec-4e63-895b-764718dc3096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Polygone\Model">
+      <UniqueIdentifier>{ea2b1023-1bbf-445f-99df-340057f08e6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\Object2D">
+      <UniqueIdentifier>{10dde345-3418-4b51-9da1-6d288d23fed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\Object3D">
+      <UniqueIdentifier>{cf0fc2e4-15b8-4397-87b8-c878ccd05ae0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Object\Lamp">
+      <UniqueIdentifier>{8af84574-384c-497b-946e-53d556b967e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -177,9 +192,6 @@
     <ClCompile Include="Ellysia\Common\Windows\WinApp.cpp">
       <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\Model.cpp">
-      <Filter>ソース ファイル\Polygone</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\ConvertFunction\CompileShader\CompileShaderManager.cpp">
       <Filter>ソース ファイル\ConvertFunction</Filter>
     </ClCompile>
@@ -219,40 +231,49 @@
     <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
       <Filter>Project\Scene\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\Mesh\Mesh.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\Material\CreateMaterial.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\Transformation\Transformation.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\Camera\Camera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
       <Filter>Project\Scene\Select</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\Corn\Corn.cpp">
+      <Filter>Project\Object\Corn</Filter>
+    </ClCompile>
     <ClCompile Include="Project\Object\Oven\Oven.cpp">
+      <Filter>Project\Object\Oven</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Model.cpp">
+      <Filter>ソース ファイル\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.cpp">
+      <Filter>ソース ファイル\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Material\CreateMaterial.cpp">
+      <Filter>ソース ファイル\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Mesh\Mesh.cpp">
+      <Filter>ソース ファイル\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Transformation\Transformation.cpp">
+      <Filter>ソース ファイル\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Lamp\Lamp.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Object3d.PS.hlsl">
-      <Filter>リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="Object3d.VS.hlsl">
-      <Filter>リソース ファイル</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shader\Object2d.PS.hlsl">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\Object2D</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Object2d.VS.hlsl">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\Object2D</Filter>
+    </FxCompile>
+    <FxCompile Include="Object3d.PS.hlsl">
+      <Filter>リソース ファイル\Object3D</Filter>
+    </FxCompile>
+    <FxCompile Include="Object3d.VS.hlsl">
+      <Filter>リソース ファイル\Object3D</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,6 +455,12 @@
       <Filter>Project\Scene\Select</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Oven\Oven.h">
+      <Filter>Project\Object\Oven</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Corn\Corn.h">
+      <Filter>Project\Object\Corn</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Lamp\Lamp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -443,11 +470,11 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Object3d.hlsli">
-      <Filter>リソース ファイル</Filter>
-    </None>
     <None Include="Resources\Shader\Object2d.hlsli">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\Object2D</Filter>
+    </None>
+    <None Include="Object3d.hlsli">
+      <Filter>リソース ファイル\Object3D</Filter>
     </None>
   </ItemGroup>
 </Project>

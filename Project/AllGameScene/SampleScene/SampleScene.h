@@ -7,6 +7,8 @@
 #include "Polygon/Model/Model.h"
 
 #include "Object/Oven/Oven.h"
+#include <Object/Corn/Corn.h>
+#include <Object/Lamp/Lamp.h>
 
 //StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
@@ -32,24 +34,14 @@ public:
 private:
 
 	//とうもろこし
-	Model* corn_ =  nullptr ;
-	Vector3 cornPosition_ = {};
-	Vector3 cornRotate_ = {};
-
+	std::unique_ptr<Corn> corn_ = nullptr;
 	
-
-
 	//オーブン
 	std::unique_ptr<Oven> oven_ = nullptr;
 	
+	//電熱線
+	std::unique_ptr<Lamp> lamp_ = nullptr;
 	
-	Model* lamp_ = nullptr;
-	Vector3 lampPosition_ = {};
-	Vector3 lampScale_ = {};
-	Vector3 lampRotate_ = {};
-	Vector4 lampColor_ = {};
-
-	Vector4 cornColor_ = {};
 
 
 

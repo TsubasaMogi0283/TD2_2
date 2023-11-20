@@ -18,10 +18,8 @@ SampleScene::SampleScene() {
 /// </summary>
 void SampleScene::Initialize(GameManager* gameManager) {
 	//とうもろこし
-	corn_ = Model::Create("Resources/Corn", "Corn.obj");
-	cornPosition_ = { -0.3f,0.0f,0.0f };
-	cornRotate_ = { 0.0f,0.0f,0.0f };
-	cornColor_ = { 1.0f,1.0f,0.2f,1.0f };
+	corn_ = std::make_unique<Corn>();
+	corn_->Initialize();
 
 	//オーブン
 	oven_ = std::make_unique<Oven>();
@@ -29,11 +27,8 @@ void SampleScene::Initialize(GameManager* gameManager) {
 
 	//オーブンの電熱線
 	//ランプって表記している
-	lamp_ = Model::Create("Resources/Lamp", "Lamp.obj");
-	lampPosition_ = { 0.0f,4.0f,3.7f };
-	lampScale_ = { 1.0f,1.0f,1.0f };
-	lampRotate_ = { 4.0f,0.0f,0.0f };
-	lampColor_ = { 1.0f,1.0f,1.0f,1.0f };
+	lamp_= std::make_unique<Lamp>();
+	lamp_->Initialize();
 
 	//カメラ
 	cameraPosition_ = {0.0f,2.2f,-8.0f};
@@ -53,34 +48,21 @@ void SampleScene::Update(GameManager* gameManager) {
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
 
-	corn_->SetColor(cornColor_);
-	corn_->SetTranslate(cornPosition_);
-	corn_->SetRotate(cornRotate_);
+	
 
 	
 
-	lamp_->SetTranslate(lampPosition_);
-	lamp_->SetScale(lampScale_);
-	lamp_->SetRotate(lampRotate_);
-	lamp_->SetColor(lampColor_);
-
-	ImGui::Begin("Corn");
-	ImGui::SliderFloat3("Translate", &cornPosition_.x, -10.0f, 10.0f);
-	ImGui::SliderFloat3("Rotate", &cornRotate_.x, -4.0f, 4.0f);
-	ImGui::SliderFloat4("Color", &cornColor_.x, 0.0f, 1.0f);
-	ImGui::End();
+	
+	//とうもろこしの更新
+	corn_->Update();
 	
 	//オーブンの更新
 	oven_->Update();
 
+	//電熱線
+	lamp_->Update();
+
 	
-
-	ImGui::Begin("Lamp");
-	ImGui::SliderFloat3("Translate", &lampPosition_.x, -10.0f, 10.0f);
-	ImGui::SliderFloat3("Rotate", &lampRotate_.x, -4.0f, 4.0f);
-	ImGui::SliderFloat4("Color", &lampColor_.x, 0.0f, 1.0f);
-
-	ImGui::End();
 
 	ImGui::Begin("Camera");
 	ImGui::SliderFloat3("Translate", &cameraPosition_.x, -20.0f, 10.0f);
@@ -108,7 +90,7 @@ void SampleScene::Draw(GameManager* gameManager) {
 /// デストラクタ
 /// </summary>
 SampleScene::~SampleScene() {
-	delete corn_;
 	
-	delete lamp_;
+	
+	
 }
