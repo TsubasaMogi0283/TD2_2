@@ -10,8 +10,8 @@ GameScene::GameScene() {
 void GameScene::Initialize(GameManager* gamaManager) {
     input_ = Input::GetInstance();
 
-    Vector3 initialPosition = { 0.0f, 0.0f, 0.0f };
-    CreateModels(10, 5.0f, initialPosition);
+    initialPosition_ = { 0.0f, 0.0f, 0.0f };
+    CreateModels(10, 1.0f, initialPosition_);
 
     model_ = Model::Create("Resources/TD_obj", "groundCube.obj");
     mapTransforms_.scale = { 1.0f, 1.0f, 1.0f };
@@ -38,12 +38,18 @@ void GameScene::Update(GameManager* gamaManager) {
     if (input_->IsTriggerKey(DIK_1) == true) {
         gamaManager->ChangeScene(new ResultScene());
     }
-
+    
     float radius = 10.0f;
-    float angle = mapTransforms_.rotate.x + 0.01f;
-    mapTransforms_.translate.y = radius * cos(angle);
-    mapTransforms_.translate.z = radius * sin(angle);
-    mapTransforms_.rotate.x -= 0.01f;
+    for (size_t i = 0; i < models_.size(); ++i) {
+        float angle = modelRotate_[i].x + 0.01f;
+        modelPosition_[i].y = radius * cos(angle);
+        modelPosition_[i].z = radius * sin(angle);
+        modelRotate_[i].x -= 0.01f;
+
+        models_[i]->SetTranslate(modelPosition_[i]);
+        models_[i]->SetRotate(modelRotate_[i]);
+    }
+    
 }
 
 void GameScene::Draw(GameManager* gamaManager) {
@@ -56,18 +62,23 @@ GameScene::~GameScene() {
     for (auto model : models_) {
         delete model;
     }
+
 }
 
 void GameScene::CreateModels(int count, float spacing, const Vector3& initialPosition)
 {
     for (int i = 0; i < count; ++i) {
-        Model* newModel = new Model();
-        newModel->Model::Create("Resources/TD_obj", "groundCube.obj");
+
+        Model* newModel = Model::Create("Resources/TD_obj", "groundCube.obj");
 
         // モデルの初期位置を設定
         Vector3 modelPosition = { initialPosition.x + i * spacing, initialPosition.y, initialPosition.z };
+        Vector3 modelRotate = { 0.0f, 0.0f, 0.0f };
         newModel->SetTranslate(modelPosition);
 
+
         models_.push_back(newModel);
+        modelPosition_.push_back(modelPosition);
+        modelRotate_.push_back(modelRotate);
     }
 }

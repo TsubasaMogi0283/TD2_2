@@ -38,6 +38,11 @@ private:
 
 	std::vector<Model*> models_;
 
+	Vector3 initialPosition_;
+
+	std::vector<Vector3> modelPosition_;
+	std::vector<Vector3> modelRotate_;
+
 	void CreateModels(int count, float spacing, const Vector3& initialPosition);
 };
 
