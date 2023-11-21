@@ -226,7 +226,6 @@ Model* Model::Create(const std::string& directoryPath, const std::string& fileNa
 			model->directionalLight_->Initialize();
 
 
-
 			//初期は白色
 			//モデル個別に色を変更できるようにこれは外に出しておく
 			model->color_ = { 1.0f,1.0f,1.0f,1.0f };
@@ -270,7 +269,6 @@ Model* Model::Create(const std::string& directoryPath, const std::string& fileNa
 	//Lighting
 	model->directionalLight_=std::make_unique<CreateDirectionalLight>();
 	model->directionalLight_->Initialize();
-
 
 
 	//初期は白色
@@ -342,7 +340,10 @@ void Model::Draw() {
 	
 
 	//Light
+	directionalLight_->SetDirection(lightingDirection_);
 	directionalLight_->SetGraphicsCommand();
+	
+
 
 	//DrawCall
 	mesh_->DrawCall();

@@ -34,5 +34,8 @@ private:
 	Vector4 color_ = {};
 
 
+
+	Vector3 lightDirection_ = {};
+	float theta_ = 0.0f;
 };
 

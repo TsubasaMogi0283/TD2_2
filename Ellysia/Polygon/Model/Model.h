@@ -111,11 +111,17 @@ public:
 
 
 
-	//Lightingの設定
+
+#pragma region Lightingの設定
 	void SetLighting(bool enableLighting) {
 		this->isEnableLighting_ = enableLighting;
 	}
+	//方向
+	void SetDirection(Vector3 direction) {
+		this->lightingDirection_ = direction;
+	}
 
+#pragma endregion
 
 private:
 
@@ -143,11 +149,17 @@ private:
 
 	//マテリアル用のリソースを作る
 	std::unique_ptr<CreateMaterial> material_ = nullptr;
-	//基本はtrueで
-	bool isEnableLighting_ = true;
+	
 
 	//Lighting用
 	std::unique_ptr<CreateDirectionalLight> directionalLight_ = nullptr;
+	//基本はtrueで
+	bool isEnableLighting_ = true;
+
+	//方向
+	Vector3 lightingDirection_ = {0.0f,-1.0f,0.0f};
+
+
 
 
 	uint32_t textureHandle_ = 0;
@@ -160,11 +172,15 @@ private:
 
 
 	//色関係のメンバ変数
-	Vector4 color_;
+	Vector4 color_ = {1.0f,1.0f,1.0f,1.0f};
 
 
 	
 
 	//TextureManagerを参考にする
 	static std::list<ModelData> modelInformationList_;
+
+
+	
+
 };
