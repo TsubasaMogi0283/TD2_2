@@ -131,7 +131,7 @@ public:
 
 	static void Initialize();
 
-	
+	ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
 
 
 

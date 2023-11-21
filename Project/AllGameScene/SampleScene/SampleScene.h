@@ -1,13 +1,16 @@
 #pragma once
 #include "AllGameScene/GameManager/IGameScene.h"
 
-#include "Polygon/Sprite/Sprite.h"
-#include <Math/Vector/SpritePosition.h>
-#include "Math/Vector/Transform.h"
+#include <memory>
 
+#include "Polygon/Sprite/Sprite.h"
 #include "Polygon/Model/Model.h"
 
-//StatePatternをル買う時は必ず前方宣言をするように
+#include "Object/Oven/Oven.h"
+#include <Object/Corn/Corn.h>
+#include <Object/Lamp/Lamp.h>
+
+//StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
 
 class SampleScene : public IGameScene {
@@ -30,15 +33,22 @@ public:
 
 private:
 
-	Model* model_ = nullptr;
-	Transform modelTransform_ = {};
+	//とうもろこし
+	std::unique_ptr<Corn> corn_ = nullptr;
+	
+	//オーブン
+	std::unique_ptr<Oven> oven_ = nullptr;
+	
+	//電熱線
+	std::unique_ptr<Lamp> lamp_ = nullptr;
+	
 
 
-	Sprite* sprite = nullptr;
-	Transform spriteTransform_ = {};
+
+
+	//カメラ
+	Vector3 cameraPosition_ = {};
+	Vector3 cameraRotate_ = {};
 
 };
-
-
-
 
