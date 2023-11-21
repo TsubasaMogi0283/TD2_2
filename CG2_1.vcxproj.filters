@@ -106,6 +106,9 @@
     <Filter Include="Project\Gamemanager">
       <UniqueIdentifier>{6783ae0e-f5a0-4867-a365-1d65f9d0e07e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Object">
+      <UniqueIdentifier>{597d0d77-076d-43f3-9af8-818963583ca0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -212,6 +215,27 @@
     </ClCompile>
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
       <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Corn\Corn.cpp">
+      <Filter>Project\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Lamp\Lamp.cpp">
+      <Filter>Project\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Oven\Oven.cpp">
+      <Filter>Project\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.cpp">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Material\CreateMaterial.cpp">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Mesh\Mesh.cpp">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Transformation\Transformation.cpp">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +423,27 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
       <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Corn\Corn.h">
+      <Filter>Project\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Lamp\Lamp.h">
+      <Filter>Project\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Oven\Oven.h">
+      <Filter>Project\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Material\CreateMaterial.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Mesh\Mesh.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h">
+      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
