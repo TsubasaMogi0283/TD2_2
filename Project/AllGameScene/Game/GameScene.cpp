@@ -13,8 +13,7 @@ void GameScene::Initialize(GameManager* gamaManager) {
     Vector3 initialPosition = { 0.0f, 0.0f, 0.0f };
     CreateModels(10, 5.0f, initialPosition);
 
-    model_ = new Model();
-    model_->CreateObject("Resources/TD_obj", "groundCube.obj");
+    model_ = Model::Create("Resources/TD_obj", "groundCube.obj");
     mapTransforms_.scale = { 1.0f, 1.0f, 1.0f };
 
     mainCamera_ = Camera::GetInstance();
@@ -49,7 +48,7 @@ void GameScene::Update(GameManager* gamaManager) {
 
 void GameScene::Draw(GameManager* gamaManager) {
     for (auto model : models_) {
-        model->Draw(mapTransforms_);
+        model->Draw();
     }
 }
 
@@ -63,11 +62,11 @@ void GameScene::CreateModels(int count, float spacing, const Vector3& initialPos
 {
     for (int i = 0; i < count; ++i) {
         Model* newModel = new Model();
-        newModel->CreateObject("Resources/TD_obj", "groundCube.obj");
+        newModel->Model::Create("Resources/TD_obj", "groundCube.obj");
 
         // モデルの初期位置を設定
         Vector3 modelPosition = { initialPosition.x + i * spacing, initialPosition.y, initialPosition.z };
-        newModel->SetPosition(modelPosition);
+        newModel->SetTranslate(modelPosition);
 
         models_.push_back(newModel);
     }
