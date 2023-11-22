@@ -50,7 +50,6 @@ void SampleScene::Update(GameManager* gameManager) {
 
 	
 
-
 	
 
 	
