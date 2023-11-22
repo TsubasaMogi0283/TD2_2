@@ -29,10 +29,13 @@ void Corn::Update(){
 	model_->SetTranslate(position_);
 	model_->SetRotate(rotate_);
 
-	//rotate_.x += 0.01f;
-	//theta_ = rotate_.y;
+	rotate_.x += 0.01f;
+	//lightDirection_.y += 0.1f;
+	if (lightDirection_.y > 1.0f) {
+
+	}
+
 	//lightDirection_.y = std::cosf(theta_);
-	//model_->SetLighting(false);
 	model_->SetDirection(lightDirection_);
 
 
