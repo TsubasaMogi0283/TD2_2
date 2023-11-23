@@ -136,6 +136,12 @@
     <Filter Include="Project\Object\Lamp">
       <UniqueIdentifier>{8af84574-384c-497b-946e-53d556b967e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Object\Popcorn">
+      <UniqueIdentifier>{fcac4bfd-3f78-4354-bea0-763ef9c0e63d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Object\SamplePlayer">
+      <UniqueIdentifier>{13c96695-ac0a-4de3-b8ac-9e50e424a466}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -259,6 +265,9 @@
       <Filter>ソース ファイル\Polygone\Model</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Lamp\Lamp.cpp">
+      <Filter>Project\Object\Lamp</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -461,6 +470,9 @@
       <Filter>Project\Object\Corn</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Lamp\Lamp.h">
+      <Filter>Project\Object\Lamp</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
