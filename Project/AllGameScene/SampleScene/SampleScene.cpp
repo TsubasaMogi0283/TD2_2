@@ -68,9 +68,6 @@ void SampleScene::Update(GameManager* gameManager) {
 	ImGui::SliderFloat3("Translate", &cameraPosition_.x, -20.0f, 10.0f);
 	ImGui::SliderFloat3("Rotate", &cameraRotate_.x, -5.0f, 5.0f);
 	ImGui::End();
-
-
-
 	
 
 
