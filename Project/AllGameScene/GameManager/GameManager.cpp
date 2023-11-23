@@ -2,7 +2,6 @@
 
 #include "AllGameScene/SampleScene/SampleScene.h"
 #include "AllGameScene/Title/TitleScene.h"
-#include "AllGameScene/Game/GameScene.h"
 
 //コンストラクタ
 GameManager::GameManager() {
@@ -37,7 +36,6 @@ void GameManager::Initialize() {
 
 	//シーンごとに動作確認したいときはここを変えてね
 	currentGamaScene_ = new SampleScene();
-
 	currentGamaScene_->Initialize(this);
 
 }
