@@ -44,6 +44,15 @@ public:
 		return modelGraphicsPipelineState_;
 	}
 
+
+	void SetSpriteBlendMode(uint32_t blendmode) {
+		selectSpriteBlendMode_ = blendmode;
+	}
+	void SetModelBlendMode(uint32_t blendmode) {
+		selectModelBlendMode_ = blendmode;
+	}
+
+
 	void Release();
 
 public:
@@ -74,6 +83,11 @@ private:
 	ComPtr<IDxcBlob> modelVertexShaderBlob_ = nullptr;
 	ComPtr<ID3D12PipelineState> modelGraphicsPipelineState_ = nullptr;
 
+	//スプライト用
+	int32_t selectSpriteBlendMode_ = 1;
+
+	//モデル用の
+	int32_t selectModelBlendMode_ = 1;
 
 };
 
