@@ -1,16 +1,14 @@
 #pragma once
 #include <Polygon/Model/Model.h>
-#include <Object/Popcorn/Popcorn.h>
-#include <list>
 
-class SamplePlayer{
-
+class Popcorn{
+	
 public:
 	//コンストラクタ
-	SamplePlayer();
+	Popcorn();
 
 	//初期化
-	void Initialize();
+	void Initialize(Vector3 position,Vector3 move);
 
 	//更新
 	void Update();
@@ -19,15 +17,19 @@ public:
 	void Draw();
 
 	//デストラクタ
-	~SamplePlayer();
+	~Popcorn();
+
+
+	bool IsDead() {
+		return isDead_;
+	}
 
 private:
 	//デバッグテキスト
 	void DisplayText();
 
-	void Move();
 
-	void Attack();
+
 
 
 private:
@@ -36,20 +38,18 @@ private:
 	//オーブン
 	//とうもろこし
 	Model* model_ =  nullptr ;
-	Vector3 scale_ = {};
+	Vector3 scale_ = {1.0f,1.0f,1.0f,};
 	Vector3 position_ = {};
 	Vector3 move_ = {};
 	Vector3 rotate_ = {};
 	Vector4 color_ = {};
 
-
+	Vector3 velocity = {};
 
 	Vector3 lightDirection_ = {};
 	float theta_ = 0.0f;
 
-
-	std::list<Popcorn*> popcornRight_;
-	std::list<Popcorn*> popcornLeft_;
-
+	int deleteTime_ = 60;
+	bool isDead_ = false;
 };
 

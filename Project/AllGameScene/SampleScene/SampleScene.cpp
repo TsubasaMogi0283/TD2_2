@@ -30,6 +30,11 @@ void SampleScene::Initialize(GameManager* gameManager) {
 	lamp_= std::make_unique<Lamp>();
 	lamp_->Initialize();
 
+	//プレイヤー
+	player_ = std::make_unique<SamplePlayer>();
+	player_->Initialize();
+
+
 	//カメラ
 	cameraPosition_ = {0.0f,2.2f,-8.0f};
 	cameraRotate_ = { 0.015f,0.0f,0.0f };
@@ -62,6 +67,9 @@ void SampleScene::Update(GameManager* gameManager) {
 	//電熱線
 	lamp_->Update();
 
+	//プレイヤー
+	player_->Update();
+
 	
 
 	ImGui::Begin("Camera");
@@ -80,7 +88,7 @@ void SampleScene::Draw(GameManager* gameManager) {
 	corn_->Draw();
 	oven_->Draw();
 	lamp_->Draw();
-	
+	player_->Draw();
 }
 
 /// <summary>

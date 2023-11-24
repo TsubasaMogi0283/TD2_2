@@ -268,7 +268,10 @@
       <Filter>Project\Object\Lamp</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Project\Object\SamplePlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
+      <Filter>Project\Object\Popcorn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -473,7 +476,10 @@
       <Filter>Project\Object\Lamp</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Project\Object\SamplePlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
+      <Filter>Project\Object\Popcorn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

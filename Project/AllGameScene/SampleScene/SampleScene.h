@@ -9,6 +9,7 @@
 #include "Object/Oven/Oven.h"
 #include <Object/Corn/Corn.h>
 #include <Object/Lamp/Lamp.h>
+#include <Object/SamplePlayer/SamplePlayer.h>
 
 //StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
@@ -30,6 +31,10 @@ public:
 
 	/// 描画
 	void Draw(GameManager* gameManager)override;
+private:
+	void CountDown();
+
+
 
 private:
 
@@ -43,7 +48,8 @@ private:
 	std::unique_ptr<Lamp> lamp_ = nullptr;
 	
 
-
+	//サンプルプレイヤー
+	std::unique_ptr<SamplePlayer> player_ = nullptr;
 
 
 	//カメラ
