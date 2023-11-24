@@ -56,5 +56,22 @@ private:
 	Vector3 cameraPosition_ = {};
 	Vector3 cameraRotate_ = {};
 
+	static const int NUMBER_AMOUNT_ = 10;
+	std::unique_ptr<Sprite> timeTensPlane_[NUMBER_AMOUNT_] = {nullptr};
+	std::unique_ptr<Sprite> timeOnesPlane_[NUMBER_AMOUNT_] = { nullptr };
+
+
+	//ゲームの時間
+	const int timer_ = 20;
+	int gameTime_ = 60 * timer_;
+
+	//表示されている時間
+	int displayTime_ = gameTime_/60;
+	//1の位
+	int onesPlace_ = 0;
+	//10の位
+	int tensPlace_ = 0;
+	
+	uint32_t numberTextureHandle[10] = {};
 };
 
