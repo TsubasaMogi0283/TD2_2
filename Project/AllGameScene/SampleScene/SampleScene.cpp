@@ -51,6 +51,8 @@ void SampleScene::Initialize(GameManager* gameManager) {
 		timeTensPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {600.0f,30.0f}));
 		timeOnesPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {680.0f,30.0f}));
 
+
+
 	}
 
 	
@@ -119,7 +121,15 @@ void SampleScene::Update(GameManager* gameManager) {
 /// 描画
 /// </summary>
 void SampleScene::Draw(GameManager* gameManager) {
-	
+	corn_->Draw();
+	oven_->Draw();
+	lamp_->Draw();
+	player_->Draw();
+
+
+
+	//スプライトは後ろに描画してね
+	//透明部分がすり抜けてしまうから
 	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
 		if (tensPlace_ == i) {
 			timeTensPlane_[i]->Draw();
@@ -132,10 +142,7 @@ void SampleScene::Draw(GameManager* gameManager) {
 
 	}
 	
-	corn_->Draw();
-	oven_->Draw();
-	lamp_->Draw();
-	player_->Draw();
+	
 }
 
 /// <summary>

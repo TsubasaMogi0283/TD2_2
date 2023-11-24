@@ -268,4 +268,7 @@ private:
 
 	//テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
+
+	//ブレンドモード
+	uint32_t blendModeNumber_ = 1;
 };

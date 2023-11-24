@@ -85,6 +85,10 @@ void Sprite::Initialize(uint32_t textureHandle,Vector2 position) {
 Sprite* Sprite::Create(uint32_t textureHandle,Vector2 position) {
 	Sprite* sprite = new Sprite();
 	
+	//初期化の所でやってね、Update,Drawでやるのが好ましいけど凄く重くなった。
+	//ブレンドモードの設定
+	PipelineManager::GetInstance()->SetSpriteBlendMode(sprite->blendModeNumber_);
+	PipelineManager::GetInstance()->GenerateSpritePSO();
 	sprite->Initialize(textureHandle,position);
 
 	return sprite;
