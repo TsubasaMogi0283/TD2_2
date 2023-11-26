@@ -85,6 +85,7 @@ void Map::UpdateModel() {
 
 
 
+
     sample_->SetRotate(sampleRotate_);
     sample_->SetTranslate(samplePosition_);
 
