@@ -15,7 +15,7 @@ void MapManager::Initialize(int count, float radius, float height, const Vector3
         Map* newMap = new Map();
 
         float angle = static_cast<float>(i) * (2.0f * 3.1416f) / static_cast<float>(count);
-
+        
         // マップの位置を円周上に配置するための座標を計算
         float x = initialPosition.x + radius * std::cos(angle);
         float y = initialPosition.y;
