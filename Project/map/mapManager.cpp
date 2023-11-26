@@ -15,14 +15,16 @@ void MapManager::Initialize(int count, float radius, float height, const Vector3
         Map* newMap = new Map();
 
         float angle = static_cast<float>(i) * (2.0f * 3.1416f) / static_cast<float>(count);
-        
-        // マップの位置を円周上に配置するための座標を計算
-        float x = initialPosition.x + radius * std::cos(angle);
-        float y = initialPosition.y;
-        float z = initialPosition.z + radius * std::sin(angle);
 
-        // 計算された位置でマップを初期化
+        // マップの位置を円周上に配置するための座標を計算
+        float x = initialPosition.x;
+        float y = initialPosition.y + radius * std::sin(angle);
+        float z = initialPosition.z + radius * std::cos(angle);
+
+        // 新しく作成したMapに新しいModelを生成して渡す
         newMap->Initialize(Vector3(x, y, z), radius, 1.0f);
+
+        // Mapを追加
         maps_.push_back(newMap);
     }
 }

@@ -14,7 +14,7 @@ void GameScene::Initialize(GameManager* gamaManager) {
     cameraPosition_ = { 0.0f,0.0f,-100.0f };
 
     //Map用初期化
-    mapRadius_ = 20.0f;
+    mapRadius_ = 10.0f;
     mapInitialPosition_ = { -20.0f, 0.0f, 0.0f };
 
     mapManager_.Initialize(30, mapRadius_, 20.0f, mapInitialPosition_);
