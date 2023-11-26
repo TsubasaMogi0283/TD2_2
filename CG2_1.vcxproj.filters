@@ -273,6 +273,12 @@
     <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
       <Filter>Project\Object\Popcorn</Filter>
     </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\Win\Win.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\Lose\LoseScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Object2d.PS.hlsl">
@@ -480,6 +486,12 @@
     </ClInclude>
     <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
       <Filter>Project\Object\Popcorn</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\Win\Win.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\Lose\LoseScene.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

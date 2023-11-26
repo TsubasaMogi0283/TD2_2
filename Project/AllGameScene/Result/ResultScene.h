@@ -17,7 +17,6 @@ private:
 
 
 private:
-	Input* input_ = nullptr;
 
 
 

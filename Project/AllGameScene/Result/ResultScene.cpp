@@ -8,7 +8,6 @@ ResultScene::ResultScene() {
 }
 
 void ResultScene::Initialize(GameManager* gamaManager) {
-	input_=Input::GetInstance();
 }
 
 void ResultScene::ShowImGui() {
@@ -21,7 +20,7 @@ void ResultScene::ShowImGui() {
 void ResultScene::Update(GameManager* gamaManager) {
 	ShowImGui();
 
-	if (input_->IsTriggerKey(DIK_1) == true) {
+	if (Input::GetInstance()->IsTriggerKey(DIK_1) == true) {
 		gamaManager->ChangeScene(new TitleScene());
 	}
 
