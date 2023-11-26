@@ -29,7 +29,13 @@ private:
     std::unique_ptr<Model> sample_ = nullptr;
     Vector3 samplePosition_ = {};
     Vector3 sampleRotate_ = {};
-    float sampleRadius_ = 0.5f;
+    float sampleRadius_ = 1.0f;
+    float rotateMove_ = 0.0f;
+
+    std::unique_ptr<Model> sampleBase_ = nullptr;
+    Vector3 sampleBasePosition_ = {};
+    Vector3 sampleBaseRotate_ = {};
+    float sampleBaseRadius_ = 0.5f;
 
     void UpdateModel();
 };
