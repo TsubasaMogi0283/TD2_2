@@ -22,8 +22,8 @@ void GameScene::Initialize(GameManager* gamaManager) {
 
 void GameScene::ShowImGui() {
     ImGui::Begin("Game");
-    ImGui::SliderFloat3("MainCameraTranslate", &cameraPosition_.x, 0.0f, -1000.0f);
-    ImGui::SliderFloat3("MainCameraRotate", &cameraRotate_.x, 0.0f, 1.0f);
+    ImGui::SliderFloat3("MainCameraTranslate", &cameraPosition_.x, -100.0f, 100.0f);
+    ImGui::SliderFloat3("MainCameraRotate", &cameraRotate_.x, -3.0f, 3.0f);
 
     ImGui::End();
 }
@@ -31,7 +31,9 @@ void GameScene::ShowImGui() {
 
 void GameScene::Update(GameManager* gamaManager) {
     ShowImGui();
-
+    cameraPosition_.z = 1.0f;
+    cameraPosition_.x = 30.0f;
+    cameraRotate_.y = -float(M_PI) / 2.0f;
     mainCamera_->SetTranslate(cameraPosition_);
     mainCamera_->SetRotate(cameraRotate_);
 
