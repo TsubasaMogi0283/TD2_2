@@ -25,7 +25,7 @@ void Map::Initialize(const Vector3& initialPosition, float radius, float rotatio
     mapModel_->SetRotate(mapModelRotate_);
     
     sample_ = std::make_unique<Model>();
-    sample_.reset(Model::Create("Resources/TD_obj", "groundCube.obj"));
+    sample_.reset(Model::Create("Resources/Sample/Corn", "Corn.obj"));
 
 
 
