@@ -23,6 +23,12 @@ void Map::Initialize(const Vector3& initialPosition, float radius, float rotatio
 
     mapModel_->SetTranslate(mapModelPosition_);
     mapModel_->SetRotate(mapModelRotate_);
+    
+    sample_ = std::make_unique<Model>();
+    sample_.reset(Model::Create("Resources/TD_obj", "groundCube.obj"));
+
+
+
 }
 
 void Map::Update() {
@@ -31,6 +37,7 @@ void Map::Update() {
 
 void Map::Draw() {
     mapModel_->Draw();
+    sample_->Draw();
 }
 
 void Map::UpdateModel() {
@@ -46,8 +53,27 @@ void Map::UpdateModel() {
     float z = initialPosition_.z + radius_ * cos(mapModelPosition_.x);
 
     mapModelPosition_ = { x, y, z };
+   // mapModelRotate_.x = sin(angle);
 
     // モデルのプロパティを更新
     mapModel_->SetTranslate(mapModelPosition_);
     mapModel_->SetRotate(mapModelRotate_);
+
+
+
+
+#pragma region サンプルっすよ
+    
+    sampleRotate_.x += 0.1f;
+
+    sample_->SetRotate(sampleRotate_);
+
+    
+
+
+    ImGui::Begin("SampleCorn");
+    ImGui::SliderFloat3("Rotate", &sampleRotate_.x, -3.0f, 3.0f);
+    ImGui::End();
+#pragma endregion
+
 }

@@ -5,7 +5,7 @@
 #include <Math/Matrix/Calculation/Matrix4x4Calculation.h>
 #include "Camera/Camera.h"
 #include "Polygon/Model/Model.h"
-
+#include <list>
 class Map {
 public:
     Map();
@@ -24,6 +24,12 @@ private:
     Vector3 mapModelRotate_;
     Vector3 mapDirection_;
     float deltaTime_;
+
+
+    std::unique_ptr<Model> sample_ = nullptr;
+    Vector3 samplePosition_ = {};
+    Vector3 sampleRotate_ = {};
+    float sampleRadius_ = 0.5f;
 
     void UpdateModel();
 };
