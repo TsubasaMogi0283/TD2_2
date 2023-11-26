@@ -1,5 +1,6 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Input/Input.h"
+#include "Polygon/Sprite/Sprite.h"
 
 class TitleScene : public IGameScene{
 public:
@@ -17,8 +18,24 @@ private:
 
 
 private:
-	Input* input_ = nullptr;
+	
+	std::unique_ptr<Sprite> logo_ = nullptr;
+	std::unique_ptr<Sprite> startText_ = nullptr;
+	std::unique_ptr<Sprite> backGround_ = nullptr;
 
+	float spriteTransparency_ = 0.0f;
 
+	//フェードイン
+	bool isFadeIn_ = true;
 
+	//フェードアウト
+	bool isFadeOut_ = false;
+
+	//点滅
+	int flashTime_=0;
+
+	
+	int startFlashTime_ = 0;
+	//ロード時間
+	int32_t loadingTime_ = 0;
 };
