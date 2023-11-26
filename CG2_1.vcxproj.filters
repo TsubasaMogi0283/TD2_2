@@ -106,6 +106,12 @@
     <Filter Include="Project\Gamemanager">
       <UniqueIdentifier>{6783ae0e-f5a0-4867-a365-1d65f9d0e07e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\map">
+      <UniqueIdentifier>{a8b8f7e2-1ec0-4e9e-b78e-c001b3a32bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\map\mapManager">
+      <UniqueIdentifier>{279d0f96-2b3e-4a3b-b57b-b8100b9359b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -221,6 +227,12 @@
     </ClCompile>
     <ClCompile Include="Ellysia\Polygon\Model\Transformation\Transformation.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\map\mapManager.cpp">
+      <Filter>Project\map\mapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\map\map.cpp">
+      <Filter>Project\map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -414,6 +426,12 @@
     </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h">
       <Filter>ヘッダー ファイル\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\map\mapManager.h">
+      <Filter>Project\map\mapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\map\map.h">
+      <Filter>Project\map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
