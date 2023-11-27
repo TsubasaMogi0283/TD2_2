@@ -5,24 +5,25 @@
 #include <list>
 #include <memory>
 
-class LoseScene: public IGameScene{
-	public:
 
-	LoseScene();
+class WinScene: public IGameScene{
+public:
+
+	WinScene();
 
 	void Initialize(GameManager* gamaManager) override;
 	void Update(GameManager* gamaManager) override;
 	void Draw(GameManager* gamaManager) override;
 
-	~LoseScene();
+	~WinScene();
 
 private:
 	void ShowImGui();
 
-
 private:
+
 	//背景
-	std::unique_ptr<Sprite> back_ = nullptr;
+
 
 	//テキスト
 	std::unique_ptr<Sprite> text_ = nullptr;
@@ -37,7 +38,6 @@ private:
 
 	//ローディング時間
 	int32_t loadingTime_ = 0;
-
 
 };
 

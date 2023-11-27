@@ -1,30 +1,28 @@
-#include "LoseScene.h"
-#include "AllGameScene/GameManager/GameManager.h"
+#include "WinScene.h"
+#include "Input/Input.h"
 #include "AllGameScene/Title/TitleScene.h"
+#include "AllGameScene/GameManager/GameManager.h"
+#include "TextureManager/TextureManager.h"
 
-LoseScene::LoseScene(){
+WinScene::WinScene(){
 
 }
 
-void LoseScene::Initialize(GameManager* gamaManager){
-	
-	//背景
-	back_ = std::make_unique<Sprite>();
-	uint32_t backTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Result/Lose/Lose.png");
-	back_->Create(backTextureHandle, { 0.0f,0.0f });
-
+void WinScene::Initialize(GameManager* gamaManager){
 	//テキスト
 	text_ = std::make_unique<Sprite>();
 	uint32_t textTexturehandle = TextureManager::GetInstance()->LoadTexture("Resources/Result/ReturnToTitle.png");
 	text_->Create(textTexturehandle, { 0.0f,0.0f });
 }
 
-void LoseScene::ShowImGui(){
-
+void WinScene::ShowImGui(){
+	ImGui::Begin("Win");
+	ImGui::End();
 }
 
+void WinScene::Update(GameManager* gamaManager){
+	ShowImGui();
 
-void LoseScene::Update(GameManager* gamaManager){
 	if (isFadeOut_ == false) {
 		//点滅
 		flashTime_ += 1;
@@ -95,12 +93,12 @@ void LoseScene::Update(GameManager* gamaManager){
 	}
 }
 
-void LoseScene::Draw(GameManager* gamaManager){
-	back_->Draw();
+void WinScene::Draw(GameManager* gamaManager){
 	text_->Draw();
 }
 
-LoseScene::~LoseScene(){
+WinScene::~WinScene(){
 
 }
+
 

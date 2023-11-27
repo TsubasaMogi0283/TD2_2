@@ -142,6 +142,12 @@
     <Filter Include="Project\Object\SamplePlayer">
       <UniqueIdentifier>{13c96695-ac0a-4de3-b8ac-9e50e424a466}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Scene\Result\Lose">
+      <UniqueIdentifier>{d2ee15a8-c5cb-4111-93f9-11606bc9bef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\Result\Win">
+      <UniqueIdentifier>{95adadd3-3e84-402c-a517-456bb025fa38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -273,11 +279,11 @@
     <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
       <Filter>Project\Object\Popcorn</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\Win\Win.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Project\AllGameScene\Result\Lose\LoseScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Project\Scene\Result\Lose</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
+      <Filter>Project\Scene\Result\Win</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -487,11 +493,11 @@
     <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
       <Filter>Project\Object\Popcorn</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\Win\Win.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Project\AllGameScene\Result\Lose\LoseScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Project\Scene\Result\Lose</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
+      <Filter>Project\Scene\Result\Win</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

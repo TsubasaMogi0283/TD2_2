@@ -36,7 +36,7 @@ void TitleScene::ShowImGui() {
 }
 
 void TitleScene::Update(GameManager* gamaManager) {
-	ShowImGui();
+	//ShowImGui();
 
 	startText_->SetTransparency(spriteTransparency_);
 	logo_->SetTransparency(spriteTransparency_);
@@ -61,7 +61,7 @@ void TitleScene::Update(GameManager* gamaManager) {
 				startText_->SetInvisible(false);
 			}
 			if (flashTime_ > 30 && flashTime_ <= 60) {
-				startText_->SetInvisible(true);
+				//startText_->SetInvisible(true);
 			}
 			if (flashTime_ > 60) {
 				flashTime_ = 0;

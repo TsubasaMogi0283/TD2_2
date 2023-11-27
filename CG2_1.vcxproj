@@ -126,7 +126,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Result\Lose\LoseScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Result\ResultScene.cpp" />
-    <ClCompile Include="Project\AllGameScene\Result\Win\Win.cpp" />
+    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp" />
     <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp" />
@@ -216,7 +216,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\AllGameScene\Game\GameScene.h" />
     <ClInclude Include="Project\AllGameScene\Result\Lose\LoseScene.h" />
     <ClInclude Include="Project\AllGameScene\Result\ResultScene.h" />
-    <ClInclude Include="Project\AllGameScene\Result\Win\Win.h" />
+    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h" />
     <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h" />
     <ClInclude Include="Project\AllGameScene\Select\SelectScene.h" />
     <ClInclude Include="Project\AllGameScene\Title\TitleScene.h" />
