@@ -9,10 +9,16 @@ WinScene::WinScene(){
 }
 
 void WinScene::Initialize(GameManager* gamaManager){
+
+	//背景
+	back_ = std::make_unique<Sprite>();
+	uint32_t backTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Result/Win/Win.png");
+	back_.reset(Sprite::Create(backTextureHandle, {0.0f,0.0f}));
+	
 	//テキスト
 	text_ = std::make_unique<Sprite>();
 	uint32_t textTexturehandle = TextureManager::GetInstance()->LoadTexture("Resources/Result/ReturnToTitle.png");
-	text_->Create(textTexturehandle, { 0.0f,0.0f });
+	text_.reset(Sprite::Create(textTexturehandle, { 0.0f,0.0f }));
 }
 
 void WinScene::ShowImGui(){
@@ -22,6 +28,8 @@ void WinScene::ShowImGui(){
 
 void WinScene::Update(GameManager* gamaManager){
 	ShowImGui();
+
+	back_->SetTransparency(spriteTransparency_);
 
 	if (isFadeOut_ == false) {
 		//点滅
@@ -94,6 +102,7 @@ void WinScene::Update(GameManager* gamaManager){
 }
 
 void WinScene::Draw(GameManager* gamaManager){
+	back_->Draw();
 	text_->Draw();
 }
 

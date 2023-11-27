@@ -39,7 +39,7 @@ void GameManager::Initialize() {
 	audio_->Initialize();
 
 	//シーンごとに動作確認したいときはここを変えてね
-	currentGamaScene_ = new LoseScene();
+	currentGamaScene_ = new WinScene();
 	currentGamaScene_->Initialize(this);
 
 }

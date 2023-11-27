@@ -2,8 +2,8 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Polygon/Sprite/Sprite.h"
 
-#include <list>
 #include <memory>
+class GameManager;
 
 class LoseScene: public IGameScene{
 	public:

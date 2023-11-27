@@ -2,9 +2,9 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Polygon/Sprite/Sprite.h"
 
-#include <list>
 #include <memory>
 
+class GameManager;
 
 class WinScene: public IGameScene{
 public:
@@ -23,7 +23,7 @@ private:
 private:
 
 	//背景
-
+	std::unique_ptr<Sprite> back_ = nullptr;
 
 	//テキスト
 	std::unique_ptr<Sprite> text_ = nullptr;

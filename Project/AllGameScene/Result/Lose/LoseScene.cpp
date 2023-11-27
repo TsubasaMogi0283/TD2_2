@@ -11,20 +11,24 @@ void LoseScene::Initialize(GameManager* gamaManager){
 	//背景
 	back_ = std::make_unique<Sprite>();
 	uint32_t backTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Result/Lose/Lose.png");
-	back_->Create(backTextureHandle, { 0.0f,0.0f });
-
+	back_.reset(Sprite::Create(backTextureHandle, {0.0f,0.0f}));
+	
 	//テキスト
 	text_ = std::make_unique<Sprite>();
 	uint32_t textTexturehandle = TextureManager::GetInstance()->LoadTexture("Resources/Result/ReturnToTitle.png");
-	text_->Create(textTexturehandle, { 0.0f,0.0f });
+	text_.reset(Sprite::Create(textTexturehandle, { 0.0f,0.0f }));
 }
 
 void LoseScene::ShowImGui(){
-
+	ImGui::Begin("LoseScene");
+	ImGui::End();
 }
 
 
 void LoseScene::Update(GameManager* gamaManager){
+
+	back_->SetTransparency(spriteTransparency_);
+
 	if (isFadeOut_ == false) {
 		//点滅
 		flashTime_ += 1;
