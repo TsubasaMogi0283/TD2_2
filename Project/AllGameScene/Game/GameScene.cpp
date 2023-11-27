@@ -86,6 +86,8 @@ void GameScene::Update(GameManager* gamaManager) {
 	// エネミー
 	enemy_->Update();
 
+	// 衝突判定
+	CheckAllCollision();
 	
 
 #ifdef _DEBUG
@@ -131,9 +133,14 @@ void GameScene::Draw(GameManager* gamaManager) {
 /// <summary>
 /// 衝突判定
 /// </summary>
-void CheckAllCollision() {
+void GameScene::CheckAllCollision() {
 
+	// オブジェクトの設定
+	collisionManager_->SetPlayer(player_.get());
+	collisionManager_->SetEnemy(enemy_.get());
 
+	// 衝突判定
+	collisionManager_->CheckAllCollision();
 }
 
 

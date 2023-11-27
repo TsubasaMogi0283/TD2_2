@@ -9,7 +9,7 @@
 /// </summary>
 void CollisionManager::CheckAllCollision() {
 
-	// プレイヤーと床の当たり判定
+	// プレイヤーとエネミーの当たり判定
 	CheckCollisionPair(player_, enemy_);
 
 }

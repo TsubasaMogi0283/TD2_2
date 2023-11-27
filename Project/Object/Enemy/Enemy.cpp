@@ -10,13 +10,13 @@ void Enemy::Initialize() {
 
 	// モデル
 	ene_.model = std::make_unique<Model>();
-	ene_.model.reset(Model::Create("Resources/Player", "Player.obj"));
+	ene_.model.reset(Model::Create("Resources/Enemy", "Enemy.obj"));
 
 	// 座標
 	init_.transform = {
 		.scale = {0.3f, 0.3f, 0.3f},
 		.rotate = {0.0f, 0.0f, 0.0f},
-		.translate = {0.0f, 1.2f, 0.0f},
+		.translate = {0.0f, 3.0f, 0.0f},
 	};
 	ene_.transform = init_.transform;
 
@@ -32,6 +32,8 @@ void Enemy::Initialize() {
 
 	// カラー
 	ene_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+	isHit_ = 0;
 }
 
 
@@ -48,7 +50,7 @@ void Enemy::Update() {
 
 #ifdef _DEBUG
 
-	ImGui::Begin("Player");
+	ImGui::Begin("Enemy");
 	ImGui::Text("Transform");
 	ImGui::DragFloat3("Scale", &ene_.transform.scale.x, 0.005f);
 	ImGui::DragFloat3("Rotate", &ene_.transform.rotate.x, 0.005f);
@@ -58,6 +60,7 @@ void Enemy::Update() {
 	ImGui::Text("Sphere");
 	ImGui::DragFloat3("Sphere.center", &eneSphere_.center.x, 0.01f);
 	ImGui::DragFloat("sphere.radius", &eneSphere_.radius, 0.01f);
+	ImGui::Text("isHit = %d", isHit_);
 	ImGui::End();
 
 #endif // _DEBUG
@@ -74,7 +77,14 @@ void Enemy::Draw() {
 
 
 // 衝突時コールバック処理
+void Enemy::onCollisionToPlayer() {
 
+	isHit_ = 1;
+}
+void Enemy::EndOverlapToPlayer() {
+
+	isHit_ = 0;
+}
 
 
 

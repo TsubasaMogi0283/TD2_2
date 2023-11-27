@@ -44,7 +44,20 @@ public: // メンバ関数
 	/// </summary>
 	void CheckAllCollision();
 
+
+#pragma region Get
+
+	/// <summary>
+	/// プレイヤーの取得
+	/// </summary>
 	void SetPlayer(Player* player) { player_ = player; }
+
+	/// <summary>
+	/// エネミーの取得
+	/// </summary>
+	void SetEnemy(Enemy* enemy) { enemy_ = enemy; }
+
+#pragma endregion 
 
 
 private: // メンバ関数

@@ -101,4 +101,7 @@ private:
 
 	// インプット
 	Input* input = nullptr;
+
+	// 
+	uint32_t isHit_;
 };
