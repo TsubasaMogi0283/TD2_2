@@ -148,6 +148,12 @@
     <Filter Include="Project\Scene\Result\Win">
       <UniqueIdentifier>{95adadd3-3e84-402c-a517-456bb025fa38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Object\Player">
+      <UniqueIdentifier>{0638f8f9-db32-4c1e-80db-a6cd74f083d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\CollisionManager">
+      <UniqueIdentifier>{3b3b7e13-22b5-4758-b3d9-b55044a9a364}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -284,6 +290,12 @@
     </ClCompile>
     <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
       <Filter>Project\Scene\Result\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Player\Player.cpp">
+      <Filter>Project\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\CollisionManager\CollisionManager.cpp">
+      <Filter>Project\CollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -498,6 +510,12 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
       <Filter>Project\Scene\Result\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Player\Player.h">
+      <Filter>Project\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\CollisionManager\CollisionManager.h">
+      <Filter>Project\CollisionManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
