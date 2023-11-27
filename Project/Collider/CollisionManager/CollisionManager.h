@@ -2,6 +2,7 @@
 
 #include "Math/Vector/Calculation/VectorCalculation.h"
 #include "Math/Matrix/Calculation/Matrix4x4Calculation.h"
+#include "Polygon/Model/Model.h"
 
 #include <list>
 #include <algorithm>

@@ -48,6 +48,11 @@ public:
 #pragma region Get
 
 	/// <summary>
+	/// Transformの取得
+	/// </summary>
+	Transform GetTransform() { return dGround_.transform; }
+
+	/// <summary>
 	/// OBBの取得
 	/// </summary>
 	OBB GetOBB() { return obb_; }
@@ -63,6 +68,11 @@ private:
 	/// OBBの計算
 	/// </summary>
 	void CalcOBB();
+
+	/// <summary>
+	/// 乗算
+	/// </summary>
+	Vector3 Mul(const Vector3& v1, const Vector3& v2);
 
 private:
 

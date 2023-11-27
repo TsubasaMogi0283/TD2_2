@@ -62,7 +62,7 @@ void Player::Update() {
 	ImGui::DragFloat3("translate", &pla_.transform.translate.x, 0.02f);
 	ImGui::Text("Sphere");
 	ImGui::DragFloat3("Sphere.center", &plaSphere_.center.x, 0.01f);
-	ImGui::DragFloat3("sphere.radius", &plaSphere_.radius, 0.01f);
+	ImGui::DragFloat("sphere.radius", &plaSphere_.radius, 0.01f);
 	ImGui::Text("Gravity");
 	ImGui::Checkbox("GravityEnable", &gravity_.enable);
 	ImGui::DragFloat("Gravity_accel", &gravity_.accel, 0.001f);
@@ -88,11 +88,13 @@ void Player::Draw() {
 // 衝突時コールバック処理
 void Player::onCollisionToGround() {
 
-	gravity_.enable = false;
+	//gravity_.enable = false;
+	isHit_ = 1;
 }
 void Player::EndOverlapToGround() {
 
-	gravity_.enable = true;
+	//gravity_.enable = true;
+	isHit_ = 0;
 }
 
 

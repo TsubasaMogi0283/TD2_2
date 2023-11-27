@@ -30,7 +30,6 @@ void GameScene::Initialize(GameManager* gamaManager){
 	collisionManager_ = std::make_unique<CollisionManager>();
 
 
-
 }
 
 void GameScene::ShowImGui(){
@@ -59,8 +58,6 @@ void GameScene::Update(GameManager* gamaManager){
 
 	/* ---------- 床 ---------- */
 	demoGround_->Update();
-
-
 
 
 	/* ---------- 衝突判定 ---------- */

@@ -4,6 +4,20 @@
 
 
 
+
+
+/// <summary>
+/// 衝突判定と応答
+/// </summary>
+void CollisionManager::CheckAllCollision() {
+
+	// プレイヤーと床の当たり判定
+	CheckCollisionPair(player_, dGround_);
+
+}
+
+
+
 /// <summary>
 /// プレイヤーと床の当たり判定
 /// </summary>
@@ -19,17 +33,6 @@ void CollisionManager::CheckCollisionPair(Player* player, DemoGround* dGround) {
 
 		player->EndOverlapToGround();
 	}
-}
-
-
-
-/// <summary>
-/// 衝突判定と応答
-/// </summary>
-void CollisionManager::CheckAllCollision() {
-
-	// プレイヤーと床の当たり判定
-	CheckCollisionPair(player_, dGround_);
 }
 
 

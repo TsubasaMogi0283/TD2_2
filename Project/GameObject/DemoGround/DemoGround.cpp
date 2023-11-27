@@ -92,3 +92,19 @@ void DemoGround::CalcOBB() {
 
 	obb_.size = dGround_.size;
 }
+
+
+
+/// <summary>
+/// 乗算
+/// </summary>
+Vector3 DemoGround::Mul(const Vector3& v1, const Vector3& v2) {
+
+	Vector3 result = {
+		.x = v1.x * v2.x,
+		.y = v1.y * v2.y,
+		.z = v1.z * v2.z,
+	};
+
+	return result;
+}

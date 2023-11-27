@@ -58,6 +58,11 @@ public:
 #pragma region Get
 
 	/// <summary>
+	/// Transformの取得
+	/// </summary>
+	Transform GetTransform() { return pla_.transform; }
+
+	/// <summary>
 	/// Sphereの取得
 	/// </summary>
 	Sphere GetSphere() { return plaSphere_; }
