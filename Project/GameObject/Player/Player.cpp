@@ -25,7 +25,7 @@ void Player::Initialize() {
 	pla_.velocity = { 1.0f, 1.0f, 1.0f };
 
 	//サイズ
-	pla_.size = 2.0f;
+	pla_.size = { 1.0f, 1.0f, 1.0f };
 
 	// 重力
 	gravity_.enable = false;
@@ -34,9 +34,8 @@ void Player::Initialize() {
 	gravity_.maxVel = -1.0f;
 
 
-	// コライダーの配に各衝突判定ステートを設定する
-	collisionState_[FRONT] = std::make_unique<IPlayerCollisionFrontState>();
 
+	isHit_ = 0;
 }
 
 
@@ -47,21 +46,28 @@ void Player::Update() {
 	// 移動処理
 	Move();
 
-
 	// 重力の処理
 	CalcGravity();
+
+	// スフィア
+	CalcSphere();
 
 
 #ifdef _DEBUG
 
 	ImGui::Begin("Player");
+	ImGui::Text("Transform");
 	ImGui::DragFloat3("Scale", &pla_.transform.scale.x, 0.005f);
 	ImGui::DragFloat3("Rotate", &pla_.transform.rotate.x, 0.005f);
 	ImGui::DragFloat3("translate", &pla_.transform.translate.x, 0.02f);
+	ImGui::Text("Sphere");
+	ImGui::DragFloat3("Sphere.center", &plaSphere_.center.x, 0.01f);
+	ImGui::DragFloat3("sphere.radius", &plaSphere_.radius, 0.01f);
 	ImGui::Text("Gravity");
 	ImGui::Checkbox("GravityEnable", &gravity_.enable);
 	ImGui::DragFloat("Gravity_accel", &gravity_.accel, 0.001f);
 	ImGui::DragFloat3("Gravity_Vel", &gravity_.velocity.x, 0.001f);
+	ImGui::Text("isHit = %d", isHit_);
 	ImGui::End();
 
 #endif // _DEBUG
@@ -79,12 +85,14 @@ void Player::Draw() {
 
 
 
-/// <summary>
-/// 衝突時コールバック処理
-/// </summary>
-void Player::onCollision(CollisionType type) {
+// 衝突時コールバック処理
+void Player::onCollisionToGround() {
 
-	collisionState_[type]->onCollision();
+	gravity_.enable = false;
+}
+void Player::EndOverlapToGround() {
+
+	gravity_.enable = true;
 }
 
 
@@ -114,6 +122,7 @@ void Player::Move() {
 
 	if (input->IsTriggerKey(DIK_R)) {
 		pla_.transform = init_.transform;
+		isHit_ = 0;
 	}
 
 #endif // _DEBUG
@@ -149,4 +158,17 @@ void Player::CalcGravity() {
 		// 重力が無効のときは、速度は０で固定しとく
 		gravity_.velocity = { 0.0f, 0.0f, 0.0f };
 	}
+}
+
+
+
+/// <summary>
+/// スフィアの計算
+/// </summary>
+void Player::CalcSphere() {
+
+	plaSphere_ = {
+		.center = pla_.transform.translate,
+		.radius = pla_.size.x,
+	};
 }

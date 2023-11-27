@@ -3,8 +3,8 @@
 #include "GameObject/Player/PlayerCollisionState/IPlayerCollisionState.h"
 
 
-/* IPlayerCollisionFrontState */
-class IPlayerCollisionFrontState : public IPlayerCollisionState {
+/* IPlayerCollisionLeftState */
+class IPlayerCollisionLeftState : public IPlayerCollisionState {
 
 public:
 

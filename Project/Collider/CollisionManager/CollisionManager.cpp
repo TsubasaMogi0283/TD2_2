@@ -1,46 +1,23 @@
 #include "CollisionManager.h"
+#include "GameObject/Player/Player.h"
+#include "GameObject/DemoGround/DemoGround.h"
 
 
 
 /// <summary>
-/// コライダーを受け取り、リストに登録する
+/// プレイヤーと床の当たり判定
 /// </summary>
-void CollisionManager::ColliderPushBack(Collider* collider) {
-
-	colliders_.push_back(collider);
-
-}
-
-
-
-/// <summary>
-/// コライダーリストをクリアにする関数
-/// </summary>
-void CollisionManager::ColliderClear() {
-
-	colliders_.clear();
-}
-
-
-
-/// <summary>
-/// コライダー2つの衝突判定と応答
-/// </summary>
-void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* colliderB) {
+void CollisionManager::CheckCollisionPair(Player* player, DemoGround* dGround) {
 
 	// 衝突していたら
-	if (IsColliding(colliderA->GetAABB(), colliderB->GetAABB())) {
+	if (isCollision(dGround->GetOBB(), player->GetSphere())) {
 
-		// 衝突時の法線ベクトルを計算
-		Vector3 collisionNormal = CalculateCollisionNormal(colliderA->GetAABB(), colliderB->GetAABB());
+		player->onCollisionToGround();
 
-		// 衝突の方向を検出
-		CollisionType collisionType = DetectCollisionType(collisionNormal);
+	}
+	else {
 
-
-		// コライダーの衝突時コールバックを呼び出す
-		colliderA->onCollision(collisionType);
-		colliderB->onCollision(collisionType);
+		player->EndOverlapToGround();
 	}
 }
 
@@ -51,100 +28,8 @@ void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* collide
 /// </summary>
 void CollisionManager::CheckAllCollision() {
 
-	// リスト内のペアを総当たり
-	std::list<Collider*>::iterator itrA = colliders_.begin();
-
-	for (; itrA != colliders_.end(); ++itrA) {
-
-		// イテレータAからコライダーAを取得する
-		Collider* colliderA = *itrA;
-
-		// イテレータBはイテレータAの次の要素から回す(重複判定を回避)
-		std::list<Collider*>::iterator itrB = itrA;
-		itrB++;
-
-		for (; itrB != colliders_.end(); ++itrB) {
-
-			// イテレータBからコライダーBを取得する
-			Collider* colliderB = *itrB;
-
-			// ペアの当たり判定
-			CheckCollisionPair(colliderA, colliderB);
-		}
-	}
-}
-
-
-
-/// <summary>
-/// AABB同氏の当たり判定
-/// </summary>
-bool CollisionManager::IsColliding(const AABB& aabb1, const AABB& aabb2) {
-
-	if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
-		(aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
-		(aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)
-		) {
-
-		// 当たっている
-		return true;
-	}
-	// 当たってない
-	return false;
-}
-
-
-
-/// <summary>
-/// 衝突の方向を検出
-/// </summary>
-CollisionType CollisionManager::DetectCollisionType(const Vector3& collisionNormal) {
-
-	// ここでは、単純な方向の判定例を示しています。
-	float absX = std::abs(collisionNormal.x);
-	float absY = std::abs(collisionNormal.y);
-	float absZ = std::abs(collisionNormal.z);
-
-
-	// 最も大きな絶対値を持つ成分をもとに衝突の方向を判定
-	if (absX > absY && absX > absZ) {
-		if (collisionNormal.x > 0) {
-			return LEFT; // 衝突は左から発生
-		}
-		else {
-			return RIGHT; // 衝突は右から発生
-		}
-	}
-	else if (absY > absX && absY > absZ) {
-		if (collisionNormal.y > 0) {
-			return BOTTOM; // 衝突は下から発生
-		}
-		else {
-			return TOP; // 衝突は上から発生
-		}
-	}
-	else {
-		if (collisionNormal.z > 0) {
-			return BACK; // 衝突は後ろから発生
-		}
-		else {
-			return FRONT; // 衝突は前から発生
-		}
-	}
-}
-
-
-
-/// <summary>
-/// AABB同士の衝突時に法線ベクトルを計算
-/// </summary>
-Vector3 CollisionManager::CalculateCollisionNormal(const AABB& aabb1, const AABB& aabb2) {
-
-	// AABB同士の中心座標の差分を法線ベクトルとする
-	Vector3 center1 = (Mul(Add(aabb1.min, aabb1.max), 0.5f));
-	Vector3 center2 = (Mul(Add(aabb2.min, aabb2.max), 0.5f));
-
-	return Normalize(Subtract(center2, center1));
+	// プレイヤーと床の当たり判定
+	CheckCollisionPair(player_, dGround_);
 }
 
 
@@ -194,4 +79,111 @@ Vector3 CollisionManager::Mul(const Vector3& v, float scalar) {
 	result.z = scalar * v.z;
 
 	return result;
+}
+
+
+
+/// <summary>
+/// OBBのワールドマトリックス作成
+/// </summary>
+Matrix4x4 CollisionManager::CreateWorldMatrix(const OBB& obb) {
+
+	Matrix4x4 worldMatrix{};
+
+	for (int i = 0; i < 3; ++i) {
+		worldMatrix.m[i][0] = obb.orientations[i].x;
+		worldMatrix.m[i][1] = obb.orientations[i].y;
+		worldMatrix.m[i][2] = obb.orientations[i].z;
+		worldMatrix.m[i][3] = 0.0f;
+	}
+
+	worldMatrix.m[3][0] = obb.center.x;
+	worldMatrix.m[3][1] = obb.center.y;
+	worldMatrix.m[3][2] = obb.center.z;
+	worldMatrix.m[3][3] = 1.0f;
+
+
+	return worldMatrix;
+}
+
+
+
+/// <summary>
+/// AABB同氏の当たり判定
+/// </summary>
+bool CollisionManager::isCollision(const AABB& aabb1, const AABB& aabb2) {
+
+	if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
+		(aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
+		(aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)
+		) {
+
+		// 当たっている
+		return true;
+	}
+	// 当たってない
+	return false;
+}
+
+
+
+/// <summary>
+/// AABBtoSphere
+/// </summary>
+bool CollisionManager::isCollision(const AABB& aabb, const Sphere& s) {
+
+	// 最近接点を求める
+	const Vector3 ClosestPoint = {
+		std::clamp(s.center.x, aabb.min.x, aabb.max.x),
+		std::clamp(s.center.y, aabb.min.y, aabb.max.y),
+		std::clamp(s.center.z, aabb.min.z, aabb.max.z), };
+
+	// 最近接点と球の中心と距離を求める
+	float dist = Length(Subtract(ClosestPoint, s.center));
+
+	// 距離が半径よりも小さければ衝突
+	if (dist <= s.radius) {
+
+		// 当たってる
+		return true;
+	}
+	else {
+		// 当たってない
+		return false;
+	}
+}
+
+
+
+/// <summary>
+/// OBBtoSphere
+/// </summary>
+bool CollisionManager::isCollision(const OBB& obb, const Sphere& s) {
+
+	Matrix4x4 obbInverse = Inverse(CreateWorldMatrix(obb));
+
+	Vector3 centerInOBBLocalSpace = {
+		vector::Transform(s.center, obbInverse) };
+
+
+	AABB aabbOBBLocal = {
+		.min = { -obb.size.x, -obb.size.y, -obb.size.z },
+		.max = { obb.size.x, obb.size.y, obb.size.z }
+	};
+	Sphere sphereOBBLocal = {
+		centerInOBBLocalSpace,
+		s.radius
+	};
+
+	// ローカル座標で衝突判定
+	if (isCollision(aabbOBBLocal, sphereOBBLocal)) {
+
+		// 当たってる
+		return true;
+	}
+	else {
+
+		// 当たってない
+		return false;
+	}
 }

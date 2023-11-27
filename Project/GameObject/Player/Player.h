@@ -3,18 +3,15 @@
 #include "Input/Input.h"
 #include "Polygon/Model/Model.h"
 #include "WorldTransform/WorldTransform.h"
-#include "Collider/Collider.h"
 
-#include "Collider/ICollisionState.h"
-#include "GameObject/Player/PlayerCollisionState/Front/IPlayerCollisionFrontState.h"
-
+#include "Collider/CollisionManager/CollisionManager.h"
 
 
 struct PlayerProperty {
 	std::unique_ptr<Model> model = nullptr;
 	Transform transform{};
 	Vector3 velocity{};
-	float size;
+	Vector3 size{};
 };
 struct GravityProperty {
 	Vector3 velocity{}; // 加算速度
@@ -29,7 +26,7 @@ struct InitProperty {
 
 
 /* Playerクラス */
-class Player : public Collider {
+class Player {
 
 public:
 
@@ -54,15 +51,28 @@ public:
 	/// <summary>
 	/// 衝突時コールバック処理
 	/// </summary>
-	void onCollision(CollisionType type) override;
+	void onCollisionToGround();
+	void EndOverlapToGround();
 
 
 #pragma region Get
 
 	/// <summary>
-	/// AABBの取得
+	/// Sphereの取得
 	/// </summary>
-	AABB GetAABB() override { return aabb_; }
+	Sphere GetSphere() { return plaSphere_; }
+
+#pragma endregion 
+
+
+#pragma region Set
+	
+	/// <summary>
+	/// 重力のフラグの設定
+	/// </summary>
+	void SetgGravityEnable(bool f) { gravity_.enable = f; }
+
+	void SetIsHit(uint32_t val) { isHit_ = val; }
 
 #pragma endregion 
 
@@ -79,6 +89,11 @@ private:
 	/// </summary>
 	void CalcGravity();
 
+	/// <summary>
+	/// スフィアの計算
+	/// </summary>
+	void CalcSphere();
+
 private:
 
 	// プレイヤー
@@ -90,14 +105,12 @@ private:
 	// 初期値
 	InitProperty init_;
 
-	// コライダー
-	std::unique_ptr<ICollisionState> collisionState_[10];
-
 	// インプット
 	Input* input = nullptr;
 
-	// 
-	AABB aabb_;
+	// Sphere
+	Sphere plaSphere_;
 
+	uint32_t isHit_;
 
 };

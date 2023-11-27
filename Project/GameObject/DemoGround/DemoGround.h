@@ -2,7 +2,17 @@
 
 #include "Polygon/Model/Model.h"
 #include "WorldTransform/WorldTransform.h"
+#include "Math/Vector/Calculation/VectorCalculation.h"
+#include "Math/Matrix/Calculation/Matrix4x4Calculation.h"
 
+#include "Collider/CollisionManager/CollisionManager.h"
+
+
+struct DemoGroundProperty {
+	std::unique_ptr<Model> model = nullptr;
+	Transform transform{};
+	Vector3 size{};
+};
 
 
 
@@ -29,14 +39,38 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// 衝突時コールバック処理
+	/// </summary>
+	void onCollision();
+
+
+#pragma region Get
+
+	/// <summary>
+	/// OBBの取得
+	/// </summary>
+	OBB GetOBB() { return obb_; }
+
+
+#pragma endregion
+
 
 private:
 
-	// モデル
-	std::unique_ptr<Model> model_ = nullptr;
 
-	// トランスフォーム
-	Transform transform_{};
+	/// <summary>
+	/// OBBの計算
+	/// </summary>
+	void CalcOBB();
 
+private:
+
+	// デモ床
+	DemoGroundProperty dGround_;
+
+	
+	// OBB
+	OBB obb_{};
 
 };

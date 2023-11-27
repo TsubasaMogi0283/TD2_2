@@ -103,22 +103,8 @@ GameScene::~GameScene(){
 /// </summary>
 void GameScene::CheckAllCollision() {
 
-	// コライダーリストをクリアにする関数
-	collisionManager_->ColliderClear();
-
-
-	// 設定するコライダー
-	std::list<Collider*> colliders_;
-
-	// コライダーを設定する
-	// Player
-	collisionManager_->ColliderPushBack(player_.get());
-
-	// Enemy
-
-
-	// Map
-
+	collisionManager_->SetPlayer(player_.get());
+	collisionManager_->SetDemoGround(demoGround_.get());
 
 
 	// コライダーの衝突判定

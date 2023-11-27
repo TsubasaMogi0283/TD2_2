@@ -2,20 +2,8 @@
 
 
 
-// 衝突の種類
-enum CollisionType {
-	FRONT,
-	BACK,
-	TOP,
-	BOTTOM,
-	LEFT,
-	RIGHT,
-	NONE,
-};
-
-
 /* ICollisionStateクラス */
-class ICollisionState {
+class IDemoGroundCollisionState {
 
 public:
 

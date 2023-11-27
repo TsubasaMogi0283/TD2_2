@@ -3,11 +3,11 @@
 #include "GameObject/Player/PlayerCollisionState/IPlayerCollisionState.h"
 
 
-/* IPlayerCollisionFrontState */
-class IPlayerCollisionFrontState : public IPlayerCollisionState {
+/* IPlayerCollisionTopState */
+class IPlayerCollisionTopState : public IPlayerCollisionState {
 
-public:
-
+public: 
+	
 	void onCollision(Player* pPla) override;
 
 };
