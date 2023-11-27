@@ -23,9 +23,16 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	lamp_ = std::make_unique<Lamp>();
 	lamp_->Initialize();
 
-	//プレイヤー
+	// プレイヤー
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
+
+	// エネミー
+	enemy_ = std::make_unique<Enemy>();
+	enemy_->Initialize();
+
+	// コリジョンマネージャー
+	collisionManager_ = std::make_unique<CollisionManager>();
 
 
 	//カウントダウン
@@ -73,8 +80,11 @@ void GameScene::Update(GameManager* gamaManager) {
 	//電熱線
 	lamp_->Update();
 
-	//プレイヤー
+	// プレイヤー
 	player_->Update();
+
+	// エネミー
+	enemy_->Update();
 
 	
 
@@ -101,6 +111,7 @@ void GameScene::Draw(GameManager* gamaManager) {
 	oven_->Draw();
 	lamp_->Draw();
 	player_->Draw();
+	enemy_->Draw();
 
 
 	//スプライトは後ろに描画してね
@@ -113,6 +124,15 @@ void GameScene::Draw(GameManager* gamaManager) {
 			timeOnesPlane_[i]->Draw();
 		}
 	}
+
+}
+
+
+/// <summary>
+/// 衝突判定
+/// </summary>
+void CheckAllCollision() {
+
 
 }
 

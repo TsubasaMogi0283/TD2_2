@@ -154,6 +154,9 @@
     <Filter Include="Project\CollisionManager">
       <UniqueIdentifier>{3b3b7e13-22b5-4758-b3d9-b55044a9a364}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Object\Enemy">
+      <UniqueIdentifier>{471d8c8a-df7a-4d6d-ad54-a2d4471eee82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -293,6 +296,9 @@
     </ClCompile>
     <ClCompile Include="Project\CollisionManager\CollisionManager.cpp">
       <Filter>Project\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Enemy\Enemy.cpp">
+      <Filter>Project\Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -510,6 +516,9 @@
     </ClInclude>
     <ClInclude Include="Project\CollisionManager\CollisionManager.h">
       <Filter>Project\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Enemy\Enemy.h">
+      <Filter>Project\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

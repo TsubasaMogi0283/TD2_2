@@ -7,32 +7,26 @@
 #include "CollisionManager/CollisionManager.h"
 
 
-struct PlayerProperty {
+struct EnemyProperty {
 	std::unique_ptr<Model> model = nullptr;
 	Transform transform{};
 	Vector3 velocity{};
 	Vector3 size{};
 	Vector4 color{};
 };
-struct GravityProperty {
-	Vector3 velocity{}; // 加算速度
-	float accel; // 重力の強さ
-	bool enable; // 重力が有効化のフラグ
-	float maxVel; //最大速度
-};
-struct PlayerInitProperty {
+struct EnemyInitProperty {
 	Transform transform{};
 };
 
 
 
-/* Playerクラス */
-class Player {
+/* Enemyクラス */
+class Enemy {
 
 public:
 
-	Player() {};
-	~Player() {};
+	Enemy() {};
+	~Enemy() {};
 
 	/// <summary>
 	/// 初期化処理
@@ -52,8 +46,8 @@ public:
 	/// <summary>
 	/// 衝突時コールバック処理
 	/// </summary>
-	void onCollisionToEnemy();
-	void EndOverlapToEnemy();
+	void onCollisionToPlayer();
+	void EndOverlapToPlayer();
 
 
 #pragma region Get
@@ -61,24 +55,18 @@ public:
 	/// <summary>
 	/// Transformの取得
 	/// </summary>
-	Transform GetTransform() { return pla_.transform; }
+	Transform GetTransform() { return ene_.transform; }
 
 	/// <summary>
 	/// Sphereの取得
 	/// </summary>
-	Sphere GetSphere() { return plaSphere_; }
+	Sphere GetSphere() { return eneSphere_; }
 
 #pragma endregion 
 
 
 #pragma region Set
 
-	/// <summary>
-	/// 重力のフラグの設定
-	/// </summary>
-	void SetgGravityEnable(bool f) { gravity_.enable = f; }
-
-	void SetIsHit(uint32_t val) { isHit_ = val; }
 
 #pragma endregion 
 
@@ -91,11 +79,6 @@ private:
 	void Move();
 
 	/// <summary>
-	/// 重力の処理
-	/// </summary>
-	void CalcGravity();
-
-	/// <summary>
 	/// スフィアの計算
 	/// </summary>
 	void CalcSphere();
@@ -103,25 +86,19 @@ private:
 	/// <summary>
 	/// いろいろ設定する
 	/// </summary>
-	void SetPlayerProperty();
+	void SetEnemyProperty();
 
 private:
 
 	// プレイヤー
-	PlayerProperty pla_;
-
-	// 重力
-	GravityProperty gravity_;
+	EnemyProperty ene_;
 
 	// 初期値
-	PlayerInitProperty init_;
+	EnemyInitProperty init_;
 
 	// Sphere
-	Sphere plaSphere_;
-
-	uint32_t isHit_;
+	Sphere eneSphere_;
 
 	// インプット
 	Input* input = nullptr;
-
 };

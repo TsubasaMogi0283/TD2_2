@@ -10,8 +10,9 @@
 #include "Object/Oven/Oven.h"
 #include <Object/Corn/Corn.h>
 #include <Object/Lamp/Lamp.h>
-#include <Object/SamplePlayer/SamplePlayer.h>
 #include <Object/Player/Player.h>
+#include <Object/Enemy/Enemy.h>
+#include "CollisionManager/CollisionManager.h"
 
 
 //StatePatternを使う時は必ず前方宣言をするように
@@ -32,6 +33,12 @@ public:
 private:
 
 	/// <summary>
+	/// 衝突判定
+	/// </summary>
+	void CheckAllCollision();
+
+
+	/// <summary>
 	/// カウントダウン
 	/// </summary>
 	void CountDown();
@@ -48,9 +55,14 @@ private:
 	//電熱線
 	std::unique_ptr<Lamp> lamp_ = nullptr;
 
-
-	//サンプルプレイヤー
+	// プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
+
+	// エネミー
+	std::unique_ptr<Enemy> enemy_ = nullptr;
+
+	// コリジョンマネージャー
+	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
 
 	//カメラ

@@ -93,12 +93,12 @@ void Player::Draw() {
 
 
 // 衝突時コールバック処理
-void Player::onCollisionToGround() {
+void Player::onCollisionToEnemy() {
 
 	//gravity_.enable = false;
 	isHit_ = 1;
 }
-void Player::EndOverlapToGround() {
+void Player::EndOverlapToEnemy() {
 
 	//gravity_.enable = true;
 	isHit_ = 0;

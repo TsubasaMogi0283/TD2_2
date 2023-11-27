@@ -31,6 +31,7 @@ struct OBB {
 
 
 class Player;
+class Enemy;
 
 
 /* CollisionManagerクラス */
@@ -51,6 +52,7 @@ private: // メンバ関数
 	/// <summary>
 	/// コライダー2つの衝突判定と応答
 	/// </summary>
+	void CheckCollisionPair(Player* player, Enemy* enemy);
 
 	/// <summary>
 	/// 長さ
@@ -96,5 +98,6 @@ private: // メンバ関数
 private: // メンバ変数
 
 	Player* player_;
+	Enemy* enemy_;
 
 };
