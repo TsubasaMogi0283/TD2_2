@@ -195,9 +195,6 @@
     <ClCompile Include="Ellysia\Math\Vector\Calculation\VectorCalculation.cpp">
       <Filter>ソース ファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Sphere\Sphere.cpp">
-      <Filter>ソース ファイル\Polygone</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\Polygon\Sprite\Sprite.cpp">
       <Filter>ソース ファイル\Polygone</Filter>
     </ClCompile>
@@ -381,9 +378,6 @@
     </ClInclude>
     <ClInclude Include="Ellysia\Math\Vector\Vector2.h">
       <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Sphere\Sphere.h">
-      <Filter>ヘッダー ファイル\Polygone</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Math\Vector\VertexData.h">
       <Filter>ヘッダー ファイル\Math\Vector</Filter>

@@ -4,6 +4,7 @@
 #include "AllGameScene/Title/TitleScene.h"
 #include "AllGameScene/Result/Win/WinScene.h"
 #include "AllGameScene/Result/Lose/LoseScene.h"
+#include "AllGameScene/Game/GameScene.h"
 
 
 
@@ -39,7 +40,7 @@ void GameManager::Initialize() {
 	audio_->Initialize();
 
 	//シーンごとに動作確認したいときはここを変えてね
-	currentGamaScene_ = new WinScene();
+	currentGamaScene_ = new GameScene();
 	currentGamaScene_->Initialize(this);
 
 }
