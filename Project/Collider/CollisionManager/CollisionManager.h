@@ -76,6 +76,11 @@ private: // メンバ関数
 	Matrix4x4 CreateWorldMatrix(const OBB& obb);
 
 	/// <summary>
+	/// 球と球の当たり判定
+	/// </summary>
+	bool isCollision(const Sphere& s1, const Sphere& s2);
+
+	/// <summary>
 	/// AABB同士の当たり判定
 	/// </summary>
 	bool isCollision(const AABB& aabb1, const AABB& aabb2);

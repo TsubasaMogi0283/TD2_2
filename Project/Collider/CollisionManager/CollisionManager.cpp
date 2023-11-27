@@ -112,6 +112,26 @@ Matrix4x4 CollisionManager::CreateWorldMatrix(const OBB& obb) {
 
 
 /// <summary>
+/// 球と球の当たり判定
+/// </summary>
+bool CollisionManager::isCollision(const Sphere& s1, const Sphere& s2) {
+
+	// 中心からの距離
+	float distance = Length(Subtract(s2.center, s1.center));
+
+	// 距離と半径を比べる
+	if (distance <= s1.radius + s2.radius) {
+
+		// 当たってる
+		return true;
+	}
+	// 当たってない
+	return false;
+}
+
+
+
+/// <summary>
 /// AABB同氏の当たり判定
 /// </summary>
 bool CollisionManager::isCollision(const AABB& aabb1, const AABB& aabb2) {
