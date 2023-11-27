@@ -2,6 +2,7 @@
 #include "ImGuiManager/ImGuiManager.h"
 #include "AllGameScene/GameManager/GameManager.h"
 #include <AllGameScene/Select/SelectScene.h>
+#include "AllGameScene/SampleScene/SampleScene.h"
 
 TitleScene::TitleScene() {
 
@@ -36,7 +37,8 @@ void TitleScene::ShowImGui() {
 }
 
 void TitleScene::Update(GameManager* gamaManager) {
-	ShowImGui();
+	//ShowImGui();
+	
 
 	startText_->SetTransparency(spriteTransparency_);
 	logo_->SetTransparency(spriteTransparency_);
@@ -113,7 +115,7 @@ void TitleScene::Update(GameManager* gamaManager) {
 
 
 					if (loadingTime_ > 60 * 2) {
-						gamaManager->ChangeScene(new SelectScene());
+						gamaManager->ChangeScene(new SampleScene());
 					}
 				}
 			}

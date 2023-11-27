@@ -80,8 +80,8 @@ void SamplePlayer::Update(){
 	model_->SetTranslate(position_);
 	model_->SetRotate(rotate_);
 
-	Attack();
 
+	Attack();
 	Move();
 
 	for (Popcorn* popcorn : popcornRight_) {
