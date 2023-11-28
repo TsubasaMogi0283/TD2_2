@@ -160,7 +160,10 @@
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
       <Filter>GameManager\Scene\Select</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\Play\PlayScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\Game\Play\PlayScene.cpp">
+      <Filter>GameManager\Scene\Game\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Game\Ready\ReadyScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -376,7 +379,10 @@
     <ClInclude Include="Project\AllGameScene\GameManager\IGamePlayScene.h">
       <Filter>GameManager\Scene\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\Play\PlayScene.h" />
+    <ClInclude Include="Project\AllGameScene\Game\Play\PlayScene.h">
+      <Filter>GameManager\Scene\Game\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Game\Ready\ReadyScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -521,6 +527,9 @@
     </Filter>
     <Filter Include="GameManager\Scene\Game\Play">
       <UniqueIdentifier>{22c5cd0a-2317-459f-9ff1-4455eea7a9bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Game\Resdy">
+      <UniqueIdentifier>{fb97fd13-8f3f-4d19-99a5-3bbb695270c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

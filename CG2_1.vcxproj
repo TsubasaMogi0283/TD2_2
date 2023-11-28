@@ -124,6 +124,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\AllGameScene\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Game\Play\PlayScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\Game\Ready\ReadyScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Result\Lose\LoseScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Result\ResultScene.cpp" />
     <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp" />
@@ -220,6 +221,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\AllGameScene\GameManager\IGameScene.h" />
     <ClInclude Include="Project\AllGameScene\Game\GameScene.h" />
     <ClInclude Include="Project\AllGameScene\Game\Play\PlayScene.h" />
+    <ClInclude Include="Project\AllGameScene\Game\Ready\ReadyScene.h" />
     <ClInclude Include="Project\AllGameScene\Result\Lose\LoseScene.h" />
     <ClInclude Include="Project\AllGameScene\Result\ResultScene.h" />
     <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h" />

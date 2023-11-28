@@ -8,6 +8,9 @@
 #include "AllGameScene/Result/Win/WinScene.h"
 #include "AllGameScene/Result/Lose/LoseScene.h"
 
+#include "AllGameScene/Game/Ready/ReadyScene.h"
+
+
 /// <summary>
 /// 初期化処理
 /// </summary>
@@ -54,16 +57,7 @@ void GameScene::Initialize(GameManager* gamaManager) {
 
 
 
-	//Ready
-	ready_ = std::make_unique<Sprite>();
-	uint32_t reeadyTextureHandle_ = TextureManager::GetInstance()->LoadTexture("Resources/Start/Ready.png");
-	ready_.reset(Sprite::Create(reeadyTextureHandle_, { 0.0f,0.0f }));
-
-	//Go
-	go_ = std::make_unique<Sprite>();
-	uint32_t goTextureHandle_ = TextureManager::GetInstance()->LoadTexture("Resources/Start/Go.png");
-	go_.reset(Sprite::Create(goTextureHandle_, { 0.0f,0.0f }));
-
+	
 
 	//Finish
 	finish_ = std::make_unique<Sprite>();
@@ -85,9 +79,14 @@ void GameScene::Initialize(GameManager* gamaManager) {
 #pragma endregion
 
 	//カメラ
-	cameraPosition_ = { 0.0f,2.2f,0.0f };
-	cameraRotate_ = { 0.015f,0.0f,0.0f };
+	//cameraPosition_ = { 0.0f,2.2f,0.0f };
+	//cameraRotate_ = { 0.015f,0.0f,0.0f };
 
+
+
+	//GameSceneにさらにStatePatternで分けるよ
+	currentGamaScene_ = new ReadyScene();
+	currentGamaScene_->Initialize(this);
 }
 
 
@@ -115,40 +114,25 @@ void GameScene::Update(GameManager* gamaManager) {
 	
 	
 
-	//カメラ
-	Camera::GetInstance()->SetRotate(cameraRotate_);
-	Camera::GetInstance()->SetTranslate(cameraPosition_);
+	
 
 #ifdef _DEBUG
 
 	ImGui::Begin("Game");
 	ImGui::End();
 
-	ImGui::Begin("Camera");
-	ImGui::SliderFloat3("Translate", &cameraPosition_.x, -20.0f, 10.0f);
-	ImGui::SliderFloat3("Rotate", &cameraRotate_.x, -5.0f, 5.0f);
-	ImGui::End();
+	//ImGui::Begin("Camera");
+	//ImGui::SliderFloat3("Translate", &cameraPosition_.x, -20.0f, 10.0f);
+	//ImGui::SliderFloat3("Rotate", &cameraRotate_.x, -5.0f, 5.0f);
+	//ImGui::End();
 
 #endif // _DEBUG
 
+	currentGamaScene_->Update(this);
+
+
 	//Ready
-	if (gamePlayScene_==1) {
-		cameraPosition_.z -= 0.05f;
-		if (cameraPosition_.z < -8.0f) {
-
-
-			gamePlayScene_ = 2;
-		}
-	}
-	if (gamePlayScene_ == 2) {
-		cameraPosition_.z = -8.0f;
-		readyTime_ += 1;
-
-		if (readyTime_ > 60 * 4) {
-			gamePlayScene_ = 3;
-		}
-
-	}
+	
 	
 	//Play
 	if (gamePlayScene_ == 3) {
@@ -181,8 +165,8 @@ void GameScene::Update(GameManager* gamaManager) {
 	if (gamePlayScene_ == 5) {
 		//ズーム
 		//ホワイトアウト
-		cameraPosition_.y +=0.02f ;
-		cameraPosition_.z +=0.05f ;
+		//cameraPosition_.y +=0.02f ;
+		//cameraPosition_.z +=0.05f ;
 		whiteTransparency_ += 0.01f;
 		white_->SetTransparency(whiteTransparency_);
 
@@ -198,7 +182,7 @@ void GameScene::Update(GameManager* gamaManager) {
 	//負け
 	if (gamePlayScene_ == 6) {
 		theta += 1.0f;
-		cameraPosition_.x += std::sinf(theta)*0.5f;
+		//cameraPosition_.x += std::sinf(theta)*0.5f;
 		
 		blackTransparency_ += 0.01f;
 		black_->SetTransparency(blackTransparency_);
@@ -237,17 +221,7 @@ void GameScene::Draw(GameManager* gamaManager) {
 	player_->Draw();
 
 
-	if (gamePlayScene_ == 2) {
-		if (readyTime_ > 0 && readyTime_ <= 60 * 2) {
-			ready_->Draw();
-
-		}
-
-		if (readyTime_ > 60*2 && readyTime_ <= 60 * 4) {
-			go_->Draw();
-
-		}
-	}
+	
 
 	if (gamePlayScene_ == 3) {
 		enemy_->Draw();
@@ -272,6 +246,17 @@ void GameScene::Draw(GameManager* gamaManager) {
 	if (gamePlayScene_ == 6) {
 		black_->Draw();
 	}
+
+	currentGamaScene_->Draw(this);
+}
+
+void GameScene::ChangeScene(IGamePlayScene* newGameScene){
+	//一度消してから次のシーンにいく
+	delete currentGamaScene_;
+
+	currentGamaScene_ = newGameScene;
+	//今は言っているシーンが引数
+	currentGamaScene_->Initialize(this);
 }
 
 
@@ -290,3 +275,6 @@ void GameScene::CheckAllCollision() {
 
 
 
+GameScene::~GameScene() {
+	delete currentGamaScene_;
+};

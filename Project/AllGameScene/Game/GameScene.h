@@ -26,11 +26,18 @@ class GameScene : public IGameScene{
 public:
 
 	GameScene() {};
-	~GameScene() {};
+	~GameScene();
 
 	void Initialize(GameManager* gamaManager) override;
 	void Update(GameManager* gamaManager) override;
 	void Draw(GameManager* gamaManager) override;
+
+
+public:
+
+	//シーンチェンジ
+	void ChangeScene(IGamePlayScene* newGameScene);
+
 
 
 private:
@@ -70,18 +77,15 @@ private:
 
 
 	//カメラ
-	Vector3 cameraPosition_ = {};
-	Vector3 cameraRotate_ = {};
+	//Vector3 cameraPosition_ = {};
+	//Vector3 cameraRotate_ = {};
 
 
 	int gamePlayScene_ = 1;
-	int readyTime_ = 0;
-
-	//Ready
-	std::unique_ptr<Sprite> ready_ = nullptr;
-	//Go
-	std::unique_ptr<Sprite> go_ = nullptr;
 	
+
+	
+
 	//Finish
 	std::unique_ptr<Sprite> finish_ = nullptr;
 	int finishDisplayTime_ = 0;
