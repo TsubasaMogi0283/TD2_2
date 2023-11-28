@@ -87,10 +87,7 @@ private:
 #pragma endregion
 
 
-
-
-
-	#pragma region スコア
+#pragma region スコア
 
 	std::unique_ptr<Sprite> scoreBack_ = nullptr;
 	Vector2 scoreBackPosition_ = {};
