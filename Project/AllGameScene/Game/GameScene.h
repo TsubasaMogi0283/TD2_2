@@ -43,6 +43,10 @@ private:
 	/// </summary>
 	void CountDown();
 
+	/// <summary>
+	/// スコア
+	/// </summary>
+	void Score();
 
 private:
 
@@ -69,13 +73,18 @@ private:
 	Vector3 cameraPosition_ = {};
 	Vector3 cameraRotate_ = {};
 
+#pragma region ゲームの時間
 	static const int NUMBER_AMOUNT_ = 10;
 	std::unique_ptr<Sprite> timeTensPlane_[NUMBER_AMOUNT_] = { nullptr };
 	std::unique_ptr<Sprite> timeOnesPlane_[NUMBER_AMOUNT_] = { nullptr };
 
+	//背景
+	std::unique_ptr<Sprite> countDownBack_ = nullptr;
+	Vector2 countDownBackPosition_ = {};
+	Vector2 countDownBackSize_ = {};
 
 	//ゲームの時間
-	const int timer_ = 20;
+	const int timer_ = 40;
 	int gameTime_ = 60 * timer_;
 
 	//表示されている時間
@@ -85,6 +94,34 @@ private:
 	//10の位
 	int tensPlace_ = 0;
 
-	uint32_t numberTextureHandle[10] = {};
+	uint32_t numberTextureHandle[NUMBER_AMOUNT_] = {};
+
+#pragma endregion
+
+
+#pragma region スコア
+
+	std::unique_ptr<Sprite> scoreBack_ = nullptr;
+	Vector2 scoreBackPosition_ = {};
+	Vector2 scoreBackSize_ = {};
+
+	int32_t score_ = 0;
+	
+	int32_t scoreTenThousandsPlace_ = 0;
+	int32_t scoreThousandsPlace_ = 0;
+	int32_t scoreHundredsPlace_ = 0;
+	int32_t scoreTensPlace_ = 0;
+	int32_t scoreOnesPlace_ = 0;
+
+
+	std::unique_ptr<Sprite> scoreTenThousandsPlane_[NUMBER_AMOUNT_] = {nullptr};	
+	std::unique_ptr<Sprite> scoreThousandsPlane_[NUMBER_AMOUNT_] = {nullptr};
+	std::unique_ptr<Sprite> scoreHundredsPlane_[NUMBER_AMOUNT_] = {nullptr};	
+	std::unique_ptr<Sprite> scoreTensPlane_[NUMBER_AMOUNT_] = {nullptr};
+	std::unique_ptr<Sprite> scoreOnesPlane_[NUMBER_AMOUNT_] = { nullptr };
+
+
+
+#pragma endregion
 };
 
