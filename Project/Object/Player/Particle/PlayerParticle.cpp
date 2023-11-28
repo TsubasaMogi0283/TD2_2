@@ -139,9 +139,9 @@ void PlayerParlicle::CalcTransform() {
 	float val = nowFrame / endFrame;
 
 	particle_.transform.scale = {
-		.x = particle_.transform.scale.x + (0.0f - particle_.transform.scale.x) * EaseInQuart(val),
-		.y = particle_.transform.scale.y + (0.0f - particle_.transform.scale.y) * EaseInQuart(val),
-		.z = particle_.transform.scale.z + (0.0f - particle_.transform.scale.z) * EaseInQuart(val),
+		.x = particle_.transform.scale.x + (0.04f - particle_.transform.scale.x) * EaseInQuart(val),
+		.y = particle_.transform.scale.y + (0.04f - particle_.transform.scale.y) * EaseInQuart(val),
+		.z = particle_.transform.scale.z + (0.04f - particle_.transform.scale.z) * EaseInQuart(val),
 	};
 
 }
