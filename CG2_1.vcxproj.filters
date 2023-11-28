@@ -154,7 +154,11 @@
     <Filter Include="Project\CollisionManager">
       <UniqueIdentifier>{3b3b7e13-22b5-4758-b3d9-b55044a9a364}</UniqueIdentifier>
     </Filter>
-
+    <Filter Include="Project\Object\Enemy">
+      <UniqueIdentifier>{471d8c8a-df7a-4d6d-ad54-a2d4471eee82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Object\Player\Particle">
+      <UniqueIdentifier>{b3034a41-f8e8-4557-91f9-cc24d4cd6ff5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
