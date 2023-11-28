@@ -19,6 +19,11 @@ public:
 	//デストラクタ
 	~CountDown();
 
+public:
+	int GetTime() {
+		return timer_;
+	}
+
 
 private:
 
