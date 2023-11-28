@@ -93,7 +93,7 @@ private:
 	std::unique_ptr<Sprite> white_ = nullptr;
 	float whiteTransparency_ = 0.0f;
 	int loadingTime = 0;
-
+	bool isWhiteOut_ = false;
 
 	//BlackOut
 	std::unique_ptr<Sprite> black_ = nullptr;

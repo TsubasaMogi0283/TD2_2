@@ -151,15 +151,7 @@ void GameScene::Update(GameManager* gamaManager) {
 
 		break;
 	case Play:
-	case Succeeded:
-	case Failed:
-	};
 
-	//Ready
-	
-	
-	//Play
-	if (gamePlayScene_ == 3) {
 		// エネミー
 		enemy_->Update();
 
@@ -169,42 +161,48 @@ void GameScene::Update(GameManager* gamaManager) {
 		//スコア
 		score_->Update();
 
-		//負け(仮)
-		if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
-			gamePlayScene_ = 6;
-		}
-
+		
 		//勝ちへ
 		if (countDown_->GetTime() < 0) {
-			gamePlayScene_ = 4;
+			phaseNo_ = Succeeded;
 		}
-	}
-	//勝ち
-	if (gamePlayScene_ == 4) {
+
+		//負け(仮)
+		if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
+			phaseNo_ = Failed;
+		}
+
+
+		break;
+	case Succeeded:
+		//勝ち
 		finishDisplayTime_ += 1;
 		if (finishDisplayTime_ > 60 * 2) {
-			gamePlayScene_ = 5;
+			isWhiteOut_ = true;
 		}
-	}
-	if (gamePlayScene_ == 5) {
-		//ズーム
-		//ホワイトアウト
-		cameraPosition_.y +=0.02f ;
-		cameraPosition_.z +=0.05f ;
-		whiteTransparency_ += 0.01f;
-		white_->SetTransparency(whiteTransparency_);
 
-		if (whiteTransparency_ > 1.0f) {
-			whiteTransparency_ = 1.0f;
 
-			loadingTime += 1;
-			
-			
+		if (isWhiteOut_ == true) {
+			//ズーム
+			//ホワイトアウト
+			cameraPosition_.y +=0.02f ;
+			cameraPosition_.z +=0.05f ;
+			whiteTransparency_ += 0.01f;
+			white_->SetTransparency(whiteTransparency_);
+
+			if (whiteTransparency_ > 1.0f) {
+				whiteTransparency_ = 1.0f;
+
+				loadingTime += 1;
+				
+				
+			}
 		}
-	}
 
-	//負け
-	if (gamePlayScene_ == 6) {
+		break;
+
+	case Failed:
+		//負け
 		theta += 1.0f;
 		cameraPosition_.x += std::sinf(theta)*0.5f;
 		
@@ -213,8 +211,12 @@ void GameScene::Update(GameManager* gamaManager) {
 		if (blackTransparency_ > 1.0f) {
 			loseLodingTime_ += 1;
 		}
-		
-	}
+		break;
+	};
+
+	
+
+	
 	
 
 	if (loseLodingTime_ >= 60) {
@@ -244,42 +246,47 @@ void GameScene::Draw(GameManager* gamaManager) {
 	//プレイヤー
 	player_->Draw();
 
-
-	if (gamePlayScene_ == 2) {
+	switch (phaseNo_) {
+	default:
+	case Ready:
 		if (readyTime_ > 0 && readyTime_ <= 60 * 2) {
 			ready_->Draw();
 
 		}
 
-		if (readyTime_ > 60*2 && readyTime_ <= 60 * 4) {
+		if (readyTime_ > 60 * 2 && readyTime_ <= 60 * 4) {
 			go_->Draw();
 
 		}
-	}
 
-	if (gamePlayScene_ == 3) {
+		break;
+	case Play:
 		enemy_->Draw();
 
 
 		//制限時間
 		countDown_->Draw();
-		
+
 		//スコア
 		score_->Draw();
 
-	}
-	if (gamePlayScene_ == 4) {
+
+		break;
+	case Succeeded:
+
 		if (finishDisplayTime_ <= 60 * 2) {
 			finish_->Draw();
 		}
-		
-	}
-	if (gamePlayScene_ == 5) {
-		white_->Draw();
-	}
-	if (gamePlayScene_ == 6) {
+		if (isWhiteOut_ == true) {
+			white_->Draw();
+		}
+		break;
+
+	case Failed:
 		black_->Draw();
-	}
+		break;
+	};
+
 }
 
 
