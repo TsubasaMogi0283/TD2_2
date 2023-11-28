@@ -3,7 +3,7 @@
 #include "ImGuiManager/ImGuiManager.h"
 #include "AllGameScene/GameManager/GameManager.h"
 #include <AllGameScene/Result/ResultScene.h>
-
+#include "AllGameScene/Result/Win/WinScene.h"
 
 
 /// <summary>
@@ -44,10 +44,42 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	score_->Initialize();
 	
 
-	
+
+
+#pragma region 後でクラスにする
+
+
+
+
+
+	//Ready
+	ready_ = std::make_unique<Sprite>();
+	uint32_t reeadyTextureHandle_ = TextureManager::GetInstance()->LoadTexture("Resources/Start/Ready.png");
+	ready_.reset(Sprite::Create(reeadyTextureHandle_, { 0.0f,0.0f }));
+
+	//Go
+	go_ = std::make_unique<Sprite>();
+	uint32_t goTextureHandle_ = TextureManager::GetInstance()->LoadTexture("Resources/Start/Go.png");
+	go_.reset(Sprite::Create(goTextureHandle_, { 0.0f,0.0f }));
+
+
+	//Finish
+	finish_ = std::make_unique<Sprite>();
+	uint32_t finishTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Finish/Finish.png");
+	finish_.reset(Sprite::Create(finishTextureHandle, { 0.0f,0.0f }));
+
+
+	//WhiteOut
+	white_ = std::make_unique<Sprite>();
+	uint32_t whiteTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/White.png");
+	white_.reset(Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
+
+
+
+#pragma endregion
 
 	//カメラ
-	cameraPosition_ = { 0.0f,2.2f,-8.0f };
+	cameraPosition_ = { 0.0f,2.2f,0.0f };
 	cameraRotate_ = { 0.015f,0.0f,0.0f };
 
 }
@@ -57,11 +89,6 @@ void GameScene::Initialize(GameManager* gamaManager) {
 /// 更新処理
 /// </summary>
 void GameScene::Update(GameManager* gamaManager) {
-
-	//カメラ
-	Camera::GetInstance()->SetRotate(cameraRotate_);
-	Camera::GetInstance()->SetTranslate(cameraPosition_);
-
 
 	//とうもろこしの更新
 	corn_->Update();
@@ -75,17 +102,16 @@ void GameScene::Update(GameManager* gamaManager) {
 	// プレイヤー
 	player_->Update();
 
-	// エネミー
-	enemy_->Update();
+	
 
 	// 衝突判定
 	CheckAllCollision();
 	
-	//制限時間
-	countDown_->Update();
+	
 
-	//スコア
-	score_->Update();
+	//カメラ
+	Camera::GetInstance()->SetRotate(cameraRotate_);
+	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
 #ifdef _DEBUG
 
@@ -98,6 +124,69 @@ void GameScene::Update(GameManager* gamaManager) {
 	ImGui::End();
 
 #endif // _DEBUG
+
+	//Ready
+	if (gamePlayScene_==1) {
+		cameraPosition_.z -= 0.05f;
+		if (cameraPosition_.z < -8.0f) {
+
+
+			gamePlayScene_ = 2;
+		}
+	}
+	if (gamePlayScene_ == 2) {
+		cameraPosition_.z = -8.0f;
+		readyTime_ += 1;
+
+		if (readyTime_ > 60 * 4) {
+			gamePlayScene_ = 3;
+		}
+
+	}
+	
+	//Play
+	if (gamePlayScene_ == 3) {
+		// エネミー
+		enemy_->Update();
+
+		//制限時間
+		countDown_->Update();
+
+		//スコア
+		score_->Update();
+
+		//勝ち
+		if (countDown_->GetTime() < 0) {
+			gamePlayScene_ = 4;
+		}
+	}
+	//勝ち
+	if (gamePlayScene_ == 4) {
+		finishDisplayTime_ += 1;
+		if (finishDisplayTime_ > 60 * 2) {
+			gamePlayScene_ = 5;
+		}
+	}
+	if (gamePlayScene_ == 5) {
+		//ズーム
+		//ホワイトアウト
+		cameraPosition_.y +=0.02f ;
+		cameraPosition_.z +=0.05f ;
+		whiteTransparency_ += 0.01f;
+		white_->SetTransparency(whiteTransparency_);
+
+		if (whiteTransparency_ > 1.0f) {
+			whiteTransparency_ = 1.0f;
+
+			loadingTime += 1;
+			if (loadingTime > 60) {
+				gamaManager->ChangeScene(new WinScene());
+			}
+			
+		}
+	}
+
+	
 }
 
 
@@ -116,16 +205,40 @@ void GameScene::Draw(GameManager* gamaManager) {
 
 	//プレイヤー
 	player_->Draw();
-	enemy_->Draw();
 
 
-	//制限時間
-	countDown_->Draw();
-	
-	//スコア
-	score_->Draw();
+	if (gamePlayScene_ == 2) {
+		if (readyTime_ > 0 && readyTime_ <= 60 * 2) {
+			ready_->Draw();
 
-	
+		}
+
+		if (readyTime_ > 60*2 && readyTime_ <= 60 * 4) {
+			go_->Draw();
+
+		}
+	}
+
+	if (gamePlayScene_ == 3) {
+		enemy_->Draw();
+
+
+		//制限時間
+		countDown_->Draw();
+		
+		//スコア
+		score_->Draw();
+
+	}
+	if (gamePlayScene_ == 4) {
+		if (finishDisplayTime_ <= 60 * 2) {
+			finish_->Draw();
+		}
+		
+	}
+	if (gamePlayScene_ == 5) {
+		white_->Draw();
+	}
 
 }
 

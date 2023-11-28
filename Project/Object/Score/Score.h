@@ -19,6 +19,15 @@ public:
 	//デストラクタ
 	~Score();
 
+public:
+	void SetScore(int score) {
+		this->score_ = score;
+	}
+	int GetScore() {
+		return score_;
+	}
+
+
 private:
 
 
