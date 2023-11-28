@@ -62,25 +62,9 @@ void GameScene::Initialize(GameManager* gamaManager) {
 		timeOnesPlane_[i].reset(Sprite::Create(numberTextureHandle[i], { 680.0f,30.0f }));
 	}
 
-
 	//スコア
-	const float SPACE_INTERVAL = 60.0f;
-	const float initialPositionX = 30.0f;
-	
-	scoreBackPosition_ =  { 6.0f,488.0f};
-	scoreBackSize_ = {0.25f,0.13f};
-	scoreBack_.reset(Sprite::Create(frameTextureHandle,scoreBackPosition_));
-
-	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
-		
-		scoreTenThousandsPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*0.0f,500.0f}));	
-		scoreThousandsPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*1.0f,500.0f}));;
-		scoreHundredsPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*2.0f,500.0f}));;	
-		scoreTensPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*3.0f,500.0f}));;
-		scoreOnesPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*4.0f,500.0f}));;
-
-
-	}
+	score_ = std::make_unique<Score>();
+	score_->Initialize();
 
 	//カメラ
 	cameraPosition_ = { 0.0f,2.2f,-8.0f };
@@ -101,9 +85,6 @@ void GameScene::Update(GameManager* gamaManager) {
 	//カウントダウン
 	CountDown();
 
-	//スコア
-	Score();
-
 	//とうもろこしの更新
 	corn_->Update();
 
@@ -122,6 +103,8 @@ void GameScene::Update(GameManager* gamaManager) {
 	// 衝突判定
 	CheckAllCollision();
 	
+	//スコア
+	score_->Update();
 
 #ifdef _DEBUG
 
@@ -154,8 +137,7 @@ void GameScene::Draw(GameManager* gamaManager) {
 	player_->Draw();
 	enemy_->Draw();
 
-	//スコアの後ろのテクスチャ
-	scoreBack_->Draw();
+	
 
 	//制限時間の後ろのテクスチャ
 	countDownBack_->Draw();
@@ -171,25 +153,9 @@ void GameScene::Draw(GameManager* gamaManager) {
 		}
 	}
 
-
-	//スコア
-	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
-		if (scoreTenThousandsPlace_ == i) {
-			scoreTenThousandsPlane_[i]->Draw();	
-		}
-		if (scoreThousandsPlace_ == i) {
-			scoreThousandsPlane_[i]->Draw();
-		}
-		if (scoreHundredsPlace_ == i) {
-			scoreHundredsPlane_[i]->Draw();	
-		}
-		if (scoreTensPlace_ == i) {
-			scoreTensPlane_[i]->Draw();
-		}
-		if (scoreOnesPlace_ == i) {
-			scoreOnesPlane_[i]->Draw();
-		}
-	}
+	//スコアの描画
+	score_->Draw();
+	
 
 }
 
@@ -224,27 +190,3 @@ void GameScene::CountDown() {
 	countDownBack_->SetPosition(countDownBackPosition_);
 }
 
-/// <summary>
-/// スコア
-/// </summary>
-void GameScene::Score() {
-
-
-	score_ += 1;
-
-
-	scoreTenThousandsPlace_ = score_/10000;
-	scoreThousandsPlace_ = (score_%10000)/1000;
-	scoreHundredsPlace_ = (score_%1000)/100;
-	scoreTensPlace_ = (score_%100)/10;
-	scoreOnesPlace_ = score_ % 10;
-
-	scoreBack_->SetScale(scoreBackSize_);
-	scoreBack_->SetPosition(scoreBackPosition_);
-
-	//ImGui::Begin("Score");
-	//ImGui::SliderFloat2("Scale", &scoreBackSize_.x, 0.0f, 1.0f);
-	//ImGui::SliderFloat2("CounDownBackPosition", &scoreBackPosition_.x, 0.0f, 1280.0f);
-	//ImGui::End();
-
-}

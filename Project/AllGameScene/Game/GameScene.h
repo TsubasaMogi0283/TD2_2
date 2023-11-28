@@ -13,6 +13,7 @@
 #include <Object/Player/Player.h>
 #include <Object/Enemy/Enemy.h>
 #include "CollisionManager/CollisionManager.h"
+#include <Object/Score/Score.h>
 
 
 //StatePatternを使う時は必ず前方宣言をするように
@@ -43,10 +44,6 @@ private:
 	/// </summary>
 	void CountDown();
 
-	/// <summary>
-	/// スコア
-	/// </summary>
-	void Score();
 
 private:
 
@@ -100,27 +97,8 @@ private:
 
 
 #pragma region スコア
-
-	std::unique_ptr<Sprite> scoreBack_ = nullptr;
-	Vector2 scoreBackPosition_ = {};
-	Vector2 scoreBackSize_ = {};
-
-	int32_t score_ = 0;
+	std::unique_ptr<Score> score_ = nullptr;
 	
-	int32_t scoreTenThousandsPlace_ = 0;
-	int32_t scoreThousandsPlace_ = 0;
-	int32_t scoreHundredsPlace_ = 0;
-	int32_t scoreTensPlace_ = 0;
-	int32_t scoreOnesPlace_ = 0;
-
-
-	std::unique_ptr<Sprite> scoreTenThousandsPlane_[NUMBER_AMOUNT_] = {nullptr};	
-	std::unique_ptr<Sprite> scoreThousandsPlane_[NUMBER_AMOUNT_] = {nullptr};
-	std::unique_ptr<Sprite> scoreHundredsPlane_[NUMBER_AMOUNT_] = {nullptr};	
-	std::unique_ptr<Sprite> scoreTensPlane_[NUMBER_AMOUNT_] = {nullptr};
-	std::unique_ptr<Sprite> scoreOnesPlane_[NUMBER_AMOUNT_] = { nullptr };
-
-
 
 #pragma endregion
 };

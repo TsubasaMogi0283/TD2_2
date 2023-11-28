@@ -89,7 +89,7 @@
       <Filter>Object\Lamp</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Oven\Oven.cpp">
-      <Filter>Object\Popcorn\Oven</Filter>
+      <Filter>Object\Oven</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Player\Player.cpp">
       <Filter>Object\Player</Filter>
@@ -154,6 +154,7 @@
     <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
       <Filter>Object\Popcorn</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\Score\Score.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -259,16 +260,13 @@
       <Filter>Object\Lamp</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Oven\Oven.h">
-      <Filter>Object\Popcorn\Oven</Filter>
+      <Filter>Object\Oven</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Player\Player.h">
       <Filter>Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
       <Filter>GameManager\Scene\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
-      <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
       <Filter>GameManager\Scene\Select</Filter>
@@ -360,6 +358,10 @@
     <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
       <Filter>Object\SamplePlayer</Filter>
     </ClInclude>
+    <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
+      <Filter>Object\Popcorn</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Score\Score.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -490,7 +492,10 @@
     <Filter Include="Object\Popcorn">
       <UniqueIdentifier>{0a949aaa-b23d-47c4-afcd-b42b791ff582}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Popcorn\Oven">
+    <Filter Include="Object\Score">
+      <UniqueIdentifier>{ad6b6b50-d884-47b8-9182-e9ac7042800a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Oven">
       <UniqueIdentifier>{7254496d-a4cc-47c6-8047-789b5df3a57c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
