@@ -89,19 +89,13 @@
       <Filter>Object\Lamp</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Oven\Oven.cpp">
-      <Filter>Object\Oven</Filter>
+      <Filter>Object\Popcorn\Oven</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Player\Player.cpp">
       <Filter>Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
       <Filter>GameManager\Scene\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
-      <Filter>GameManager\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
       <Filter>GameManager\Scene\Select</Filter>
@@ -121,9 +115,6 @@
     <ClCompile Include="Ellysia\TextureManager\TextureManager.cpp">
       <Filter>Ellisia\TextureManager</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp">
-      <Filter>GameManager</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\PipelineManager\PipelineManager.cpp">
       <Filter>Ellisia\PipelineManager</Filter>
     </ClCompile>
@@ -135,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="Ellysia\ViewProjection\ViewProjection.cpp">
       <Filter>Ellisia\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
-      <Filter>GameManager</Filter>
     </ClCompile>
     <ClCompile Include="Ellysia\Math\Matrix\Calculation\Matrix4x4Calculation.cpp">
       <Filter>Ellisia\Math\Matrix</Filter>
@@ -153,6 +141,18 @@
     </ClCompile>
     <ClCompile Include="Ellysia\Polygon\Model\Mesh\Mesh.cpp">
       <Filter>Ellisia\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp">
+      <Filter>GameManager\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
+      <Filter>GameManager\Scene\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
+      <Filter>Object\SamplePlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
+      <Filter>Object\Popcorn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,7 +259,7 @@
       <Filter>Object\Lamp</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Oven\Oven.h">
-      <Filter>Object\Oven</Filter>
+      <Filter>Object\Popcorn\Oven</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Player\Player.h">
       <Filter>Object\Player</Filter>
@@ -269,9 +269,6 @@
     </ClInclude>
     <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
       <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
-      <Filter>GameManager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
       <Filter>GameManager\Scene\Select</Filter>
@@ -284,9 +281,6 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Result\Lose\LoseScene.h">
       <Filter>GameManager\Scene\Lose</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h">
-      <Filter>GameManager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Math\Vector\SphereStruct.h">
       <Filter>Ellisia\Polygone\Sphere</Filter>
@@ -317,9 +311,6 @@
     </ClInclude>
     <ClInclude Include="Ellysia\ViewProjection\ViewProjection.h">
       <Filter>Ellisia\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
-      <Filter>GameManager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Math\Matrix\Matrix\Matrix3x3.h">
       <Filter>Ellisia\Math\Matrix</Filter>
@@ -359,6 +350,15 @@
     </ClInclude>
     <ClInclude Include="Ellysia\Common\Windows\WinApp.h">
       <Filter>Ellisia\Common\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h">
+      <Filter>GameManager\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
+      <Filter>GameManager\Scene\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
+      <Filter>Object\SamplePlayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -424,9 +424,6 @@
     <Filter Include="Object\Lamp">
       <UniqueIdentifier>{9ebebb85-0be8-4859-a759-0a3eeb65db65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Oven">
-      <UniqueIdentifier>{7254496d-a4cc-47c6-8047-789b5df3a57c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Player">
       <UniqueIdentifier>{97201df3-f748-439e-9538-3b3df55d277d}</UniqueIdentifier>
     </Filter>
@@ -480,6 +477,21 @@
     </Filter>
     <Filter Include="ImGui\manager">
       <UniqueIdentifier>{53fd4ae3-b1e8-4c24-b084-19f5e1180664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Title">
+      <UniqueIdentifier>{302587c3-7722-42f3-a2f4-0a193e698e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Win">
+      <UniqueIdentifier>{30d1b818-1f38-446e-9ee5-531d8609d507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\SamplePlayer">
+      <UniqueIdentifier>{db195171-ebc6-49f7-984d-c9fe5571bbe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Popcorn">
+      <UniqueIdentifier>{0a949aaa-b23d-47c4-afcd-b42b791ff582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Popcorn\Oven">
+      <UniqueIdentifier>{7254496d-a4cc-47c6-8047-789b5df3a57c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
