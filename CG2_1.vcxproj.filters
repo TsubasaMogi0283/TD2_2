@@ -1,536 +1,490 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="imgui">
-      <UniqueIdentifier>{26a1d75c-68f5-48de-a7b5-c1eb6ab5e24a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Common">
-      <UniqueIdentifier>{07c0a95e-6a93-4df8-8d44-8e73f10e1ea2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Common">
-      <UniqueIdentifier>{489343cf-64f2-4e1a-99e3-9a53fd5598b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Math">
-      <UniqueIdentifier>{06a9a389-3fa9-4add-ab75-e624db9a3dd9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Math">
-      <UniqueIdentifier>{b543a5c7-1ed6-4ca8-ac06-3165a71162a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Math\Vector">
-      <UniqueIdentifier>{aaf74c02-09fc-4fb3-8841-c46e52af7448}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Math\Matrix">
-      <UniqueIdentifier>{979fd626-d0ee-4f17-8e46-8c4d9e8a2bb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\ImGui">
-      <UniqueIdentifier>{14d4744c-9636-4620-8765-10b4ee6446ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\ImGui">
-      <UniqueIdentifier>{00ad347e-53a6-4856-9344-67a497557e0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\ConvertFunction">
-      <UniqueIdentifier>{5f4a72fc-e562-4946-a2ac-4329dcdc39c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\ConvertFunction">
-      <UniqueIdentifier>{88525f3c-706e-4397-b214-f9c6099be35f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Polygone">
-      <UniqueIdentifier>{7d6b79d6-b619-47a8-8605-e65a4fad754b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Polygone">
-      <UniqueIdentifier>{6a198dbf-5723-494c-be30-e68adffa3015}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Input">
-      <UniqueIdentifier>{8654ad5d-6e38-43c8-90ef-8d93aa2c6272}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Input">
-      <UniqueIdentifier>{bd6a7a20-7921-47f1-a1ef-c5a99c26491a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Audio">
-      <UniqueIdentifier>{38c8c39f-90cc-4b8a-99bb-e3a6cf511aa2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Polygone\Model">
-      <UniqueIdentifier>{e5a13ab7-8f0d-4526-bba9-e90030f8a6d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Pipeline">
-      <UniqueIdentifier>{960690e0-f2d3-4f0a-a7e9-81f206ff3f49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Blend">
-      <UniqueIdentifier>{41250f08-3f73-4c50-a28e-c98adcfbb3f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\TextureManager">
-      <UniqueIdentifier>{7cee7120-9bf3-4b3b-a93a-30c9b8710e6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\TextureManager">
-      <UniqueIdentifier>{923fe313-40bb-48ce-aa0b-eb17ee0b5333}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Audio">
-      <UniqueIdentifier>{4e9ce233-b84c-4858-95a3-08d752302d12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Pipeline">
-      <UniqueIdentifier>{dd9a03be-6394-4e47-b16e-f7b88147685e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\DebugCamera">
-      <UniqueIdentifier>{6e47dfb1-b930-4c50-b9d8-f2c7d12decc5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project">
-      <UniqueIdentifier>{160b8139-af03-4112-af3c-93a9300024ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene">
-      <UniqueIdentifier>{d9eddbfe-a4ba-4d83-abf7-e4a8b4477052}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene\Game">
-      <UniqueIdentifier>{2c88eadf-ea93-49e2-954d-a4fe52b33dfe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene\Title">
-      <UniqueIdentifier>{cb42a54a-1dc8-444b-bfee-bcb3f0364be4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene\Result">
-      <UniqueIdentifier>{53901854-2f22-4129-b4ca-998a3c6d929b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene\Sample">
-      <UniqueIdentifier>{e3845ed3-b2ef-4f58-96e5-80777c1798b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Gamemanager">
-      <UniqueIdentifier>{6783ae0e-f5a0-4867-a365-1d65f9d0e07e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Camera">
-      <UniqueIdentifier>{87bdb518-d077-4291-aa52-d10916f80521}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Camera">
-      <UniqueIdentifier>{8b50bdd8-5385-4b4a-97aa-55bb324810c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene\Select">
-      <UniqueIdentifier>{7c084db6-7b30-4685-8b0e-c263ffca4327}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Object">
-      <UniqueIdentifier>{175b34b3-a960-4997-82e4-448e3778545e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Object\Oven">
-      <UniqueIdentifier>{f6ecefa3-855c-48a1-8449-25a234c5d63e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Object\Corn">
-      <UniqueIdentifier>{93289f95-18ec-4e63-895b-764718dc3096}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Polygone\Model">
-      <UniqueIdentifier>{ea2b1023-1bbf-445f-99df-340057f08e6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソース ファイル\Object2D">
-      <UniqueIdentifier>{10dde345-3418-4b51-9da1-6d288d23fed6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソース ファイル\Object3D">
-      <UniqueIdentifier>{cf0fc2e4-15b8-4397-87b8-c878ccd05ae0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Object\Lamp">
-      <UniqueIdentifier>{8af84574-384c-497b-946e-53d556b967e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Object\Popcorn">
-      <UniqueIdentifier>{fcac4bfd-3f78-4354-bea0-763ef9c0e63d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Object\SamplePlayer">
-      <UniqueIdentifier>{13c96695-ac0a-4de3-b8ac-9e50e424a466}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene\Result\Lose">
-      <UniqueIdentifier>{d2ee15a8-c5cb-4111-93f9-11606bc9bef0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Scene\Result\Win">
-      <UniqueIdentifier>{95adadd3-3e84-402c-a517-456bb025fa38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Object\Player">
-      <UniqueIdentifier>{0638f8f9-db32-4c1e-80db-a6cd74f083d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\CollisionManager">
-      <UniqueIdentifier>{3b3b7e13-22b5-4758-b3d9-b55044a9a364}</UniqueIdentifier>
-    </Filter>
-
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\externals\imGui\imgui.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\externals\imGui\imgui_demo.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\externals\imGui\imgui_draw.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\externals\imGui\imgui_impl_dx12.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\externals\imGui\imgui_impl_win32.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\externals\imGui\imgui_tables.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\externals\imGui\imgui_widgets.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Math\Matrix\Calculation\Matrix4x4Calculation.cpp">
-      <Filter>ソース ファイル\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\ImGuiManager\ImGuiManager.cpp">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\ConvertFunction\ConvertColor\ColorConvert.cpp">
-      <Filter>ソース ファイル\ConvertFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\ConvertFunction\ConvertLog\LogConvert.cpp">
-      <Filter>ソース ファイル\ConvertFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Math\Vector\Calculation\VectorCalculation.cpp">
-      <Filter>ソース ファイル\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Sprite\Sprite.cpp">
-      <Filter>ソース ファイル\Polygone</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Triangle\Triangle.cpp">
-      <Filter>ソース ファイル\Polygone</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Common\DirectX\DirectXSetup.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Common\Windows\WinApp.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\ConvertFunction\CompileShader\CompileShaderManager.cpp">
-      <Filter>ソース ファイル\ConvertFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Input\Input.cpp">
-      <Filter>ソース ファイル\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\GameManager\GameManager.cpp">
-      <Filter>Project\Gamemanager</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\TextureManager\TextureManager.cpp">
-      <Filter>ソース ファイル\TextureManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Audio\Audio.cpp">
-      <Filter>ソース ファイル\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\PipelineManager\PipelineManager.cpp">
-      <Filter>ソース ファイル\Pipeline</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\DebugCamera\DebugCamera.cpp">
-      <Filter>ソース ファイル\DebugCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\ViewProjection\ViewProjection.cpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\WorldTransform\WorldTransform.cpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp">
-      <Filter>Project\Scene\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp">
-      <Filter>Project\Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\ResultScene.cpp">
-      <Filter>Project\Scene\Result</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
-      <Filter>Project\Scene\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Camera\Camera.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
-      <Filter>Project\Scene\Select</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Corn\Corn.cpp">
-      <Filter>Project\Object\Corn</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Oven\Oven.cpp">
-      <Filter>Project\Object\Oven</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\Model.cpp">
-      <Filter>ソース ファイル\Polygone\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.cpp">
-      <Filter>ソース ファイル\Polygone\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\Material\CreateMaterial.cpp">
-      <Filter>ソース ファイル\Polygone\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\Mesh\Mesh.cpp">
-      <Filter>ソース ファイル\Polygone\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Ellysia\Polygon\Model\Transformation\Transformation.cpp">
-      <Filter>ソース ファイル\Polygone\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Lamp\Lamp.cpp">
-      <Filter>Project\Object\Lamp</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
-      <Filter>Project\Object\SamplePlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
-      <Filter>Project\Object\Popcorn</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\Lose\LoseScene.cpp">
-      <Filter>Project\Scene\Result\Lose</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
-      <Filter>Project\Scene\Result\Win</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Player\Player.cpp">
-      <Filter>Project\Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\CollisionManager\CollisionManager.cpp">
-      <Filter>Project\CollisionManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Enemy\Enemy.cpp">
-      <Filter>Project\Object\Enemy</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <FxCompile Include="Resources\Shader\Object2d.PS.hlsl">
-      <Filter>リソース ファイル\Object2D</Filter>
+      <Filter>Resource</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Object2d.VS.hlsl">
-      <Filter>リソース ファイル\Object2D</Filter>
+      <Filter>Resource</Filter>
     </FxCompile>
     <FxCompile Include="Object3d.PS.hlsl">
-      <Filter>リソース ファイル\Object3D</Filter>
+      <Filter>Resource</Filter>
     </FxCompile>
     <FxCompile Include="Object3d.VS.hlsl">
-      <Filter>リソース ファイル\Object3D</Filter>
+      <Filter>Resource</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ellysia\externals\imGui\imconfig.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\externals\imGui\imgui.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\externals\imGui\imgui_impl_dx12.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\externals\imGui\imgui_impl_win32.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\externals\imGui\imgui_internal.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\externals\imGui\imstb_rectpack.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\externals\imGui\imstb_textedit.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\externals\imGui\imstb_truetype.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\Vector3.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\Vector4.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Matrix\Matrix\Matrix3x3.h">
-      <Filter>ヘッダー ファイル\Math\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Matrix\Matrix\Matrix4x4.h">
-      <Filter>ヘッダー ファイル\Math\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Matrix\Calculation\Matrix4x4Calculation.h">
-      <Filter>ヘッダー ファイル\Math\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Matrix\Matrix\WorldViewMatrix.h">
-      <Filter>ヘッダー ファイル\Math\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\ImGuiManager\ImGuiManager.h">
-      <Filter>ヘッダー ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\ConvertFunction\ConvertColor\ColorConvert.h">
-      <Filter>ヘッダー ファイル\ConvertFunction</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\ConvertFunction\ConvertLog\LogConvert.h">
-      <Filter>ヘッダー ファイル\ConvertFunction</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\Transform.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\SphereStruct.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\Calculation\VectorCalculation.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Sprite\Sprite.h">
-      <Filter>ヘッダー ファイル\Polygone</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Triangle\Triangle.h">
-      <Filter>ヘッダー ファイル\Polygone</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\Vector2.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\VertexData.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\Material.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Matrix\Matrix\TransformationMatrix.h">
-      <Filter>ヘッダー ファイル\Math\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Math\Vector\DirectionalLight.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Common\DirectX\DirectXSetup.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Common\Windows\WinApp.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\ConvertFunction\CompileShader\CompileShaderManager.h">
-      <Filter>ヘッダー ファイル\ConvertFunction</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Input\Input.h">
-      <Filter>ヘッダー ファイル\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Input\Mouse\MouseInformation.h">
-      <Filter>ヘッダー ファイル\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Audio\ChunkHeader\ChunkHeader.h">
-      <Filter>ヘッダー ファイル\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Audio\FormatChunk\FormatChunk.h">
-      <Filter>ヘッダー ファイル\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Audio\RiffHeader\RiffHeader.h">
-      <Filter>ヘッダー ファイル\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Audio\SoundData\SoundData.h">
-      <Filter>ヘッダー ファイル\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\Model.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\PipelineManager\PipelineManager.h">
-      <Filter>ヘッダー ファイル\Pipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Blend\BlendMode.h">
-      <Filter>ヘッダー ファイル\Blend</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Audio\Audio.h">
-      <Filter>ヘッダー ファイル\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\TextureManager\TextureManager.h">
-      <Filter>ヘッダー ファイル\TextureManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\DebugCamera\DebugCamera.h">
-      <Filter>ソース ファイル\DebugCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\ViewProjection\ViewProjection.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\WorldTransform\WorldTransform.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\GameManager\GameManager.h">
-      <Filter>Project\Gamemanager</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\GameManager\IGameScene.h">
-      <Filter>Project\Gamemanager</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h">
-      <Filter>Project\Scene\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h">
-      <Filter>Project\Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\ResultScene.h">
-      <Filter>Project\Scene\Result</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
-      <Filter>Project\Scene\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\MaterialData\MaterialData.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\ModelData\ModelData.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\Material\CreateMaterial.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\Mesh\Mesh.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h">
-      <Filter>ヘッダー ファイル\Polygone\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ellysia\Camera\Camera.h">
-      <Filter>ヘッダー ファイル\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
-      <Filter>Project\Scene\Select</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Oven\Oven.h">
-      <Filter>Project\Object\Oven</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Corn\Corn.h">
-      <Filter>Project\Object\Corn</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Lamp\Lamp.h">
-      <Filter>Project\Object\Lamp</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
-      <Filter>Project\Object\SamplePlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
-      <Filter>Project\Object\Popcorn</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\Lose\LoseScene.h">
-      <Filter>Project\Scene\Result\Lose</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
-      <Filter>Project\Scene\Result\Win</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Player\Player.h">
-      <Filter>Project\Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\CollisionManager\CollisionManager.h">
-      <Filter>Project\CollisionManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Enemy\Enemy.h">
-      <Filter>Project\Object\Enemy</Filter>
-    </ClInclude>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Ellysia\Audio\Audio.cpp">
+      <Filter>Ellisia\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Camera\Camera.cpp">
+      <Filter>Ellisia\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\CollisionManager\CollisionManager.cpp">
+      <Filter>Object\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\ConvertFunction\ConvertColor\ColorConvert.cpp">
+      <Filter>Ellisia\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\ConvertFunction\CompileShader\CompileShaderManager.cpp">
+      <Filter>Ellisia\CompilerShadermanager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.cpp">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Material\CreateMaterial.cpp">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\DebugCamera\DebugCamera.cpp">
+      <Filter>Ellisia\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Common\DirectX\DirectXSetup.cpp">
+      <Filter>Ellisia\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\GameManager\GameManager.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\externals\imGui\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\externals\imGui\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\externals\imGui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\externals\imGui\imgui_impl_dx12.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\externals\imGui\imgui_impl_win32.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\externals\imGui\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\externals\imGui\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\ImGuiManager\ImGuiManager.cpp">
+      <Filter>ImGui\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Input\Input.cpp">
+      <Filter>Ellisia\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\ConvertFunction\ConvertLog\LogConvert.cpp">
+      <Filter>Ellisia\Convert</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Model.cpp">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Corn\Corn.cpp">
+      <Filter>Object\Corn</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Enemy\Enemy.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Lamp\Lamp.cpp">
+      <Filter>Object\Lamp</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Oven\Oven.cpp">
+      <Filter>Object\Oven</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Player\Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
+      <Filter>GameManager\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
+      <Filter>GameManager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
+      <Filter>GameManager\Scene\Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp">
+      <Filter>GameManager\Scene\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\ResultScene.cpp">
+      <Filter>GameManager\Scene\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\Lose\LoseScene.cpp">
+      <Filter>GameManager\Scene\Lose</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Sprite\Sprite.cpp">
+      <Filter>Ellisia\Polygone\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\TextureManager\TextureManager.cpp">
+      <Filter>Ellisia\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\PipelineManager\PipelineManager.cpp">
+      <Filter>Ellisia\PipelineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Triangle\Triangle.cpp">
+      <Filter>Ellisia\Polygone\Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Transformation\Transformation.cpp">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\ViewProjection\ViewProjection.cpp">
+      <Filter>Ellisia\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Math\Matrix\Calculation\Matrix4x4Calculation.cpp">
+      <Filter>Ellisia\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\WorldTransform\WorldTransform.cpp">
+      <Filter>Ellisia\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Math\Vector\Calculation\VectorCalculation.cpp">
+      <Filter>Ellisia\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Common\Windows\WinApp.cpp">
+      <Filter>Ellisia\Common\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellysia\Polygon\Model\Mesh\Mesh.cpp">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Ellysia\externals\imGui\LICENSE.txt">
-      <Filter>imgui</Filter>
-    </Text>
+    <ClInclude Include="Ellysia\Audio\Audio.h">
+      <Filter>Ellisia\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Audio\ChunkHeader\ChunkHeader.h">
+      <Filter>Ellisia\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Blend\BlendMode.h">
+      <Filter>Ellisia\Blend</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Camera\Camera.h">
+      <Filter>Ellisia\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\CollisionManager\CollisionManager.h">
+      <Filter>Object\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\ConvertFunction\ConvertColor\ColorConvert.h">
+      <Filter>Ellisia\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\ConvertFunction\CompileShader\CompileShaderManager.h">
+      <Filter>Ellisia\CompilerShadermanager</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\DirectionalLight\CreateDirectionalLight.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Material\CreateMaterial.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\DebugCamera\DebugCamera.h">
+      <Filter>Ellisia\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\DirectionalLight.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Common\DirectX\DirectXSetup.h">
+      <Filter>Ellisia\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Audio\FormatChunk\FormatChunk.h">
+      <Filter>Ellisia\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\GameManager\GameManager.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\GameManager\IGameScene.h">
+      <Filter>GameManager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\externals\imGui\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\externals\imGui\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\externals\imGui\imgui_impl_dx12.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\externals\imGui\imgui_impl_win32.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\externals\imGui\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\ImGuiManager\ImGuiManager.h">
+      <Filter>ImGui\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\externals\imGui\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\externals\imGui\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\externals\imGui\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\Material.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Input\Input.h">
+      <Filter>Ellisia\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\ConvertFunction\ConvertLog\LogConvert.h">
+      <Filter>Ellisia\Convert</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Mesh\Mesh.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Model.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\ModelData\ModelData.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Input\Mouse\MouseInformation.h">
+      <Filter>Ellisia\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Corn\Corn.h">
+      <Filter>Object\Corn</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Enemy\Enemy.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Lamp\Lamp.h">
+      <Filter>Object\Lamp</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Oven\Oven.h">
+      <Filter>Object\Oven</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Player\Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
+      <Filter>GameManager\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
+      <Filter>GameManager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
+      <Filter>GameManager\Scene\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h">
+      <Filter>GameManager\Scene\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\ResultScene.h">
+      <Filter>GameManager\Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\Lose\LoseScene.h">
+      <Filter>GameManager\Scene\Lose</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h">
+      <Filter>GameManager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\SphereStruct.h">
+      <Filter>Ellisia\Polygone\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Sprite\Sprite.h">
+      <Filter>Ellisia\Polygone\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\TextureManager\TextureManager.h">
+      <Filter>Ellisia\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Audio\RiffHeader\RiffHeader.h">
+      <Filter>Ellisia\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Audio\SoundData\SoundData.h">
+      <Filter>Ellisia\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\PipelineManager\PipelineManager.h">
+      <Filter>Ellisia\PipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\MaterialData\MaterialData.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Triangle\Triangle.h">
+      <Filter>Ellisia\Polygone\Triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Polygon\Model\Transformation\Transformation.h">
+      <Filter>Ellisia\Polygone\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\ViewProjection\ViewProjection.h">
+      <Filter>Ellisia\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
+      <Filter>GameManager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Matrix\Matrix\Matrix3x3.h">
+      <Filter>Ellisia\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Matrix\Matrix\Matrix4x4.h">
+      <Filter>Ellisia\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Matrix\Calculation\Matrix4x4Calculation.h">
+      <Filter>Ellisia\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\WorldTransform\WorldTransform.h">
+      <Filter>Ellisia\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\Vector2.h">
+      <Filter>Ellisia\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\Vector3.h">
+      <Filter>Ellisia\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\Vector4.h">
+      <Filter>Ellisia\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Matrix\Matrix\TransformationMatrix.h">
+      <Filter>Ellisia\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\Calculation\VectorCalculation.h">
+      <Filter>Ellisia\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Matrix\Matrix\WorldViewMatrix.h">
+      <Filter>Ellisia\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\VertexData.h">
+      <Filter>Ellisia\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Math\Vector\Transform.h">
+      <Filter>Ellisia\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellysia\Common\Windows\WinApp.h">
+      <Filter>Ellisia\Common\Win</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
-      <Filter>リソース ファイル\Object2D</Filter>
+      <Filter>Resource</Filter>
     </None>
     <None Include="Object3d.hlsli">
-      <Filter>リソース ファイル\Object3D</Filter>
+      <Filter>Resource</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Object">
+      <UniqueIdentifier>{2c2a893e-acb0-4463-a8b1-83f28ad7dc91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\CollisionManager">
+      <UniqueIdentifier>{c201cfcf-8d40-47ab-a697-9022d8420d0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager">
+      <UniqueIdentifier>{f327e01c-515d-43d0-a8e1-f12dd5ce6b14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene">
+      <UniqueIdentifier>{6afa98da-cbad-413f-8158-7af937410b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{70d5f17d-c8a8-4982-90f7-770f96f1bc57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia">
+      <UniqueIdentifier>{16dba923-9280-4e51-8997-caae6af38233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Audio">
+      <UniqueIdentifier>{fa49ef14-7030-4aad-a221-137dbd104884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Blend">
+      <UniqueIdentifier>{92fb01df-dbeb-4372-a2d0-5f124ac857d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Camera">
+      <UniqueIdentifier>{ee82cadb-af73-40bd-a7e8-4062c3869e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Color">
+      <UniqueIdentifier>{b75bef32-ded3-43ab-acc3-53e716a78f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\CompilerShadermanager">
+      <UniqueIdentifier>{a24a80ea-bd79-48aa-a2dd-2e83845febcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Common">
+      <UniqueIdentifier>{a565e628-97f8-4355-a2df-7a87a1b29303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Input">
+      <UniqueIdentifier>{6326c389-764a-4882-b352-358bee75e1fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Convert">
+      <UniqueIdentifier>{ec673244-e721-47b6-9cf8-391897f5882e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Math">
+      <UniqueIdentifier>{56c2a375-2692-4c6c-b226-38fc861d3957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Corn">
+      <UniqueIdentifier>{5cb417d5-df0e-40e8-88f4-e02f59e10ddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy">
+      <UniqueIdentifier>{19364b64-b446-4df4-b0fe-ff7363b26729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Lamp">
+      <UniqueIdentifier>{9ebebb85-0be8-4859-a759-0a3eeb65db65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Oven">
+      <UniqueIdentifier>{7254496d-a4cc-47c6-8047-789b5df3a57c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{97201df3-f748-439e-9538-3b3df55d277d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Game">
+      <UniqueIdentifier>{62be90f4-fdba-42ad-a3d9-993e962e909b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Select">
+      <UniqueIdentifier>{9357f2a7-6bda-4fa2-bb99-f955ac7e61a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Sample">
+      <UniqueIdentifier>{9dd7d5a5-08eb-429a-9554-7e652ebf691d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Result">
+      <UniqueIdentifier>{7d9b223c-0333-4943-8af0-249e17820d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Lose">
+      <UniqueIdentifier>{4acb8113-b106-4c01-af52-26839d3251b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\TextureManager">
+      <UniqueIdentifier>{22905170-05fc-4cf2-8c05-c1963b778da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\PipelineManager">
+      <UniqueIdentifier>{d270c154-4269-434b-b232-1f1ab123c609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Polygone">
+      <UniqueIdentifier>{af5e10dd-35d8-4953-a99f-9834937eed50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Polygone\Sphere">
+      <UniqueIdentifier>{5bf3cd63-5148-40b4-81c7-40858af28d5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Polygone\Sprite">
+      <UniqueIdentifier>{b9ec1906-dfa6-44b6-b2fa-23b5e99d9cfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Polygone\Model">
+      <UniqueIdentifier>{c5ba2779-fd32-4ba2-8615-dd3969fe56e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Polygone\Triangle">
+      <UniqueIdentifier>{fb551f25-118f-41c0-ace3-a956c69ee4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Math\Matrix">
+      <UniqueIdentifier>{a2e110d0-8fd9-4625-b585-eef1de0e6171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Math\Vector">
+      <UniqueIdentifier>{d9d77ee4-c223-45e4-a191-c96a14f65907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ellisia\Common\Win">
+      <UniqueIdentifier>{09954813-2104-4942-b9a3-119102f85a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{d747a006-c67a-467c-a524-ba0cba7f6274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui\manager">
+      <UniqueIdentifier>{53fd4ae3-b1e8-4c24-b084-19f5e1180664}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Ellysia\externals\imGui\LICENSE.txt">
+      <Filter>ImGui</Filter>
+    </Text>
   </ItemGroup>
 </Project>
