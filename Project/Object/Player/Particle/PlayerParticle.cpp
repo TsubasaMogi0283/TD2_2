@@ -27,6 +27,10 @@ void PlayerParlicle::Initialize(const Vector3& position) {
 
 	// 描画フラグを立てる
 	isDrawing_ = true;
+
+	// 描画時間
+	drawTimer_ = 0;
+	endDrawTimer_ = 90;
 }
 
 
@@ -39,11 +43,14 @@ void PlayerParlicle::Update() {
 	// いろいろ設定する
 	SetPlayerParlicleProperty();
 
+	// 描画時間の計算
+	CalcDrawTimer();
+
 	// アルファの計算
 	CalcAlpha();
 
 	// スケールの計算
-	CalcTranslate();
+	CalcTransform();
 
 
 
@@ -92,14 +99,15 @@ void PlayerParlicle::SetPlayerParlicleProperty() {
 
 
 /// <summary>
-/// アルファの計算
+/// 描画時間を計算する
 /// </summary>
-void PlayerParlicle::CalcAlpha() {
+void PlayerParlicle::CalcDrawTimer() {
 
-	particle_.color.w -= 0.01f;
+	// 毎フレームー１
+	drawTimer_ = drawTimer_ + 1;
 
-	// アルファが０以下になったら描画フラグを折る
-	if (particle_.color.w <= 0.0f) {
+	// ９０フレームで描画を切る
+	if (drawTimer_ >= endDrawTimer_) {
 		isDrawing_ = false;
 	}
 }
@@ -107,10 +115,42 @@ void PlayerParlicle::CalcAlpha() {
 
 
 /// <summary>
+/// アルファの計算
+/// </summary>
+void PlayerParlicle::CalcAlpha() {
+
+	particle_.color.w -= 0.01f;
+
+}
+
+
+
+/// <summary>
 /// スケールの計算
 /// </summary>
-void PlayerParlicle::CalcTranslate() {
+void PlayerParlicle::CalcTransform() {
 
+	// 上へ移動する
 	particle_.transform.translate.y += 0.007f;
 
+	// スケールが小さくなっていく
+	float nowFrame = float(drawTimer_);
+	float endFrame = float(endDrawTimer_);
+	float val = nowFrame / endFrame;
+
+	particle_.transform.scale = {
+		.x = particle_.transform.scale.x + (0.0f - particle_.transform.scale.x) * EaseInQuart(val),
+		.y = particle_.transform.scale.y + (0.0f - particle_.transform.scale.y) * EaseInQuart(val),
+		.z = particle_.transform.scale.z + (0.0f - particle_.transform.scale.z) * EaseInQuart(val),
+	};
+
+}
+
+
+
+/// <summary>
+/// イージング関数
+/// </summary>
+float PlayerParlicle::EaseInQuart(float& x) {
+	return x * x * x * x;
 }

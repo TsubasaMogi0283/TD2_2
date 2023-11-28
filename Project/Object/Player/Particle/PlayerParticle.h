@@ -73,6 +73,11 @@ private: // メンバ関数
 	void SetPlayerParlicleProperty();
 
 	/// <summary>
+	/// 描画時間を計算する
+	/// </summary>
+	void CalcDrawTimer();
+
+	/// <summary>
 	/// アルファの計算
 	/// </summary>
 	void CalcAlpha();
@@ -80,7 +85,12 @@ private: // メンバ関数
 	/// <summary>
 	/// スケールの計算
 	/// </summary>
-	void CalcTranslate();
+	void CalcTransform();
+
+	/// <summary>
+	/// イージング関数
+	/// </summary>
+	float EaseInQuart(float& x);
 
 
 private: // メンバ変数
@@ -94,4 +104,7 @@ private: // メンバ変数
 	// 描画フラグ
 	bool isDrawing_;
 
+	// 描画タイマー
+	uint32_t drawTimer_;
+	uint32_t endDrawTimer_;
 };
