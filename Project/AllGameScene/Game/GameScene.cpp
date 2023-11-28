@@ -1,10 +1,12 @@
 #include "GameScene.h"
 
 #include "ImGuiManager/ImGuiManager.h"
+#include "Input/Input.h"
+
 #include "AllGameScene/GameManager/GameManager.h"
 #include <AllGameScene/Result/ResultScene.h>
 #include "AllGameScene/Result/Win/WinScene.h"
-
+#include "AllGameScene/Result/Lose/LoseScene.h"
 
 /// <summary>
 /// 初期化処理
@@ -74,6 +76,10 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	uint32_t whiteTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/White.png");
 	white_.reset(Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
 
+	//BlackOut
+	black_ = std::make_unique<Sprite>();
+	uint32_t blackTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Black.png");
+	black_.reset(Sprite::Create(blackTextureHandle, { 0.0f,0.0f }));
 
 
 #pragma endregion
@@ -155,7 +161,12 @@ void GameScene::Update(GameManager* gamaManager) {
 		//スコア
 		score_->Update();
 
-		//勝ち
+		//負け(仮)
+		if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
+			gamePlayScene_ = 6;
+		}
+
+		//勝ちへ
 		if (countDown_->GetTime() < 0) {
 			gamePlayScene_ = 4;
 		}
@@ -179,14 +190,33 @@ void GameScene::Update(GameManager* gamaManager) {
 			whiteTransparency_ = 1.0f;
 
 			loadingTime += 1;
-			if (loadingTime > 60) {
-				gamaManager->ChangeScene(new WinScene());
-			}
+			
 			
 		}
 	}
 
+	//負け
+	if (gamePlayScene_ == 6) {
+		theta += 1.0f;
+		cameraPosition_.x += std::sinf(theta)*0.5f;
+		
+		blackTransparency_ += 0.01f;
+		black_->SetTransparency(blackTransparency_);
+		if (blackTransparency_ > 1.0f) {
+			loseLodingTime_ += 1;
+		}
+		
+	}
 	
+
+	if (loseLodingTime_ >= 60) {
+		gamaManager->ChangeScene(new LoseScene());
+	}
+
+	if (loadingTime > 60) {
+		gamaManager->ChangeScene(new WinScene());
+	}
+
 }
 
 
@@ -239,7 +269,9 @@ void GameScene::Draw(GameManager* gamaManager) {
 	if (gamePlayScene_ == 5) {
 		white_->Draw();
 	}
-
+	if (gamePlayScene_ == 6) {
+		black_->Draw();
+	}
 }
 
 
