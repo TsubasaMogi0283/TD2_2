@@ -26,7 +26,7 @@ void Oven::Update(){
 	oven_->SetRotate(ovenRotate_);
 
 
-	DisplayText();
+	//DisplayText();
 
 	
 

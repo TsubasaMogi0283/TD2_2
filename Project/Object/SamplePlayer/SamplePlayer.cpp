@@ -96,7 +96,7 @@ void SamplePlayer::Update(){
 		return false;
 	});
 
-	DisplayText();
+	//DisplayText();
 }
 
 void SamplePlayer::Draw(){
