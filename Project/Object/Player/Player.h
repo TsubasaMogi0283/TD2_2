@@ -116,6 +116,9 @@ private:
 	// 初期値
 	PlayerInitProperty init_;
 
+	// 回転量
+	Vector3 moveRotate_{};
+
 	// Sphere
 	Sphere plaSphere_;
 

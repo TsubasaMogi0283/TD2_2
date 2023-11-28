@@ -11,10 +11,11 @@ void Player::Initialize() {
 	// モデル
 	pla_.model = std::make_unique<Model>();
 	pla_.model.reset(Model::Create("Resources/Player", "Player.obj"));
+	pla_.model->SetLighting(false);
 
 	// 座標
 	init_.transform = {
-		.scale = {0.3f, 0.3f, 0.3f},
+		.scale = {0.2f, 0.2f, 0.2f},
 		.rotate = {0.0f, 0.0f, 0.0f},
 		.translate = {0.0f, 1.2f, 0.0f},
 	};
@@ -22,6 +23,9 @@ void Player::Initialize() {
 
 	// 速度
 	pla_.velocity = { 0.1f, 0.1f, 0.1f };
+
+	// 回転量
+	moveRotate_ = { 0.3f, 0.2f, 0.1f };
 
 	//サイズ
 	pla_.size = {
@@ -109,6 +113,7 @@ void Player::EndOverlapToEnemy() {
 // 移動処理
 void Player::Move() {
 
+	// 左右移動処理
 	if (input->IsPushKey(DIK_A) || input->IsPushKey(DIK_LEFT)) {
 
 		pla_.transform.translate.x -= pla_.velocity.x;
@@ -117,6 +122,9 @@ void Player::Move() {
 
 		pla_.transform.translate.x += pla_.velocity.x;
 	}
+
+	// 無駄な回転処理
+	pla_.transform.rotate = Add(pla_.transform.rotate, moveRotate_);
 
 
 #ifdef _DEBUG
