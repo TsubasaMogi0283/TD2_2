@@ -303,6 +303,9 @@
     <ClCompile Include="Project\Object\Enemy\Enemy.cpp">
       <Filter>Project\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\Player\Particle\PlayerParticle.cpp">
+      <Filter>Project\Object\Player\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Object2d.PS.hlsl">
@@ -522,6 +525,9 @@
     </ClInclude>
     <ClInclude Include="Project\Object\Enemy\Enemy.h">
       <Filter>Project\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Player\Particle\PlayerParticle.h">
+      <Filter>Project\Object\Player\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
