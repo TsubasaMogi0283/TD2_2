@@ -4,6 +4,7 @@
 #include "AllGameScene/Title/TitleScene.h"
 #include "AllGameScene/Result/Win/WinScene.h"
 #include "AllGameScene/Result/Lose/LoseScene.h"
+#include "AllGameScene/Game/GameScene.h"
 
 
 
@@ -40,6 +41,7 @@ void GameManager::Initialize() {
 
 	//シーンごとに動作確認したいときはここを変えてね
 	currentGamaScene_ = new SampleScene();
+
 	currentGamaScene_->Initialize(this);
 
 }
