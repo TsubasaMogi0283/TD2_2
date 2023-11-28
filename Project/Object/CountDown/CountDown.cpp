@@ -24,6 +24,8 @@ void CountDown::Initialize(){
 	countDownBackSize_ = { 0.11f,0.12f };
 	countDownBack_.reset(Sprite::Create(frameTextureHandle,countDownBackPosition_ ));
 	
+	countDownBack_->SetScale(countDownBackSize_);
+	countDownBack_->SetPosition(countDownBackPosition_);
 	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
 		//代入の時はresetを使ってね
 		timeTensPlane_[i].reset(Sprite::Create(numberTextureHandle[i], { 600.0f,30.0f }));
@@ -41,8 +43,7 @@ void CountDown::Update(){
 	tensPlace_ = displayTime_ / 10;
 	onesPlace_ = displayTime_ % 10;
 
-	countDownBack_->SetScale(countDownBackSize_);
-	countDownBack_->SetPosition(countDownBackPosition_);
+	
 }
 
 void CountDown::Draw(){
