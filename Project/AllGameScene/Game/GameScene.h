@@ -15,6 +15,7 @@
 #include "CollisionManager/CollisionManager.h"
 #include <Object/CountDown/CountDown.h>
 #include <Object/Score/Score.h>
+#include <AllGameScene/GameManager/IGamePlayScene.h>
 
 
 //StatePatternを使う時は必ず前方宣言をするように
@@ -71,6 +72,14 @@ private:
 	//カメラ
 	Vector3 cameraPosition_ = {};
 	Vector3 cameraRotate_ = {};
+
+
+	int gamePlayScene_ = 1;
+
+
+	//StatePatternに必要な変数
+	IGamePlayScene* currentGamaScene_ = nullptr;
+
 
 };
 

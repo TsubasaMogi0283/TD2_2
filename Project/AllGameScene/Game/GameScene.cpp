@@ -47,7 +47,7 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	
 
 	//カメラ
-	cameraPosition_ = { 0.0f,2.2f,-8.0f };
+	cameraPosition_ = { 0.0f,2.2f,0.0f };
 	cameraRotate_ = { 0.015f,0.0f,0.0f };
 
 }
@@ -58,9 +58,25 @@ void GameScene::Initialize(GameManager* gamaManager) {
 /// </summary>
 void GameScene::Update(GameManager* gamaManager) {
 
-	//カメラ
-	Camera::GetInstance()->SetRotate(cameraRotate_);
-	Camera::GetInstance()->SetTranslate(cameraPosition_);
+	if (gamePlayScene_==1) {
+		cameraPosition_.z -= 0.05f;
+		if (cameraPosition_.z < -8.0f) {
+			gamePlayScene_ = 2;
+		}
+	}
+	if (gamePlayScene_ == 2) {
+
+		// エネミー
+		enemy_->Update();
+
+		//制限時間
+		countDown_->Update();
+
+		//スコア
+		score_->Update();
+	}
+
+	
 
 
 	//とうもろこしの更新
@@ -75,17 +91,16 @@ void GameScene::Update(GameManager* gamaManager) {
 	// プレイヤー
 	player_->Update();
 
-	// エネミー
-	enemy_->Update();
+	
 
 	// 衝突判定
 	CheckAllCollision();
 	
-	//制限時間
-	countDown_->Update();
+	
 
-	//スコア
-	score_->Update();
+	//カメラ
+	Camera::GetInstance()->SetRotate(cameraRotate_);
+	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
 #ifdef _DEBUG
 
@@ -116,15 +131,20 @@ void GameScene::Draw(GameManager* gamaManager) {
 
 	//プレイヤー
 	player_->Draw();
-	enemy_->Draw();
 
 
-	//制限時間
-	countDown_->Draw();
+	if (gamePlayScene_ == 2) {
+		enemy_->Draw();
+
+
+		//制限時間
+		countDown_->Draw();
+		
+		//スコア
+		score_->Draw();
+
+	}
 	
-	//スコア
-	score_->Draw();
-
 	
 
 }

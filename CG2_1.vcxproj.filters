@@ -70,7 +70,7 @@
       <Filter>Object\CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Corn\Corn.cpp">
-      <Filter>Object\Corn</Filter>
+      <Filter>Object\Stage\Corn</Filter>
     </ClCompile>
     <ClCompile Include="Ellysia\ConvertFunction\ConvertLog\LogConvert.cpp">
       <Filter>Ellysia\Convert</Filter>
@@ -79,7 +79,7 @@
       <Filter>Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Lamp\Lamp.cpp">
-      <Filter>Object\Lamp</Filter>
+      <Filter>Object\Stage\Lamp</Filter>
     </ClCompile>
     <ClCompile Include="Ellysia\Polygon\Model\Model.cpp">
       <Filter>Ellysia\Polygone\Model</Filter>
@@ -103,15 +103,6 @@
       <Filter>GameManager\Scene\Result</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp">
-      <Filter>GameManager\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
-      <Filter>GameManager\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp">
-      <Filter>GameManager\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\TextureManager\TextureManager.cpp">
       <Filter>Ellysia\TextureManager</Filter>
     </ClCompile>
@@ -130,9 +121,6 @@
     <ClCompile Include="Ellysia\Common\Windows\WinApp.cpp">
       <Filter>Ellysia\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
-      <Filter>GameManager\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\Math\Vector\Calculation\VectorCalculation.cpp">
       <Filter>Math\Vector</Filter>
     </ClCompile>
@@ -143,7 +131,7 @@
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Oven\Oven.cpp">
-      <Filter>Object\Oven</Filter>
+      <Filter>Object\Stage\Oven</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Player\Player.cpp">
       <Filter>Object\Player</Filter>
@@ -154,8 +142,25 @@
     <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
       <Filter>Object\SamplePlayer</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Object\CountDown\CountDown.cpp" />
-    <ClCompile Include="Project\Object\Score\Score.cpp" />
+    <ClCompile Include="Project\Object\CountDown\CountDown.cpp">
+      <Filter>Object\CountDown</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Score\Score.cpp">
+      <Filter>Object\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
+      <Filter>GameManager\Scene\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp">
+      <Filter>GameManager\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp">
+      <Filter>GameManager\Scene\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
+      <Filter>GameManager\Scene\Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Game\Play\PlayScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -191,9 +196,6 @@
     <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
       <Filter>GameManager\Scene\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\GameManager\IGameScene.h">
-      <Filter>GameManager\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\externals\imGui\imconfig.h">
       <Filter>ImGui</Filter>
     </ClInclude>
@@ -228,7 +230,7 @@
       <Filter>Object\CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Corn\Corn.h">
-      <Filter>Object\Corn</Filter>
+      <Filter>Object\Stage\Corn</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\ConvertFunction\ConvertLog\LogConvert.h">
       <Filter>Ellysia\Convert</Filter>
@@ -237,7 +239,7 @@
       <Filter>Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Lamp\Lamp.h">
-      <Filter>Object\Lamp</Filter>
+      <Filter>Object\Stage\Lamp</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\Model.h">
       <Filter>Ellysia\Polygone\Model</Filter>
@@ -271,15 +273,6 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Result\ResultScene.h">
       <Filter>GameManager\Scene\Result</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h">
-      <Filter>GameManager\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
-      <Filter>GameManager\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h">
-      <Filter>GameManager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Math\Vector\SphereStruct.h">
       <Filter>Ellysia</Filter>
@@ -326,9 +319,6 @@
     <ClInclude Include="Ellysia\Common\Windows\WinApp.h">
       <Filter>Ellysia\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
-      <Filter>GameManager</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\WorldTransform\WorldTransform.h">
       <Filter>Math\Matrix</Filter>
     </ClInclude>
@@ -351,7 +341,7 @@
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Oven\Oven.h">
-      <Filter>Object\Oven</Filter>
+      <Filter>Object\Stage\Oven</Filter>
     </ClInclude>
     <ClInclude Include="Project\Object\Player\Player.h">
       <Filter>Object\Player</Filter>
@@ -362,8 +352,31 @@
     <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
       <Filter>Object\SamplePlayer</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Object\CountDown\CountDown.h" />
-    <ClInclude Include="Project\Object\Score\Score.h" />
+    <ClInclude Include="Project\Object\CountDown\CountDown.h">
+      <Filter>Object\CountDown</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Score\Score.h">
+      <Filter>Object\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
+      <Filter>GameManager\Scene\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h">
+      <Filter>GameManager\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h">
+      <Filter>GameManager\Scene\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
+      <Filter>GameManager\Scene\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\GameManager\IGameScene.h">
+      <Filter>GameManager\Scene\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\GameManager\IGamePlayScene.h">
+      <Filter>GameManager\Scene\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Game\Play\PlayScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -419,14 +432,8 @@
     <Filter Include="Object\CollisionManager">
       <UniqueIdentifier>{a5f6cfd9-efa4-480c-82c3-486126ff0add}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Corn">
-      <UniqueIdentifier>{37579799-6d38-4354-bca6-1e15ed8fb26f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Enemy">
       <UniqueIdentifier>{b872413e-dcc8-4e27-b96e-761ac6738d69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Lamp">
-      <UniqueIdentifier>{5bdd3bc6-b005-4567-ad6a-c88fdcfe690c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{30a29118-9e36-4c45-87b4-f85e67becb88}</UniqueIdentifier>
@@ -470,9 +477,6 @@
     <Filter Include="Math\Vector">
       <UniqueIdentifier>{6f50afcd-072e-4f63-a883-580815f01cca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Oven">
-      <UniqueIdentifier>{181c8a95-9c04-4efa-9935-2c68d1033f75}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Player">
       <UniqueIdentifier>{29007251-23ba-4e0c-83dc-6475302320e9}</UniqueIdentifier>
     </Filter>
@@ -487,6 +491,36 @@
     </Filter>
     <Filter Include="Object\Score">
       <UniqueIdentifier>{32029754-1c9d-4db2-a9cf-f1ff6495b736}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Stage">
+      <UniqueIdentifier>{17e807d8-50d5-4fdf-9736-a7b119753b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Stage\Corn">
+      <UniqueIdentifier>{37579799-6d38-4354-bca6-1e15ed8fb26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Stage\Oven">
+      <UniqueIdentifier>{181c8a95-9c04-4efa-9935-2c68d1033f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Stage\Lamp">
+      <UniqueIdentifier>{5bdd3bc6-b005-4567-ad6a-c88fdcfe690c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Win">
+      <UniqueIdentifier>{277b5f31-6d28-4e16-ade1-0019b5561d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Title">
+      <UniqueIdentifier>{3987aa3b-d683-4661-98c6-50e2844ff21f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Sample">
+      <UniqueIdentifier>{31137849-dc56-4635-932c-f0757a45d975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Select">
+      <UniqueIdentifier>{947b4c0f-5f47-4524-9ef0-11338246a076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Interface">
+      <UniqueIdentifier>{5b1dca75-3140-4653-a958-218284dd294b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Game\Play">
+      <UniqueIdentifier>{22c5cd0a-2317-459f-9ff1-4455eea7a9bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
