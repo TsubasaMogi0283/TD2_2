@@ -1,7 +1,8 @@
 #pragma once
 #include "Common/DirectX/DirectXSetup.h"
 #include "ConvertFunction/ConvertLog/LogConvert.h"
-#include "externals/DirectXTex/DirectXTex.h"
+#include "Externals/DirectXTex/DirectXTex.h"
+
 
 #include "Math/Vector/Vector4.h"
 #include "Math/Matrix/Matrix/Matrix4x4.h"
