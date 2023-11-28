@@ -1,5 +1,6 @@
 #include "CollisionManager.h"
 #include "Object/Player/Player.h"
+#include "Object/Enemy/Enemy.h"
 
 
 
@@ -8,31 +9,33 @@
 /// </summary>
 void CollisionManager::CheckAllCollision() {
 
-	// プレイヤーと床の当たり判定
-	//CheckCollisionPair(player_, dGround_);
+	// プレイヤーとエネミーの当たり判定
+	CheckCollisionPair(player_, enemy_);
 
 }
 
 
-//
-///// <summary>
-///// プレイヤーと床の当たり判定
-///// </summary>
-//void CollisionManager::CheckCollisionPair(Player* player, DemoGround* dGround) {
-//
-//	// 衝突していたら
-//	if (isCollision(dGround->GetOBB(), player->GetSphere())) {
-//
-//		player->onCollisionToGround();
-//
-//	}
-//	else {
-//
-//		player->EndOverlapToGround();
-//	}
-//}
-//
-//
+
+/// <summary>
+/// コライダー2つの衝突判定と応答
+/// </summary>
+void CollisionManager::CheckCollisionPair(Player* player, Enemy* enemy) {
+
+	if (isCollision(player->GetSphere(), enemy->GetSphere())) {
+
+		// 衝突時判定
+		player->onCollisionToEnemy();
+		enemy->onCollisionToPlayer();
+	}
+	else {
+
+		// 非衝突時処理
+		player->EndOverlapToEnemy();
+		enemy->EndOverlapToPlayer();
+	}
+}
+
+
 
 /// <summary>
 /// 長さ

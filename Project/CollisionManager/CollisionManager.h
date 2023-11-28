@@ -31,6 +31,7 @@ struct OBB {
 
 
 class Player;
+class Enemy;
 
 
 /* CollisionManagerクラス */
@@ -43,7 +44,20 @@ public: // メンバ関数
 	/// </summary>
 	void CheckAllCollision();
 
+
+#pragma region Get
+
+	/// <summary>
+	/// プレイヤーの取得
+	/// </summary>
 	void SetPlayer(Player* player) { player_ = player; }
+
+	/// <summary>
+	/// エネミーの取得
+	/// </summary>
+	void SetEnemy(Enemy* enemy) { enemy_ = enemy; }
+
+#pragma endregion 
 
 
 private: // メンバ関数
@@ -51,6 +65,7 @@ private: // メンバ関数
 	/// <summary>
 	/// コライダー2つの衝突判定と応答
 	/// </summary>
+	void CheckCollisionPair(Player* player, Enemy* enemy);
 
 	/// <summary>
 	/// 長さ
@@ -96,5 +111,6 @@ private: // メンバ関数
 private: // メンバ変数
 
 	Player* player_;
+	Enemy* enemy_;
 
 };
