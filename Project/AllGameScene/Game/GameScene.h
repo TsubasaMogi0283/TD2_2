@@ -91,6 +91,17 @@ private:
 	float whiteTransparency_ = 0.0f;
 	int loadingTime = 0;
 
+
+	//BlackOut
+	std::unique_ptr<Sprite> black_ = nullptr;
+	float blackTransparency_ = 0.0f;
+	
+
+	//負け
+	float theta = 0.0f;
+	int loseLodingTime_ = 0;
+
+
 	//StatePatternに必要な変数
 	IGamePlayScene* currentGamaScene_ = nullptr;
 
