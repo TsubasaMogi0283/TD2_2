@@ -1,4 +1,5 @@
 #include "PipelineManager.h"
+#include <Blend/BlendMode.h>
 
 
 
@@ -169,17 +170,98 @@ void PipelineManager::GenerateSpritePSO() {
 	blendDesc.RenderTarget[0].RenderTargetWriteMask =D3D12_COLOR_WRITE_ENABLE_ALL;
 
 	//α合成
-	blendDesc.RenderTarget[0].BlendEnable = TRUE;
-	blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
-	blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_INV_SRC_ALPHA;
-	
 	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
 	
 
+	//ブレンドモードの選択
+	//switchでやった方が楽でしょう
+	switch (PipelineManager::GetInstance()->selectSpriteBlendMode_) {
 
+	case BlendModeNone:
+		//ブレンド無し
+		blendDesc.RenderTarget[0].BlendEnable = false;
+
+		break;
+
+	case BlendModeNormal:
+		//通常ブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_INV_SRC_ALPHA;
+		
+
+
+
+
+		break;
+
+		
+	case BlendModeAdd: 
+		//加算ブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_ONE;
+		
+		
+
+
+
+
+		break;
+
+
+	case BlendModeSubtract:
+		//減算ブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_ONE;
+		
+
+		break;
+
+	case BlendModeMultiply: 
+		//乗算ブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_ZERO;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_SRC_COLOR;
+
+		break;
+
+	case BlendModeScreen:
+		//スクリーンブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_INV_DEST_COLOR;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_ONE;
+
+
+
+
+
+
+		break;
+
+	case CountOfBlendMode:
+		//利用してはいけない,
+
+
+
+
+
+		break;
+
+
+	}
+
+
+	
+	
 
 	////RasterizerState
 	//RasterizerState・・・Rasterizerに対する設定
@@ -246,7 +328,6 @@ void PipelineManager::GenerateSpritePSO() {
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	//実際に生成
-	//ID3D12PipelineState* graphicsPipelineState_ = nullptr;
 	hr_ = DirectXSetup::GetInstance()->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&PipelineManager::GetInstance()->spriteGraphicsPipelineState_));
 	assert(SUCCEEDED(hr_));
@@ -407,15 +488,112 @@ void PipelineManager::GenerateModelPSO() {
 	blendDesc.RenderTarget[0].RenderTargetWriteMask =D3D12_COLOR_WRITE_ENABLE_ALL;
 
 	//α合成
-	blendDesc.RenderTarget[0].BlendEnable = TRUE;
-	blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
-	blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_INV_SRC_ALPHA;
 	
 	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
 	
+	//ブレンドモードの選択
+	//switchでやった方が楽でしょう
+	switch (PipelineManager::GetInstance()->selectModelBlendMode_) {
+
+	case BlendModeNone:
+		//ブレンド無し
+		blendDesc.RenderTarget[0].BlendEnable = false;
+
+		break;
+
+	case BlendModeNormal:
+		//通常ブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_INV_SRC_ALPHA;
+		//blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
+		//blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
+		//blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
+
+
+
+
+		break;
+
+		
+	case BlendModeAdd: 
+		//加算ブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_ONE;
+		
+		//透明度これはどのブレンドモードでも同じ
+		//blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
+		//blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
+		//blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
+
+
+
+
+
+		break;
+
+
+	case BlendModeSubtract:
+		//減算ブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_ONE;
+		
+		//blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
+		//blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
+		//blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
+
+		break;
+
+	case BlendModeMultiply: 
+		//乗算ブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_ZERO;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_SRC_COLOR;
+
+		//blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
+		//blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
+		//blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
+
+
+		
+		break;
+
+	case BlendModeScreen:
+		//スクリーンブレンド
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_INV_DEST_COLOR;
+		blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlend=D3D12_BLEND_ONE;
+
+		//blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
+		//blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
+		//blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
+
+
+
+
+
+		break;
+
+	case CountOfBlendMode:
+		//利用してはいけない,
+
+
+
+
+
+		break;
+
+
+	}
 
 
 

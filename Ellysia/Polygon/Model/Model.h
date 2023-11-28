@@ -3,8 +3,9 @@
 #include <cassert>
 #include <fstream>
 #include <sstream>
+#include <array>
+#include <memory>
 
-#include "Common/DirectX/DirectXSetup.h"
 #include "ConvertFunction/ConvertLog/LogConvert.h"
 #include "externals/DirectXTex/DirectXTex.h"
 #include "ImGuiManager/ImGuiManager.h"
@@ -13,8 +14,8 @@
 #include <Math/Vector/Material.h>
 #include <Math/Matrix/Matrix/TransformationMatrix.h>
 #include <Math/Vector/DirectionalLight.h>
-#include <TextureManager/MaterialData/MaterialData.h>
-#include <TextureManager/ModelData/ModelData.h>
+#include "Polygon/Model/MaterialData/MaterialData.h"
+#include "Polygon/Model/ModelData/ModelData.h"
 
 
 
@@ -28,6 +29,13 @@
 
 
 
+
+#include "Polygon/Model/Mesh/Mesh.h"
+#include "Polygon/Model/Material/CreateMaterial.h"
+#include "DirectionalLight/CreateDirectionalLight.h"
+#include "Transformation/Transformation.h"
+
+
 class Model {
 public:
 
@@ -36,7 +44,11 @@ public:
 
 	//初期化
 	//Initializeも兼ねているよ
-	void CreateObject(const std::string& directoryPath,const std::string& fileName);
+	//void CreateObject(const std::string& directoryPath,const std::string& fileName);
+
+
+	static Model* Create(const std::string& directoryPath,const std::string& fileName);
+
 
 private:
 #pragma region モデルの読み込み関係の関数
@@ -50,7 +62,7 @@ private:
 
 public:
 	//描画
-	void Draw(Transform transform);
+	void Draw();
 
 
 	//デストラクタ
@@ -62,6 +74,32 @@ public:
 public:
 	//アクセッサのまとめ
 
+	//SRT
+	//Scale
+	void SetScale(Vector3 scale) {
+		this->scale_ = scale;
+	}
+	const Vector3 GetScale() {
+		return scale_;
+	}
+	//Rotate
+	void SetRotate(Vector3 rotate) {
+		this->rotate_ = rotate;
+	}
+	const Vector3 GetRotate() {
+		return rotate_;
+	}
+	//Translate
+	void SetTranslate(Vector3 translate) {
+		this->translate_ = translate;
+	}
+	const Vector3 GetTranslate() {
+		return translate_;
+	}
+
+
+
+	
 	//透明度の変更
 	void SetColor(Vector4 color) {
 		this->color_ = color;
@@ -73,68 +111,76 @@ public:
 
 
 
+
+#pragma region Lightingの設定
+	void SetLighting(bool enableLighting) {
+		this->isEnableLighting_ = enableLighting;
+	}
+	//方向
+	void SetDirection(Vector3 direction) {
+		this->lightingDirection_ = direction;
+	}
+
+#pragma endregion
+
 private:
 
-	//Resource作成の関数化
-	ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
-
-	//頂点バッファビューを作成する
-	void GenerateVertexBufferView();
+	
 
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index);
 	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index);
 
 
 
+	
+
 
 private:
-
-	//DirectX内にある情報を取り入れる
-	DirectXSetup* directXSetup_ = nullptr;
-
-
-	//モデルの読み込み
-	ModelData modelData_;
-
 	//頂点リソースを作る
-	ComPtr<ID3D12Resource> vertexResource_ = nullptr;
-	//関数用
-	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
-	D3D12_RESOURCE_DESC vertexResourceDesc_{};
-
 	//頂点バッファビューを作成する
-	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_;
+	//頂点リソースにデータを書き込む
+
+	//頂点データ
+	std::unique_ptr<Mesh> mesh_ = nullptr;
 
 
-	//貯y店リソースにデータを書き込む
-	VertexData* vertexData_;
-
-
-	//Sprite用のTransformationMatrix用のリソースを作る。
-	//Matrix4x4 1つ分サイズを用意する
-	ComPtr<ID3D12Resource> transformationMatrixResource_ = nullptr;
-	TransformationMatrix* transformationMatrixData_ = nullptr;
+	//Model用のTransformationMatrix用のリソースを作る。
+	std::unique_ptr<Transformation> transformation_ = nullptr;
 
 	//マテリアル用のリソースを作る
-	ComPtr<ID3D12Resource> materialResource_ = nullptr;
-	Material* materialData_ = nullptr;
-
+	std::unique_ptr<CreateMaterial> material_ = nullptr;
+	
 
 	//Lighting用
-	ComPtr<ID3D12Resource> directionalLightResource_ = nullptr;
-	DirectionalLight* directionalLightData_ = nullptr;
+	std::unique_ptr<CreateDirectionalLight> directionalLight_ = nullptr;
+	//基本はtrueで
+	bool isEnableLighting_ = true;
 
-	uint32_t descriptorSizeSRV_ = 0u;
+	//方向
+	Vector3 lightingDirection_ = {0.0f,-1.0f,0.0f};
 
-	ComPtr<ID3D12Resource> resource_ = nullptr;
 
 
-	//構築するModelData
-	ModelData modelData;
+
+	uint32_t textureHandle_ = 0;
+
+	//SRT
+	Vector3 scale_ = { 1.0f,1.0f,1.0f };
+	Vector3 rotate_ = { 0.0f,0.0f,0.0f };
+	Vector3 translate_ = { 0.0f,0.0f,0.0f };
+
 
 
 	//色関係のメンバ変数
-	Vector4 color_;
+	Vector4 color_ = {1.0f,1.0f,1.0f,1.0f};
+
 
 	
+
+	//TextureManagerを参考にする
+	static std::list<ModelData> modelInformationList_;
+
+
+	
+
 };

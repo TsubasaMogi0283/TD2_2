@@ -26,6 +26,51 @@ ComPtr<ID3D12DescriptorHeap> DirectXSetup::GenarateDescriptorHeap(
 
 }
 
+
+//Resource作成の関数化
+ComPtr<ID3D12Resource> DirectXSetup::CreateBufferResource(size_t sizeInBytes) {
+	//void返り値も忘れずに
+	ComPtr<ID3D12Resource> resource = nullptr;
+	
+	////VertexResourceを生成
+	//頂点リソース用のヒープを設定
+	//関数用
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
+	
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD;
+
+	//頂点リソースの設定
+	D3D12_RESOURCE_DESC vertexResourceDesc_{};
+	//バッファリソース。テクスチャの場合はまた別の設定をする
+	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	vertexResourceDesc_.Width = sizeInBytes;
+	//バッファの場合はこれらは1にする決まり
+	vertexResourceDesc_.Height = 1;
+	vertexResourceDesc_.DepthOrArraySize = 1;
+	vertexResourceDesc_.MipLevels = 1;
+	vertexResourceDesc_.SampleDesc.Count = 1;
+
+	//バッファの場合はこれにする決まり
+	vertexResourceDesc_.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	//実際に頂点リソースを作る
+	//ID3D12Resource* vertexResource_ = nullptr;
+	
+	//次はここで問題
+	//hrは調査用
+	HRESULT hr;
+	hr = DirectXSetup::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_,
+		D3D12_HEAP_FLAG_NONE,
+		&vertexResourceDesc_,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr, IID_PPV_ARGS(&resource));
+	assert(SUCCEEDED(hr));
+
+	return resource;
+}
+
+
 ComPtr<ID3D12Resource> DirectXSetup::CreateDepthStencilTextureResource(const int32_t width,const int32_t height) {
 	D3D12_RESOURCE_DESC resourceDesc{};
 	//Textureの幅
@@ -624,7 +669,7 @@ void DirectXSetup::BeginFrame() {
 	//描画先のRTVを設定する
 	DirectXSetup::GetInstance()->m_commandList_->OMSetRenderTargets(1, &rtvHandles_[backBufferIndex_], false, nullptr);
 	//指定した色で画面全体をクリアする
-	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };	//青っぽい色,RGBA
+	float clearColor[] = { 0.0f,0.0f,0.0f,1.0f };	//青っぽい色,RGBA
 	DirectXSetup::GetInstance()->m_commandList_->ClearRenderTargetView(rtvHandles_[backBufferIndex_], clearColor, 0, nullptr);
 
 	////コマンドを積む

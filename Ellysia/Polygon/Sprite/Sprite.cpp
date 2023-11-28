@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-
+#include "TextureManager/TextureManager.h"
 
 //動的配列
 #include <vector>
@@ -14,44 +14,6 @@ Sprite::Sprite(){
 }
 
 
-//Resource作成の関数化
-ComPtr<ID3D12Resource> Sprite::CreateBufferResource(size_t sizeInBytes) {
-	//void返り値も忘れずに
-	ComPtr<ID3D12Resource> resource = nullptr;
-	
-	////VertexResourceを生成
-	//頂点リソース用のヒープを設定
-	
-	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD;
-
-	//頂点リソースの設定
-	
-	//バッファリソース。テクスチャの場合はまた別の設定をする
-	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	vertexResourceDesc_.Width = sizeInBytes;
-	//バッファの場合はこれらは1にする決まり
-	vertexResourceDesc_.Height = 1;
-	vertexResourceDesc_.DepthOrArraySize = 1;
-	vertexResourceDesc_.MipLevels = 1;
-	vertexResourceDesc_.SampleDesc.Count = 1;
-
-	//バッファの場合はこれにする決まり
-	vertexResourceDesc_.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-	//実際に頂点リソースを作る
-	//ID3D12Resource* vertexResource_ = nullptr;
-	//hrは調査用
-	HRESULT hr;
-	hr = directXSetup_->GetDevice()->CreateCommittedResource(
-		&uploadHeapProperties_,
-		D3D12_HEAP_FLAG_NONE,
-		&vertexResourceDesc_,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr, IID_PPV_ARGS(&resource));
-	assert(SUCCEEDED(hr));
-
-	return resource;
-}
 
 //Vertex
 void Sprite::CreateVertexBufferView() {
@@ -79,23 +41,28 @@ void Sprite::CreateIndexBufferView() {
 
 
 //初期化
-void Sprite::Initialize() {
-	directXSetup_ = DirectXSetup::GetInstance();
-	position_ = {};
+void Sprite::Initialize(uint32_t textureHandle,Vector2 position) {
+	this->textureHandle_ = textureHandle;
+	this->position_ = position;
 	color_ = { 1.0f,1.0f,1.0f,1.0f };
 	
+	//テクスチャの情報を取得
+	resourceDesc_ = TextureManager::GetInstance()->GetResourceDesc(textureHandle_);
+	size_ = { float(resourceDesc_.Width),float(resourceDesc_.Height) };
+
+
 	
 	//ここでBufferResourceを作る
 	//Sprite用の頂点リソースを作る
 	//以前三角形二枚にしてたけど結合して四角一枚で良くなったので4で良いよね
-	vertexResource_ = CreateBufferResource(sizeof(VertexData) * 6).Get();
+	vertexResource_ = DirectXSetup::GetInstance()->CreateBufferResource(sizeof(VertexData) * 6).Get();
 	//index用のリソースを作る
-	indexResource_ = CreateBufferResource(sizeof(uint32_t) * 6).Get();
+	indexResource_ = DirectXSetup::GetInstance()->CreateBufferResource(sizeof(uint32_t) * 6).Get();
 	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
-	materialResource_=CreateBufferResource(sizeof(Material));
+	materialResource_=DirectXSetup::GetInstance()->CreateBufferResource(sizeof(Material));
 	//Sprite用のTransformationMatrix用のリソースを作る。
 	//Matrix4x4 1つ分サイズを用意する
-	transformationMatrixResource_ = CreateBufferResource(sizeof(TransformationMatrix)).Get();
+	transformationMatrixResource_ = DirectXSetup::GetInstance()->CreateBufferResource(sizeof(TransformationMatrix)).Get();
 	
 
 	//頂点バッファビューを作成する
@@ -115,68 +82,29 @@ void Sprite::Initialize() {
 	
 }
 
-void Sprite::LoadTextureHandle(uint32_t textureHandle) {
-	this->texturehandle_ = textureHandle;
-	Initialize();
+Sprite* Sprite::Create(uint32_t textureHandle,Vector2 position) {
+	Sprite* sprite = new Sprite();
+	
+	//初期化の所でやってね、Update,Drawでやるのが好ましいけど凄く重くなった。
+	//ブレンドモードの設定
+	PipelineManager::GetInstance()->SetSpriteBlendMode(sprite->blendModeNumber_);
+	PipelineManager::GetInstance()->GenerateSpritePSO();
+	sprite->Initialize(textureHandle,position);
+
+	return sprite;
 
 }
-
-void Sprite::AssertInformation() {
-
-	//leftTop,LeftBottom,RightTop,RightBottom
-	//{ {0.0f,0.0f},{512.0f,0.0f}
-	// {0.1f,512.0f},{512.0f,512.0f} };
-	
-	//座標を入れるとき値が違っていると面倒なので
-	//Assertで止めたい
-
-	//左側2つのX座標が一致していない
-	if (leftBottom_.x != leftTop_.x) {
-		Log("Please Set Same Value LeftBottom.x And LeftTop.x !!!\n\n");
-
-		assert(leftBottom_.x == leftTop_.x);
-	}
-
-	//上側2つのY座標が一致していない
-	if (leftTop_.y != rightTop_.y) {
-		Log("Please Set Same Value LeftTop.y And RightTop.y !!!\n\n");
-
-		assert(leftTop_.y == rightTop_.y);
-	}
-
-
-
-	//右側2つのX座標が一致していない
-	if (rightTop_.x != rightBottom_.x) {
-		Log("Please Set Same Value RightTop.x And RightBottom.x !!!\n\n");
-
-		assert(rightTop_.x == rightBottom_.x);
-	}
-
-	//下側2つのY座標が一致していない
-	if (rightBottom_.y != leftBottom_.y) {
-		Log("Please Set Same Value RightBottom.y And LeftBottom.y !!!\n\n");
-
-		assert(rightBottom_.y == leftBottom_.y);
-	}
-	
-}
-
 //描画
-void Sprite::DrawRect(Transform transform) {
+void Sprite::Draw() {
 	
 	//参考
 	//assert(device_ != nullptr);
 
 
-	//SetAllPosition
-	leftBottom_ = {position_.leftBottom.x,position_.leftBottom.y,0.0f,1.0f};
-	leftTop_ = {position_.leftTop.x,position_.leftTop.y,0.0f,1.0f};
-	rightBottom_ = {position_.rightBottom.x,position_.rightBottom.y,0.0f,1.0f};
-	rightTop_ = {position_.rightTop.x,position_.rightTop.y,0.0f,1.0f};
-
-	
-	AssertInformation();
+	//非表示にするかどうか
+	if (isInvisible_ == true) {
+		return;
+	}
 
 	
 
@@ -205,24 +133,59 @@ void Sprite::DrawRect(Transform transform) {
 
 	//書き込むためのアドレスを取得
 	vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&vertexData_));
+
+	float left = (0.0f-anchorPoint_.x) * size_.x;
+	float right = (1.0f-anchorPoint_.x) * size_.x;
+	float top = (0.0f-anchorPoint_.y) * size_.y;
+	float bottom = (1.0f-anchorPoint_.y) * size_.y;
+
+
+	float texLeft =0.0f;
+	float texRight = 1.0f;
+	float texTop= 0.0f;
+	float texBottom= 1.0f;
+
+	//UVをいじりたいときにオンにして設定するもの
+	if (isUVSetting_ == true) {
+		//uv
+		texLeft = textureLeftTop_.x / resourceDesc_.Width;
+		texRight = (textureLeftTop_.x+textureSize_.x) / resourceDesc_.Width;
+		texTop= textureLeftTop_.y / resourceDesc_.Height;
+		texBottom= (textureLeftTop_.y +textureSize_.y)/ resourceDesc_.Height;
+	}
+	
+
+
+
+	//左右反転
+	if (isFlipX_ == true) {
+		left = -left;
+		right = -right;
+	}
+	//上下反転
+	if (isFlipY_ == true) {
+		top = -top;
+		bottom = -bottom;
+	}
+
+
 	//1枚目の三角形
 	//左下
-	vertexData_[0].position = {leftBottom_};
-	vertexData_[0].texCoord = { 0.0f,1.0f };
+	vertexData_[LEFT_BOTTOM].position = {left,bottom,0.0f,1.0f};
+	vertexData_[LEFT_BOTTOM].texCoord = { texLeft,texBottom };
 
 	//左上
-	vertexData_[1].position = {leftTop_};
-	vertexData_[1].texCoord = { 0.0f,0.0f };
+	vertexData_[LEFT_TOP].position = {left,top,0.0f,1.0f};
+	vertexData_[LEFT_TOP].texCoord = { texLeft,texTop };
 	
 	//右下
-	vertexData_[2].position = {rightBottom_} ;
-	vertexData_[2].texCoord = { 1.0f,1.0f };
+	vertexData_[RIGHT_BOTTOM].position = {right,bottom,0.0f,1.0f} ;
+	vertexData_[RIGHT_BOTTOM].texCoord = { texRight,texBottom };
 
 
 	//右上
-	vertexData_[3].position = { rightTop_ };
-	vertexData_[3].texCoord = { 1.0f,0.0f };
-
+	vertexData_[RIGHT_TOP].position = { right,top,0.0f,1.0f };
+	vertexData_[RIGHT_TOP].texCoord = { texRight,texTop };
 
 
 	//IndexResourceにデータを書き込む
@@ -245,7 +208,7 @@ void Sprite::DrawRect(Transform transform) {
 
 	//新しく引数作った方が良いかも
 	//3x3x3
-	Matrix4x4 worldMatrixSprite = MakeAffineMatrix(transform.scale,transform.rotate,transform.translate);
+	Matrix4x4 worldMatrixSprite = MakeAffineMatrix({ scale_.x,scale_.y,1.0f }, { 0.0f,0.0f,rotate_ }, {position_.x,position_.y,0.0f});
 	//遠視投影行列
 	Matrix4x4 viewMatrixSprite = MakeIdentity4x4();
 	
@@ -279,43 +242,39 @@ void Sprite::DrawRect(Transform transform) {
 	//パイプラインはここに引っ越したい
 
 	//参考
-	directXSetup_->GetCommandList()->SetGraphicsRootSignature(PipelineManager::GetInstance()->GetSpriteRootSignature().Get());
-	directXSetup_->GetCommandList()->SetPipelineState(PipelineManager::GetInstance()->GetSpriteGraphicsPipelineState().Get());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootSignature(PipelineManager::GetInstance()->GetSpriteRootSignature().Get());
+	DirectXSetup::GetInstance()->GetCommandList()->SetPipelineState(PipelineManager::GetInstance()->GetSpriteGraphicsPipelineState().Get());
 
 
 	//RootSignatureを設定。PSOに設定しているけど別途設定が必要
-	directXSetup_->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);
+	DirectXSetup::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);
 	//IBVを設定
-	directXSetup_->GetCommandList()->IASetIndexBuffer(&indexBufferView_);
+	DirectXSetup::GetInstance()->GetCommandList()->IASetIndexBuffer(&indexBufferView_);
 	
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えよう
-	directXSetup_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	DirectXSetup::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	
 	//CBVを設定する
-	directXSetup_->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
-	directXSetup_->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
+	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
 	
 	//SRVのDescriptorTableの先頭を設定。2はrootParameter[2]である
 	//directXSetup_->GetCommandList()->SetGraphicsRootDescriptorTable(2, TextureManager::GetInstance()->GetTextureIndex());
 	
 	
-	if (texturehandle_ != 0) {
-		TextureManager::TexCommand(texturehandle_);
+	if (textureHandle_ != 0) {
+		TextureManager::TexCommand(textureHandle_);
 
 	}
 	
 	//今度はこっちでドローコールをするよ
 	//描画(DrawCall)6個のインデックスを使用し1つのインスタンスを描画。
-	directXSetup_->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
+	DirectXSetup::GetInstance()->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
 
 
 }
 
-//解放
-void Sprite::Release() {
 
-	
-}
 
 //デストラクタ
 Sprite::~Sprite() {
