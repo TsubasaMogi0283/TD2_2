@@ -25,17 +25,17 @@ struct PlayerParticleEmitter {
 
 
 /* PlayerParticleクラス */
-class PlayerPerlicle {
+class PlayerParlicle {
 
 public: // メンバ関数
 
-	PlayerPerlicle() {};
-	~PlayerPerlicle() {};
+	PlayerParlicle() {};
+	~PlayerParlicle() {};
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize();
+	void Initialize(const Vector3& position);
 
 	/// <summary>
 	/// 更新処理
@@ -50,7 +50,10 @@ public: // メンバ関数
 
 #pragma region Get
 
-
+	/// <summary>
+	/// 描画フラグの取得
+	/// </summary>
+	bool IsDrawing() const { return isDrawing_; }
 
 #pragma endregion
 
@@ -64,6 +67,21 @@ public: // メンバ関数
 
 private: // メンバ関数
 
+	/// <summary>
+	/// いろいろ設定する
+	/// </summary>
+	void SetPlayerParlicleProperty();
+
+	/// <summary>
+	/// アルファの計算
+	/// </summary>
+	void CalcAlpha();
+
+	/// <summary>
+	/// スケールの計算
+	/// </summary>
+	void CalcTranslate();
+
 
 private: // メンバ変数
 
@@ -72,5 +90,8 @@ private: // メンバ変数
 
 	// エミッター
 	PlayerParticleEmitter emitter_;
+
+	// 描画フラグ
+	bool isDrawing_;
 
 };

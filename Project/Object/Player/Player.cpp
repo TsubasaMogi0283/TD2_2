@@ -2,6 +2,17 @@
 
 
 
+// デストラクタ
+Player::~Player() {
+
+	// パーティクルリストの削除
+	for (PlayerParlicle* particle : particles_) {
+		delete particle;
+	}
+}
+
+
+
 // 初期化処理
 void Player::Initialize() {
 
@@ -46,6 +57,10 @@ void Player::Initialize() {
 
 
 	isHit_ = 0;
+
+
+	// パーティクルのプッシュバックタイマー
+	particlePushBackTimer_ = 0;
 }
 
 
@@ -61,6 +76,10 @@ void Player::Update() {
 
 	// 重力の処理
 	CalcGravity();
+
+	// パーティクルの更新処理
+	UpdateParticle();
+
 
 
 #ifdef _DEBUG
@@ -92,6 +111,10 @@ void Player::Update() {
 void Player::Draw() {
 
 	pla_.model->Draw();
+	for (PlayerParlicle* particle : particles_) {
+		particle->Draw();
+	}
+
 }
 
 
@@ -171,9 +194,7 @@ void Player::CalcGravity() {
 
 
 
-/// <summary>
-/// スフィアの計算
-/// </summary>
+// スフィアの計算
 void Player::CalcSphere() {
 
 	plaSphere_ = {
@@ -184,9 +205,7 @@ void Player::CalcSphere() {
 
 
 
-/// <summary>
-/// いろいろ設定する
-/// </summary>
+// いろいろ設定する
 void Player::SetPlayerProperty() {
 
 	// モデルの設定
@@ -197,4 +216,50 @@ void Player::SetPlayerProperty() {
 
 	// スフィアの計算
 	CalcSphere();
+}
+
+
+
+// パーティクルの更新処理
+void Player::UpdateParticle() {
+
+	particlePushBackTimer_++;
+
+	if (particlePushBackTimer_ >= 3) {
+
+		// 0に戻す
+		particlePushBackTimer_ = 0;
+
+		// パーティクルの登録
+		PushBackParticles();
+	}
+
+	// 更新処理
+	for (PlayerParlicle* particle : particles_) {
+		particle->Update();
+	}
+
+	// 描画フラグが切れたら削除
+	particles_.remove_if([](PlayerParlicle* particle) {
+		if (!particle->IsDrawing()) {
+			delete particle;
+			return true;
+		}
+		return false;
+		}
+	);
+}
+
+
+
+// プレイヤーパーティクルのプッシュバク処理
+void Player::PushBackParticles() {
+
+	// パーティクルを生成
+	PlayerParlicle* newParticle = new PlayerParlicle();
+	newParticle->Initialize(pla_.transform.translate);
+
+	// パーティクルを登録する
+	particles_.push_back(newParticle);
+
 }
