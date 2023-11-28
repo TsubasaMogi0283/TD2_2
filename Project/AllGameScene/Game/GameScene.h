@@ -26,29 +26,23 @@ class GameScene : public IGameScene{
 public:
 
 	GameScene() {};
-	~GameScene();
+	~GameScene() {};
 
 	void Initialize(GameManager* gamaManager) override;
 	void Update(GameManager* gamaManager) override;
 	void Draw(GameManager* gamaManager) override;
 
 
-public:
+private:
 
-	//シーンチェンジ
-	void ChangeScene(IGamePlayScene* newGameScene);
-
-
-	//PlayerのGetter
-	//GameScene内どこでも使えるようにしたい
+	/// <summary>
+	/// 衝突判定
+	/// </summary>
+	void CheckAllCollision();
 	
-////private:
-////
-////	/// <summary>
-////	/// 衝突判定
-////	/// </summary>
-////	void CheckAllCollision();
 
+	////シーンチェンジ
+	//void ChangeScene(IGamePlayScene* newGameScene);
 
 
 private:
@@ -66,28 +60,31 @@ private:
 	std::unique_ptr<Player> player_ = nullptr;
 
 	// エネミー
-	//std::unique_ptr<Enemy> enemy_ = nullptr;
+	std::unique_ptr<Enemy> enemy_ = nullptr;
 
 	// コリジョンマネージャー
-	//std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
+	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
 	//制限時間
-	//std::unique_ptr<CountDown> countDown_ = nullptr;
+	std::unique_ptr<CountDown> countDown_ = nullptr;
 
 	//スコア
-	//std::unique_ptr<Score> score_ = nullptr;
+	std::unique_ptr<Score> score_ = nullptr;
 
 
 	//カメラ
-	//Vector3 cameraPosition_ = {};
-	//Vector3 cameraRotate_ = {};
+	Vector3 cameraPosition_ = {};
+	Vector3 cameraRotate_ = {};
 
 
-	int gamePlayScene_ = 1;
+	//int gamePlayScene_ = 1;
+	int readyTime_ = 0;
+
+	//Ready
+	std::unique_ptr<Sprite> ready_ = nullptr;
+	//Go
+	std::unique_ptr<Sprite> go_ = nullptr;
 	
-
-	
-
 	//Finish
 	std::unique_ptr<Sprite> finish_ = nullptr;
 	int finishDisplayTime_ = 0;
@@ -107,6 +104,17 @@ private:
 	float theta = 0.0f;
 	int loseLodingTime_ = 0;
 
+
+
+	//enum宣言
+	enum Phase {
+		Ready,	
+		Play,
+		Succeeded,
+		Failed,
+	};
+
+	int phaseNo_= 0;
 
 	//StatePatternに必要な変数
 	IGamePlayScene* currentGamaScene_ = nullptr;

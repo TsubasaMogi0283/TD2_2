@@ -25,6 +25,16 @@ private:
 
 
 private:
+	//Ready
+	std::unique_ptr<Sprite> ready_ = nullptr;
+	//Go
+	std::unique_ptr<Sprite> go_ = nullptr;
+	int readyTime_ = 0;
+
+	//カメラ
+	Vector3 cameraPosition_ = {};
+	Vector3 cameraRotate_ = {};
+
 	// プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
 	// エネミー
