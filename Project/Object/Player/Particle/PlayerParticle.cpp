@@ -49,7 +49,7 @@ void PlayerParlicle::Update() {
 	// アルファの計算
 	CalcAlpha();
 
-	// スケールの計算
+	// トランスフォームの計算
 	CalcTransform();
 
 
@@ -67,7 +67,6 @@ void PlayerParlicle::Update() {
 	ImGui::End();
 
 #endif // _DEBUG
-
 }
 
 
@@ -131,7 +130,7 @@ void PlayerParlicle::CalcAlpha() {
 void PlayerParlicle::CalcTransform() {
 
 	// 上へ移動する
-	particle_.transform.translate.y += 0.007f;
+	particle_.transform.translate.y += 0.006f;
 
 	// スケールが小さくなっていく
 	float nowFrame = float(drawTimer_);

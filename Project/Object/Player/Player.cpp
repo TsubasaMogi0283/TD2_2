@@ -55,9 +55,7 @@ void Player::Initialize() {
 	gravity_.maxVel = -1.0f;
 
 
-
 	isHit_ = 0;
-
 
 	// パーティクルのプッシュバックタイマー
 	particlePushBackTimer_ = 0;
@@ -102,7 +100,6 @@ void Player::Update() {
 	ImGui::End();
 
 #endif // _DEBUG
-
 }
 
 
@@ -114,7 +111,6 @@ void Player::Draw() {
 	for (PlayerParlicle* particle : particles_) {
 		particle->Draw();
 	}
-
 }
 
 
@@ -158,7 +154,6 @@ void Player::Move() {
 	}
 
 #endif // _DEBUG
-
 }
 
 
