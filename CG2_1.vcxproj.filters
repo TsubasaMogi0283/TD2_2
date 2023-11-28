@@ -93,15 +93,6 @@
     <ClCompile Include="Ellysia\Polygon\Model\Material\CreateMaterial.cpp">
       <Filter>Ellysia\Polygone\Model\Material</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Object\Oven\Oven.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Player\Player.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\PipelineManager\PipelineManager.cpp">
       <Filter>Ellysia\PipelineManager</Filter>
     </ClCompile>
@@ -112,9 +103,6 @@
       <Filter>GameManager\Scene\Result</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp">
       <Filter>GameManager\Scene</Filter>
     </ClCompile>
@@ -154,6 +142,20 @@
     <ClCompile Include="Ellysia\WorldTransform\WorldTransform.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\Oven\Oven.cpp">
+      <Filter>Object\Oven</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Player\Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
+      <Filter>Object\Popcorn</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
+      <Filter>Object\SamplePlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\CountDown\CountDown.cpp" />
+    <ClCompile Include="Project\Object\Score\Score.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -258,15 +260,6 @@
     <ClInclude Include="Ellysia\Input\Mouse\MouseInformation.h">
       <Filter>Ellysia\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Object\Oven\Oven.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Player\Player.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\PipelineManager\PipelineManager.h">
       <Filter>Ellysia\PipelineManager</Filter>
     </ClInclude>
@@ -278,9 +271,6 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Result\ResultScene.h">
       <Filter>GameManager\Scene\Result</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
-      <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h">
       <Filter>GameManager\Scene</Filter>
@@ -360,6 +350,20 @@
     <ClInclude Include="Ellysia\Math\Matrix\Matrix\WorldViewMatrix.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Project\Object\Oven\Oven.h">
+      <Filter>Object\Oven</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Player\Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
+      <Filter>Object\Popcorn</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
+      <Filter>Object\SamplePlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\CountDown\CountDown.h" />
+    <ClInclude Include="Project\Object\Score\Score.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -465,6 +469,24 @@
     </Filter>
     <Filter Include="Math\Vector">
       <UniqueIdentifier>{6f50afcd-072e-4f63-a883-580815f01cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Oven">
+      <UniqueIdentifier>{181c8a95-9c04-4efa-9935-2c68d1033f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{29007251-23ba-4e0c-83dc-6475302320e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Popcorn">
+      <UniqueIdentifier>{6634f24c-bd5c-4cf4-97e1-3c4b0adfd6f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\SamplePlayer">
+      <UniqueIdentifier>{2abb7856-db44-4310-ba6e-e54abbbc64b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\CountDown">
+      <UniqueIdentifier>{4be77b51-c5ba-43ea-b702-682300069b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Score">
+      <UniqueIdentifier>{32029754-1c9d-4db2-a9cf-f1ff6495b736}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
