@@ -32,21 +32,21 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
 
-	// エネミー
-	enemy_ = std::make_unique<Enemy>();
-	enemy_->Initialize();
-	enemy_->SetPlayer(player_.get());
+	//// エネミー
+	//enemy_ = std::make_unique<Enemy>();
+	//enemy_->Initialize();
+	//enemy_->SetPlayer(player_.get());
 
-	// コリジョンマネージャー
-	collisionManager_ = std::make_unique<CollisionManager>();
+	//// コリジョンマネージャー
+	//collisionManager_ = std::make_unique<CollisionManager>();
 
-	//制限時間
-	countDown_ =std::make_unique<CountDown>();
-	countDown_->Initialize();
+	////制限時間
+	//countDown_ =std::make_unique<CountDown>();
+	//countDown_->Initialize();
 
-	//スコア
-	score_ = std::make_unique<Score>();
-	score_->Initialize();
+	////スコア
+	//score_ = std::make_unique<Score>();
+	//score_->Initialize();
 	
 
 
@@ -109,8 +109,8 @@ void GameScene::Update(GameManager* gamaManager) {
 
 	
 
-	// 衝突判定
-	CheckAllCollision();
+	//// 衝突判定
+	//CheckAllCollision();
 	
 	
 
@@ -136,24 +136,24 @@ void GameScene::Update(GameManager* gamaManager) {
 	
 	//Play
 	if (gamePlayScene_ == 3) {
-		// エネミー
-		enemy_->Update();
+		//// エネミー
+		//enemy_->Update();
 
-		//制限時間
-		countDown_->Update();
+		////制限時間
+		//countDown_->Update();
 
-		//スコア
-		score_->Update();
+		////スコア
+		//score_->Update();
 
-		//負け(仮)
-		if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
-			gamePlayScene_ = 6;
-		}
+		////負け(仮)
+		//if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
+		//	gamePlayScene_ = 6;
+		//}
 
-		//勝ちへ
-		if (countDown_->GetTime() < 0) {
-			gamePlayScene_ = 4;
-		}
+		////勝ちへ
+		//if (countDown_->GetTime() < 0) {
+		//	gamePlayScene_ = 4;
+		//}
 	}
 	//勝ち
 	if (gamePlayScene_ == 4) {
@@ -224,14 +224,14 @@ void GameScene::Draw(GameManager* gamaManager) {
 	
 
 	if (gamePlayScene_ == 3) {
-		enemy_->Draw();
+		//enemy_->Draw();
 
 
-		//制限時間
-		countDown_->Draw();
-		
-		//スコア
-		score_->Draw();
+		////制限時間
+		//countDown_->Draw();
+		//
+		////スコア
+		//score_->Draw();
 
 	}
 	if (gamePlayScene_ == 4) {
@@ -263,15 +263,15 @@ void GameScene::ChangeScene(IGamePlayScene* newGameScene){
 /// <summary>
 /// 衝突判定
 /// </summary>
-void GameScene::CheckAllCollision() {
-
-	// オブジェクトの設定
-	collisionManager_->SetPlayer(player_.get());
-	collisionManager_->SetEnemy(enemy_.get());
-
-	// 衝突判定
-	collisionManager_->CheckAllCollision();
-}
+//void GameScene::CheckAllCollision() {
+//
+//	// オブジェクトの設定
+//	collisionManager_->SetPlayer(player_.get());
+//	collisionManager_->SetEnemy(enemy_.get());
+//
+//	// 衝突判定
+//	collisionManager_->CheckAllCollision();
+//}
 
 
 

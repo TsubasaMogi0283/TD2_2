@@ -15,6 +15,8 @@ public:
 	void Draw(GameScene* gamaManager) override;
 
 private:
+
+	
 	//Ready
 	std::unique_ptr<Sprite> ready_ = nullptr;
 	//Go

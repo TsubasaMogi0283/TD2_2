@@ -39,13 +39,15 @@ public:
 	void ChangeScene(IGamePlayScene* newGameScene);
 
 
-
-private:
-
-	/// <summary>
-	/// 衝突判定
-	/// </summary>
-	void CheckAllCollision();
+	//PlayerのGetter
+	//GameScene内どこでも使えるようにしたい
+	
+////private:
+////
+////	/// <summary>
+////	/// 衝突判定
+////	/// </summary>
+////	void CheckAllCollision();
 
 
 
@@ -64,16 +66,16 @@ private:
 	std::unique_ptr<Player> player_ = nullptr;
 
 	// エネミー
-	std::unique_ptr<Enemy> enemy_ = nullptr;
+	//std::unique_ptr<Enemy> enemy_ = nullptr;
 
 	// コリジョンマネージャー
-	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
+	//std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
 	//制限時間
-	std::unique_ptr<CountDown> countDown_ = nullptr;
+	//std::unique_ptr<CountDown> countDown_ = nullptr;
 
 	//スコア
-	std::unique_ptr<Score> score_ = nullptr;
+	//std::unique_ptr<Score> score_ = nullptr;
 
 
 	//カメラ
