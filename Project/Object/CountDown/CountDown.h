@@ -20,8 +20,9 @@ public:
 	~CountDown();
 
 public:
+	//timeはあくまで初期値だから違うよ
 	int GetTime() {
-		return timer_;
+		return gameTime_;
 	}
 
 
@@ -37,7 +38,7 @@ private:
 	Vector2 countDownBackSize_ = {};
 
 	//ゲームの時間
-	const int timer_ = 40;
+	const int timer_ = 10;
 	int gameTime_ = 60 * timer_;
 
 	//表示されている時間

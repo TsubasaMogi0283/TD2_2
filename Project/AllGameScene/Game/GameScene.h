@@ -75,7 +75,21 @@ private:
 
 
 	int gamePlayScene_ = 1;
+	int readyTime_ = 0;
 
+	//Ready
+	std::unique_ptr<Sprite> ready_ = nullptr;
+	//Go
+	std::unique_ptr<Sprite> go_ = nullptr;
+	
+	//Finish
+	std::unique_ptr<Sprite> finish_ = nullptr;
+	int finishDisplayTime_ = 0;
+
+	//WhiteOut
+	std::unique_ptr<Sprite> white_ = nullptr;
+	float whiteTransparency_ = 0.0f;
+	int loadingTime = 0;
 
 	//StatePatternに必要な変数
 	IGamePlayScene* currentGamaScene_ = nullptr;
