@@ -7,9 +7,14 @@
 #include "CollisionManager/CollisionManager.h"
 
 
+
+class Player;
+
+
 struct EnemyProperty {
 	std::unique_ptr<Model> model = nullptr;
 	Transform transform{};
+	Matrix4x4 matWorld{};
 	Vector3 velocity{};
 	Vector3 size{};
 	Vector4 color{};
@@ -67,6 +72,10 @@ public:
 
 #pragma region Set
 
+	/// <summary>
+	/// Playerの取得
+	/// </summary>
+	void SetPlayer(Player* player) { player_ = player; }
 
 #pragma endregion 
 
@@ -88,13 +97,24 @@ private:
 	/// </summary>
 	void SetEnemyProperty();
 
+	/// <summary>
+	/// マットワールド作る
+	/// </summary>
+	void UpdateMat();
+
 private:
 
-	// プレイヤー
+	// エネミー
 	EnemyProperty ene_;
+
+	// プレイヤー
+	Player* player_;
 
 	// 初期値
 	EnemyInitProperty init_;
+
+	// 移動量
+	float move_;
 
 	// Sphere
 	Sphere eneSphere_;
@@ -104,4 +124,6 @@ private:
 
 	// 
 	uint32_t isHit_;
+
+	bool isApproach_ = false;
 };

@@ -30,6 +30,7 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	// エネミー
 	enemy_ = std::make_unique<Enemy>();
 	enemy_->Initialize();
+	enemy_->SetPlayer(player_.get());
 
 	// コリジョンマネージャー
 	collisionManager_ = std::make_unique<CollisionManager>();

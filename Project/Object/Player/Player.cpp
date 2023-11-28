@@ -190,6 +190,3 @@ void Player::SetPlayerProperty() {
 	// スフィアの計算
 	CalcSphere();
 }
-
-
-

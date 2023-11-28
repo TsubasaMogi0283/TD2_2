@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Object/Player/Player.h"
 
 
 
@@ -21,7 +22,10 @@ void Enemy::Initialize() {
 	ene_.transform = init_.transform;
 
 	// 速度
-	ene_.velocity = { 0.1f, 0.1f, 0.1f };
+	ene_.velocity = { 0.0f, 0.0f, 0.0f };
+
+	// 移動量
+	move_ = 0.07f;
 
 	//サイズ
 	ene_.size = {
@@ -34,6 +38,7 @@ void Enemy::Initialize() {
 	ene_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	isHit_ = 0;
+
 }
 
 
@@ -45,7 +50,9 @@ void Enemy::Update() {
 	SetEnemyProperty();
 
 	// 移動処理
-	Move();
+	if (isApproach_) {
+		Move();
+	}
 
 
 #ifdef _DEBUG
@@ -57,11 +64,20 @@ void Enemy::Update() {
 	ImGui::DragFloat3("translate", &ene_.transform.translate.x, 0.02f);
 	ImGui::Text("size");
 	ImGui::DragFloat3("size", &ene_.size.x, 0.01f);
+	ImGui::Text("Velocity");
+	ImGui::DragFloat3("velocity", &ene_.velocity.x, 0.01f);
 	ImGui::Text("Sphere");
 	ImGui::DragFloat3("Sphere.center", &eneSphere_.center.x, 0.01f);
 	ImGui::DragFloat("sphere.radius", &eneSphere_.radius, 0.01f);
 	ImGui::Text("isHit = %d", isHit_);
+	ImGui::Checkbox("isApproach", &isApproach_);
 	ImGui::End();
+
+
+	if (input->IsTriggerKey(DIK_R)) {
+		ene_.transform = init_.transform;
+		isApproach_ = false;
+	}
 
 #endif // _DEBUG
 }
@@ -80,6 +96,7 @@ void Enemy::Draw() {
 void Enemy::onCollisionToPlayer() {
 
 	isHit_ = 1;
+	isApproach_ = false;
 }
 void Enemy::EndOverlapToPlayer() {
 
@@ -91,16 +108,25 @@ void Enemy::EndOverlapToPlayer() {
 // 移動処理
 void Enemy::Move() {
 
-	
+	// プレイヤーとのベクトル
+	Vector3 toPlayer = {
+		.x = player_->GetTransform().translate.x - ene_.transform.translate.x,
+		.y = player_->GetTransform().translate.y - ene_.transform.translate.y,
+		.z = player_->GetTransform().translate.z - ene_.transform.translate.z,
+	};
 
+	// プレイヤー間との距離
+	float lenght = sqrt((toPlayer.x * toPlayer.x) + (toPlayer.y * toPlayer.y) + (toPlayer.z * toPlayer.z));
 
-#ifdef _DEBUG
+	// ベクトルとレングスを使った速度設定
+	ene_.velocity = {
+		.x = toPlayer.x / lenght * move_,
+		.y = toPlayer.y / lenght * move_,
+		.z = toPlayer.z / lenght * move_,
+	};
 
-	if (input->IsTriggerKey(DIK_R)) {
-		ene_.transform = init_.transform;
-	}
-
-#endif // _DEBUG
+	// 移動処理
+	ene_.transform.translate = Add(ene_.transform.translate, ene_.velocity);
 }
 
 
@@ -131,4 +157,17 @@ void Enemy::SetEnemyProperty() {
 
 	// スフィアの計算
 	CalcSphere();
+
+	// マットワールドの計算
+	UpdateMat();
+}
+
+
+
+/// <summary>
+/// マットワールド作る
+/// </summary>
+void Enemy::UpdateMat() {
+
+	ene_.matWorld = MakeAffineMatrix(ene_.transform.scale, ene_.transform.rotate, ene_.transform.translate);
 }
