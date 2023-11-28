@@ -23,9 +23,17 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	lamp_ = std::make_unique<Lamp>();
 	lamp_->Initialize();
 
-	//プレイヤー
+	// プレイヤー
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
+
+	// エネミー
+	enemy_ = std::make_unique<Enemy>();
+	enemy_->Initialize();
+	enemy_->SetPlayer(player_.get());
+
+	// コリジョンマネージャー
+	collisionManager_ = std::make_unique<CollisionManager>();
 
 
 	//カウントダウン
@@ -105,9 +113,14 @@ void GameScene::Update(GameManager* gamaManager) {
 	//電熱線
 	lamp_->Update();
 
-	//プレイヤー
+	// プレイヤー
 	player_->Update();
 
+	// エネミー
+	enemy_->Update();
+
+	// 衝突判定
+	CheckAllCollision();
 	
 
 #ifdef _DEBUG
@@ -139,6 +152,7 @@ void GameScene::Draw(GameManager* gamaManager) {
 
 	//プレイヤー
 	player_->Draw();
+	enemy_->Draw();
 
 	//スコアの後ろのテクスチャ
 	scoreBack_->Draw();
@@ -177,6 +191,20 @@ void GameScene::Draw(GameManager* gamaManager) {
 		}
 	}
 
+}
+
+
+/// <summary>
+/// 衝突判定
+/// </summary>
+void GameScene::CheckAllCollision() {
+
+	// オブジェクトの設定
+	collisionManager_->SetPlayer(player_.get());
+	collisionManager_->SetEnemy(enemy_.get());
+
+	// 衝突判定
+	collisionManager_->CheckAllCollision();
 }
 
 
