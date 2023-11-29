@@ -126,10 +126,12 @@ void GameScene::PlayUpdate() {
 	}
 
 	//負け(仮)
-	if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
+	if (collisionManager_->GetIsHitPlayerAndEnemy() == true) {
 		countDown_->ISetICounDown(false);
 		phaseNo_ = Failed;
 	}
+	
+
 
 }
 

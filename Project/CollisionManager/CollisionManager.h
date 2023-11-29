@@ -66,6 +66,12 @@ public: // メンバ関数
 #pragma endregion 
 
 
+#pragma region Get
+	bool GetIsHitPlayerAndEnemy() {
+		return isHitPlayerAndEnemy_;
+	}
+
+#pragma endregion
 private: // メンバ関数
 
 	/// <summary>
@@ -115,10 +121,14 @@ private: // メンバ関数
 	bool isCollision(const OBB& obb, const Sphere& s);
 
 
+	
 private: // メンバ変数
 
 	Player* player_;
 	PlayerHitBox* playerHitBox_;
 	Enemy* enemy_;
 	std::list<Enemy*> enemys_;
+
+	bool isHitPlayerAndEnemy_ = false;
+
 };
