@@ -13,6 +13,11 @@
 /// </summary>
 void GameScene::Initialize(GameManager* gamaManager) {
 
+	mainBGM_ = Audio::GetInstance();
+	mainBgmHandle_ = mainBGM_->LoadWave("Resources/Audio/BGM/MainGame.wav");
+	mainBGM_->PlayWave(mainBgmHandle_, true);
+	mainBGM_->ChangeVolume(mainBgmHandle_, 0.2f);
+
 	//とうもろこし
 	corn_ = std::make_unique<Corn>();
 	corn_->Initialize();
@@ -94,16 +99,15 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	Camera::GetInstance()->SetRotate(cameraRotate_);
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
-	bgm_ = Audio::GetInstance();
-	bgmHandle_ = bgm_->LoadWave("Resources/Audio/BGM/MainGame.wav");
-	bgm_->PlayWave(bgmHandle_, true);
-	bgm_->ChangeVolume(bgmHandle_, 0.2f);
+	
 
 	finishSE_ = Audio::GetInstance();
 	finishHandle_ = finishSE_->LoadWave("Resources/Audio/Finish/Finish.wav");
 
 	lose_ = Audio::GetInstance();
 	loseHandle_ = lose_->LoadWave("Resources/Audio/Action/Damege.wav");
+
+	
 }
 
 //RedayScene
@@ -125,7 +129,7 @@ void GameScene::ReadyUpdate() {
 //PlayScene
 void GameScene::PlayUpdate() {
 
-	bgm_->ChangeVolume(bgmHandle_, 0.7f);
+	mainBGM_->ChangeVolume(mainBgmHandle_, 0.7f);
 	// エネミー
 	EnemysUpdate();
 
@@ -176,7 +180,7 @@ void GameScene::SucceededUpdate() {
 			whiteTransparency_ = 1.0f;
 
 
-			bgm_->StopWave(bgmHandle_);
+			mainBGM_->StopWave(mainBgmHandle_);
 			if (countDown_->GetIsCountDown() == true) {
 				loadingTime += 1;
 			
@@ -189,7 +193,7 @@ void GameScene::SucceededUpdate() {
 
 //Failed
 void GameScene::FailedUpdate() {
-	bgm_->StopWave(bgmHandle_);
+	mainBGM_->StopWave(mainBgmHandle_);
 
 	loseTriggerTime_++;
 	if (loseTriggerTime_ == 1) {
