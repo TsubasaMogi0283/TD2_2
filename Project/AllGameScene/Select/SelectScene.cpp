@@ -58,16 +58,26 @@ void SelectScene::Initialize(GameManager* gamaManager){
 	corn_->SetRotate(rotate_);
 	corn_->SetTranslate(cornPosition_);
 
+	//BGM
+	bgm_ = Audio::GetInstance();
+	selectBGMHandle_ = bgm_->LoadWave("Resources/Audio/BGM/TitleSelect.wav");
+	
+	bgm_->PlayWave(selectBGMHandle_, true);
+
+	//DecideSE
+	decideSE_ = Audio::GetInstance();
+	decideSEHandle_ = decideSE_->LoadWave("Resources/Audio/Deside/Decide.wav");
+	
+	//MoveSE
+	moveSE_ = Audio::GetInstance();
+	moveSEHandle_ = moveSE_->LoadWave("Resources/Audio/Select/Select.wav");
 
 }
 
 void SelectScene::ShowImGui(){
 	ImGui::Begin("Select");
-	ImGui::SliderFloat3("Scale", &scale_.x, -1.0f, 1.0f);
-	ImGui::SliderFloat3("Rotate", &rotate_.x, -1.0f, 1.0f);
-
+	ImGui::InputFloat3("CursorPosition", &cursorPosition_.x);
 	
-	ImGui::SliderFloat3("Position", &cornPosition_.x, -3.0f, 3.0f);
 
 	ImGui::End();
 }
@@ -154,6 +164,8 @@ void SelectScene::Update(GameManager* gamaManager){
 		//左
 		if (Input::GetInstance()->IsTriggerKey(DIK_LEFT) == true || triggerButtonLeftTime == 1) {
 
+			//セレクトのSE
+			moveSE_->PlayWave(moveSEHandle_,false);
 
 			if (cursorPosition_.x <= INITIALE_POSITION.x) {
 			}
@@ -164,6 +176,10 @@ void SelectScene::Update(GameManager* gamaManager){
 
 		//右
 		if (Input::GetInstance()->IsTriggerKey(DIK_RIGHT) == true || triggerButtonRightTime == 1) {
+			
+			//セレクトのSE
+			moveSE_->PlayWave(moveSEHandle_,false);
+			
 			if (cursorPosition_.x > INITIALE_POSITION.x * 2) {
 			}
 			else {
@@ -174,25 +190,45 @@ void SelectScene::Update(GameManager* gamaManager){
 
 		
 	
-		if (cursorPosition_.x == ICON_INTERVAL_.x) {
+		if (cursorPosition_.x == ICON_INTERVAL_.x && isFadeOut_ == false) {
 			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+				//決定SE
+				decideSE_->PlayWave(decideSEHandle_, false);
+				
+				//BGM止める
+				bgm_->StopWave(selectBGMHandle_);
+
 				isToTitle_ = true;
-				isFadeOut_ = false;
+				isFadeOut_ = true;
 
 			}
 		}
-		if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x) {
+		if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x&&  isFadeOut_ == false) {
 			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+				
+				//決定SE
+				decideSE_->PlayWave(decideSEHandle_, false);
+				
+				//BGM止める
+				bgm_->StopWave(selectBGMHandle_);
+
 				isToGame_ = true;
-				isFadeOut_ = false;
+				isFadeOut_ = true;
 
 			}
 			
 		}
-		if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x*2) {
+		if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x*2&& isFadeOut_ == false) {
 			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+				
+				//決定SE
+				decideSE_->PlayWave(decideSEHandle_, false);
+
+				//BGM止める
+				bgm_->StopWave(selectBGMHandle_);
+
 				isToScoreAttack_ = true;
-				isFadeOut_ = false;
+				isFadeOut_ = true;
 				
 
 			}
@@ -201,9 +237,11 @@ void SelectScene::Update(GameManager* gamaManager){
 
 	}
 	
+	//INITIALE_POSITION = {300.0f,500.0f};
+	//const Vector2 ICON_INTERVAL_ = {300.0f};
 
 	//フェードアウト
-	if (isFadeOut_ == false) {
+	if (isFadeOut_ == true) {
 		if (isToTitle_ == true) {
 			transparency_ -= 0.05f;
 			if (transparency_ < 0.0f) {
