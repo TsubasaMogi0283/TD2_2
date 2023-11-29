@@ -5,6 +5,10 @@
 #include "WorldTransform/WorldTransform.h"
 
 #include "CollisionManager/CollisionManager.h"
+#include "Object/Player/Particle/PlayerParticle.h"
+
+#include <list>
+#include <random>
 
 
 struct PlayerProperty {
@@ -32,7 +36,7 @@ class Player {
 public:
 
 	Player() {};
-	~Player() {};
+	~Player();
 
 	/// <summary>
 	/// 初期化処理
@@ -105,6 +109,16 @@ private:
 	/// </summary>
 	void SetPlayerProperty();
 
+	/// <summary>
+	/// パーティクルの更新処理
+	/// </summary>
+	void UpdateParticle();
+
+	/// <summary>
+	/// プレイヤーパーティクルのプッシュバク処理
+	/// </summary>
+	void PushBackParticles();
+
 private:
 
 	// プレイヤー
@@ -124,7 +138,16 @@ private:
 
 	uint32_t isHit_;
 
+
+	// パーティクル
+	std::list<PlayerParlicle*> particles_;
+	uint32_t particlePushBackTimer_;
+	// パーティクル用乱数生成器
+	std::random_device seedGenerator;
+	std::mt19937 randomEngine;
+
 	// インプット
 	Input* input = nullptr;
+
 
 };

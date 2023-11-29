@@ -166,6 +166,9 @@
     <ClCompile Include="Project\AllGameScene\Game\Ready\ReadyScene.cpp">
       <Filter>GameManager\Scene\Game\Ready</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\Player\Particle\PlayerParticle.cpp">
+      <Filter>Project\Object\Player\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">

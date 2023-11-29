@@ -2,6 +2,17 @@
 
 
 
+// デストラクタ
+Player::~Player() {
+
+	// パーティクルリストの削除
+	for (PlayerParlicle* particle : particles_) {
+		delete particle;
+	}
+}
+
+
+
 // 初期化処理
 void Player::Initialize() {
 
@@ -44,8 +55,10 @@ void Player::Initialize() {
 	gravity_.maxVel = -1.0f;
 
 
-
 	isHit_ = 0;
+
+	// パーティクルのプッシュバックタイマー
+	particlePushBackTimer_ = 0;
 }
 
 
@@ -61,6 +74,10 @@ void Player::Update() {
 
 	// 重力の処理
 	CalcGravity();
+
+	// パーティクルの更新処理
+	UpdateParticle();
+
 
 
 #ifdef _DEBUG
@@ -83,7 +100,6 @@ void Player::Update() {
 	ImGui::End();
 
 #endif // _DEBUG
-
 }
 
 
@@ -92,6 +108,9 @@ void Player::Update() {
 void Player::Draw() {
 
 	pla_.model->Draw();
+	for (PlayerParlicle* particle : particles_) {
+		particle->Draw();
+	}
 }
 
 
@@ -135,7 +154,6 @@ void Player::Move() {
 	}
 
 #endif // _DEBUG
-
 }
 
 
@@ -171,9 +189,7 @@ void Player::CalcGravity() {
 
 
 
-/// <summary>
-/// スフィアの計算
-/// </summary>
+// スフィアの計算
 void Player::CalcSphere() {
 
 	plaSphere_ = {
@@ -184,9 +200,7 @@ void Player::CalcSphere() {
 
 
 
-/// <summary>
-/// いろいろ設定する
-/// </summary>
+// いろいろ設定する
 void Player::SetPlayerProperty() {
 
 	// モデルの設定
@@ -197,4 +211,65 @@ void Player::SetPlayerProperty() {
 
 	// スフィアの計算
 	CalcSphere();
+}
+
+
+
+// パーティクルの更新処理
+void Player::UpdateParticle() {
+
+	particlePushBackTimer_++;
+
+	if (particlePushBackTimer_ >= 3) {
+
+		// 0に戻す
+		particlePushBackTimer_ = 0;
+
+		// パーティクルの登録
+		PushBackParticles();
+	}
+
+	// 更新処理
+	for (PlayerParlicle* particle : particles_) {
+		particle->Update();
+	}
+
+	// 描画フラグが切れたら削除
+	particles_.remove_if([](PlayerParlicle* particle) {
+		if (!particle->IsDrawing()) {
+			delete particle;
+			return true;
+		}
+		return false;
+		}
+	);
+}
+
+
+
+// プレイヤーパーティクルのプッシュバク処理
+void Player::PushBackParticles() {
+
+	// パーティクルを生成
+	PlayerParlicle* newParticle = new PlayerParlicle();
+
+	Vector3 min = Subtract(pla_.transform.translate, pla_.size);
+	Vector3 max = Add(pla_.transform.translate, pla_.size);
+	float val = 0.35f;
+
+	std::random_device seedGenerator;
+	std::mt19937 randomEngine(seedGenerator());
+	std::uniform_real_distribution<float> distributionX(min.x, max.x);
+	std::uniform_real_distribution<float> distributionY(min.y, max.y);
+	std::uniform_real_distribution<float> distributionZ(min.z, max.z - val);
+	Vector3 particlePos = {
+		.x = distributionX(randomEngine),
+		.y = distributionY(randomEngine),
+		.z = distributionZ(randomEngine),
+	};
+	newParticle->Initialize(particlePos);
+
+	// パーティクルを登録する
+	particles_.push_back(newParticle);
+
 }
