@@ -2,6 +2,8 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Polygon/Sprite/Sprite.h"
 
+#include <Xinput.h>
+#include "Audio/Audio.h"
 #include <memory>
 
 class GameManager;
@@ -39,5 +41,19 @@ private:
 	//ローディング時間
 	int32_t loadingTime_ = 0;
 
+	//コントローラー
+	XINPUT_STATE joyState{};
+
+	int triggerButtonBTime=0;
+
+
+
+
+	//BGM
+	Audio* bgm_ = nullptr;
+	uint32_t selectBGMHandle_ = 0u;
+	//DecideSE
+	Audio* decideSE_ = nullptr;
+	uint32_t decideSEHandle_ = 0u;
 };
 

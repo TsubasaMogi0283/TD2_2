@@ -19,6 +19,16 @@ void WinScene::Initialize(GameManager* gamaManager){
 	text_ = std::make_unique<Sprite>();
 	uint32_t textTexturehandle = TextureManager::GetInstance()->LoadTexture("Resources/Result/ReturnToTitle.png");
 	text_.reset(Sprite::Create(textTexturehandle, { 0.0f,0.0f }));
+
+	//BGM
+	bgm_ = Audio::GetInstance();
+	selectBGMHandle_ = bgm_->LoadWave("Resources/Audio/BGM/Win.wav");
+	bgm_->PlayWave(selectBGMHandle_, true);
+
+	//DecideSE
+	decideSE_ = Audio::GetInstance();
+	decideSEHandle_ = decideSE_->LoadWave("Resources/Audio/Deside/Decide.wav");
+
 }
 
 void WinScene::ShowImGui(){
@@ -27,7 +37,7 @@ void WinScene::ShowImGui(){
 }
 
 void WinScene::Update(GameManager* gamaManager){
-	ShowImGui();
+	//ShowImGui();
 
 	back_->SetTransparency(spriteTransparency_);
 
@@ -46,8 +56,20 @@ void WinScene::Update(GameManager* gamaManager){
 			}
 		}
 
-		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+		if (Input::GetInstance()->GetJoystickState(joyState)) {
+
+			//Bボタン
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+				triggerButtonBTime += 1;
+
+			}
+
+		}
+
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
 			isFadeOut_ = true;
+			decideSE_->PlayWave(decideSEHandle_, false);
+			bgm_->StopWave(selectBGMHandle_);
 			
 		}
 

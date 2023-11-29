@@ -4,7 +4,7 @@
 
 
 // 初期化処理
-void Enemy::Initialize() {
+void Enemy::Initialize(const Vector3& position) {
 
 	// インプット
 	input = Input::GetInstance();
@@ -15,9 +15,9 @@ void Enemy::Initialize() {
 
 	// 座標
 	init_.transform = {
-		.scale = {0.3f, 0.3f, 0.3f},
+		.scale = {0.18f, 0.18f, 0.18f},
 		.rotate = {0.0f, 0.0f, 0.0f},
-		.translate = {0.0f, 3.0f, 0.0f},
+		.translate = position,
 	};
 	ene_.transform = init_.transform;
 
@@ -25,7 +25,7 @@ void Enemy::Initialize() {
 	ene_.velocity = { 0.0f, 0.0f, 0.0f };
 
 	// 移動量
-	move_ = 0.07f;
+	move_ = 0.028f;
 
 	//サイズ
 	ene_.size = {
@@ -38,7 +38,16 @@ void Enemy::Initialize() {
 	ene_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	isHit_ = 0;
+	isApproach_ = true;
 
+	// 挙動ステート
+	moveState_ = new EnemyWanderingState();
+
+	// モデルの設定
+	ene_.model->SetColor(ene_.color);
+	ene_.model->SetScale(ene_.transform.scale);
+	ene_.model->SetRotate(ene_.transform.rotate);
+	ene_.model->SetTranslate(ene_.transform.translate);
 }
 
 
@@ -53,7 +62,8 @@ void Enemy::Update() {
 	if (isApproach_) {
 		Move();
 	}
-
+	// 挙動
+	//moveState_->Move(this);
 
 #ifdef _DEBUG
 
@@ -71,6 +81,7 @@ void Enemy::Update() {
 	ImGui::DragFloat("sphere.radius", &eneSphere_.radius, 0.01f);
 	ImGui::Text("isHit = %d", isHit_);
 	ImGui::Checkbox("isApproach", &isApproach_);
+	ImGui::Checkbox("isDead", &isDead_);
 	ImGui::End();
 
 
@@ -97,12 +108,20 @@ void Enemy::onCollisionToPlayer() {
 
 	isHit_ = 1;
 	isApproach_ = false;
+	isDead_ = true;
 }
 void Enemy::EndOverlapToPlayer() {
 
 	isHit_ = 0;
 }
 
+
+// 挙動ステートパターン変更
+void Enemy::ChangeMoveState(IEnemyMoveState* newState) {
+
+	delete moveState_;
+	moveState_ = newState;
+}
 
 
 // 移動処理
@@ -170,4 +189,13 @@ void Enemy::SetEnemyProperty() {
 void Enemy::UpdateMat() {
 
 	ene_.matWorld = MakeAffineMatrix(ene_.transform.scale, ene_.transform.rotate, ene_.transform.translate);
+}
+
+
+
+/// <summary>
+/// プレイヤーのTransformの取得
+/// </summary>
+Vector3 Enemy::GetPlayerPos() {
+	return player_->GetTransform().translate;
 }

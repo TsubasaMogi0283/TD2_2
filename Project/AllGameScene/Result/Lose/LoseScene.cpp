@@ -17,6 +17,16 @@ void LoseScene::Initialize(GameManager* gamaManager){
 	text_ = std::make_unique<Sprite>();
 	uint32_t textTexturehandle = TextureManager::GetInstance()->LoadTexture("Resources/Result/ReturnToTitle.png");
 	text_.reset(Sprite::Create(textTexturehandle, { 0.0f,0.0f }));
+
+	//BGM
+	bgm_ = Audio::GetInstance();
+	loseBGMHandle_ = bgm_->LoadWave("Resources/Audio/BGM/Lose.wav");
+	bgm_->PlayWave(loseBGMHandle_, true);
+
+	//DecideSE
+	decideSE_ = Audio::GetInstance();
+	decideSEHandle_ = bgm_->LoadWave("Resources/Audio/Return/Return.wav");
+
 }
 
 void LoseScene::ShowImGui(){
@@ -44,8 +54,21 @@ void LoseScene::Update(GameManager* gamaManager){
 			}
 		}
 
-		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+		if (Input::GetInstance()->GetJoystickState(joyState)) {
+
+			//Bボタン
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+				triggerButtonBTime += 1;
+
+			}
+
+		}
+
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+			bgm_->StopWave(loseBGMHandle_);
+			decideSE_->PlayWave(decideSEHandle_, false);
 			isFadeOut_ = true;
+			
 			
 		}
 

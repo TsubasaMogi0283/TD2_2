@@ -2,6 +2,17 @@
 
 
 
+// デストラクタ
+Player::~Player() {
+
+	// パーティクルリストの削除
+	for (PlayerParticle* particle : particles_) {
+		delete particle;
+	}
+}
+
+
+
 // 初期化処理
 void Player::Initialize() {
 
@@ -43,9 +54,8 @@ void Player::Initialize() {
 	gravity_.accel = 0.1f;
 	gravity_.maxVel = -1.0f;
 
-
-
-	isHit_ = 0;
+	// パーティクルのプッシュバックタイマー
+	particlePushBackTimer_ = 0;
 }
 
 
@@ -61,6 +71,10 @@ void Player::Update() {
 
 	// 重力の処理
 	CalcGravity();
+
+	// パーティクルの更新処理
+	UpdateParticle();
+
 
 
 #ifdef _DEBUG
@@ -79,11 +93,9 @@ void Player::Update() {
 	ImGui::Checkbox("GravityEnable", &gravity_.enable);
 	ImGui::DragFloat("Gravity_accel", &gravity_.accel, 0.001f);
 	ImGui::DragFloat3("Gravity_Vel", &gravity_.velocity.x, 0.001f);
-	ImGui::Text("isHit = %d", isHit_);
 	ImGui::End();
 
 #endif // _DEBUG
-
 }
 
 
@@ -92,6 +104,9 @@ void Player::Update() {
 void Player::Draw() {
 
 	pla_.model->Draw();
+	for (PlayerParticle* particle : particles_) {
+		particle->Draw();
+	}
 }
 
 
@@ -100,28 +115,48 @@ void Player::Draw() {
 void Player::onCollisionToEnemy() {
 
 	//gravity_.enable = false;
-	isHit_ = 1;
 }
 void Player::EndOverlapToEnemy() {
 
 	//gravity_.enable = true;
-	isHit_ = 0;
 }
 
 
 
 // 移動処理
 void Player::Move() {
+	if (Input::GetInstance()->GetJoystickState(joyState)) {
+		//右
+		if (pla_.transform.translate.x <= 3.0f) {
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) {
+				pla_.transform.translate.x += pla_.velocity.x;
+			}
+		}
+		if (pla_.transform.translate.x >= -3.0f) {
+			//左
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) {
+				pla_.transform.translate.x -= pla_.velocity.x;
+			}
+		}
+	}
 
 	// 左右移動処理
-	if (input->IsPushKey(DIK_A) || input->IsPushKey(DIK_LEFT)) {
 
-		pla_.transform.translate.x -= pla_.velocity.x;
-	}
-	if (input->IsPushKey(DIK_D) || input->IsPushKey(DIK_RIGHT)) {
+	if (pla_.transform.translate.x <= 3.0f) {
+		if (input->IsPushKey(DIK_D) || input->IsPushKey(DIK_RIGHT)) {
 
-		pla_.transform.translate.x += pla_.velocity.x;
+			pla_.transform.translate.x += pla_.velocity.x;
+		}
 	}
+
+	if (pla_.transform.translate.x >= -3.0f) {
+
+		if (input->IsPushKey(DIK_A) || input->IsPushKey(DIK_LEFT)) {
+
+			pla_.transform.translate.x -= pla_.velocity.x;
+		}
+	}
+
 
 	// 無駄な回転処理
 	pla_.transform.rotate = Add(pla_.transform.rotate, moveRotate_);
@@ -131,11 +166,9 @@ void Player::Move() {
 
 	if (input->IsTriggerKey(DIK_R)) {
 		pla_.transform = init_.transform;
-		isHit_ = 0;
 	}
 
 #endif // _DEBUG
-
 }
 
 
@@ -171,9 +204,7 @@ void Player::CalcGravity() {
 
 
 
-/// <summary>
-/// スフィアの計算
-/// </summary>
+// スフィアの計算
 void Player::CalcSphere() {
 
 	plaSphere_ = {
@@ -184,9 +215,7 @@ void Player::CalcSphere() {
 
 
 
-/// <summary>
-/// いろいろ設定する
-/// </summary>
+// いろいろ設定する
 void Player::SetPlayerProperty() {
 
 	// モデルの設定
@@ -198,3 +227,66 @@ void Player::SetPlayerProperty() {
 	// スフィアの計算
 	CalcSphere();
 }
+
+
+
+// パーティクルの更新処理
+void Player::UpdateParticle() {
+
+	particlePushBackTimer_++;
+
+	if (particlePushBackTimer_ >= 3) {
+
+		// 0に戻す
+		particlePushBackTimer_ = 0;
+
+		// パーティクルの登録
+		PushBackParticles();
+	}
+
+	// 更新処理
+	for (PlayerParticle* particle : particles_) {
+		particle->Update();
+	}
+
+	// 描画フラグが切れたら削除
+	particles_.remove_if([](PlayerParticle* particle) {
+		if (!particle->IsDrawing()) {
+			delete particle;
+			return true;
+		}
+		return false;
+		}
+	);
+}
+
+
+
+// プレイヤーパーティクルのプッシュバク処理
+void Player::PushBackParticles() {
+
+	// パーティクルを生成
+	PlayerParticle* newParticle = new PlayerParticle();
+
+	Vector3 min = Subtract(pla_.transform.translate, pla_.size);
+	Vector3 max = Add(pla_.transform.translate, pla_.size);
+	float val = 0.38f;
+
+	std::random_device seedGenerator;
+	std::mt19937 randomEngine(seedGenerator());
+	std::uniform_real_distribution<float> distributionX(min.x, max.x);
+	std::uniform_real_distribution<float> distributionY(min.y, max.y);
+	std::uniform_real_distribution<float> distributionZ(min.z, max.z - val);
+	Vector3 particlePos = {
+		.x = distributionX(randomEngine),
+		.y = distributionY(randomEngine),
+		.z = distributionZ(randomEngine),
+	};
+	newParticle->Initialize(particlePos);
+
+	// パーティクルを登録する
+	particles_.push_back(newParticle);
+
+}
+
+

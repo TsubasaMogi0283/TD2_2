@@ -5,8 +5,8 @@
 #include "AllGameScene/Result/Win/WinScene.h"
 #include "AllGameScene/Result/Lose/LoseScene.h"
 #include "AllGameScene/Game/GameScene.h"
-
-
+#include "AllGameScene/Select/SelectScene.h"
+#include "AllGameScene/Result/ResultScene.h"
 
 //コンストラクタ
 GameManager::GameManager() {
@@ -27,7 +27,7 @@ GameManager::GameManager() {
 	
 void GameManager::Initialize() {
 	//ここでタイトルバーの名前を決めてね
-	const wchar_t* titleBarName = L"Ellysia";
+	const wchar_t* titleBarName = L"2225_ポップスコーン";
 
 	//初期化
 	winApp_->Initialize(titleBarName,WINDOW_SIZE_WIDTH_,WINDOW_SIZE_HEIGHT_);
@@ -40,7 +40,8 @@ void GameManager::Initialize() {
 	audio_->Initialize();
 
 	//シーンごとに動作確認したいときはここを変えてね
-	currentGamaScene_ = new GameScene();
+	currentGamaScene_ = new TitleScene();
+
 	currentGamaScene_->Initialize(this);
 
 }
@@ -101,9 +102,9 @@ void GameManager::ChangeScene(IGameScene* newGameScene) {
 
 
 void GameManager::Operate() {
-	
+
 	Initialize();
-	
+
 	MSG msg{};
 
 	////メインループ
@@ -111,7 +112,7 @@ void GameManager::Operate() {
 	while (msg.message != WM_QUIT) {
 		//Windowにメッセージが来てたら最優先で処理させる
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-			
+
 			//common_->WinMSG(msg);
 			winApp_->WindowsMSG(msg);
 
@@ -123,20 +124,20 @@ void GameManager::Operate() {
 			BeginFrame();
 
 
-			
+
 			//更新処理
 			Update();
 
 
 			//描画
 			Draw();
-		
+
 			//フレームの終わり
 			EndFrame();
 
-			
+
 		}
-		
+
 	}
 
 	Release();

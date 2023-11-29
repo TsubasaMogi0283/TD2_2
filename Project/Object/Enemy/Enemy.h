@@ -5,6 +5,11 @@
 #include "WorldTransform/WorldTransform.h"
 
 #include "CollisionManager/CollisionManager.h"
+#include "Object/Enemy/State/IEnemyMoveState.h"
+#include "Object/Enemy/State/Approach/EnemyApproachState.h"
+#include "Object/Enemy/State/Wandering/EnemyWanderingState.h"
+#include "Object/Enemy/State/Attack/EnemyAttackState.h"
+
 
 
 
@@ -36,7 +41,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize();
+	void Initialize(const Vector3& position);
 
 	/// <summary>
 	/// 更新処理
@@ -54,6 +59,16 @@ public:
 	void onCollisionToPlayer();
 	void EndOverlapToPlayer();
 
+	/// <summary>
+	/// 挙動処理
+	/// </summary>
+	void ChangeMoveState(IEnemyMoveState* newState);
+
+	/// <summary>
+	/// 死亡判定
+	/// </summary>
+	bool IsDead() const { return isDead_; }
+
 
 #pragma region Get
 
@@ -67,6 +82,16 @@ public:
 	/// </summary>
 	Sphere GetSphere() { return eneSphere_; }
 
+	/// <summary>
+	/// Playerの取得
+	/// </summary>
+	Vector3 GetPlayerPos();
+
+	/// <summary>
+	/// moveの取得
+	/// </summary>
+	float GetMove() { return move_; }
+
 #pragma endregion 
 
 
@@ -76,6 +101,17 @@ public:
 	/// Playerの取得
 	/// </summary>
 	void SetPlayer(Player* player) { player_ = player; }
+
+	/// <summary>
+	/// velocityの設定
+	/// </summary>
+	void SetVelocity(Vector3 vel) { ene_.velocity = vel; }
+
+	/// <summary>
+	/// translateの設定
+	/// </summary>
+	void SetTranslate(Vector3 translate) { ene_.transform.translate = translate; }
+
 
 #pragma endregion 
 
@@ -107,6 +143,9 @@ private:
 	// エネミー
 	EnemyProperty ene_;
 
+	// 挙動ステートパターン
+	IEnemyMoveState* moveState_;
+
 	// プレイヤー
 	Player* player_;
 
@@ -126,4 +165,6 @@ private:
 	uint32_t isHit_;
 
 	bool isApproach_ = false;
+
+	bool isDead_ = false;
 };

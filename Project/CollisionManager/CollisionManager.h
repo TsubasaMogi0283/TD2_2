@@ -31,6 +31,7 @@ struct OBB {
 
 
 class Player;
+class PlayerHitBox;
 class Enemy;
 
 
@@ -44,28 +45,43 @@ public: // メンバ関数
 	/// </summary>
 	void CheckAllCollision();
 
+	void EnemyListPushBack(Enemy* enemy);
 
-#pragma region Get
+
+#pragma region Set
 
 	/// <summary>
 	/// プレイヤーの取得
 	/// </summary>
 	void SetPlayer(Player* player) { player_ = player; }
 
+	void SetPlayerHitBox(PlayerHitBox* playerHitBox) { playerHitBox_ = playerHitBox; }
+
 	/// <summary>
 	/// エネミーの取得
 	/// </summary>
 	void SetEnemy(Enemy* enemy) { enemy_ = enemy; }
 
+
 #pragma endregion 
 
 
+#pragma region Get
+	bool GetIsHitPlayerAndEnemy() {
+		return isHitPlayerAndEnemy_;
+	}
+	bool GetIsKillEnemy() {
+		return isKillEnemy_;
+	}
+
+#pragma endregion
 private: // メンバ関数
 
 	/// <summary>
 	/// コライダー2つの衝突判定と応答
 	/// </summary>
 	void CheckCollisionPair(Player* player, Enemy* enemy);
+	void CheckCollisionPair(PlayerHitBox* hitBox, Enemy* enemy);
 
 	/// <summary>
 	/// 長さ
@@ -108,9 +124,14 @@ private: // メンバ関数
 	bool isCollision(const OBB& obb, const Sphere& s);
 
 
+	
 private: // メンバ変数
 
 	Player* player_;
+	PlayerHitBox* playerHitBox_;
 	Enemy* enemy_;
+	std::list<Enemy*> enemys_;
 
+	bool isHitPlayerAndEnemy_ = false;
+	bool isKillEnemy_ = false;
 };

@@ -18,7 +18,7 @@
 #include "Camera/Camera.h"
 #include "TextureManager/TextureManager.h"
 #include "PipelineManager/PipelineManager.h"
-
+#include "AllGameScene/GameManager/IGameScene.h"
 
 
 
@@ -38,7 +38,9 @@ public:
 	//デストラクタ
 	~GameManager();
 
-
+	IGameScene* GetCurrentGamaScene() {
+		return currentGamaScene_;
+	}
 
 private:
 
@@ -82,8 +84,6 @@ private:
 
 	//StatePatternに必要な変数
 	IGameScene* currentGamaScene_ = nullptr;
-
-
 
 	
 };
