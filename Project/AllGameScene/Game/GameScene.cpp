@@ -49,11 +49,6 @@ void GameScene::Initialize(GameManager* gamaManager) {
 
 
 #pragma region 後でクラスにする
-
-
-
-
-
 	//Ready
 	ready_ = std::make_unique<Sprite>();
 	uint32_t reeadyTextureHandle_ = TextureManager::GetInstance()->LoadTexture("Resources/Start/Ready.png");
@@ -90,6 +85,83 @@ void GameScene::Initialize(GameManager* gamaManager) {
 
 }
 
+//RedayScene
+void GameScene::ReadyUpdate() {
+	cameraPosition_.z -= 0.05f;
+	if (cameraPosition_.z < -8.0f) {
+		cameraPosition_.z = -8.0f;
+	readyTime_ += 1;
+
+	}
+
+	
+
+	if (readyTime_ > 60 * 4) {
+		phaseNo_ = Play;
+	}
+}
+
+//PlayScene
+void GameScene::PlayUpdate() {
+	// エネミー
+	enemy_->Update();
+
+	//制限時間
+	countDown_->Update();
+
+	//スコア
+	score_->Update();
+
+	
+	//勝ちへ
+	if (countDown_->GetTime() < 0) {
+		phaseNo_ = Succeeded;
+	}
+
+	//負け(仮)
+	if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
+		phaseNo_ = Failed;
+	}
+
+}
+
+//Succeeded
+void GameScene::SucceededUpdate() {
+	finishDisplayTime_ += 1;
+	if (finishDisplayTime_ > 60 * 2) {
+		isWhiteOut_ = true;
+	}
+
+
+	if (isWhiteOut_ == true) {
+		//ズーム
+		//ホワイトアウト
+		cameraPosition_.y +=0.02f ;
+		cameraPosition_.z +=0.05f ;
+		whiteTransparency_ += 0.01f;
+		white_->SetTransparency(whiteTransparency_);
+
+		if (whiteTransparency_ > 1.0f) {
+			whiteTransparency_ = 1.0f;
+
+			loadingTime += 1;
+			
+			
+		}
+	}
+}
+
+//Failed
+void GameScene::FailedUpdate() {
+	theta += 1.0f;
+	cameraPosition_.x += std::sinf(theta)*0.5f;
+	
+	blackTransparency_ += 0.01f;
+	black_->SetTransparency(blackTransparency_);
+	if (blackTransparency_ > 1.0f) {
+		loseLodingTime_ += 1;
+	}
+}
 
 /// <summary>
 /// 更新処理
@@ -135,82 +207,25 @@ void GameScene::Update(GameManager* gamaManager) {
 	switch (phaseNo_) {
 	default:
 	case Ready:
-		cameraPosition_.z -= 0.05f;
-		if (cameraPosition_.z < -8.0f) {
-			cameraPosition_.z = -8.0f;
-		readyTime_ += 1;
-
-		}
-
-		
-
-		if (readyTime_ > 60 * 4) {
-			phaseNo_ = Play;
-		}
-		
+		//Readyのシーン
+		ReadyUpdate();
 
 		break;
 	case Play:
-
-		// エネミー
-		enemy_->Update();
-
-		//制限時間
-		countDown_->Update();
-
-		//スコア
-		score_->Update();
-
+		//ゲームプレイ時のシーン
+		PlayUpdate();
 		
-		//勝ちへ
-		if (countDown_->GetTime() < 0) {
-			phaseNo_ = Succeeded;
-		}
-
-		//負け(仮)
-		if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
-			phaseNo_ = Failed;
-		}
-
-
 		break;
 	case Succeeded:
 		//勝ち
-		finishDisplayTime_ += 1;
-		if (finishDisplayTime_ > 60 * 2) {
-			isWhiteOut_ = true;
-		}
-
-
-		if (isWhiteOut_ == true) {
-			//ズーム
-			//ホワイトアウト
-			cameraPosition_.y +=0.02f ;
-			cameraPosition_.z +=0.05f ;
-			whiteTransparency_ += 0.01f;
-			white_->SetTransparency(whiteTransparency_);
-
-			if (whiteTransparency_ > 1.0f) {
-				whiteTransparency_ = 1.0f;
-
-				loadingTime += 1;
-				
-				
-			}
-		}
-
+		SucceededUpdate();
+		
 		break;
 
 	case Failed:
 		//負け
-		theta += 1.0f;
-		cameraPosition_.x += std::sinf(theta)*0.5f;
-		
-		blackTransparency_ += 0.01f;
-		black_->SetTransparency(blackTransparency_);
-		if (blackTransparency_ > 1.0f) {
-			loseLodingTime_ += 1;
-		}
+		FailedUpdate();
+
 		break;
 	};
 
@@ -218,7 +233,7 @@ void GameScene::Update(GameManager* gamaManager) {
 
 	
 	
-
+	//シーンチェンジ
 	if (loseLodingTime_ >= 60) {
 		gamaManager->ChangeScene(new LoseScene());
 	}

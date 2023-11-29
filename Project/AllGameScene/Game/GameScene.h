@@ -46,6 +46,16 @@ private:
 
 
 private:
+	//switch文の中身
+	void ReadyUpdate();
+
+	void PlayUpdate();
+
+	void SucceededUpdate();
+
+	void FailedUpdate();
+
+private:
 
 	//とうもろこし
 	std::unique_ptr<Corn> corn_ = nullptr;
@@ -77,7 +87,6 @@ private:
 	Vector3 cameraRotate_ = {};
 
 
-	//int gamePlayScene_ = 1;
 	int readyTime_ = 0;
 
 	//Ready
