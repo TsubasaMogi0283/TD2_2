@@ -175,6 +175,9 @@
     <ClCompile Include="Project\Object\Player\Particle\PlayerParticle.cpp">
       <Filter>Object\Player\Paricle</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\Player\HitBox\PlayerHitBox.cpp">
+      <Filter>Object\Player\HitBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -404,6 +407,9 @@
     </ClInclude>
     <ClInclude Include="Project\Object\Player\Particle\PlayerParticle.h">
       <Filter>Object\Player\Paricle</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Player\HitBox\PlayerHitBox.h">
+      <Filter>Object\Player\HitBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
