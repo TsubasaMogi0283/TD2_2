@@ -14,6 +14,7 @@
 #include <Object/Corn/Corn.h>
 #include <Object/Lamp/Lamp.h>
 #include <Object/Player/Player.h>
+#include <Object/Player/HitBox/PlayerHitBox.h>
 #include <Object/Enemy/Enemy.h>
 #include "CollisionManager/CollisionManager.h"
 #include <Object/CountDown/CountDown.h>
@@ -85,6 +86,8 @@ private:
 
 	// プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
+	// プレイヤーのヒットボックス
+	std::unique_ptr<PlayerHitBox> playerHitBox_ = nullptr;
 
 	// エネミー
 	std::unique_ptr<Enemy> enemy_ = nullptr;

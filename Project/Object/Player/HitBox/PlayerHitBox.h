@@ -56,6 +56,11 @@ public:
 	AABB GetLeftAABB() { return aabbLeft_; }
 	AABB GetRightAABB() { return aabbRight_; }
 
+	/// <summary>
+	/// ヒットボックス出現フラグの取得
+	/// </summary>
+	bool GetIsEmergeHitBox() { return isEmergeHitBox_; }
+
 #pragma endregion
 
 

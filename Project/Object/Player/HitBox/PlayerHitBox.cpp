@@ -130,10 +130,12 @@ void PlayerHitBox::SetPlayerHitBoxProperty() {
 	// Left
 	hitBoxLeft_.model->SetColor(hitBoxLeft_.color);
 	hitBoxLeft_.model->SetScale(hitBoxLeft_.transform.scale);
+	hitBoxLeft_.model->SetRotate(hitBoxLeft_.transform.rotate);
 	hitBoxLeft_.model->SetTranslate(hitBoxLeft_.transform.translate);
 	//Right
-	hitBoxRight_.model->SetRotate(hitBoxRight_.transform.rotate);
+	hitBoxRight_.model->SetColor(hitBoxRight_.color);
 	hitBoxRight_.model->SetScale(hitBoxRight_.transform.scale);
+	hitBoxRight_.model->SetRotate(hitBoxRight_.transform.rotate);
 	hitBoxRight_.model->SetTranslate(hitBoxRight_.transform.translate);
 
 	// AABBの計算
@@ -154,4 +156,15 @@ void PlayerHitBox::CalcAABB() {
 		.min = Subtract(hitBoxRight_.transform.translate, hitBoxRight_.size),
 		.max = Add(hitBoxRight_.transform.translate, hitBoxRight_.size),
 	};
+}
+
+
+// 衝突時コールバック処理
+void PlayerHitBox::onCollisionToEnemy() {
+
+
+}
+void PlayerHitBox::EndOverlapToEnemy() {
+
+
 }
