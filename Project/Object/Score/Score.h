@@ -1,5 +1,6 @@
 #pragma once
 #include "Polygon/Sprite/Sprite.h"
+
 #include <memory>
 
 class Score{
@@ -27,6 +28,21 @@ public:
 		return score_;
 	}
 
+	Vector2 GetScoreBackSizeScale() const {
+		return scoreBackSize_;
+	}
+
+	void SetScoreBackSize(Vector2 size) {
+		scoreBackSize_ = size;
+	}
+
+	Vector2 GetScoreScale() const {
+		return setScale_;
+	}
+
+	void SetScoreScale(Vector2 scale) {
+		setScale_ = scale;
+	}
 
 private:
 
@@ -51,6 +67,8 @@ private:
 	std::unique_ptr<Sprite> scoreOnesPlane_[NUMBER_AMOUNT_] = { nullptr };
 
 	uint32_t numberTextureHandle[NUMBER_AMOUNT_] = {};
+
+	Vector2 setScale_ = { 1.0f,1.0f };
 
 };
 

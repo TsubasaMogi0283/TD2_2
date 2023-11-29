@@ -26,7 +26,6 @@ void Score::Initialize(){
 	const float SPACE_INTERVAL = 60.0f;
 	const float initialPositionX = 30.0f;
 
-
 	uint32_t frameTextureHandle = TextureManager::LoadTexture("Resources/Frame/Frame.png");
 	scoreBackPosition_ =  { 6.0f,488.0f};
 	scoreBackSize_ = {0.25f,0.13f};
@@ -40,7 +39,11 @@ void Score::Initialize(){
 		scoreTensPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*3.0f,500.0f}));;
 		scoreOnesPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*4.0f,500.0f}));;
 
-
+		scoreTenThousandsPlane_[i]->SetScale(setScale_);
+		scoreThousandsPlane_[i]->SetScale(setScale_);
+		scoreHundredsPlane_[i]->SetScale(setScale_);
+		scoreTensPlane_[i]->SetScale(setScale_);
+		scoreOnesPlane_[i]->SetScale(setScale_);
 	}
 
 	scoreBack_->SetScale(scoreBackSize_);

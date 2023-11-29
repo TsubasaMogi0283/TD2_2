@@ -19,11 +19,13 @@ public:
 	//代入演算子を無効にする
 	Record& operator=(const Record& obj) = delete;
 
-	int SetScore(int score) {
+	void SetScore(int score) {
 		this->score_ = score;
 	}
 
-	
+	int GetScore() const {
+		return score_;
+	}
 
 private:
 	//5桁
