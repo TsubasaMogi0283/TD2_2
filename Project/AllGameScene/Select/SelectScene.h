@@ -1,7 +1,8 @@
 #pragma once
 #include "AllGameScene/GameManager/IGameScene.h"
-#include "Input/Input.h"
 
+#include "Polygon/Sprite/Sprite.h"
+#include "Polygon/Model/Model.h"
 
 class SelectScene : public IGameScene{
 public:
@@ -19,8 +20,28 @@ private:
 
 
 private:
-	Input* input_ = nullptr;
+	//WhiteOut
+	std::unique_ptr<Sprite> whiteBack_ = nullptr;
+	float transparency_ = 0.0f;
 
+	//タイトルに戻る
+	std::unique_ptr<Sprite> returnToTile_ = nullptr;
+
+	//ゲームへ
+	std::unique_ptr<Sprite> gameMode_ = nullptr;
+
+	//スコアアタック
+	std::unique_ptr<Sprite> scoreAttackMode_ = nullptr;
+
+	//カーソル
+	std::unique_ptr<Sprite> cursor_ = nullptr;
+	
+	//とうもろこし
+	std::unique_ptr<Model> corn_ = nullptr;
+
+	const Vector2 ICON_INTERVAL_ = {300.0f};
+	Vector2 cursorPosition_ = {};
+	Vector2 move_ = {};
 
 
 };
