@@ -1,10 +1,12 @@
 #include "GameScene.h"
 
 #include "ImGuiManager/ImGuiManager.h"
+#include "Input/Input.h"
+
 #include "AllGameScene/GameManager/GameManager.h"
 #include <AllGameScene/Result/ResultScene.h>
-
-
+#include "AllGameScene/Result/Win/WinScene.h"
+#include "AllGameScene/Result/Lose/LoseScene.h"
 
 /// <summary>
 /// 初期化処理
@@ -35,74 +37,136 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	// コリジョンマネージャー
 	collisionManager_ = std::make_unique<CollisionManager>();
 
-
-	//カウントダウン
-	numberTextureHandle[0] = TextureManager::LoadTexture("Resources/Number/0.png");
-	numberTextureHandle[1] = TextureManager::LoadTexture("Resources/Number/1.png");
-	numberTextureHandle[2] = TextureManager::LoadTexture("Resources/Number/2.png");
-	numberTextureHandle[3] = TextureManager::LoadTexture("Resources/Number/3.png");
-	numberTextureHandle[4] = TextureManager::LoadTexture("Resources/Number/4.png");
-	numberTextureHandle[5] = TextureManager::LoadTexture("Resources/Number/5.png");
-	numberTextureHandle[6] = TextureManager::LoadTexture("Resources/Number/6.png");
-	numberTextureHandle[7] = TextureManager::LoadTexture("Resources/Number/7.png");
-	numberTextureHandle[8] = TextureManager::LoadTexture("Resources/Number/8.png");
-	numberTextureHandle[9] = TextureManager::LoadTexture("Resources/Number/9.png");
-
-	//カウントダウン
-	uint32_t frameTextureHandle = TextureManager::LoadTexture("Resources/Frame/Frame.png");
-	countDownBackPosition_ = { 590.0f,18.0f };
-	countDownBackSize_ = { 0.11f,0.12f };
-	countDownBack_.reset(Sprite::Create(frameTextureHandle,countDownBackPosition_ ));
-	
-	
-
-	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
-		//代入の時はresetを使ってね
-		timeTensPlane_[i].reset(Sprite::Create(numberTextureHandle[i], { 600.0f,30.0f }));
-		timeOnesPlane_[i].reset(Sprite::Create(numberTextureHandle[i], { 680.0f,30.0f }));
-	}
-
+	//制限時間
+	countDown_ =std::make_unique<CountDown>();
+	countDown_->Initialize();
 
 	//スコア
-	const float SPACE_INTERVAL = 60.0f;
-	const float initialPositionX = 30.0f;
+	score_ = std::make_unique<Score>();
+	score_->Initialize();
 	
-	scoreBackPosition_ =  { 6.0f,488.0f};
-	scoreBackSize_ = {0.25f,0.13f};
-	scoreBack_.reset(Sprite::Create(frameTextureHandle,scoreBackPosition_));
-
-	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
-		
-		scoreTenThousandsPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*0.0f,500.0f}));	
-		scoreThousandsPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*1.0f,500.0f}));;
-		scoreHundredsPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*2.0f,500.0f}));;	
-		scoreTensPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*3.0f,500.0f}));;
-		scoreOnesPlane_[i].reset(Sprite::Create(numberTextureHandle[i], {initialPositionX+SPACE_INTERVAL*4.0f,500.0f}));;
 
 
-	}
+
+#pragma region 後でクラスにする
+	//Ready
+	ready_ = std::make_unique<Sprite>();
+	uint32_t reeadyTextureHandle_ = TextureManager::GetInstance()->LoadTexture("Resources/Start/Ready.png");
+	ready_.reset(Sprite::Create(reeadyTextureHandle_, { 0.0f,0.0f }));
+
+	//Go
+	go_ = std::make_unique<Sprite>();
+	uint32_t goTextureHandle_ = TextureManager::GetInstance()->LoadTexture("Resources/Start/Go.png");
+	go_.reset(Sprite::Create(goTextureHandle_, { 0.0f,0.0f }));
+
+
+	//Finish
+	finish_ = std::make_unique<Sprite>();
+	uint32_t finishTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Finish/Finish.png");
+	finish_.reset(Sprite::Create(finishTextureHandle, { 0.0f,0.0f }));
+
+
+	//WhiteOut
+	white_ = std::make_unique<Sprite>();
+	uint32_t whiteTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/White.png");
+	white_.reset(Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
+
+	//BlackOut
+	black_ = std::make_unique<Sprite>();
+	uint32_t blackTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Black.png");
+	black_.reset(Sprite::Create(blackTextureHandle, { 0.0f,0.0f }));
+
+
+#pragma endregion
 
 	//カメラ
-	cameraPosition_ = { 0.0f,2.2f,-8.0f };
+	cameraPosition_ = { 0.0f,2.2f,0.0f };
 	cameraRotate_ = { 0.015f,0.0f,0.0f };
 
 }
 
+//RedayScene
+void GameScene::ReadyUpdate() {
+	cameraPosition_.z -= 0.05f;
+	if (cameraPosition_.z < -8.0f) {
+		cameraPosition_.z = -8.0f;
+	readyTime_ += 1;
+
+	}
+
+	
+
+	if (readyTime_ > 60 * 4) {
+		phaseNo_ = Play;
+	}
+}
+
+//PlayScene
+void GameScene::PlayUpdate() {
+	// エネミー
+	enemy_->Update();
+
+	//制限時間
+	countDown_->Update();
+
+	//スコア
+	score_->Update();
+
+	
+	//勝ちへ
+	if (countDown_->GetTime() < 0) {
+		phaseNo_ = Succeeded;
+	}
+
+	//負け(仮)
+	if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
+		phaseNo_ = Failed;
+	}
+
+}
+
+//Succeeded
+void GameScene::SucceededUpdate() {
+	finishDisplayTime_ += 1;
+	if (finishDisplayTime_ > 60 * 2) {
+		isWhiteOut_ = true;
+	}
+
+
+	if (isWhiteOut_ == true) {
+		//ズーム
+		//ホワイトアウト
+		cameraPosition_.y +=0.02f ;
+		cameraPosition_.z +=0.05f ;
+		whiteTransparency_ += 0.01f;
+		white_->SetTransparency(whiteTransparency_);
+
+		if (whiteTransparency_ > 1.0f) {
+			whiteTransparency_ = 1.0f;
+
+			loadingTime += 1;
+			
+			
+		}
+	}
+}
+
+//Failed
+void GameScene::FailedUpdate() {
+	theta += 1.0f;
+	cameraPosition_.x += std::sinf(theta)*0.5f;
+	
+	blackTransparency_ += 0.01f;
+	black_->SetTransparency(blackTransparency_);
+	if (blackTransparency_ > 1.0f) {
+		loseLodingTime_ += 1;
+	}
+}
 
 /// <summary>
 /// 更新処理
 /// </summary>
 void GameScene::Update(GameManager* gamaManager) {
-
-	//カメラ
-	Camera::GetInstance()->SetRotate(cameraRotate_);
-	Camera::GetInstance()->SetTranslate(cameraPosition_);
-
-	//カウントダウン
-	CountDown();
-
-	//スコア
-	Score();
 
 	//とうもろこしの更新
 	corn_->Update();
@@ -116,12 +180,16 @@ void GameScene::Update(GameManager* gamaManager) {
 	// プレイヤー
 	player_->Update();
 
-	// エネミー
-	enemy_->Update();
+	
 
 	// 衝突判定
 	CheckAllCollision();
 	
+	
+
+	//カメラ
+	Camera::GetInstance()->SetRotate(cameraRotate_);
+	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
 #ifdef _DEBUG
 
@@ -134,6 +202,46 @@ void GameScene::Update(GameManager* gamaManager) {
 	ImGui::End();
 
 #endif // _DEBUG
+
+
+	switch (phaseNo_) {
+	default:
+	case Ready:
+		//Readyのシーン
+		ReadyUpdate();
+
+		break;
+	case Play:
+		//ゲームプレイ時のシーン
+		PlayUpdate();
+		
+		break;
+	case Succeeded:
+		//勝ち
+		SucceededUpdate();
+		
+		break;
+
+	case Failed:
+		//負け
+		FailedUpdate();
+
+		break;
+	};
+
+	
+
+	
+	
+	//シーンチェンジ
+	if (loseLodingTime_ >= 60) {
+		gamaManager->ChangeScene(new LoseScene());
+	}
+
+	if (loadingTime > 60) {
+		gamaManager->ChangeScene(new WinScene());
+	}
+
 }
 
 
@@ -152,46 +260,59 @@ void GameScene::Draw(GameManager* gamaManager) {
 
 	//プレイヤー
 	player_->Draw();
-	enemy_->Draw();
 
-	//スコアの後ろのテクスチャ
-	scoreBack_->Draw();
+	switch (phaseNo_) {
+	default:
+	case Ready:
+		if (readyTime_ > 0 && readyTime_ <= 60 * 2) {
+			ready_->Draw();
 
-	//制限時間の後ろのテクスチャ
-	countDownBack_->Draw();
+		}
 
-	//スプライトは後ろに描画してね
-	//透明部分がすり抜けてしまうから
-	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
-		if (tensPlace_ == i) {
-			timeTensPlane_[i]->Draw();
+		if (readyTime_ > 60 * 2 && readyTime_ <= 60 * 4) {
+			go_->Draw();
+
 		}
-		if (onesPlace_ == i) {
-			timeOnesPlane_[i]->Draw();
-		}
-	}
+
+		break;
+	case Play:
+		enemy_->Draw();
 
 
-	//スコア
-	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
-		if (scoreTenThousandsPlace_ == i) {
-			scoreTenThousandsPlane_[i]->Draw();	
+		//制限時間
+		countDown_->Draw();
+
+		//スコア
+		score_->Draw();
+
+
+		break;
+	case Succeeded:
+
+		if (finishDisplayTime_ <= 60 * 2) {
+			finish_->Draw();
 		}
-		if (scoreThousandsPlace_ == i) {
-			scoreThousandsPlane_[i]->Draw();
+		if (isWhiteOut_ == true) {
+			white_->Draw();
 		}
-		if (scoreHundredsPlace_ == i) {
-			scoreHundredsPlane_[i]->Draw();	
-		}
-		if (scoreTensPlace_ == i) {
-			scoreTensPlane_[i]->Draw();
-		}
-		if (scoreOnesPlace_ == i) {
-			scoreOnesPlane_[i]->Draw();
-		}
-	}
+		break;
+
+	case Failed:
+		black_->Draw();
+		break;
+	};
 
 }
+
+
+//void GameScene::ChangeScene(IGamePlayScene* newGameScene){
+//	//一度消してから次のシーンにいく
+//	delete currentGamaScene_;
+//
+//	currentGamaScene_ = newGameScene
+//	//今は言っているシーンが引数
+//	currentGamaScene_->Initialize(this);
+//}
 
 
 /// <summary>
@@ -208,43 +329,4 @@ void GameScene::CheckAllCollision() {
 }
 
 
-/// <summary>
-/// カウントダウン
-/// </summary>
-void GameScene::CountDown() {
-	//仮で60秒
-	gameTime_ -= 1;
 
-	displayTime_ = gameTime_ / 60;
-
-	tensPlace_ = displayTime_ / 10;
-	onesPlace_ = displayTime_ % 10;
-
-	countDownBack_->SetScale(countDownBackSize_);
-	countDownBack_->SetPosition(countDownBackPosition_);
-}
-
-/// <summary>
-/// スコア
-/// </summary>
-void GameScene::Score() {
-
-
-	score_ += 1;
-
-
-	scoreTenThousandsPlace_ = score_/10000;
-	scoreThousandsPlace_ = (score_%10000)/1000;
-	scoreHundredsPlace_ = (score_%1000)/100;
-	scoreTensPlace_ = (score_%100)/10;
-	scoreOnesPlace_ = score_ % 10;
-
-	scoreBack_->SetScale(scoreBackSize_);
-	scoreBack_->SetPosition(scoreBackPosition_);
-
-	//ImGui::Begin("Score");
-	//ImGui::SliderFloat2("Scale", &scoreBackSize_.x, 0.0f, 1.0f);
-	//ImGui::SliderFloat2("CounDownBackPosition", &scoreBackPosition_.x, 0.0f, 1280.0f);
-	//ImGui::End();
-
-}

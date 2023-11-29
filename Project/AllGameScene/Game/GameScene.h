@@ -13,6 +13,9 @@
 #include <Object/Player/Player.h>
 #include <Object/Enemy/Enemy.h>
 #include "CollisionManager/CollisionManager.h"
+#include <Object/CountDown/CountDown.h>
+#include <Object/Score/Score.h>
+#include <AllGameScene/GameManager/IGamePlayScene.h>
 
 
 //StatePatternを使う時は必ず前方宣言をするように
@@ -36,17 +39,21 @@ private:
 	/// 衝突判定
 	/// </summary>
 	void CheckAllCollision();
+	
+
+	////シーンチェンジ
+	//void ChangeScene(IGamePlayScene* newGameScene);
 
 
-	/// <summary>
-	/// カウントダウン
-	/// </summary>
-	void CountDown();
+private:
+	//switch文の中身
+	void ReadyUpdate();
 
-	/// <summary>
-	/// スコア
-	/// </summary>
-	void Score();
+	void PlayUpdate();
+
+	void SucceededUpdate();
+
+	void FailedUpdate();
 
 private:
 
@@ -68,60 +75,59 @@ private:
 	// コリジョンマネージャー
 	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
+	//制限時間
+	std::unique_ptr<CountDown> countDown_ = nullptr;
+
+	//スコア
+	std::unique_ptr<Score> score_ = nullptr;
+
 
 	//カメラ
 	Vector3 cameraPosition_ = {};
 	Vector3 cameraRotate_ = {};
 
-#pragma region ゲームの時間
-	static const int NUMBER_AMOUNT_ = 10;
-	std::unique_ptr<Sprite> timeTensPlane_[NUMBER_AMOUNT_] = { nullptr };
-	std::unique_ptr<Sprite> timeOnesPlane_[NUMBER_AMOUNT_] = { nullptr };
 
-	//背景
-	std::unique_ptr<Sprite> countDownBack_ = nullptr;
-	Vector2 countDownBackPosition_ = {};
-	Vector2 countDownBackSize_ = {};
+	int readyTime_ = 0;
 
-	//ゲームの時間
-	const int timer_ = 40;
-	int gameTime_ = 60 * timer_;
-
-	//表示されている時間
-	int displayTime_ = gameTime_ / 60;
-	//1の位
-	int onesPlace_ = 0;
-	//10の位
-	int tensPlace_ = 0;
-
-	uint32_t numberTextureHandle[NUMBER_AMOUNT_] = {};
-
-#pragma endregion
-
-
-#pragma region スコア
-
-	std::unique_ptr<Sprite> scoreBack_ = nullptr;
-	Vector2 scoreBackPosition_ = {};
-	Vector2 scoreBackSize_ = {};
-
-	int32_t score_ = 0;
+	//Ready
+	std::unique_ptr<Sprite> ready_ = nullptr;
+	//Go
+	std::unique_ptr<Sprite> go_ = nullptr;
 	
-	int32_t scoreTenThousandsPlace_ = 0;
-	int32_t scoreThousandsPlace_ = 0;
-	int32_t scoreHundredsPlace_ = 0;
-	int32_t scoreTensPlace_ = 0;
-	int32_t scoreOnesPlace_ = 0;
+	//Finish
+	std::unique_ptr<Sprite> finish_ = nullptr;
+	int finishDisplayTime_ = 0;
+
+	//WhiteOut
+	std::unique_ptr<Sprite> white_ = nullptr;
+	float whiteTransparency_ = 0.0f;
+	int loadingTime = 0;
+	bool isWhiteOut_ = false;
+
+	//BlackOut
+	std::unique_ptr<Sprite> black_ = nullptr;
+	float blackTransparency_ = 0.0f;
+	
+
+	//負け
+	float theta = 0.0f;
+	int loseLodingTime_ = 0;
 
 
-	std::unique_ptr<Sprite> scoreTenThousandsPlane_[NUMBER_AMOUNT_] = {nullptr};	
-	std::unique_ptr<Sprite> scoreThousandsPlane_[NUMBER_AMOUNT_] = {nullptr};
-	std::unique_ptr<Sprite> scoreHundredsPlane_[NUMBER_AMOUNT_] = {nullptr};	
-	std::unique_ptr<Sprite> scoreTensPlane_[NUMBER_AMOUNT_] = {nullptr};
-	std::unique_ptr<Sprite> scoreOnesPlane_[NUMBER_AMOUNT_] = { nullptr };
+
+	//enum宣言
+	enum Phase {
+		Ready,	
+		Play,
+		Succeeded,
+		Failed,
+	};
+
+	int phaseNo_= 0;
+
+	//StatePatternに必要な変数
+	IGamePlayScene* currentGamaScene_ = nullptr;
 
 
-
-#pragma endregion
 };
 

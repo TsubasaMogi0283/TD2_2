@@ -39,6 +39,13 @@ void Enemy::Initialize() {
 
 	isHit_ = 0;
 
+
+
+	// モデルの設定
+	ene_.model->SetColor(ene_.color);
+	ene_.model->SetScale(ene_.transform.scale);
+	ene_.model->SetRotate(ene_.transform.rotate);
+	ene_.model->SetTranslate(ene_.transform.translate);
 }
 
 
