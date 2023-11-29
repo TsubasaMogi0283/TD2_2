@@ -20,10 +20,7 @@ void PlayScene::Initialize(GameScene* gamaManager){
 	// プレイヤー
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
-	// エネミー
-	enemy_ = std::make_unique<Enemy>();
-	enemy_->Initialize();
-	enemy_->SetPlayer(player_.get());
+	
 	//制限時間
 	countDown_ =std::make_unique<CountDown>();
 	countDown_->Initialize();

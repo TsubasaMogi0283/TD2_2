@@ -36,7 +36,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize();
+	void Initialize(const Vector3& position);
 
 	/// <summary>
 	/// 更新処理
@@ -53,6 +53,11 @@ public:
 	/// </summary>
 	void onCollisionToPlayer();
 	void EndOverlapToPlayer();
+
+	/// <summary>
+	/// 死亡判定
+	/// </summary>
+	bool IsDead() const { return isDead_; }
 
 
 #pragma region Get
@@ -126,4 +131,6 @@ private:
 	uint32_t isHit_;
 
 	bool isApproach_ = false;
+
+	bool isDead_ = false;
 };

@@ -167,7 +167,7 @@
       <Filter>GameManager\Scene\Game\Ready</Filter>
     </ClCompile>
     <ClCompile Include="Project\Object\Player\Particle\PlayerParticle.cpp">
-      <Filter>Project\Object\Player\Particle</Filter>
+      <Filter>Object\Player\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +390,9 @@
     <ClInclude Include="Project\AllGameScene\Game\Ready\ReadyScene.h">
       <Filter>GameManager\Scene\Game\Ready</Filter>
     </ClInclude>
+    <ClInclude Include="Project\Object\Player\Particle\PlayerParticle.h">
+      <Filter>Object\Player\Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -537,6 +540,9 @@
     </Filter>
     <Filter Include="GameManager\Scene\Game\Ready">
       <UniqueIdentifier>{fb97fd13-8f3f-4d19-99a5-3bbb695270c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\Particle">
+      <UniqueIdentifier>{cdd9f274-21c4-4bf3-89a2-528deedefa4d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,9 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 
 #include <memory>
+#include <iostream>
+#include <algorithm>
+#include <vector>
 
 #include "Polygon/Sprite/Sprite.h"
 #include "Polygon/Model/Model.h"
@@ -39,7 +42,21 @@ private:
 	/// 衝突判定
 	/// </summary>
 	void CheckAllCollision();
+
+	/// <summary>
+	/// エネミーリストの処理をまとめたもの
+	/// </summary>
+	void EnemysUpdate();
+
+	/// <summary>
+	/// エネミーのリストのカウント
+	/// </summary>
+	uint32_t CalcEnemysList();
 	
+	/// <summary>
+	/// 新しいエネミーをプッシュバックする
+	/// </summary>
+	void PushBackEnemy();
 
 	////シーンチェンジ
 	//void ChangeScene(IGamePlayScene* newGameScene);
@@ -71,6 +88,8 @@ private:
 
 	// エネミー
 	std::unique_ptr<Enemy> enemy_ = nullptr;
+	std::list<Enemy*> enemys_;
+	uint32_t enemysCountTimer_;
 
 	// コリジョンマネージャー
 	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
