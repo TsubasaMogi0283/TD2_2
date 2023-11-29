@@ -166,7 +166,10 @@
     <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
       <Filter>GameManager\Scene\Game\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.cpp" />
+    <ClCompile Include="Project\Object\Player\Particle\PlayerParticle.cpp" />
+    <ClCompile Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.cpp">
+      <Filter>GameManager\Scene\Game\ScoreAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -388,7 +391,10 @@
     <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
       <Filter>GameManager\Scene\Game\Main</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.h" />
+    <ClInclude Include="Project\Object\Player\Particle\PlayerParticle.h" />
+    <ClInclude Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.h">
+      <Filter>GameManager\Scene\Game\ScoreAttack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
