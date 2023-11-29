@@ -4,6 +4,7 @@
 #include "AllGameScene/GameManager/GameManager.h"
 #include "AllGameScene/Game/GameScene.h"
 #include "AllGameScene/Title/TitleScene.h"
+#include "AllGameScene/Game/ScoreAttack/ScoreAttackScene.h"
 
 #include "Input/Input.h"
 #include "TextureManager/TextureManager.h"
@@ -86,6 +87,15 @@ void SelectScene::Update(GameManager* gamaManager){
 		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) {
 			triggerButtonLeftTime += 1;
 		}
+		//右ボタン
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) {
+			triggerButtonRightTime += 1;
+		}
+		//Bボタン
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+			triggerButtonBTime += 1;
+
+		}
 
 	}
 	if (isFadeIn_ == true) {
@@ -107,16 +117,6 @@ void SelectScene::Update(GameManager* gamaManager){
 
 	}
 
-	//右ボタン
-	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) {
-			triggerButtonRightTime += 1;
-
-		}
-	//Bボタン
-	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
-		triggerButtonBTime += 1;
-
-	}
 
 	//押していない時
 	if ((joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) == 0) {
@@ -129,20 +129,8 @@ void SelectScene::Update(GameManager* gamaManager){
 		triggerButtonBTime = 0;
 	}
 	
-
-	//選択
-	if (Input::GetInstance()->IsTriggerKey(DIK_LEFT) == true || triggerButtonLeftTime == 1) {
-
-		
-		//スコアアタック
-		scoreAttackMode_->SetTransparency(transparency_);
-		
-		//カーソル
-		cursor_->SetTransparency(transparency_);
-		
-		corn_->SetTransparency(transparency_);
-	}
 	
+	//選択
 	if (isFadeIn_ == false) {
 		cursor_->SetPosition(cursorPosition_);
 
@@ -163,7 +151,8 @@ void SelectScene::Update(GameManager* gamaManager){
 		corn_->SetTransparency(transparency_);
 
 		//選択
-		if (Input::GetInstance()->IsTriggerKey(DIK_LEFT) == true) {
+		//左
+		if (Input::GetInstance()->IsTriggerKey(DIK_LEFT) == true || triggerButtonLeftTime == 1) {
 
 
 			if (cursorPosition_.x <= INITIALE_POSITION.x) {
@@ -172,47 +161,48 @@ void SelectScene::Update(GameManager* gamaManager){
 				cursorPosition_.x -= ICON_INTERVAL_.x;
 			}
 		}
-	}
-	if (Input::GetInstance()->IsTriggerKey(DIK_RIGHT) == true || triggerButtonRightTime == 1) {
-		if (cursorPosition_.x > INITIALE_POSITION.x * 2) {
 
-
-		}
-		if (Input::GetInstance()->IsTriggerKey(DIK_RIGHT) == true) {
+		//右
+		if (Input::GetInstance()->IsTriggerKey(DIK_RIGHT) == true || triggerButtonRightTime == 1) {
 			if (cursorPosition_.x > INITIALE_POSITION.x * 2) {
-
 			}
 			else {
 				cursorPosition_.x += ICON_INTERVAL_.x;
 			}
-
 		}
 
 
+		
+	
 		if (cursorPosition_.x == ICON_INTERVAL_.x) {
-			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
 				isToTitle_ = true;
 				isFadeOut_ = false;
-			}
-		}
-	}
-	if (cursorPosition_.x == ICON_INTERVAL_.x) {
-		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
-			isToTitle_ = true;
 
+			}
 		}
 		if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x) {
-			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
 				isToGame_ = true;
 				isFadeOut_ = false;
+
 			}
-		
-		
+			
+		}
+		if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x*2) {
+			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+				isToScoreAttack_ = true;
+				isFadeOut_ = false;
+				
+
+			}
+			
 		}
 
 	}
-
 	
+
+	//フェードアウト
 	if (isFadeOut_ == false) {
 		if (isToTitle_ == true) {
 			transparency_ -= 0.05f;
@@ -222,35 +212,40 @@ void SelectScene::Update(GameManager* gamaManager){
 
 			}
 		}
-	}
-		
 
-	if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x) {
-		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
-			isToGame_ = true;
-		}
-
-		
 		if (isToGame_ == true) {
 			transparency_ -= 0.05f;
 			if (transparency_ < 0.0f) {
 				transparency_ = 0.0f;
 				waitingTimeToGame_ += 1;
-				
+			
 			}
 		}
 
-		
-		
-	}
+		if (isToScoreAttack_ == true) {
+			transparency_ -= 0.05f;
+			if (transparency_ < 0.0f) {
+				transparency_ = 0.0f;
+				waitingTimeToScoreAttack_ += 1;
+			
+			}
+		}
 
-	if (waitingTimeToTitle_ > 60 * 2) {
-			gamaManager->ChangeScene(new TitleScene());
-		}
-		if (waitingTimeToGame_ > 60 * 2) {
-			gamaManager->ChangeScene(new GameScene());
-		}
+	}
+		
+
 	
+
+	//シーンチェンジ
+	if (waitingTimeToTitle_ > 60 * 2) {
+		gamaManager->ChangeScene(new TitleScene());
+	}
+	if (waitingTimeToGame_ > 60 * 2) {
+		gamaManager->ChangeScene(new GameScene());
+	}
+	if (waitingTimeToScoreAttack_ > 60 * 2) {
+		gamaManager->ChangeScene(new ScoreAttackScene());
+	}
 }
 
 void SelectScene::Draw(GameManager* gamaManager){

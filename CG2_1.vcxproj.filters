@@ -166,7 +166,13 @@
     <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
       <Filter>GameManager\Scene\Game\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.cpp" />
+    <ClCompile Include="Project\Object\Player\Particle\PlayerParticle.cpp" />
+    <ClCompile Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.cpp">
+      <Filter>GameManager\Scene\Game\ScoreAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Record\Record.cpp">
+      <Filter>Object\Score\Record</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -388,7 +394,13 @@
     <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
       <Filter>GameManager\Scene\Game\Main</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.h" />
+    <ClInclude Include="Project\Object\Player\Particle\PlayerParticle.h" />
+    <ClInclude Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.h">
+      <Filter>GameManager\Scene\Game\ScoreAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Record\Record.h">
+      <Filter>Object\Score\Record</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -542,6 +554,9 @@
     </Filter>
     <Filter Include="GameManager\Scene\Game\ScoreAttack">
       <UniqueIdentifier>{4d963fec-fa77-429a-9a6e-db1ed0e63a29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Score\Record">
+      <UniqueIdentifier>{89de5ab1-0143-4a02-9d52-4528d02467eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
