@@ -3,6 +3,7 @@
 #include "ImGuiManager/ImGuiManager.h"
 #include "AllGameScene/GameManager/GameManager.h"
 #include "AllGameScene/Game/GameScene.h"
+#include "AllGameScene/Title/TitleScene.h"
 
 #include "Input/Input.h"
 #include "TextureManager/TextureManager.h"
@@ -17,7 +18,7 @@ void SelectScene::Initialize(GameManager* gamaManager){
 	uint32_t whiteTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/White.png");
 	whiteBack_.reset(Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
 
-	const Vector2 INITIALE_POSITION = {200.0f,500.0f};
+	
 	
 
 	//タイトル
@@ -56,22 +57,90 @@ void SelectScene::ShowImGui(){
 }
 
 void SelectScene::Update(GameManager* gamaManager){
-	ShowImGui();
+	//ShowImGui();
 
+
+	cursor_->SetPosition(cursorPosition_);
+
+	//背景
+	whiteBack_->SetTransparency(transparency_);
+	//タイトル
+	returnToTile_->SetTransparency(transparency_);
+	
+	//ゲームへ
+	gameMode_->SetTransparency(transparency_);
+	
+	//スコアアタック
+	scoreAttackMode_->SetTransparency(transparency_);
+	
+	//カーソル
+	cursor_->SetTransparency(transparency_);
+	
 
 
 	//選択
 	if (Input::GetInstance()->IsTriggerKey(DIK_LEFT) == true) {
-		cursorPosition_.x -= ICON_INTERVAL_.x;
+		
+
+		if (cursorPosition_.x < INITIALE_POSITION.x) {
+			cursorPosition_.x = INITIALE_POSITION.x;
+		}
+		else {
+			cursorPosition_.x -= ICON_INTERVAL_.x;
+		}
+
 	}
 	if (Input::GetInstance()->IsTriggerKey(DIK_RIGHT) == true) {
-		cursorPosition_.x += ICON_INTERVAL_.x;
+		if (cursorPosition_.x > INITIALE_POSITION.x*2) {
+
+		}
+		else {
+			cursorPosition_.x += ICON_INTERVAL_.x;
+		}
+		
 	}
 
-	if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+
+	if (cursorPosition_.x == ICON_INTERVAL_.x) {
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+			isToTitle_ = true;
+		}
+	}
+	if (isToTitle_ == true) {
+		transparency_ -= 0.05f;
+		if (transparency_ < 0.0f) {
+			transparency_ = 0.0f;
+			waitingTimeToTitle_ += 1;
+
+		}
+	}
+
+	
+
+		
+	if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x) {
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+			isToGame_ = true;
+		}
+		
+		
+	}
+	if (isToGame_ == true) {
+		transparency_ -= 0.05f;
+		if (transparency_ < 0.0f) {
+			transparency_ = 0.0f;
+			waitingTimeToGame_ += 1;
+			
+		}
+	}
+
+	
+	if (waitingTimeToTitle_ > 60 * 2) {
+		gamaManager->ChangeScene(new TitleScene());
+	}
+	if (waitingTimeToGame_ > 60 * 2) {
 		gamaManager->ChangeScene(new GameScene());
 	}
-
 }
 
 void SelectScene::Draw(GameManager* gamaManager){
@@ -87,6 +156,8 @@ void SelectScene::Draw(GameManager* gamaManager){
 	scoreAttackMode_->Draw();
 
 	corn_->Draw();
+
+	cursor_->Draw();
 }
 
 SelectScene::~SelectScene(){
