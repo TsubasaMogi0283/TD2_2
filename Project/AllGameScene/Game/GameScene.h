@@ -29,7 +29,7 @@ class GameScene : public IGameScene{
 public:
 
 	GameScene() {};
-	~GameScene() {};
+	~GameScene();
 
 	void Initialize(GameManager* gamaManager) override;
 	void Update(GameManager* gamaManager) override;
