@@ -48,6 +48,7 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	score_ = std::make_unique<Score>();
 	score_->Initialize();
 	score_->SetCollisionManager(collisionManager_.get());
+	score_->SetPlayerHitBox(playerHitBox_.get());
 
 #pragma region 後でクラスにする
 	//Ready

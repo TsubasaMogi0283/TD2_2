@@ -251,7 +251,7 @@ void PlayerHitBox::CalcAABB() {
 
 // 衝突時コールバック処理
 void PlayerHitBox::onCollisionToEnemy() {
-
+	isKillEnemy_ = true;
 
 }
 void PlayerHitBox::EndOverlapToEnemy() {

@@ -1,6 +1,7 @@
 #include "Score.h"
 #include "TextureManager/TextureManager.h"
 #include "CollisionManager/CollisionManager.h"
+#include "Object/Player/HitBox/PlayerHitBox.h"
 
 Score::Score(){
 
@@ -58,7 +59,7 @@ void Score::Update(){
 	//ImGui::End();
 
 	
-	if (collisionManager_->GetIsKillEnemy() == true) {
+	if (playerHitBox_->GetIsKillEnemy() == true) {
 		killCount_++;
 		isUpScore_ = true;
 	}

@@ -3,6 +3,7 @@
 #include <memory>
 
 class CollisionManager;
+class PlayerHitBox;
 
 class Score{
 public:
@@ -30,6 +31,9 @@ public:
 	}
 
 	void SetCollisionManager(CollisionManager* player) { collisionManager_ = player; }
+	void SetPlayerHitBox(PlayerHitBox* hitBox) {
+		playerHitBox_ = hitBox;
+	}
 
 private:
 
@@ -55,6 +59,7 @@ private:
 
 	uint32_t numberTextureHandle[NUMBER_AMOUNT_] = {};
 
+	PlayerHitBox* playerHitBox_ = nullptr;
 
 	CollisionManager* collisionManager_ = nullptr;
 	int getScore = 0;

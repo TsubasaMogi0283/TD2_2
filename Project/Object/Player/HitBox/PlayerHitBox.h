@@ -70,12 +70,17 @@ public:
 	/// </summary>
 	bool GetIsEmergeHitBox() { return isEmergeHitBox_; }
 
+	bool GetIsKillEnemy() {
+		return isKillEnemy_;
+	}
+
 #pragma endregion
 
 
 #pragma region Set
 
 	void SetPlayer(Player* player) { player_ = player; }
+	
 
 #pragma endregion 
 
@@ -112,5 +117,6 @@ private:
 	std::list<Popcorn*>popcornRight_;
 	std::list<Popcorn*>popcornLeft_;
 
+	bool isKillEnemy_ = false;
 
 };
