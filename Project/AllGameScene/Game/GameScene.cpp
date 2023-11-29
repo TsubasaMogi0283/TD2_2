@@ -43,8 +43,6 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	//スコア
 	score_ = std::make_unique<Score>();
 	score_->Initialize();
-	
-
 
 
 #pragma region 後でクラスにする
@@ -75,6 +73,10 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	uint32_t blackTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Black.png");
 	black_.reset(Sprite::Create(blackTextureHandle, { 0.0f,0.0f }));
 
+	//プレイのテキスト
+	playText_ = std::make_unique<Sprite>();
+	uint32_t playTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/PlayUI.png");
+	playText_.reset(Sprite::Create(playTextureHandle, { 1120.0f,500.0f }));
 
 #pragma endregion
 
@@ -290,6 +292,8 @@ void GameScene::Draw(GameManager* gamaManager) {
 		//スコア
 		score_->Draw();
 
+		//操作方法
+		playText_->Draw();
 
 		break;
 	case Succeeded:
