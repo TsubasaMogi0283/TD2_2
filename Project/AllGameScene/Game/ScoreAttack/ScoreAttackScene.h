@@ -24,7 +24,7 @@
 //StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
 
-class ScoreAttackScene{
+class ScoreAttackScene : public IGameScene{
 	public:
 
 	ScoreAttackScene() {};
@@ -67,9 +67,7 @@ private:
 
 	void PlayUpdate();
 
-	void SucceededUpdate();
-
-	void FailedUpdate();
+	void FinishUpdate();
 
 private:
 
@@ -93,8 +91,6 @@ private:
 	// コリジョンマネージャー
 	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
-	//制限時間
-	std::unique_ptr<CountDown> countDown_ = nullptr;
 
 	//スコア
 	std::unique_ptr<Score> score_ = nullptr;
@@ -137,8 +133,7 @@ private:
 	enum Phase {
 		Ready,	
 		Play,
-		Succeeded,
-		Failed,
+		Finish
 	};
 
 	int phaseNo_= 0;

@@ -37,9 +37,6 @@ void ScoreAttackScene::Initialize(GameManager* gamaManager) {
 	// コリジョンマネージャー
 	collisionManager_ = std::make_unique<CollisionManager>();
 
-	//制限時間
-	countDown_ =std::make_unique<CountDown>();
-	countDown_->Initialize();
 
 	//スコア
 	score_ = std::make_unique<Score>();
@@ -94,7 +91,7 @@ void ScoreAttackScene::ReadyUpdate() {
 	cameraPosition_.z -= 0.05f;
 	if (cameraPosition_.z < -8.0f) {
 		cameraPosition_.z = -8.0f;
-	readyTime_ += 1;
+		readyTime_ += 1;
 
 	}
 
@@ -110,27 +107,21 @@ void ScoreAttackScene::PlayUpdate() {
 	// エネミー
 	EnemysUpdate();
 
-	//制限時間
-	countDown_->Update();
 
 	//スコア
 	score_->Update();
 
 	
-	//勝ちへ
-	if (countDown_->GetTime() < 0) {
-		phaseNo_ = Succeeded;
-	}
-
+	
 	//負け(仮)
 	if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
-		phaseNo_ = Failed;
+		phaseNo_ = Finish;
 	}
 
 }
 
-//Succeeded
-void ScoreAttackScene::SucceededUpdate() {
+//Finish
+void ScoreAttackScene::FinishUpdate() {
 	finishDisplayTime_ += 1;
 	if (finishDisplayTime_ > 60 * 2) {
 		isWhiteOut_ = true;
@@ -155,17 +146,7 @@ void ScoreAttackScene::SucceededUpdate() {
 	}
 }
 
-//Failed
-void ScoreAttackScene::FailedUpdate() {
-	theta += 1.0f;
-	cameraPosition_.x += std::sinf(theta)*0.5f;
-	
-	blackTransparency_ += 0.01f;
-	black_->SetTransparency(blackTransparency_);
-	if (blackTransparency_ > 1.0f) {
-		loseLodingTime_ += 1;
-	}
-}
+
 
 /// <summary>
 /// 更新処理
@@ -220,17 +201,12 @@ void ScoreAttackScene::Update(GameManager* gamaManager) {
 		PlayUpdate();
 		
 		break;
-	case Succeeded:
+	case Finish:
 		//勝ち
-		SucceededUpdate();
+		FinishUpdate();
 		
 		break;
 
-	case Failed:
-		//負け
-		FailedUpdate();
-
-		break;
 	};
 
 	
@@ -285,15 +261,13 @@ void ScoreAttackScene::Draw(GameManager* gamaManager) {
 		}
 
 
-		//制限時間
-		countDown_->Draw();
 
 		//スコア
 		score_->Draw();
 
 
 		break;
-	case Succeeded:
+	case Finish:
 
 		if (finishDisplayTime_ <= 60 * 2) {
 			finish_->Draw();
@@ -303,9 +277,6 @@ void ScoreAttackScene::Draw(GameManager* gamaManager) {
 		}
 		break;
 
-	case Failed:
-		black_->Draw();
-		break;
 	};
 
 }

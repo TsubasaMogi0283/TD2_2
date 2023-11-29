@@ -53,8 +53,13 @@ private:
 
 	int waitingTimeToTitle_ = 0;
 	bool isToTitle_ = false;
+
 	int waitingTimeToGame_ = 0;
 	bool isToGame_ = false;
+
+	int waitingTimeToScoreAttack_ = 0;
+	bool isToScoreAttack_ = false;
+
 
 	bool isFadeIn_ = true;
 	bool isFadeOut_ = false;
