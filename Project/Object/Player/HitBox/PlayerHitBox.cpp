@@ -61,10 +61,95 @@ void PlayerHitBox::Update() {
 	// キーを押してヒットボックスの出現フラグを立てる
 	if (Input::GetInstance()->IsPushKey(DIK_SPACE) == true) {
 		isEmergeHitBox_ = true;
+
+
+
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+			static const int POPCORN_AMOUNT = 2;
+		
+		
+			const Vector3 INITIAL_VELOCITY = {0.1f,-0.2f,0.0f};
+
+			
+			Popcorn* popcornRight[POPCORN_AMOUNT] = { nullptr };
+			Vector3 popcornRightPosition[POPCORN_AMOUNT] = {};
+			Vector3 moveRight[POPCORN_AMOUNT] = {};
+
+
+			Popcorn* popcornLeft[POPCORN_AMOUNT] = { nullptr };
+			Vector3 popcornLeftPosition[POPCORN_AMOUNT] = {};
+			Vector3 moveLeft[POPCORN_AMOUNT] = {};
+
+			for (int i = 0; i < POPCORN_AMOUNT; i++) {
+				
+				//出る位置をずらす
+				popcornRightPosition[i] = Add(hitBoxRight_.transform.translate, INITIAL_VELOCITY);
+				popcornLeftPosition[i] = Add(hitBoxLeft_.transform.translate, { -INITIAL_VELOCITY.x,INITIAL_VELOCITY.y,INITIAL_VELOCITY.z });
+
+				const Vector3 RIGHT_VELOCITY_INTERVAL = { 0.05f,0.05f,0.1f };
+				const Vector3 LEFT_VELOCITY_INTERVAL = { -0.05f,0.05f,0.1f };
+
+				moveRight[i] = {
+					0.03f+i*RIGHT_VELOCITY_INTERVAL.x,
+					0.2f+ i*RIGHT_VELOCITY_INTERVAL.y,
+					0.0f+ i*RIGHT_VELOCITY_INTERVAL.z 
+				};
+
+				moveLeft[i] = {
+					-0.03f+i*LEFT_VELOCITY_INTERVAL.x,
+					0.2f+ i*LEFT_VELOCITY_INTERVAL.y,
+					0.0f+ i*LEFT_VELOCITY_INTERVAL.z 
+				};
+			
+				//初期化
+				popcornRight[i] = new Popcorn();
+				popcornRight[i]->Initialize(popcornRightPosition[i], moveRight[i]);
+				
+				popcornLeft[i] = new Popcorn();
+				popcornLeft[i]->Initialize(popcornLeftPosition[i], moveLeft[i]);
+				
+
+				popcornRight_.push_back(popcornRight[i]);
+				popcornLeft_.push_back(popcornLeft[i]);
+			}
+		}
+
+		
+		
+		
+		
+
+		
 	}
 	else {
 		isEmergeHitBox_ = false;
 	}
+
+	for (Popcorn* popcorn : popcornRight_) {
+		popcorn->Update();
+	}
+	for (Popcorn* popcorn : popcornLeft_) {
+		popcorn->Update();
+	}
+
+
+	//デスフラグの立った玉を削除
+	popcornRight_.remove_if([](Popcorn* popcorn) {
+		if (popcorn->IsDead()) {
+			delete popcorn;
+			return true;
+		}
+		return false;
+	});
+
+	popcornLeft_.remove_if([](Popcorn* popcorn) {
+		if (popcorn->IsDead()) {
+			delete popcorn;
+			return true;
+		}
+		return false;
+	});
+
 
 	// もろもろの計算
 	SetPlayerHitBoxProperty();
@@ -105,7 +190,12 @@ void PlayerHitBox::Draw() {
 		hitBoxLeft_.model->Draw();
 		hitBoxRight_.model->Draw();
 	}
-
+	for (Popcorn* popcorn : popcornRight_) {
+		popcorn->Draw();
+	}
+	for (Popcorn* popcorn : popcornLeft_) {
+		popcorn->Draw();
+	}
 }
 
 
