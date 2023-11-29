@@ -10,10 +10,6 @@
 #include <list>
 #include <random>
 
-#include <dinput.h>
-#include <Xinput.h>
-
-
 struct PlayerProperty {
 	std::unique_ptr<Model> model = nullptr;
 	Transform transform{};

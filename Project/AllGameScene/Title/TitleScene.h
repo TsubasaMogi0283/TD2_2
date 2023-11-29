@@ -3,8 +3,6 @@
 
 #include "Input/Input.h"
 #include "Polygon/Sprite/Sprite.h"
-#include <dinput.h>
-#include <Xinput.h>
 
 class TitleScene : public IGameScene{
 public:

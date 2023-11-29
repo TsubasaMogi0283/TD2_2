@@ -4,6 +4,8 @@
 #include "Polygon/Sprite/Sprite.h"
 #include "Polygon/Model/Model.h"
 
+#include <Xinput.h>
+
 class SelectScene : public IGameScene{
 public:
 
@@ -50,5 +52,13 @@ private:
 	int waitingTimeToGame_ = 0;
 	bool isToGame_ = false;
 
+	//コントローラー
+	XINPUT_STATE joyState{};
+
+	int triggerButtonLeftTime;
+
+	int triggerButtonRightTime;
+
+	int triggerButtonBTime;
 };
 

@@ -132,25 +132,22 @@ void Player::EndOverlapToEnemy() {
 // 移動処理
 void Player::Move() {
 	if (Input::GetInstance()->GetJoystickState(joyState)) {
-		//左ボタン
-		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) {
-			triggerButtonLeftTime += 1;
-
-		}
-		//右ボタン
+		//右
 		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) {
-			triggerButtonRightTime += 1;
-
+			pla_.transform.translate.x += pla_.velocity.x;
 		}
-
+		//左
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) {
+			pla_.transform.translate.x -= pla_.velocity.x;
+		}
 	}
 
 	// 左右移動処理
-	if (input->IsPushKey(DIK_A) || input->IsPushKey(DIK_LEFT) || triggerButtonLeftTime == 1) {
+	if (input->IsPushKey(DIK_A) || input->IsPushKey(DIK_LEFT)) {
 
 		pla_.transform.translate.x -= pla_.velocity.x;
 	}
-	if (input->IsPushKey(DIK_D) || input->IsPushKey(DIK_RIGHT) || triggerButtonRightTime == 1) {
+	if (input->IsPushKey(DIK_D) || input->IsPushKey(DIK_RIGHT)) {
 
 		pla_.transform.translate.x += pla_.velocity.x;
 	}

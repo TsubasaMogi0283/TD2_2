@@ -2,7 +2,6 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Polygon/Sprite/Sprite.h"
 
-#include <dinput.h>
 #include <Xinput.h>
 
 #include <memory>
