@@ -54,9 +54,6 @@ void Player::Initialize() {
 	gravity_.accel = 0.1f;
 	gravity_.maxVel = -1.0f;
 
-
-	isHit_ = 0;
-
 	// パーティクルのプッシュバックタイマー
 	particlePushBackTimer_ = 0;
 }
@@ -96,7 +93,6 @@ void Player::Update() {
 	ImGui::Checkbox("GravityEnable", &gravity_.enable);
 	ImGui::DragFloat("Gravity_accel", &gravity_.accel, 0.001f);
 	ImGui::DragFloat3("Gravity_Vel", &gravity_.velocity.x, 0.001f);
-	ImGui::Text("isHit = %d", isHit_);
 	ImGui::End();
 
 #endif // _DEBUG
@@ -119,12 +115,10 @@ void Player::Draw() {
 void Player::onCollisionToEnemy() {
 
 	//gravity_.enable = false;
-	isHit_ = 1;
 }
 void Player::EndOverlapToEnemy() {
 
 	//gravity_.enable = true;
-	isHit_ = 0;
 }
 
 
@@ -160,7 +154,6 @@ void Player::Move() {
 
 	if (input->IsTriggerKey(DIK_R)) {
 		pla_.transform = init_.transform;
-		isHit_ = 0;
 	}
 
 #endif // _DEBUG
@@ -283,3 +276,5 @@ void Player::PushBackParticles() {
 	particles_.push_back(newParticle);
 
 }
+
+

@@ -130,9 +130,6 @@
     <ClCompile Include="Project\Object\Oven\Oven.cpp">
       <Filter>Object\Stage\Oven</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Object\Player\Player.cpp">
-      <Filter>Object\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
       <Filter>Object\Popcorn</Filter>
     </ClCompile>
@@ -166,7 +163,21 @@
     <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
       <Filter>GameManager\Scene\Game\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.cpp">
+      <Filter>GameManager\Scene\Game\ScoreAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Record\Record.cpp">
+      <Filter>Object\Score\Record</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Player\Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Player\Particle\PlayerParticle.cpp">
+      <Filter>Object\Player\Paricle</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Player\HitBox\PlayerHitBox.cpp">
+      <Filter>Object\Player\HitBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -346,9 +357,6 @@
     <ClInclude Include="Project\Object\Oven\Oven.h">
       <Filter>Object\Stage\Oven</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Object\Player\Player.h">
-      <Filter>Object\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
       <Filter>Object\Popcorn</Filter>
     </ClInclude>
@@ -388,7 +396,21 @@
     <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
       <Filter>GameManager\Scene\Game\Main</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.h" />
+    <ClInclude Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.h">
+      <Filter>GameManager\Scene\Game\ScoreAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Record\Record.h">
+      <Filter>Object\Score\Record</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Player\Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Player\Particle\PlayerParticle.h">
+      <Filter>Object\Player\Paricle</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Player\HitBox\PlayerHitBox.h">
+      <Filter>Object\Player\HitBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -542,6 +564,15 @@
     </Filter>
     <Filter Include="GameManager\Scene\Game\ScoreAttack">
       <UniqueIdentifier>{4d963fec-fa77-429a-9a6e-db1ed0e63a29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Score\Record">
+      <UniqueIdentifier>{89de5ab1-0143-4a02-9d52-4528d02467eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\Paricle">
+      <UniqueIdentifier>{6bd4783f-a9e2-4ab3-8dc0-429caa738b81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\HitBox">
+      <UniqueIdentifier>{57768f86-0130-46f4-afe9-6b8a1e2709e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
