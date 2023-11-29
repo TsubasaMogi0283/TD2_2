@@ -6,6 +6,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <random>
 
 #include "Polygon/Sprite/Sprite.h"
 #include "Polygon/Model/Model.h"
@@ -14,19 +15,20 @@
 #include <Object/Corn/Corn.h>
 #include <Object/Lamp/Lamp.h>
 #include <Object/Player/Player.h>
+#include <Object/Player/HitBox/PlayerHitBox.h>
 #include <Object/Enemy/Enemy.h>
 #include "CollisionManager/CollisionManager.h"
 #include <Object/CountDown/CountDown.h>
 #include <Object/Score/Score.h>
 #include <AllGameScene/GameManager/IGamePlayScene.h>
-#include <Object/Record/Record.h>
-
+#include "Audio/Audio.h"
 
 //StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
 
+
 class ScoreAttackScene : public IGameScene{
-	public:
+public:
 
 	ScoreAttackScene() {};
 	~ScoreAttackScene();
@@ -68,7 +70,9 @@ private:
 
 	void PlayUpdate();
 
-	void FinishUpdate();
+	void SucceededUpdate();
+
+	void FailedUpdate();
 
 private:
 
@@ -83,6 +87,8 @@ private:
 
 	// プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
+	// プレイヤーのヒットボックス
+	std::unique_ptr<PlayerHitBox> playerHitBox_ = nullptr;
 
 	// エネミー
 	std::unique_ptr<Enemy> enemy_ = nullptr;
@@ -92,10 +98,14 @@ private:
 	// コリジョンマネージャー
 	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
+	//制限時間
+	std::unique_ptr<CountDown> countDown_ = nullptr;
 
 	//スコア
 	std::unique_ptr<Score> score_ = nullptr;
 
+	//操作方法
+	std::unique_ptr<Sprite> playText_ = nullptr;
 
 	//カメラ
 	Vector3 cameraPosition_ = {};
@@ -134,7 +144,8 @@ private:
 	enum Phase {
 		Ready,	
 		Play,
-		Finish
+		Succeeded,
+		Failed,
 	};
 
 	int phaseNo_= 0;
@@ -142,8 +153,15 @@ private:
 	//StatePatternに必要な変数
 	IGamePlayScene* currentGamaScene_ = nullptr;
 
+	Audio* bgm_ = nullptr;
+	uint32_t bgmHandle_ = 0u;
+
+	Audio* finishSE_ = nullptr;
+	uint32_t finishHandle_ = 0u;
+
+	Audio* lose_ = nullptr;
+	uint32_t loseHandle_ = 0u;
+
+	int loseTriggerTime_ = 0;
 };
-
-
-
 

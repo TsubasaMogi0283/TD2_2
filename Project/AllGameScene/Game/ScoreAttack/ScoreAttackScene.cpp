@@ -1,6 +1,5 @@
 #include "ScoreAttackScene.h"
 
-
 #include "ImGuiManager/ImGuiManager.h"
 #include "Input/Input.h"
 
@@ -8,6 +7,7 @@
 #include <AllGameScene/Result/ResultScene.h>
 #include "AllGameScene/Result/Win/WinScene.h"
 #include "AllGameScene/Result/Lose/LoseScene.h"
+#include "AllGameScene/Title/TitleScene.h"
 
 /// <summary>
 /// 初期化処理
@@ -29,6 +29,10 @@ void ScoreAttackScene::Initialize(GameManager* gamaManager) {
 	// プレイヤー
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
+	// プレイヤーヒットボックス
+	playerHitBox_ = std::make_unique<PlayerHitBox>();
+	playerHitBox_->Initialize();
+	playerHitBox_->SetPlayer(player_.get());
 
 	// エネミー
 	enemy_ = std::make_unique<Enemy>();
@@ -37,13 +41,15 @@ void ScoreAttackScene::Initialize(GameManager* gamaManager) {
 	// コリジョンマネージャー
 	collisionManager_ = std::make_unique<CollisionManager>();
 
+	//制限時間
+	countDown_ =std::make_unique<CountDown>();
+	countDown_->Initialize();
 
 	//スコア
 	score_ = std::make_unique<Score>();
 	score_->Initialize();
-	
-
-
+	score_->SetCollisionManager(collisionManager_.get());
+	score_->SetPlayerHitBox(playerHitBox_.get());
 
 #pragma region 後でクラスにする
 	//Ready
@@ -73,6 +79,10 @@ void ScoreAttackScene::Initialize(GameManager* gamaManager) {
 	uint32_t blackTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Black.png");
 	black_.reset(Sprite::Create(blackTextureHandle, { 0.0f,0.0f }));
 
+	//プレイのテキスト
+	playText_ = std::make_unique<Sprite>();
+	uint32_t playTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/PlayUI.png");
+	playText_.reset(Sprite::Create(playTextureHandle, { 1120.0f,500.0f }));
 
 #pragma endregion
 
@@ -84,6 +94,20 @@ void ScoreAttackScene::Initialize(GameManager* gamaManager) {
 	//カメラ
 	Camera::GetInstance()->SetRotate(cameraRotate_);
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
+
+	
+
+	finishSE_ = Audio::GetInstance();
+	finishHandle_ = finishSE_->LoadWave("Resources/Audio/Finish/Finish.wav");
+
+	lose_ = Audio::GetInstance();
+	loseHandle_ = lose_->LoadWave("Resources/Audio/Action/Damege.wav");
+
+	bgm_ = Audio::GetInstance();
+	bgmHandle_ = bgm_->LoadWave("Resources/Audio/BGM/ScoreAttack.wav");
+	bgm_->PlayWave(bgmHandle_, true);
+	bgm_->ChangeVolume(bgmHandle_, 0.2f);
+
 }
 
 //RedayScene
@@ -104,25 +128,37 @@ void ScoreAttackScene::ReadyUpdate() {
 
 //PlayScene
 void ScoreAttackScene::PlayUpdate() {
+
+	bgm_->ChangeVolume(bgmHandle_, 0.7f);
 	// エネミー
 	EnemysUpdate();
 
+	//制限時間
+	countDown_->Update();
 
 	//スコア
-	score_->Update();
 
+	score_->Update();
 	
 	
+
 	//負け(仮)
-	if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
-		phaseNo_ = Finish;
+	if (collisionManager_->GetIsHitPlayerAndEnemy() == true) {
+		countDown_->ISetICounDown(false);
+		phaseNo_ = Failed;
 	}
+	
+
 
 }
 
-//Finish
-void ScoreAttackScene::FinishUpdate() {
+//Succeeded
+void ScoreAttackScene::SucceededUpdate() {
 	finishDisplayTime_ += 1;
+	if (finishDisplayTime_==1) {
+		finishSE_->PlayWave(finishHandle_, false);
+	}
+
 	if (finishDisplayTime_ > 60 * 2) {
 		isWhiteOut_ = true;
 	}
@@ -139,22 +175,43 @@ void ScoreAttackScene::FinishUpdate() {
 		if (whiteTransparency_ > 1.0f) {
 			whiteTransparency_ = 1.0f;
 
-			loadingTime += 1;
+
+			bgm_->StopWave(bgmHandle_);
+			if (countDown_->GetIsCountDown() == true) {
+				loadingTime += 1;
+			
+			}
 			
 			
 		}
-
-		// スコアをRecordシングルトンに保存
-		Record::GetInstance()->SetScore(score_->GetScore());
 	}
 }
 
+//Failed
+void ScoreAttackScene::FailedUpdate() {
+	bgm_->StopWave(bgmHandle_);
 
+	loseTriggerTime_++;
+	if (loseTriggerTime_ == 1) {
+		lose_->PlayWave(loseHandle_, false);
+
+	}
+	
+	theta += 1.0f;
+	cameraPosition_.x += std::sinf(theta)*0.5f;
+	
+	blackTransparency_ += 0.01f;
+	black_->SetTransparency(blackTransparency_);
+	if (blackTransparency_ > 1.0f) {
+		loseLodingTime_ += 1;
+	}
+}
 
 /// <summary>
 /// 更新処理
 /// </summary>
 void ScoreAttackScene::Update(GameManager* gamaManager) {
+	
 
 	//とうもろこしの更新
 	corn_->Update();
@@ -167,7 +224,7 @@ void ScoreAttackScene::Update(GameManager* gamaManager) {
 
 	// プレイヤー
 	player_->Update();
-
+	playerHitBox_->Update();
 	
 
 	// 衝突判定
@@ -179,10 +236,15 @@ void ScoreAttackScene::Update(GameManager* gamaManager) {
 	Camera::GetInstance()->SetRotate(cameraRotate_);
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
-#ifdef _DEBUG
+	
 
+#ifdef _DEBUG
 	ImGui::Begin("Game");
+	ImGui::InputInt("WinLoadingTime", &loadingTime);
+	ImGui::InputInt("LoseLoadingTime", &loseLodingTime_);
+
 	ImGui::End();
+	
 
 	ImGui::Begin("Camera");
 	ImGui::SliderFloat3("Translate", &cameraPosition_.x, -20.0f, 10.0f);
@@ -204,22 +266,35 @@ void ScoreAttackScene::Update(GameManager* gamaManager) {
 		PlayUpdate();
 		
 		break;
-	case Finish:
+	case Succeeded:
 		//勝ち
-		FinishUpdate();
+		SucceededUpdate();
 		
+		if (loadingTime > 60) {
+			gamaManager->ChangeScene(new WinScene());
+		}
+
 		break;
 
-	};	
-	
-	//シーンチェンジ
-	if (loseLodingTime_ >= 60) {
-		gamaManager->ChangeScene(new LoseScene());
-	}
+	case Failed:
+		//負け
+		FailedUpdate();
 
-	if (loadingTime > 60) {
-		gamaManager->ChangeScene(new WinScene());
-	}
+		//シーンチェンジ
+		if (loseLodingTime_ > 60) {
+			gamaManager->ChangeScene(new TitleScene());
+		}
+
+		break;
+	};
+
+	
+
+	
+	
+	
+
+	
 
 }
 
@@ -239,6 +314,7 @@ void ScoreAttackScene::Draw(GameManager* gamaManager) {
 
 	//プレイヤー
 	player_->Draw();
+	playerHitBox_->Draw();
 
 	switch (phaseNo_) {
 	case Ready:
@@ -260,13 +336,17 @@ void ScoreAttackScene::Draw(GameManager* gamaManager) {
 		}
 
 
+		//制限時間
+		//countDown_->Draw();
 
 		//スコア
 		score_->Draw();
 
+		//操作方法
+		playText_->Draw();
 
 		break;
-	case Finish:
+	case Succeeded:
 
 		if (finishDisplayTime_ <= 60 * 2) {
 			finish_->Draw();
@@ -276,6 +356,9 @@ void ScoreAttackScene::Draw(GameManager* gamaManager) {
 		}
 		break;
 
+	case Failed:
+		black_->Draw();
+		break;
 	};
 
 }
@@ -314,6 +397,9 @@ void ScoreAttackScene::EnemysUpdate() {
 			PushBackEnemy();
 		}
 	}
+	/*if (Input::GetInstance()->IsPushKey(DIK_RETURN)) {
+		PushBackEnemy();
+	}*/
 
 #ifdef _DEBUG
 
@@ -334,8 +420,23 @@ uint32_t ScoreAttackScene::CalcEnemysList() {
 
 void ScoreAttackScene::PushBackEnemy() {
 
+	// インスタンス生成
 	Enemy* newEnemy = new Enemy();
-	Vector3 newPos = { 0.0f, 3.0f, 0.0f };
+
+	// 乱数生成
+	std::random_device seedGenerator;
+	std::mt19937 randomEngine(seedGenerator());
+
+	// X,Yは乱数で、Zはプレイヤーと揃える
+	std::uniform_real_distribution<float> distributionX(-7.0f, 7.0f);
+	std::uniform_real_distribution<float> distributionY(4.0f, 8.0f);
+
+	// 敵の初期値を乱数で沸かせる
+	Vector3 newPos = { 
+		.x = distributionX(randomEngine),
+		.y = distributionY(randomEngine),
+		.z = player_->GetTransform().translate.z
+	};
 	newEnemy->Initialize(newPos);
 	newEnemy->SetPlayer(player_.get());
 	enemys_.push_back(newEnemy);
@@ -359,6 +460,7 @@ void ScoreAttackScene::CheckAllCollision() {
 
 	// オブジェクトの設定
 	collisionManager_->SetPlayer(player_.get());
+	collisionManager_->SetPlayerHitBox(playerHitBox_.get());
 	for (Enemy* enemy : enemys_) {
 		collisionManager_->EnemyListPushBack(enemy);
 	}
