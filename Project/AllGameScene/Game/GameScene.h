@@ -6,6 +6,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <random>
 
 #include "Polygon/Sprite/Sprite.h"
 #include "Polygon/Model/Model.h"

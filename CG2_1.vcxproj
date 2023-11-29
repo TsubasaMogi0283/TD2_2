@@ -136,6 +136,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Object\Corn\Corn.cpp" />
     <ClCompile Include="Project\Object\CountDown\CountDown.cpp" />
     <ClCompile Include="Project\Object\Enemy\Enemy.cpp" />
+    <ClCompile Include="Project\Object\Enemy\State\Approach\EnemyApproachState.cpp" />
+    <ClCompile Include="Project\Object\Enemy\State\Attack\EnemyAttackState.cpp" />
+    <ClCompile Include="Project\Object\Enemy\State\Wandering\EnemyWanderingState.cpp" />
     <ClCompile Include="Project\Object\Lamp\Lamp.cpp" />
     <ClCompile Include="Project\Object\Oven\Oven.cpp" />
     <ClCompile Include="Project\Object\Player\HitBox\PlayerHitBox.cpp" />
@@ -237,6 +240,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Object\Corn\Corn.h" />
     <ClInclude Include="Project\Object\CountDown\CountDown.h" />
     <ClInclude Include="Project\Object\Enemy\Enemy.h" />
+    <ClInclude Include="Project\Object\Enemy\State\Approach\EnemyApproachState.h" />
+    <ClInclude Include="Project\Object\Enemy\State\Attack\EnemyAttackState.h" />
+    <ClInclude Include="Project\Object\Enemy\State\IEnemyMoveState.h" />
+    <ClInclude Include="Project\Object\Enemy\State\Wandering\EnemyWanderingState.h" />
     <ClInclude Include="Project\Object\Lamp\Lamp.h" />
     <ClInclude Include="Project\Object\Oven\Oven.h" />
     <ClInclude Include="Project\Object\Player\HitBox\PlayerHitBox.h" />

@@ -178,6 +178,15 @@
     <ClCompile Include="Project\Object\Player\HitBox\PlayerHitBox.cpp">
       <Filter>Object\Player\HitBox</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\Enemy\State\Approach\EnemyApproachState.cpp">
+      <Filter>Object\Enemy\State\Approach</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Enemy\State\Attack\EnemyAttackState.cpp">
+      <Filter>Object\Enemy\State\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\Enemy\State\Wandering\EnemyWanderingState.cpp">
+      <Filter>Object\Enemy\State\Wandering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -411,6 +420,18 @@
     <ClInclude Include="Project\Object\Player\HitBox\PlayerHitBox.h">
       <Filter>Object\Player\HitBox</Filter>
     </ClInclude>
+    <ClInclude Include="Project\Object\Enemy\State\IEnemyMoveState.h">
+      <Filter>Object\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Enemy\State\Approach\EnemyApproachState.h">
+      <Filter>Object\Enemy\State\Approach</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Enemy\State\Attack\EnemyAttackState.h">
+      <Filter>Object\Enemy\State\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Enemy\State\Wandering\EnemyWanderingState.h">
+      <Filter>Object\Enemy\State\Wandering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -573,6 +594,18 @@
     </Filter>
     <Filter Include="Object\Player\HitBox">
       <UniqueIdentifier>{57768f86-0130-46f4-afe9-6b8a1e2709e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\State">
+      <UniqueIdentifier>{ca363eb2-a711-46c2-acd4-1695c60f396e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\State\Approach">
+      <UniqueIdentifier>{f5b73bf1-5bcc-4453-8250-5e9c8f61436a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\State\Attack">
+      <UniqueIdentifier>{4578ce09-55b0-4ec7-a7fe-95bf19688209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\State\Wandering">
+      <UniqueIdentifier>{eccc5eef-12ed-492a-8014-1ee028941679}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

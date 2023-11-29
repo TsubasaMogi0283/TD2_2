@@ -367,6 +367,9 @@ void GameScene::EnemysUpdate() {
 			PushBackEnemy();
 		}
 	}
+	/*if (Input::GetInstance()->IsPushKey(DIK_RETURN)) {
+		PushBackEnemy();
+	}*/
 
 #ifdef _DEBUG
 
@@ -387,8 +390,23 @@ uint32_t GameScene::CalcEnemysList() {
 
 void GameScene::PushBackEnemy() {
 
+	// インスタンス生成
 	Enemy* newEnemy = new Enemy();
-	Vector3 newPos = { 0.0f, 3.0f, 0.0f };
+
+	// 乱数生成
+	std::random_device seedGenerator;
+	std::mt19937 randomEngine(seedGenerator());
+
+	// X,Yは乱数で、Zはプレイヤーと揃える
+	std::uniform_real_distribution<float> distributionX(-7.0f, 7.0f);
+	std::uniform_real_distribution<float> distributionY(4.0f, 8.0f);
+
+	// 敵の初期値を乱数で沸かせる
+	Vector3 newPos = { 
+		.x = distributionX(randomEngine),
+		.y = distributionY(randomEngine),
+		.z = player_->GetTransform().translate.z
+	};
 	newEnemy->Initialize(newPos);
 	newEnemy->SetPlayer(player_.get());
 	enemys_.push_back(newEnemy);
