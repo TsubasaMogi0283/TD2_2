@@ -3,7 +3,7 @@
 #include "Polygon/Sprite/Sprite.h"
 
 #include <Xinput.h>
-
+#include "Audio/Audio.h"
 #include <memory>
 
 class GameManager;
@@ -44,7 +44,16 @@ private:
 	//コントローラー
 	XINPUT_STATE joyState{};
 
-	int triggerButtonBTime;
+	int triggerButtonBTime=0;
 
+
+
+
+	//BGM
+	Audio* bgm_ = nullptr;
+	uint32_t selectBGMHandle_ = 0u;
+	//DecideSE
+	Audio* decideSE_ = nullptr;
+	uint32_t decideSEHandle_ = 0u;
 };
 
