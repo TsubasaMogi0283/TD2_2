@@ -36,9 +36,6 @@
     <ClCompile Include="Project\AllGameScene\GameManager\GameManager.cpp">
       <Filter>GameManager</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
-      <Filter>GameManager\Scene\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\externals\imGui\imgui.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
@@ -161,9 +158,15 @@
       <Filter>GameManager\Scene\Select</Filter>
     </ClCompile>
     <ClCompile Include="Project\AllGameScene\Game\Play\PlayScene.cpp">
-      <Filter>GameManager\Scene\Game\Play</Filter>
+      <Filter>GameManager\Scene\Game\Main\Play</Filter>
     </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\Ready\ReadyScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\Game\Ready\ReadyScene.cpp">
+      <Filter>GameManager\Scene\Game\Main\Ready</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
+      <Filter>GameManager\Scene\Game\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -195,9 +198,6 @@
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\GameManager\GameManager.h">
       <Filter>GameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
-      <Filter>GameManager\Scene\Game</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\externals\imGui\imconfig.h">
       <Filter>ImGui</Filter>
@@ -380,9 +380,15 @@
       <Filter>GameManager\Scene\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Project\AllGameScene\Game\Play\PlayScene.h">
-      <Filter>GameManager\Scene\Game\Play</Filter>
+      <Filter>GameManager\Scene\Game\Main\Play</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\Ready\ReadyScene.h" />
+    <ClInclude Include="Project\AllGameScene\Game\Ready\ReadyScene.h">
+      <Filter>GameManager\Scene\Game\Main\Ready</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
+      <Filter>GameManager\Scene\Game\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -525,11 +531,17 @@
     <Filter Include="GameManager\Scene\Interface">
       <UniqueIdentifier>{5b1dca75-3140-4653-a958-218284dd294b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameManager\Scene\Game\Play">
+    <Filter Include="GameManager\Scene\Game\Main">
+      <UniqueIdentifier>{33b72b4f-8c7a-4aa7-935d-a9b290affaab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Game\Main\Play">
       <UniqueIdentifier>{22c5cd0a-2317-459f-9ff1-4455eea7a9bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameManager\Scene\Game\Resdy">
+    <Filter Include="GameManager\Scene\Game\Main\Ready">
       <UniqueIdentifier>{fb97fd13-8f3f-4d19-99a5-3bbb695270c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager\Scene\Game\ScoreAttack">
+      <UniqueIdentifier>{4d963fec-fa77-429a-9a6e-db1ed0e63a29}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
