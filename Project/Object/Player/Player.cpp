@@ -252,7 +252,22 @@ void Player::PushBackParticles() {
 
 	// パーティクルを生成
 	PlayerParlicle* newParticle = new PlayerParlicle();
-	newParticle->Initialize(pla_.transform.translate);
+
+	Vector3 min = Subtract(pla_.transform.translate, pla_.size);
+	Vector3 max = Add(pla_.transform.translate, pla_.size);
+	float val = 0.35f;
+
+	std::random_device seedGenerator;
+	std::mt19937 randomEngine(seedGenerator());
+	std::uniform_real_distribution<float> distributionX(min.x, max.x);
+	std::uniform_real_distribution<float> distributionY(min.y, max.y);
+	std::uniform_real_distribution<float> distributionZ(min.z, max.z - val);
+	Vector3 particlePos = {
+		.x = distributionX(randomEngine),
+		.y = distributionY(randomEngine),
+		.z = distributionZ(randomEngine),
+	};
+	newParticle->Initialize(particlePos);
 
 	// パーティクルを登録する
 	particles_.push_back(newParticle);

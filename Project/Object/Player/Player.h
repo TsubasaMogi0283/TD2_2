@@ -8,6 +8,7 @@
 #include "Object/Player/Particle/PlayerParticle.h"
 
 #include <list>
+#include <random>
 
 
 struct PlayerProperty {
@@ -141,6 +142,9 @@ private:
 	// パーティクル
 	std::list<PlayerParlicle*> particles_;
 	uint32_t particlePushBackTimer_;
+	// パーティクル用乱数生成器
+	std::random_device seedGenerator;
+	std::mt19937 randomEngine;
 
 	// インプット
 	Input* input = nullptr;

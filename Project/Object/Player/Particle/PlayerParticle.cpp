@@ -12,7 +12,7 @@ void PlayerParlicle::Initialize(const Vector3& position) {
 	particle_.model.reset(Model::Create("Resources/PlayerParticle", "PlayerParticle.obj"));
 	particle_.model->SetLighting(false);
 
-	// 座標
+	// トランスフォーム
 	particle_.transform = {
 		.scale  = { 0.1f, 0.1f, 0.1f },
 		.rotate = { 0.0f, 0.0f, 0.0f },
