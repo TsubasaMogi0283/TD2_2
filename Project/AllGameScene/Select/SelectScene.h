@@ -22,7 +22,7 @@ private:
 private:
 	//WhiteOut
 	std::unique_ptr<Sprite> whiteBack_ = nullptr;
-	float transparency_ = 1.0f;
+	float transparency_ = 0.0f;
 
 	//タイトルに戻る
 	std::unique_ptr<Sprite> returnToTile_ = nullptr;
@@ -38,6 +38,10 @@ private:
 	
 	//とうもろこし
 	std::unique_ptr<Model> corn_ = nullptr;
+	Vector3 cornPosition_ = { 0.0f,0.0f,0.0f };
+	Vector3 scale_ = { 1.0f,1.0f,1.0f };
+	Vector3 rotate_ = { 0.0f,0.0f,0.0f };
+
 
 	const Vector2 INITIALE_POSITION = {300.0f,500.0f};
 	const Vector2 ICON_INTERVAL_ = {300.0f};
@@ -49,6 +53,9 @@ private:
 	bool isToTitle_ = false;
 	int waitingTimeToGame_ = 0;
 	bool isToGame_ = false;
+
+	bool isFadeIn_ = true;
+	bool isFadeOut_ = false;
 
 };
 
