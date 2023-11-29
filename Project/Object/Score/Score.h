@@ -6,8 +6,8 @@
 class CollisionManager;
 class PlayerHitBox;
 
-class Score{
-public:
+class Score {
+	public:
 	//コンストラクタ
 	Score();
 
@@ -23,19 +23,21 @@ public:
 	//デストラクタ
 	~Score();
 
-public:
+
 	void SetScore(int score) {
 		this->score_ = score;
 	}
+
 	int GetScore() {
 		return score_;
 	}
+
 
 	void SetCollisionManager(CollisionManager* player) { collisionManager_ = player; }
 
 	void SetPlayerHitBox(PlayerHitBox* hitBox) {
 		playerHitBox_ = hitBox;
-
+	}
 	Vector2 GetScoreBackSizeScale() const {
 		return scoreBackSize_;
 	}
@@ -53,7 +55,8 @@ public:
 
 	}
 
-private:
+
+	private:
 
 
 	std::unique_ptr<Sprite> scoreBack_ = nullptr;
@@ -87,4 +90,13 @@ private:
 	Vector2 setScale_ = { 1.0f,1.0f };
 
 };
+
+
+
+
+	
+
+	
+
+
 

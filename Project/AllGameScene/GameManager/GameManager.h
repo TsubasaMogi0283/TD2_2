@@ -18,7 +18,7 @@
 #include "Camera/Camera.h"
 #include "TextureManager/TextureManager.h"
 #include "PipelineManager/PipelineManager.h"
-
+#include "AllGameScene/GameManager/IGameScene.h"
 
 
 
