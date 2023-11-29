@@ -9,9 +9,14 @@
 /// </summary>
 void CollisionManager::CheckAllCollision() {
 
-	// プレイヤーとエネミーの当たり判定
+	// エネミーの当たり判定
 	for (Enemy* enemy : enemys_) {
-		CheckCollisionPair(player_, enemy);
+		//CheckCollisionPair(player_, enemy);
+
+		// ヒットボックスが出ている時だけ衝突判定
+		if (playerHitBox_->GetIsEmergeHitBox()) {
+			CheckCollisionPair(playerHitBox_, enemy);
+		}
 	}
 }
 
@@ -25,6 +30,7 @@ void CollisionManager::EnemyListPushBack(Enemy* enemy) {
 /// <summary>
 /// コライダー2つの衝突判定と応答
 /// </summary>
+// プレイヤー本体とエネミー
 void CollisionManager::CheckCollisionPair(Player* player, Enemy* enemy) {
 
 	if (isCollision(player->GetSphere(), enemy->GetSphere())) {
@@ -37,6 +43,36 @@ void CollisionManager::CheckCollisionPair(Player* player, Enemy* enemy) {
 
 		// 非衝突時処理
 		player->EndOverlapToEnemy();
+		enemy->EndOverlapToPlayer();
+	}
+}
+// プレイヤーヒットボックスとエネミー
+void CollisionManager::CheckCollisionPair(PlayerHitBox* hitBox, Enemy* enemy) {
+
+	// HitBoxLeft
+	if (isCollision(hitBox->GetLeftAABB(), enemy->GetSphere())) {
+
+		// 衝突時判定
+		hitBox->onCollisionToEnemy();
+		enemy->onCollisionToPlayer();
+	}
+	else {
+
+		// 非衝突判定
+		hitBox->EndOverlapToEnemy();
+		enemy->EndOverlapToPlayer();
+	}
+	// HitBoxRight
+	if (isCollision(hitBox->GetRightAABB(), enemy->GetSphere())) {
+
+		// 衝突時判定
+		hitBox->onCollisionToEnemy();
+		enemy->onCollisionToPlayer();
+	}
+	else {
+
+		// 非衝突判定
+		hitBox->EndOverlapToEnemy();
 		enemy->EndOverlapToPlayer();
 	}
 }

@@ -6,6 +6,7 @@
 
 #include "CollisionManager/CollisionManager.h"
 #include "Object/Player/Particle/PlayerParticle.h"
+#include "Object/Player/HitBox/PlayerHitBox.h"
 
 #include <list>
 #include <random>
@@ -71,6 +72,11 @@ public:
 	/// </summary>
 	Sphere GetSphere() { return plaSphere_; }
 
+	/// <summary>
+	/// Sizeの取得
+	/// </summary>
+	Vector3 GetSize() { return pla_.size; }
+
 #pragma endregion 
 
 
@@ -80,8 +86,6 @@ public:
 	/// 重力のフラグの設定
 	/// </summary>
 	void SetgGravityEnable(bool f) { gravity_.enable = f; }
-
-	void SetIsHit(uint32_t val) { isHit_ = val; }
 
 #pragma endregion 
 
@@ -118,6 +122,7 @@ private:
 	/// </summary>
 	void PushBackParticles();
 
+
 private:
 
 	// プレイヤー
@@ -134,9 +139,6 @@ private:
 
 	// Sphere
 	Sphere plaSphere_;
-
-	uint32_t isHit_;
-
 
 	// パーティクル
 	std::list<PlayerParlicle*> particles_;
