@@ -102,9 +102,9 @@ void GameManager::ChangeScene(IGameScene* newGameScene) {
 
 
 void GameManager::Operate() {
-	
+
 	Initialize();
-	
+
 	MSG msg{};
 
 	////メインループ
@@ -112,7 +112,7 @@ void GameManager::Operate() {
 	while (msg.message != WM_QUIT) {
 		//Windowにメッセージが来てたら最優先で処理させる
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-			
+
 			//common_->WinMSG(msg);
 			winApp_->WindowsMSG(msg);
 
@@ -124,20 +124,20 @@ void GameManager::Operate() {
 			BeginFrame();
 
 
-			
+
 			//更新処理
 			Update();
 
 
 			//描画
 			Draw();
-		
+
 			//フレームの終わり
 			EndFrame();
 
-			
+
 		}
-		
+
 	}
 
 	Release();
