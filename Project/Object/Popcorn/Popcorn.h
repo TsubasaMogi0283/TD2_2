@@ -38,7 +38,7 @@ private:
 	//オーブン
 	//とうもろこし
 	Model* model_ =  nullptr ;
-	Vector3 scale_ = {1.0f,1.0f,1.0f,};
+	Vector3 scale_ = {0.5f,0.5f,0.5f,};
 	Vector3 position_ = {};
 	Vector3 move_ = {};
 	Vector3 rotate_ = {};

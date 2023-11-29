@@ -103,6 +103,8 @@ private:
 	//スコア
 	std::unique_ptr<Score> score_ = nullptr;
 
+	//操作方法
+	std::unique_ptr<Sprite> playText_ = nullptr;
 
 	//カメラ
 	Vector3 cameraPosition_ = {};

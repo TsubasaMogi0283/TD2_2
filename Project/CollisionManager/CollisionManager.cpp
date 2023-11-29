@@ -11,7 +11,7 @@ void CollisionManager::CheckAllCollision() {
 
 	// エネミーの当たり判定
 	for (Enemy* enemy : enemys_) {
-		//CheckCollisionPair(player_, enemy);
+		CheckCollisionPair(player_, enemy);
 
 		// ヒットボックスが出ている時だけ衝突判定
 		if (playerHitBox_->GetIsEmergeHitBox()) {
@@ -34,10 +34,19 @@ void CollisionManager::EnemyListPushBack(Enemy* enemy) {
 void CollisionManager::CheckCollisionPair(Player* player, Enemy* enemy) {
 
 	if (isCollision(player->GetSphere(), enemy->GetSphere())) {
+		
+		isHitPlayerAndEnemy_ = true;
+		if (isHitPlayerAndEnemy_ == true) {
+			ImGui::Begin("Collision");
+			ImGui::End();
+		}
+		
 
+		
 		// 衝突時判定
 		player->onCollisionToEnemy();
 		enemy->onCollisionToPlayer();
+		
 	}
 	else {
 

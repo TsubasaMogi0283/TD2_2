@@ -5,6 +5,7 @@
 #include "WorldTransform/WorldTransform.h"
 
 #include "CollisionManager/CollisionManager.h"
+#include <Object/Popcorn/Popcorn.h>
 
 
 
@@ -24,7 +25,15 @@ class PlayerHitBox {
 public:
 
 	PlayerHitBox() {};
-	~PlayerHitBox() {};
+	~PlayerHitBox() {
+		for (Popcorn* popcorn : popcornRight_) {
+			delete popcorn;
+		}
+		for (Popcorn* popcorn : popcornLeft_) {
+			delete popcorn;
+		}
+
+	};
 
 	/// <summary>
 	/// 初期化処理
@@ -97,5 +106,11 @@ private:
 
 	// ヒットボックス出現フラグ
 	bool isEmergeHitBox_;
+
+
+	Model* popcorn_ = nullptr;
+	std::list<Popcorn*>popcornRight_;
+	std::list<Popcorn*>popcornLeft_;
+
 
 };
