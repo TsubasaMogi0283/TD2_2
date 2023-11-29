@@ -153,8 +153,8 @@ private:
 	//StatePatternに必要な変数
 	IGamePlayScene* currentGamaScene_ = nullptr;
 
-	Audio* bgm_ = nullptr;
-	uint32_t bgmHandle_ = 0u;
+	Audio* mainBGM_ = nullptr;
+	uint32_t mainBgmHandle_ = 0u;
 
 	Audio* finishSE_ = nullptr;
 	uint32_t finishHandle_ = 0u;
