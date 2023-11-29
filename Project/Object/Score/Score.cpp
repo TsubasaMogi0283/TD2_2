@@ -42,6 +42,9 @@ void Score::Initialize(){
 
 
 	}
+
+	scoreBack_->SetScale(scoreBackSize_);
+	scoreBack_->SetPosition(scoreBackPosition_);
 }
 
 void Score::Update(){
@@ -54,12 +57,13 @@ void Score::Update(){
 	scoreTensPlace_ = (score_%100)/10;
 	scoreOnesPlace_ = score_ % 10;
 
-	scoreBack_->SetScale(scoreBackSize_);
-	scoreBack_->SetPosition(scoreBackPosition_);
+	
 
 }
 
 void Score::Draw(){
+
+	scoreBack_->Draw();
 	//スコア
 	for (int i = 0; i < NUMBER_AMOUNT_; i++) {
 		if (scoreTenThousandsPlace_ == i) {

@@ -39,7 +39,10 @@ private:
 	/// 衝突判定
 	/// </summary>
 	void CheckAllCollision();
+	
 
+	////シーンチェンジ
+	//void ChangeScene(IGamePlayScene* newGameScene);
 
 
 private:
@@ -74,7 +77,7 @@ private:
 	Vector3 cameraRotate_ = {};
 
 
-	int gamePlayScene_ = 1;
+	//int gamePlayScene_ = 1;
 	int readyTime_ = 0;
 
 	//Ready
@@ -90,7 +93,7 @@ private:
 	std::unique_ptr<Sprite> white_ = nullptr;
 	float whiteTransparency_ = 0.0f;
 	int loadingTime = 0;
-
+	bool isWhiteOut_ = false;
 
 	//BlackOut
 	std::unique_ptr<Sprite> black_ = nullptr;
@@ -101,6 +104,17 @@ private:
 	float theta = 0.0f;
 	int loseLodingTime_ = 0;
 
+
+
+	//enum宣言
+	enum Phase {
+		Ready,	
+		Play,
+		Succeeded,
+		Failed,
+	};
+
+	int phaseNo_= 0;
 
 	//StatePatternに必要な変数
 	IGamePlayScene* currentGamaScene_ = nullptr;
