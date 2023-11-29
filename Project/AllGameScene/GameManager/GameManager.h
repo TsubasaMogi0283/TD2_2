@@ -10,7 +10,6 @@
 #include "ConvertFunction/ConvertColor/ColorConvert.h"
 #include "Math/Matrix/Calculation/Matrix4x4Calculation.h"
 #include <Polygon/Sprite/Sprite.h>
-#include <Polygon/Sphere/Sphere.h>
 #include <Polygon/Model/Model.h>
 
 #include "Audio/Audio.h"

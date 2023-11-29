@@ -1,5 +1,7 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Input/Input.h"
+#include <dinput.h>
+#include <Xinput.h>
 
 class ResultScene : public IGameScene{
 public:
@@ -17,8 +19,5 @@ private:
 
 
 private:
-	Input* input_ = nullptr;
-
-
 
 };

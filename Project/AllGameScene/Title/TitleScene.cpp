@@ -2,6 +2,7 @@
 #include "ImGuiManager/ImGuiManager.h"
 #include "AllGameScene/GameManager/GameManager.h"
 #include <AllGameScene/Select/SelectScene.h>
+#include "AllGameScene/SampleScene/SampleScene.h"
 
 TitleScene::TitleScene() {
 
@@ -25,6 +26,16 @@ void TitleScene::Initialize(GameManager* gamaManager) {
 	startText_.reset(Sprite::Create(startTextureHandle, { 0.0f,0.0f }));
 	backGround_.reset(Sprite::Create(backTextureHandle, { 0.0f, 0.0f }));
 
+
+	//BGM
+	bgm_ = Audio::GetInstance();
+	titleBGMHandle_ = bgm_->LoadWave("Resources/Audio/BGM/TitleSelect.wav");
+	bgm_->PlayWave(titleBGMHandle_, true);
+
+	//SE
+	decideSE_ = Audio::GetInstance();
+	decideSEHandle_ = decideSE_->LoadWave("Resources/Audio/Deside/Decide.wav");
+
 }
 
 void TitleScene::ShowImGui() {
@@ -36,7 +47,8 @@ void TitleScene::ShowImGui() {
 }
 
 void TitleScene::Update(GameManager* gamaManager) {
-	ShowImGui();
+	//ShowImGui();
+	
 
 	startText_->SetTransparency(spriteTransparency_);
 	logo_->SetTransparency(spriteTransparency_);
@@ -68,7 +80,20 @@ void TitleScene::Update(GameManager* gamaManager) {
 			}
 		}
 
-		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+
+		if (Input::GetInstance()->GetJoystickState(joyState)) {
+
+			//Bボタン
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+				triggerButtonBTime += 1;
+
+			}
+
+		}
+
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+			decideSE_->PlayWave(decideSEHandle_, false);
+			bgm_->StopWave(titleBGMHandle_);
 			isFadeOut_ = true;
 			
 		}

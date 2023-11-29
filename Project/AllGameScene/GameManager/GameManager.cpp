@@ -2,6 +2,11 @@
 
 #include "AllGameScene/SampleScene/SampleScene.h"
 #include "AllGameScene/Title/TitleScene.h"
+#include "AllGameScene/Result/Win/WinScene.h"
+#include "AllGameScene/Result/Lose/LoseScene.h"
+#include "AllGameScene/Game/GameScene.h"
+#include "AllGameScene/Select/SelectScene.h"
+
 
 //コンストラクタ
 GameManager::GameManager() {
@@ -35,7 +40,8 @@ void GameManager::Initialize() {
 	audio_->Initialize();
 
 	//シーンごとに動作確認したいときはここを変えてね
-	currentGamaScene_ = new TitleScene();
+	currentGamaScene_ = new GameScene();
+
 	currentGamaScene_->Initialize(this);
 
 }
