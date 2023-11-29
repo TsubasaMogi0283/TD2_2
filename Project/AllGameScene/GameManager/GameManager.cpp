@@ -27,7 +27,7 @@ GameManager::GameManager() {
 	
 void GameManager::Initialize() {
 	//ここでタイトルバーの名前を決めてね
-	const wchar_t* titleBarName = L"Ellysia";
+	const wchar_t* titleBarName = L"2225_ポップスコーン";
 
 	//初期化
 	winApp_->Initialize(titleBarName,WINDOW_SIZE_WIDTH_,WINDOW_SIZE_HEIGHT_);
