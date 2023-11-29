@@ -37,8 +37,8 @@ void CollisionManager::CheckCollisionPair(Player* player, Enemy* enemy) {
 		
 		isHitPlayerAndEnemy_ = true;
 		if (isHitPlayerAndEnemy_ == true) {
-			ImGui::Begin("Collision");
-			ImGui::End();
+			//ImGui::Begin("Collision");
+			//ImGui::End();
 		}
 		
 
@@ -62,27 +62,35 @@ void CollisionManager::CheckCollisionPair(PlayerHitBox* hitBox, Enemy* enemy) {
 	if (isCollision(hitBox->GetLeftAABB(), enemy->GetSphere())) {
 
 		// 衝突時判定
+		isKillEnemy_ = true;
 		hitBox->onCollisionToEnemy();
 		enemy->onCollisionToPlayer();
+		
 	}
 	else {
 
 		// 非衝突判定
+		isKillEnemy_ = false;
 		hitBox->EndOverlapToEnemy();
 		enemy->EndOverlapToPlayer();
+		
 	}
 	// HitBoxRight
 	if (isCollision(hitBox->GetRightAABB(), enemy->GetSphere())) {
 
 		// 衝突時判定
+		isKillEnemy_ = true;
 		hitBox->onCollisionToEnemy();
 		enemy->onCollisionToPlayer();
+		
 	}
 	else {
 
 		// 非衝突判定
+		isKillEnemy_ = false;
 		hitBox->EndOverlapToEnemy();
 		enemy->EndOverlapToPlayer();
+		
 	}
 }
 

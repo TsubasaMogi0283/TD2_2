@@ -47,7 +47,7 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	//スコア
 	score_ = std::make_unique<Score>();
 	score_->Initialize();
-
+	score_->SetCollisionManager(collisionManager_.get());
 
 #pragma region 後でクラスにする
 	//Ready
@@ -92,6 +92,17 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	//カメラ
 	Camera::GetInstance()->SetRotate(cameraRotate_);
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
+
+	bgm_ = Audio::GetInstance();
+	bgmHandle_ = bgm_->LoadWave("Resources/Audio/BGM/MainGame.wav");
+	bgm_->PlayWave(bgmHandle_, true);
+	bgm_->ChangeVolume(bgmHandle_, 0.2f);
+
+	finishSE_ = Audio::GetInstance();
+	finishHandle_ = finishSE_->LoadWave("Resources/Audio/Finish/Finish.wav");
+
+	lose_ = Audio::GetInstance();
+	loseHandle_ = lose_->LoadWave("Resources/Audio/Action/Damege.wav");
 }
 
 //RedayScene
@@ -99,7 +110,7 @@ void GameScene::ReadyUpdate() {
 	cameraPosition_.z -= 0.05f;
 	if (cameraPosition_.z < -8.0f) {
 		cameraPosition_.z = -8.0f;
-	readyTime_ += 1;
+		readyTime_ += 1;
 
 	}
 
@@ -112,6 +123,8 @@ void GameScene::ReadyUpdate() {
 
 //PlayScene
 void GameScene::PlayUpdate() {
+
+	bgm_->ChangeVolume(bgmHandle_, 0.7f);
 	// エネミー
 	EnemysUpdate();
 
@@ -119,8 +132,9 @@ void GameScene::PlayUpdate() {
 	countDown_->Update();
 
 	//スコア
-	score_->Update();
 
+	score_->Update();
+	
 	
 	//勝ちへ
 	if (countDown_->GetTime() < 0) {
@@ -140,6 +154,10 @@ void GameScene::PlayUpdate() {
 //Succeeded
 void GameScene::SucceededUpdate() {
 	finishDisplayTime_ += 1;
+	if (finishDisplayTime_==1) {
+		finishSE_->PlayWave(finishHandle_, false);
+	}
+
 	if (finishDisplayTime_ > 60 * 2) {
 		isWhiteOut_ = true;
 	}
@@ -156,6 +174,8 @@ void GameScene::SucceededUpdate() {
 		if (whiteTransparency_ > 1.0f) {
 			whiteTransparency_ = 1.0f;
 
+
+			bgm_->StopWave(bgmHandle_);
 			if (countDown_->GetIsCountDown() == true) {
 				loadingTime += 1;
 			
@@ -168,6 +188,14 @@ void GameScene::SucceededUpdate() {
 
 //Failed
 void GameScene::FailedUpdate() {
+	bgm_->StopWave(bgmHandle_);
+
+	loseTriggerTime_++;
+	if (loseTriggerTime_ == 1) {
+		lose_->PlayWave(loseHandle_, false);
+
+	}
+	
 	theta += 1.0f;
 	cameraPosition_.x += std::sinf(theta)*0.5f;
 	
@@ -182,6 +210,7 @@ void GameScene::FailedUpdate() {
 /// 更新処理
 /// </summary>
 void GameScene::Update(GameManager* gamaManager) {
+	
 
 	//とうもろこしの更新
 	corn_->Update();
@@ -206,14 +235,14 @@ void GameScene::Update(GameManager* gamaManager) {
 	Camera::GetInstance()->SetRotate(cameraRotate_);
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
+	
+
+#ifdef _DEBUG
 	ImGui::Begin("Game");
 	ImGui::InputInt("WinLoadingTime", &loadingTime);
 	ImGui::InputInt("LoseLoadingTime", &loseLodingTime_);
 
 	ImGui::End();
-
-#ifdef _DEBUG
-
 	
 
 	ImGui::Begin("Camera");
@@ -367,6 +396,9 @@ void GameScene::EnemysUpdate() {
 			PushBackEnemy();
 		}
 	}
+	/*if (Input::GetInstance()->IsPushKey(DIK_RETURN)) {
+		PushBackEnemy();
+	}*/
 
 #ifdef _DEBUG
 
@@ -387,8 +419,23 @@ uint32_t GameScene::CalcEnemysList() {
 
 void GameScene::PushBackEnemy() {
 
+	// インスタンス生成
 	Enemy* newEnemy = new Enemy();
-	Vector3 newPos = { 0.0f, 3.0f, 0.0f };
+
+	// 乱数生成
+	std::random_device seedGenerator;
+	std::mt19937 randomEngine(seedGenerator());
+
+	// X,Yは乱数で、Zはプレイヤーと揃える
+	std::uniform_real_distribution<float> distributionX(-7.0f, 7.0f);
+	std::uniform_real_distribution<float> distributionY(4.0f, 8.0f);
+
+	// 敵の初期値を乱数で沸かせる
+	Vector3 newPos = { 
+		.x = distributionX(randomEngine),
+		.y = distributionY(randomEngine),
+		.z = player_->GetTransform().translate.z
+	};
 	newEnemy->Initialize(newPos);
 	newEnemy->SetPlayer(player_.get());
 	enemys_.push_back(newEnemy);

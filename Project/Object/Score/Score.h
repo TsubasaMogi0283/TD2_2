@@ -3,6 +3,8 @@
 
 #include <memory>
 
+class CollisionManager;
+
 class Score{
 public:
 	//コンストラクタ
@@ -28,6 +30,7 @@ public:
 		return score_;
 	}
 
+	void SetCollisionManager(CollisionManager* player) { collisionManager_ = player; }
 	Vector2 GetScoreBackSizeScale() const {
 		return scoreBackSize_;
 	}
@@ -68,6 +71,12 @@ private:
 
 	uint32_t numberTextureHandle[NUMBER_AMOUNT_] = {};
 
+
+	CollisionManager* collisionManager_ = nullptr;
+	int getScore = 0;
+	bool isUpScore_ = false;
+	bool isKillEnemy_;
+	int killCount_ = 0;
 	Vector2 setScale_ = { 1.0f,1.0f };
 
 };
