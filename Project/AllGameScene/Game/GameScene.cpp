@@ -235,14 +235,14 @@ void GameScene::Update(GameManager* gamaManager) {
 	Camera::GetInstance()->SetRotate(cameraRotate_);
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
+	
+
+#ifdef _DEBUG
 	ImGui::Begin("Game");
 	ImGui::InputInt("WinLoadingTime", &loadingTime);
 	ImGui::InputInt("LoseLoadingTime", &loseLodingTime_);
 
 	ImGui::End();
-
-#ifdef _DEBUG
-
 	
 
 	ImGui::Begin("Camera");

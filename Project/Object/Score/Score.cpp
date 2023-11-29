@@ -50,12 +50,12 @@ void Score::Initialize(){
 
 void Score::Update(){
 
-	ImGui::Begin("Score");
-	ImGui::InputInt("killCount", &killCount_);
-	ImGui::InputInt("score", &score_);
-	
-	ImGui::InputInt("getScore", &getScore);
-	ImGui::End();
+	//ImGui::Begin("Score");
+	//ImGui::InputInt("killCount", &killCount_);
+	//ImGui::InputInt("score", &score_);
+	//
+	//ImGui::InputInt("getScore", &getScore);
+	//ImGui::End();
 
 	
 	if (collisionManager_->GetIsKillEnemy() == true) {

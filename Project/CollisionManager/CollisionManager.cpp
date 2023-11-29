@@ -37,8 +37,8 @@ void CollisionManager::CheckCollisionPair(Player* player, Enemy* enemy) {
 		
 		isHitPlayerAndEnemy_ = true;
 		if (isHitPlayerAndEnemy_ == true) {
-			ImGui::Begin("Collision");
-			ImGui::End();
+			//ImGui::Begin("Collision");
+			//ImGui::End();
 		}
 		
 
