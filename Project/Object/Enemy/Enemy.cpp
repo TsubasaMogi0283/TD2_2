@@ -4,7 +4,7 @@
 
 
 // 初期化処理
-void Enemy::Initialize() {
+void Enemy::Initialize(const Vector3& position) {
 
 	// インプット
 	input = Input::GetInstance();
@@ -17,7 +17,7 @@ void Enemy::Initialize() {
 	init_.transform = {
 		.scale = {0.3f, 0.3f, 0.3f},
 		.rotate = {0.0f, 0.0f, 0.0f},
-		.translate = {0.0f, 3.0f, 0.0f},
+		.translate = position,
 	};
 	ene_.transform = init_.transform;
 
@@ -38,7 +38,7 @@ void Enemy::Initialize() {
 	ene_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	isHit_ = 0;
-
+	isApproach_ = true;
 
 
 	// モデルの設定
@@ -78,6 +78,7 @@ void Enemy::Update() {
 	ImGui::DragFloat("sphere.radius", &eneSphere_.radius, 0.01f);
 	ImGui::Text("isHit = %d", isHit_);
 	ImGui::Checkbox("isApproach", &isApproach_);
+	ImGui::Checkbox("isDead", &isDead_);
 	ImGui::End();
 
 
@@ -104,6 +105,7 @@ void Enemy::onCollisionToPlayer() {
 
 	isHit_ = 1;
 	isApproach_ = false;
+	isDead_ = true;
 }
 void Enemy::EndOverlapToPlayer() {
 

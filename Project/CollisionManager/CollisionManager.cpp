@@ -10,8 +10,14 @@
 void CollisionManager::CheckAllCollision() {
 
 	// プレイヤーとエネミーの当たり判定
-	CheckCollisionPair(player_, enemy_);
+	for (Enemy* enemy : enemys_) {
+		CheckCollisionPair(player_, enemy);
+	}
+}
 
+void CollisionManager::EnemyListPushBack(Enemy* enemy) {
+
+	enemys_.push_back(enemy);
 }
 
 
