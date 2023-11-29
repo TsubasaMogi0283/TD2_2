@@ -36,8 +36,11 @@ void CountDown::Initialize(){
 
 void CountDown::Update(){
 	//仮で60秒
-	gameTime_ -= 1;
+	if (isCountDown_ == true) {
+		gameTime_ -= 1;
 
+	}
+	
 	displayTime_ = gameTime_ / 60;
 
 	tensPlace_ = displayTime_ / 10;

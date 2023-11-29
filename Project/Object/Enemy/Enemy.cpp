@@ -15,7 +15,7 @@ void Enemy::Initialize(const Vector3& position) {
 
 	// 座標
 	init_.transform = {
-		.scale = {0.3f, 0.3f, 0.3f},
+		.scale = {0.18f, 0.18f, 0.18f},
 		.rotate = {0.0f, 0.0f, 0.0f},
 		.translate = position,
 	};

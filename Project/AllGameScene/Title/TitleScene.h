@@ -3,6 +3,7 @@
 
 #include "Input/Input.h"
 #include "Polygon/Sprite/Sprite.h"
+#include "Audio/Audio.h"
 
 class TitleScene : public IGameScene{
 public:
@@ -20,14 +21,21 @@ private:
 
 
 private:
-	
+	//ロゴ
 	std::unique_ptr<Sprite> logo_ = nullptr;
+	//スタートのテキスト
 	std::unique_ptr<Sprite> startText_ = nullptr;
+	//背景
 	std::unique_ptr<Sprite> backGround_ = nullptr;
 
-	float spriteTransparency_ = 0.0f;
+	//BGM
+	Audio* bgm_ = nullptr;
+	uint32_t titleBGMHandle_ = 0u;
+	//SE
+	Audio* decideSE_ = nullptr;
+	uint32_t decideSEHandle_ = 0u;
 
-	//フェードイン
+	float spriteTransparency_ = 0.0f;
 	bool isFadeIn_ = true;
 
 	//フェードアウト
@@ -42,6 +50,8 @@ private:
 	int32_t loadingTime_ = 0;
 
 	//コントローラー
+
+	//フェードイン
 	XINPUT_STATE joyState{};
 
 	int triggerButtonBTime;

@@ -56,7 +56,7 @@ void PlayerParlicle::Update() {
 
 #ifdef _DEBUG
 
-	ImGui::Begin("PlayerParticle");
+	/*ImGui::Begin("PlayerParticle");
 	ImGui::Text("Transform");
 	ImGui::DragFloat3("Scele", &particle_.transform.scale.x, 0.01f);
 	ImGui::DragFloat3("Rotate", &particle_.transform.rotate.x, 0.01f);
@@ -64,7 +64,7 @@ void PlayerParlicle::Update() {
 	ImGui::Text("Color");
 	ImGui::ColorEdit4("color", &particle_.color.x);
 	ImGui::Checkbox("isDrawing", &isDrawing_);
-	ImGui::End();
+	ImGui::End();*/
 
 #endif // _DEBUG
 }

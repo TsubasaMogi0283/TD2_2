@@ -28,6 +28,10 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	// プレイヤー
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
+	// プレイヤーヒットボックス
+	playerHitBox_ = std::make_unique<PlayerHitBox>();
+	playerHitBox_->Initialize();
+	playerHitBox_->SetPlayer(player_.get());
 
 	// エネミー
 	enemy_ = std::make_unique<Enemy>();
@@ -123,6 +127,7 @@ void GameScene::PlayUpdate() {
 
 	//負け(仮)
 	if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
+		countDown_->ISetICounDown(false);
 		phaseNo_ = Failed;
 	}
 
@@ -147,7 +152,10 @@ void GameScene::SucceededUpdate() {
 		if (whiteTransparency_ > 1.0f) {
 			whiteTransparency_ = 1.0f;
 
-			loadingTime += 1;
+			if (countDown_->GetIsCountDown() == true) {
+				loadingTime += 1;
+			
+			}
 			
 			
 		}
@@ -182,7 +190,7 @@ void GameScene::Update(GameManager* gamaManager) {
 
 	// プレイヤー
 	player_->Update();
-
+	playerHitBox_->Update();
 	
 
 	// 衝突判定
@@ -194,10 +202,15 @@ void GameScene::Update(GameManager* gamaManager) {
 	Camera::GetInstance()->SetRotate(cameraRotate_);
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
+	ImGui::Begin("Game");
+	ImGui::InputInt("WinLoadingTime", &loadingTime);
+	ImGui::InputInt("LoseLoadingTime", &loseLodingTime_);
+
+	ImGui::End();
+
 #ifdef _DEBUG
 
-	ImGui::Begin("Game");
-	ImGui::End();
+	
 
 	ImGui::Begin("Camera");
 	ImGui::SliderFloat3("Translate", &cameraPosition_.x, -20.0f, 10.0f);
@@ -223,11 +236,20 @@ void GameScene::Update(GameManager* gamaManager) {
 		//勝ち
 		SucceededUpdate();
 		
+		if (loadingTime > 60) {
+			gamaManager->ChangeScene(new WinScene());
+		}
+
 		break;
 
 	case Failed:
 		//負け
 		FailedUpdate();
+
+		//シーンチェンジ
+		if (loseLodingTime_ > 60) {
+			gamaManager->ChangeScene(new LoseScene());
+		}
 
 		break;
 	};
@@ -236,14 +258,9 @@ void GameScene::Update(GameManager* gamaManager) {
 
 	
 	
-	//シーンチェンジ
-	if (loseLodingTime_ >= 60) {
-		gamaManager->ChangeScene(new LoseScene());
-	}
+	
 
-	if (loadingTime > 60) {
-		gamaManager->ChangeScene(new WinScene());
-	}
+	
 
 }
 
@@ -263,6 +280,7 @@ void GameScene::Draw(GameManager* gamaManager) {
 
 	//プレイヤー
 	player_->Draw();
+	playerHitBox_->Draw();
 
 	switch (phaseNo_) {
 	case Ready:
@@ -388,6 +406,7 @@ void GameScene::CheckAllCollision() {
 
 	// オブジェクトの設定
 	collisionManager_->SetPlayer(player_.get());
+	collisionManager_->SetPlayerHitBox(playerHitBox_.get());
 	for (Enemy* enemy : enemys_) {
 		collisionManager_->EnemyListPushBack(enemy);
 	}

@@ -25,6 +25,13 @@ public:
 		return gameTime_;
 	}
 
+	bool GetIsCountDown() {
+		return isCountDown_;
+	}
+
+	void ISetICounDown(bool isCountDown) {
+		this->isCountDown_ = isCountDown;
+	}
 
 private:
 
@@ -50,6 +57,9 @@ private:
 
 	uint32_t numberTextureHandle[NUMBER_AMOUNT_] = {};
 
+	//減る
+	//負けたらfalseにして減らないようにする
+	bool isCountDown_ = true;
 
 
 };

@@ -3,6 +3,7 @@
 
 #include "Polygon/Sprite/Sprite.h"
 #include "Polygon/Model/Model.h"
+#include "Audio/Audio.h"
 
 #include <Xinput.h>
 
@@ -46,7 +47,7 @@ private:
 
 
 	const Vector2 INITIALE_POSITION = {300.0f,500.0f};
-	const Vector2 ICON_INTERVAL_ = {300.0f};
+	const Vector2 ICON_INTERVAL_ = {300.0f,0.0f};
 	Vector2 cursorPosition_ = {};
 	Vector2 move_ = {};
 
@@ -72,6 +73,18 @@ private:
 	int triggerButtonRightTime;
 
 	int triggerButtonBTime;
+
+
+	//BGM
+	Audio* bgm_ = nullptr;
+	uint32_t selectBGMHandle_ = 0u;
+	//DecideSE
+	Audio* decideSE_ = nullptr;
+	uint32_t decideSEHandle_ = 0u;
+	//MoveSE
+	Audio* moveSE_ = nullptr;
+	uint32_t moveSEHandle_ = 0u;
+
 
 };
 
