@@ -3,14 +3,52 @@
 #include "ImGuiManager/ImGuiManager.h"
 #include "AllGameScene/GameManager/GameManager.h"
 #include "AllGameScene/Game/GameScene.h"
+#include "AllGameScene/Title/TitleScene.h"
 
+#include "Input/Input.h"
+#include "TextureManager/TextureManager.h"
 SelectScene::SelectScene(){
 
 
 }
 
 void SelectScene::Initialize(GameManager* gamaManager){
-	input_ = Input::GetInstance();
+	//背景
+	whiteBack_ = std::make_unique<Sprite>();
+	uint32_t whiteTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/White.png");
+	whiteBack_.reset(Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
+
+	
+	
+
+	//タイトル
+	returnToTile_ = std::make_unique<Sprite>();
+	uint32_t returnTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Select/Return.png");
+	returnToTile_.reset(Sprite::Create(returnTextureHandle, INITIALE_POSITION));
+	
+
+	//ゲームへ
+	gameMode_ = std::make_unique<Sprite>();
+	uint32_t gameModeTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Select/Game.png");
+	gameMode_.reset(Sprite::Create(gameModeTextureHandle, {INITIALE_POSITION.x + ICON_INTERVAL_.x, INITIALE_POSITION.y + ICON_INTERVAL_.y }));
+	
+
+	//スコアアタック
+	scoreAttackMode_ = std::make_unique<Sprite>();
+	uint32_t scoreAttackTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Select/ScoreAttack.png");
+	scoreAttackMode_.reset(Sprite::Create(scoreAttackTextureHandle, { INITIALE_POSITION.x + ICON_INTERVAL_.x * 2, INITIALE_POSITION.y + ICON_INTERVAL_.y }));
+
+	//カーソル
+	cursor_ = std::make_unique<Sprite>();
+	uint32_t cursorTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Select/cursor.png");
+	cursorPosition_ = INITIALE_POSITION;
+	cursor_.reset(Sprite::Create(cursorTextureHandle, cursorPosition_));
+
+
+	//とうもろこし
+	corn_.reset(Model::Create("Resources/Corn","Corn.obj"));
+
+
 }
 
 void SelectScene::ShowImGui(){
@@ -19,18 +57,107 @@ void SelectScene::ShowImGui(){
 }
 
 void SelectScene::Update(GameManager* gamaManager){
-	ShowImGui();
+	//ShowImGui();
 
 
-	if (input_->IsTriggerKey(DIK_1) == true) {
-		gamaManager->ChangeScene(new GameScene());
+	cursor_->SetPosition(cursorPosition_);
+
+	//背景
+	whiteBack_->SetTransparency(transparency_);
+	//タイトル
+	returnToTile_->SetTransparency(transparency_);
+	
+	//ゲームへ
+	gameMode_->SetTransparency(transparency_);
+	
+	//スコアアタック
+	scoreAttackMode_->SetTransparency(transparency_);
+	
+	//カーソル
+	cursor_->SetTransparency(transparency_);
+	
+
+
+	//選択
+	if (Input::GetInstance()->IsTriggerKey(DIK_LEFT) == true) {
+		
+
+		if (cursorPosition_.x < INITIALE_POSITION.x) {
+			cursorPosition_.x = INITIALE_POSITION.x;
+		}
+		else {
+			cursorPosition_.x -= ICON_INTERVAL_.x;
+		}
+
+	}
+	if (Input::GetInstance()->IsTriggerKey(DIK_RIGHT) == true) {
+		if (cursorPosition_.x > INITIALE_POSITION.x*2) {
+
+		}
+		else {
+			cursorPosition_.x += ICON_INTERVAL_.x;
+		}
+		
 	}
 
+
+	if (cursorPosition_.x == ICON_INTERVAL_.x) {
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+			isToTitle_ = true;
+		}
+	}
+	if (isToTitle_ == true) {
+		transparency_ -= 0.05f;
+		if (transparency_ < 0.0f) {
+			transparency_ = 0.0f;
+			waitingTimeToTitle_ += 1;
+
+		}
+	}
+
+	
+
+		
+	if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x) {
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+			isToGame_ = true;
+		}
+		
+		
+	}
+	if (isToGame_ == true) {
+		transparency_ -= 0.05f;
+		if (transparency_ < 0.0f) {
+			transparency_ = 0.0f;
+			waitingTimeToGame_ += 1;
+			
+		}
+	}
+
+	
+	if (waitingTimeToTitle_ > 60 * 2) {
+		gamaManager->ChangeScene(new TitleScene());
+	}
+	if (waitingTimeToGame_ > 60 * 2) {
+		gamaManager->ChangeScene(new GameScene());
+	}
 }
 
 void SelectScene::Draw(GameManager* gamaManager){
+	whiteBack_->Draw();
 
+	//タイトル
+	returnToTile_->Draw();
 
+	//ゲームへ
+	gameMode_->Draw();
+
+	//スコアアタック
+	scoreAttackMode_->Draw();
+
+	corn_->Draw();
+
+	cursor_->Draw();
 }
 
 SelectScene::~SelectScene(){

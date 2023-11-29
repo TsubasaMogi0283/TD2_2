@@ -115,7 +115,7 @@ void TitleScene::Update(GameManager* gamaManager) {
 
 
 					if (loadingTime_ > 60 * 2) {
-						gamaManager->ChangeScene(new SampleScene());
+						gamaManager->ChangeScene(new SelectScene());
 					}
 				}
 			}
