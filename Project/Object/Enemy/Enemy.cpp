@@ -25,7 +25,7 @@ void Enemy::Initialize(const Vector3& position) {
 	ene_.velocity = { 0.0f, 0.0f, 0.0f };
 
 	// 移動量
-	move_ = 0.07f;
+	move_ = 0.03f;
 
 	//サイズ
 	ene_.size = {

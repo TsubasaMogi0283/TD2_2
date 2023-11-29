@@ -10,10 +10,10 @@ void Popcorn::Initialize(Vector3 position,Vector3 move){
 	this->position_ = position;
 	this->move_ = move;
 	
-	const float SCALE_SIZE = 0.3f;
+	const float SCALE_SIZE = 0.2f;
 	this->scale_ = { SCALE_SIZE,SCALE_SIZE,SCALE_SIZE };
 
-	model_ = Model::Create("Resources/Sample/Enemy", "enemy.obj");
+	model_ = Model::Create("Resources/Popcorn", "Popcorn.obj");
 }
 
 void Popcorn::DisplayText(){
