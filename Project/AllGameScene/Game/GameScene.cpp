@@ -392,5 +392,9 @@ void GameScene::CheckAllCollision() {
 	collisionManager_->CheckAllCollision();
 }
 
+GameScene::~GameScene() {
 
-
+	for (Enemy* enemy : enemys_) {
+		delete enemy;
+	}
+}
