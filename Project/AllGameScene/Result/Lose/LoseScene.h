@@ -2,6 +2,9 @@
 #include "AllGameScene/GameManager/IGameScene.h"
 #include "Polygon/Sprite/Sprite.h"
 
+#include <dinput.h>
+#include <Xinput.h>
+
 #include <memory>
 class GameManager;
 
@@ -38,6 +41,10 @@ private:
 	//ローディング時間
 	int32_t loadingTime_ = 0;
 
+	//コントローラー
+	XINPUT_STATE joyState{};
+
+	int triggerButtonBTime;
 
 };
 

@@ -70,7 +70,18 @@ void TitleScene::Update(GameManager* gamaManager) {
 			}
 		}
 
-		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+
+		if (Input::GetInstance()->GetJoystickState(joyState)) {
+
+			//Bボタン
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+				triggerButtonBTime += 1;
+
+			}
+
+		}
+
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
 			isFadeOut_ = true;
 			
 		}

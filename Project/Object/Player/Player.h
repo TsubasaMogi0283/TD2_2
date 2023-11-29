@@ -10,6 +10,9 @@
 #include <list>
 #include <random>
 
+#include <dinput.h>
+#include <Xinput.h>
+
 
 struct PlayerProperty {
 	std::unique_ptr<Model> model = nullptr;
@@ -146,5 +149,11 @@ private:
 	// インプット
 	Input* input = nullptr;
 
+	//コントローラー
+	XINPUT_STATE joyState{};
+
+	int triggerButtonLeftTime;
+
+	int triggerButtonRightTime;
 
 };

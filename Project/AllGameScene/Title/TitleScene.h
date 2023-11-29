@@ -1,6 +1,10 @@
 #include "AllGameScene/GameManager/IGameScene.h"
+#include "AllGameScene/Game/GameScene.h"
+
 #include "Input/Input.h"
 #include "Polygon/Sprite/Sprite.h"
+#include <dinput.h>
+#include <Xinput.h>
 
 class TitleScene : public IGameScene{
 public:
@@ -38,4 +42,9 @@ private:
 	int startFlashTime_ = 0;
 	//ロード時間
 	int32_t loadingTime_ = 0;
+
+	//コントローラー
+	XINPUT_STATE joyState{};
+
+	int triggerButtonBTime;
 };
