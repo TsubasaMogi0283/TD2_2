@@ -58,13 +58,28 @@ void PlayerHitBox::Initialize() {
 // 更新処理
 void PlayerHitBox::Update() {
 
+	if (Input::GetInstance()->GetJoystickState(joyState)) {
+
+		//Bボタン
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+			triggerButtonBTime += 1;
+
+		}
+
+		//押してないとき
+		if ((joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) == 0) {
+			triggerButtonBTime = 0;
+		}
+
+	}
+
 	// キーを押してヒットボックスの出現フラグを立てる
-	if (Input::GetInstance()->IsPushKey(DIK_SPACE) == true) {
+	if (Input::GetInstance()->IsPushKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
 		isEmergeHitBox_ = true;
 
 
 
-		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
 			static const int POPCORN_AMOUNT = 2;
 		
 		

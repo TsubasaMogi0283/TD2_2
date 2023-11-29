@@ -7,7 +7,7 @@
 #include "CollisionManager/CollisionManager.h"
 #include <Object/Popcorn/Popcorn.h>
 
-
+#include <Xinput.h>
 
 class Player;
 
@@ -118,5 +118,10 @@ private:
 	std::list<Popcorn*>popcornLeft_;
 
 	bool isKillEnemy_ = false;
+
+	//コントローラー
+	XINPUT_STATE joyState{};
+
+	int triggerButtonBTime;
 
 };

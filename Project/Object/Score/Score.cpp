@@ -78,15 +78,11 @@ void Score::Update(){
 		}
 	}
 	
-
-
 	scoreTenThousandsPlace_ = score_/10000;
 	scoreThousandsPlace_ = (score_%10000)/1000;
 	scoreHundredsPlace_ = (score_%1000)/100;
 	scoreTensPlace_ = (score_%100)/10;
 	scoreOnesPlace_ = score_ % 10;
-
-	
 
 }
 

@@ -68,7 +68,6 @@ void ResultScene::Update(GameManager* gamaManager) {
 		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
 			isFadeOut_ = true;
 
-
 		}
 
 	}

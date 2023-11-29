@@ -127,24 +127,36 @@ void Player::EndOverlapToEnemy() {
 void Player::Move() {
 	if (Input::GetInstance()->GetJoystickState(joyState)) {
 		//右
-		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) {
-			pla_.transform.translate.x += pla_.velocity.x;
+		if (pla_.transform.translate.x <= 3.0f) {
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) {
+				pla_.transform.translate.x += pla_.velocity.x;
+			}
 		}
-		//左
-		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) {
-			pla_.transform.translate.x -= pla_.velocity.x;
+		if (pla_.transform.translate.x >= -3.0f) {
+			//左
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) {
+				pla_.transform.translate.x -= pla_.velocity.x;
+			}
 		}
 	}
 
 	// 左右移動処理
-	if (input->IsPushKey(DIK_A) || input->IsPushKey(DIK_LEFT)) {
 
-		pla_.transform.translate.x -= pla_.velocity.x;
-	}
-	if (input->IsPushKey(DIK_D) || input->IsPushKey(DIK_RIGHT)) {
+	if (pla_.transform.translate.x <= 3.0f) {
+		if (input->IsPushKey(DIK_D) || input->IsPushKey(DIK_RIGHT)) {
 
-		pla_.transform.translate.x += pla_.velocity.x;
+			pla_.transform.translate.x += pla_.velocity.x;
+		}
 	}
+
+	if (pla_.transform.translate.x >= -3.0f) {
+
+		if (input->IsPushKey(DIK_A) || input->IsPushKey(DIK_LEFT)) {
+
+			pla_.transform.translate.x -= pla_.velocity.x;
+		}
+	}
+
 
 	// 無駄な回転処理
 	pla_.transform.rotate = Add(pla_.transform.rotate, moveRotate_);
