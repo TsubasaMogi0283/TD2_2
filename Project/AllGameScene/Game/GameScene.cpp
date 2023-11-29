@@ -82,6 +82,10 @@ void GameScene::Initialize(GameManager* gamaManager) {
 	cameraPosition_ = { 0.0f,2.2f,0.0f };
 	cameraRotate_ = { 0.015f,0.0f,0.0f };
 
+
+	//カメラ
+	Camera::GetInstance()->SetRotate(cameraRotate_);
+	Camera::GetInstance()->SetTranslate(cameraPosition_);
 }
 
 //RedayScene
