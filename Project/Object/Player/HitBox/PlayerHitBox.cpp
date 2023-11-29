@@ -19,13 +19,13 @@ void PlayerHitBox::Initialize() {
 	// 座標
 	// Left
 	hitBoxLeft_.transform = {
-		.scale = {0.2f, 0.2f, 0.2f},
+		.scale = {0.2f, 0.25f, 0.2f},
 		.rotate = {0.0f, 0.0f, 0.0f},
 		.translate = {0.0f, 1.2f, 0.0f},
 	};
 	//Right
 	hitBoxRight_.transform = {
-		.scale = {0.2f, 0.2f, 0.2f},
+		.scale = {0.2f, 0.25f, 0.2f},
 		.rotate = {0.0f, 0.0f, 0.0f},
 		.translate = {0.0f, 1.2f, 0.0f},
 	};
