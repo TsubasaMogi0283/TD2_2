@@ -31,8 +31,7 @@ void GameScene::Initialize(GameManager* gamaManager) {
 
 	// エネミー
 	enemy_ = std::make_unique<Enemy>();
-	enemy_->Initialize();
-	enemy_->SetPlayer(player_.get());
+	enemysCountTimer_ = 0;
 
 	// コリジョンマネージャー
 	collisionManager_ = std::make_unique<CollisionManager>();
@@ -104,7 +103,7 @@ void GameScene::ReadyUpdate() {
 //PlayScene
 void GameScene::PlayUpdate() {
 	// エネミー
-	enemy_->Update();
+	EnemysUpdate();
 
 	//制限時間
 	countDown_->Update();
@@ -276,7 +275,9 @@ void GameScene::Draw(GameManager* gamaManager) {
 
 		break;
 	case Play:
-		enemy_->Draw();
+		for (Enemy* enemy : enemys_) {
+			enemy->Draw();
+		}
 
 
 		//制限時間
@@ -305,6 +306,67 @@ void GameScene::Draw(GameManager* gamaManager) {
 }
 
 
+void GameScene::EnemysUpdate() {
+
+	// 更新処理
+	for (Enemy* enemy : enemys_) {
+		enemy->Update();
+	}
+	// 衝突していたら削除
+	enemys_.remove_if([](Enemy* enemy) {
+		if (enemy->IsDead()) {
+			delete enemy;
+			return true;
+		}
+		return false;
+		}
+	);
+
+
+	// タイマーカウント
+	enemysCountTimer_++;
+
+	// タイマーカウントが５を超えたら
+	if (enemysCountTimer_ >= 60) {
+
+		// タイマーは0に戻す
+		enemysCountTimer_ = 0;
+
+		// エネミーのリストが５以下だったら新しくプッシュバックする
+		if (CalcEnemysList() < 5) {
+
+			// リスポーン
+			PushBackEnemy();
+		}
+	}
+
+#ifdef _DEBUG
+
+	ImGui::Begin("EnemyList");
+	ImGui::Text("timer = %d", enemysCountTimer_);
+	ImGui::Text("enemyList = %d", CalcEnemysList());
+	ImGui::End();
+
+#endif // _DEBUG
+}
+
+uint32_t GameScene::CalcEnemysList() {
+
+	size_t count = enemys_.size();
+
+	return static_cast<uint32_t>(count);
+}
+
+void GameScene::PushBackEnemy() {
+
+	Enemy* newEnemy = new Enemy();
+	Vector3 newPos = { 0.0f, 3.0f, 0.0f };
+	newEnemy->Initialize(newPos);
+	newEnemy->SetPlayer(player_.get());
+	enemys_.push_back(newEnemy);
+}
+
+
 //void GameScene::ChangeScene(IGamePlayScene* newGameScene){
 //	//一度消してから次のシーンにいく
 //	delete currentGamaScene_;
@@ -322,11 +384,17 @@ void GameScene::CheckAllCollision() {
 
 	// オブジェクトの設定
 	collisionManager_->SetPlayer(player_.get());
-	collisionManager_->SetEnemy(enemy_.get());
+	for (Enemy* enemy : enemys_) {
+		collisionManager_->EnemyListPushBack(enemy);
+	}
 
 	// 衝突判定
 	collisionManager_->CheckAllCollision();
 }
 
+GameScene::~GameScene() {
 
-
+	for (Enemy* enemy : enemys_) {
+		delete enemy;
+	}
+}
