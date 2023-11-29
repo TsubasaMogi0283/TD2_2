@@ -44,8 +44,10 @@ public: // メンバ関数
 	/// </summary>
 	void CheckAllCollision();
 
+	void EnemyListPushBack(Enemy* enemy);
 
-#pragma region Get
+
+#pragma region Set
 
 	/// <summary>
 	/// プレイヤーの取得
@@ -56,6 +58,7 @@ public: // メンバ関数
 	/// エネミーの取得
 	/// </summary>
 	void SetEnemy(Enemy* enemy) { enemy_ = enemy; }
+
 
 #pragma endregion 
 
@@ -112,5 +115,5 @@ private: // メンバ変数
 
 	Player* player_;
 	Enemy* enemy_;
-
+	std::list<Enemy*> enemys_;
 };
