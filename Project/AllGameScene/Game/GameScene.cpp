@@ -129,6 +129,7 @@ void GameScene::PlayUpdate() {
 
 	//負け(仮)
 	if (Input::GetInstance()->IsTriggerKey(DIK_L) == true) {
+		countDown_->ISetICounDown(false);
 		phaseNo_ = Failed;
 	}
 
@@ -153,7 +154,10 @@ void GameScene::SucceededUpdate() {
 		if (whiteTransparency_ > 1.0f) {
 			whiteTransparency_ = 1.0f;
 
-			loadingTime += 1;
+			if (countDown_->GetIsCountDown() == true) {
+				loadingTime += 1;
+			
+			}
 			
 			
 		}
@@ -200,10 +204,15 @@ void GameScene::Update(GameManager* gamaManager) {
 	Camera::GetInstance()->SetRotate(cameraRotate_);
 	Camera::GetInstance()->SetTranslate(cameraPosition_);
 
+	ImGui::Begin("Game");
+	ImGui::InputInt("WinLoadingTime", &loadingTime);
+	ImGui::InputInt("LoseLoadingTime", &loseLodingTime_);
+
+	ImGui::End();
+
 #ifdef _DEBUG
 
-	ImGui::Begin("Game");
-	ImGui::End();
+	
 
 	ImGui::Begin("Camera");
 	ImGui::SliderFloat3("Translate", &cameraPosition_.x, -20.0f, 10.0f);
@@ -229,11 +238,20 @@ void GameScene::Update(GameManager* gamaManager) {
 		//勝ち
 		SucceededUpdate();
 		
+		if (loadingTime > 60) {
+			gamaManager->ChangeScene(new WinScene());
+		}
+
 		break;
 
 	case Failed:
 		//負け
 		FailedUpdate();
+
+		//シーンチェンジ
+		if (loseLodingTime_ > 60) {
+			gamaManager->ChangeScene(new LoseScene());
+		}
 
 		break;
 	};
@@ -242,14 +260,9 @@ void GameScene::Update(GameManager* gamaManager) {
 
 	
 	
-	//シーンチェンジ
-	if (loseLodingTime_ >= 60) {
-		gamaManager->ChangeScene(new LoseScene());
-	}
+	
 
-	if (loadingTime > 60) {
-		gamaManager->ChangeScene(new WinScene());
-	}
+	
 
 }
 
