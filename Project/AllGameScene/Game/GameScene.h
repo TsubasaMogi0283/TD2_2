@@ -21,7 +21,7 @@
 #include <Object/CountDown/CountDown.h>
 #include <Object/Score/Score.h>
 #include <AllGameScene/GameManager/IGamePlayScene.h>
-
+#include "Audio/Audio.h"
 
 //StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
@@ -153,6 +153,15 @@ private:
 	//StatePatternに必要な変数
 	IGamePlayScene* currentGamaScene_ = nullptr;
 
+	Audio* bgm_ = nullptr;
+	uint32_t bgmHandle_ = 0u;
 
+	Audio* finishSE_ = nullptr;
+	uint32_t finishHandle_ = 0u;
+
+	Audio* lose_ = nullptr;
+	uint32_t loseHandle_ = 0u;
+
+	int loseTriggerTime_ = 0;
 };
 

@@ -49,16 +49,6 @@ void SelectScene::Initialize(GameManager* gamaManager){
 	cursor_.reset(Sprite::Create(cursorTextureHandle, cursorPosition_));
 
 
-	//とうもろこし
-	corn_ = std::make_unique<Model>();
-	corn_.reset(Model::Create("Resources/Corn","Corn.obj"));
-	cornPosition_ = { 0.0f,0.0f,0.0f };
-	scale_ = { 1.0f,1.0f,1.0f };
-	rotate_ = { 0.0f,0.0f,0.0f };
-
-	corn_->SetScale(scale_);
-	corn_->SetRotate(rotate_);
-	corn_->SetTranslate(cornPosition_);
 
 	//BGM
 	bgm_ = Audio::GetInstance();
@@ -85,12 +75,8 @@ void SelectScene::ShowImGui(){
 }
 
 void SelectScene::Update(GameManager* gamaManager){
-	ShowImGui();
+	//ShowImGui();
 
-	rotate_.y += 0.01f;
-	corn_->SetScale(scale_);
-	corn_->SetRotate(rotate_);
-	corn_->SetTranslate(cornPosition_);
 
 	
 	// コントローラー
@@ -127,6 +113,7 @@ void SelectScene::Update(GameManager* gamaManager){
 		//ゲームへ
 		gameMode_->SetTransparency(transparency_);
 
+		selectText_->SetTransparency(transparency_);
 	}
 
 
@@ -160,8 +147,7 @@ void SelectScene::Update(GameManager* gamaManager){
 		//カーソル
 		cursor_->SetTransparency(transparency_);
 		
-		corn_->SetTransparency(transparency_);
-
+		selectText_->SetTransparency(transparency_);
 		//選択
 		//左
 		if (Input::GetInstance()->IsTriggerKey(DIK_LEFT) == true || triggerButtonLeftTime == 1) {
@@ -289,7 +275,7 @@ void SelectScene::Update(GameManager* gamaManager){
 }
 
 void SelectScene::Draw(GameManager* gamaManager){
-	whiteBack_->Draw();
+	//whiteBack_->Draw();
 
 	//選択Text
 	selectText_->Draw();

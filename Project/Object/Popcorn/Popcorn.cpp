@@ -42,7 +42,7 @@ void Popcorn::Update(){
 
 	model_->SetScale(scale_);
 	model_->SetTranslate(position_);
-	DisplayText();
+	//DisplayText();
 }
 
 void Popcorn::Draw(){
