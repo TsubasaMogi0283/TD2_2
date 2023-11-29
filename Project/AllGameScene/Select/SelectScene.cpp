@@ -66,7 +66,7 @@ void SelectScene::ShowImGui(){
 	ImGui::SliderFloat3("Rotate", &rotate_.x, -1.0f, 1.0f);
 
 	
-	ImGui::SliderFloat3("Position", &cornPosition_.x, -1.0f, 1.0f);
+	ImGui::SliderFloat3("Position", &cornPosition_.x, -3.0f, 3.0f);
 
 	ImGui::End();
 }
@@ -74,6 +74,7 @@ void SelectScene::ShowImGui(){
 void SelectScene::Update(GameManager* gamaManager){
 	ShowImGui();
 
+	rotate_.y += 0.01f;
 	corn_->SetScale(scale_);
 	corn_->SetRotate(rotate_);
 	corn_->SetTranslate(cornPosition_);
@@ -202,7 +203,7 @@ void SelectScene::Update(GameManager* gamaManager){
 }
 
 void SelectScene::Draw(GameManager* gamaManager){
-	//whiteBack_->Draw();
+	whiteBack_->Draw();
 
 	//タイトル
 	returnToTile_->Draw();
@@ -213,7 +214,7 @@ void SelectScene::Draw(GameManager* gamaManager){
 	//スコアアタック
 	scoreAttackMode_->Draw();
 
-	corn_->Draw();
+	//corn_->Draw();
 
 	cursor_->Draw();
 }
