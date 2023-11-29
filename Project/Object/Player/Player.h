@@ -141,7 +141,7 @@ private:
 	Sphere plaSphere_;
 
 	// パーティクル
-	std::list<PlayerParlicle*> particles_;
+	std::list<PlayerParticle*> particles_;
 	uint32_t particlePushBackTimer_;
 
 	// インプット

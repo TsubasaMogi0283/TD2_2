@@ -23,16 +23,20 @@ struct PlayerParticleProperty {
 struct PlayerParticleEmitter {
 	Transform transform{};
 };
+enum ColorCalcType {
+	Mul,
+	Div,
+};
 
 
 
 /* PlayerParticleクラス */
-class PlayerParlicle {
+class PlayerParticle {
 
 public: // メンバ関数
 
-	PlayerParlicle() {};
-	~PlayerParlicle() {};
+	PlayerParticle() {};
+	~PlayerParticle() {};
 
 	/// <summary>
 	/// 初期化処理
@@ -82,7 +86,7 @@ private: // メンバ関数
 	/// <summary>
 	/// アルファの計算
 	/// </summary>
-	void CalcAlpha();
+	void CalcColor();
 
 	/// <summary>
 	/// スケールの計算
@@ -92,8 +96,16 @@ private: // メンバ関数
 	/// <summary>
 	/// イージング関数
 	/// </summary>
+	float EaseInSine(float& x);
 	float EaseInQuart(float& x);
+	float EaseInCirc(float& x);
+	float EaseOutQuart(float& x);
+	float EaseOutExpo(float& x);
 
+	/// <summary>
+	/// 色の計算
+	/// </summary>
+	Vector4 CalcRGBA(Vector4 color, ColorCalcType type);
 
 private: // メンバ変数
 

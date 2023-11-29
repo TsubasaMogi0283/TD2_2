@@ -6,7 +6,7 @@
 Player::~Player() {
 
 	// パーティクルリストの削除
-	for (PlayerParlicle* particle : particles_) {
+	for (PlayerParticle* particle : particles_) {
 		delete particle;
 	}
 }
@@ -104,7 +104,7 @@ void Player::Update() {
 void Player::Draw() {
 
 	pla_.model->Draw();
-	for (PlayerParlicle* particle : particles_) {
+	for (PlayerParticle* particle : particles_) {
 		particle->Draw();
 	}
 }
@@ -233,12 +233,12 @@ void Player::UpdateParticle() {
 	}
 
 	// 更新処理
-	for (PlayerParlicle* particle : particles_) {
+	for (PlayerParticle* particle : particles_) {
 		particle->Update();
 	}
 
 	// 描画フラグが切れたら削除
-	particles_.remove_if([](PlayerParlicle* particle) {
+	particles_.remove_if([](PlayerParticle* particle) {
 		if (!particle->IsDrawing()) {
 			delete particle;
 			return true;
@@ -254,11 +254,11 @@ void Player::UpdateParticle() {
 void Player::PushBackParticles() {
 
 	// パーティクルを生成
-	PlayerParlicle* newParticle = new PlayerParlicle();
+	PlayerParticle* newParticle = new PlayerParticle();
 
 	Vector3 min = Subtract(pla_.transform.translate, pla_.size);
 	Vector3 max = Add(pla_.transform.translate, pla_.size);
-	float val = 0.35f;
+	float val = 0.38f;
 
 	std::random_device seedGenerator;
 	std::mt19937 randomEngine(seedGenerator());
