@@ -9,6 +9,8 @@
 #include <Object/Record/Record.h>
 
 #include <Object/Score/Score.h>
+#include <Object/Score/ResultScore/ResultScore.h>
+
 
 class ResultScene : public IGameScene{
 public:
@@ -33,7 +35,7 @@ private:
 	std::unique_ptr<Sprite> text_ = nullptr;
 
 	//スコア
-	Score* score_ = nullptr;
+	ResultScore* score_ = nullptr;
 
 	//フェード
 	bool isFadeOut_ = false;

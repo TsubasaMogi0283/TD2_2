@@ -187,6 +187,9 @@
     <ClCompile Include="Project\Object\Enemy\State\Wandering\EnemyWanderingState.cpp">
       <Filter>Object\Enemy\State\Wandering</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\Score\ResultScore\ResultScore.cpp">
+      <Filter>Object\Score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -431,6 +434,9 @@
     </ClInclude>
     <ClInclude Include="Project\Object\Enemy\State\Wandering\EnemyWanderingState.h">
       <Filter>Object\Enemy\State\Wandering</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\Score\ResultScore\ResultScore.h">
+      <Filter>Object\Score</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

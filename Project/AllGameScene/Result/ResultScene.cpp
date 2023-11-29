@@ -11,7 +11,7 @@ ResultScene::ResultScene() {
 void ResultScene::Initialize(GameManager* gamaManager) {
 
 	//スコア
-	score_ = new Score;
+	score_ = new ResultScore;
 	score_->Initialize();
 	// Recordシングルトンから保存されたスコアを取得
 	score_->SetScore(Record::GetInstance()->GetScore());

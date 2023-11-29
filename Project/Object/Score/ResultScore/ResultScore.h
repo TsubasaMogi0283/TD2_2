@@ -6,10 +6,10 @@
 class CollisionManager;
 class PlayerHitBox;
 
-class Score {
+class ResultScore {
 public:
 	//コンストラクタ
-	Score();
+	ResultScore();
 
 	//初期化
 	void Initialize();
@@ -21,7 +21,7 @@ public:
 	void Draw();
 
 	//デストラクタ
-	~Score();
+	~ResultScore();
 
 public:
 	void SetScore(int score) {
@@ -89,6 +89,6 @@ private:
 	bool isUpScore_ = false;
 	bool isKillEnemy_;
 	int killCount_ = 0;
-	Vector2 setScale_ = { 1.0f,1.0f };
+	Vector2 setScale_ = { 2.0f,2.0f };
 
 };

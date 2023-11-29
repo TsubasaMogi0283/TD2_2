@@ -147,6 +147,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp" />
     <ClCompile Include="Project\Object\Record\Record.cpp" />
     <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp" />
+    <ClCompile Include="Project\Object\Score\ResultScore\ResultScore.cpp" />
     <ClCompile Include="Project\Object\Score\Score.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +253,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Object\Popcorn\Popcorn.h" />
     <ClInclude Include="Project\Object\Record\Record.h" />
     <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h" />
+    <ClInclude Include="Project\Object\Score\ResultScore\ResultScore.h" />
     <ClInclude Include="Project\Object\Score\Score.h" />
   </ItemGroup>
   <ItemGroup>
