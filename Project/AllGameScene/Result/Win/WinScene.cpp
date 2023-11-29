@@ -37,7 +37,7 @@ void WinScene::ShowImGui(){
 }
 
 void WinScene::Update(GameManager* gamaManager){
-	ShowImGui();
+	//ShowImGui();
 
 	back_->SetTransparency(spriteTransparency_);
 

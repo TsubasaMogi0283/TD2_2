@@ -70,6 +70,9 @@ public: // メンバ関数
 	bool GetIsHitPlayerAndEnemy() {
 		return isHitPlayerAndEnemy_;
 	}
+	bool GetIsKillEnemy() {
+		return isKillEnemy_;
+	}
 
 #pragma endregion
 private: // メンバ関数
@@ -130,5 +133,5 @@ private: // メンバ変数
 	std::list<Enemy*> enemys_;
 
 	bool isHitPlayerAndEnemy_ = false;
-
+	bool isKillEnemy_ = false;
 };

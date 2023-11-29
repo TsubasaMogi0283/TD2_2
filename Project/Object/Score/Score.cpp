@@ -1,5 +1,6 @@
 #include "Score.h"
 #include "TextureManager/TextureManager.h"
+#include "CollisionManager/CollisionManager.h"
 
 Score::Score(){
 
@@ -48,7 +49,31 @@ void Score::Initialize(){
 }
 
 void Score::Update(){
-	score_ += 1;
+
+	ImGui::Begin("Score");
+	ImGui::InputInt("killCount", &killCount_);
+	ImGui::InputInt("score", &score_);
+	
+	ImGui::InputInt("getScore", &getScore);
+	ImGui::End();
+
+	
+	if (collisionManager_->GetIsKillEnemy() == true) {
+		killCount_++;
+		isUpScore_ = true;
+	}
+	if (isUpScore_ == true) {
+		
+
+		getScore = killCount_*100;
+		if (score_ < getScore) {
+			score_++;
+		}
+		else {
+			isUpScore_ = false;
+		}
+	}
+	
 
 
 	scoreTenThousandsPlace_ = score_/10000;
