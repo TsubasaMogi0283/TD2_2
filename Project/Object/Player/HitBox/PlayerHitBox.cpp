@@ -1,5 +1,6 @@
 #include "PlayerHitBox.h"
 #include "Object/Player/Player.h"
+#include "AllGameScene/Game/GameScene.h"
 
 
 
@@ -111,6 +112,8 @@ void PlayerHitBox::Update() {
 
 				popcornRight_.push_back(popcornRight[i]);
 				popcornLeft_.push_back(popcornLeft[i]);
+
+				gameScene->AddPopcornList(popcornRight[i]);
 			}
 		}
 

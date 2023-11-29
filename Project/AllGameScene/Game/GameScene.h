@@ -21,6 +21,7 @@
 #include <Object/CountDown/CountDown.h>
 #include <Object/Score/Score.h>
 #include <AllGameScene/GameManager/IGamePlayScene.h>
+#include "Object/Popcorn/Popcorn.h"
 
 
 //StatePatternを使う時は必ず前方宣言をするように
@@ -36,6 +37,8 @@ public:
 	void Initialize(GameManager* gamaManager) override;
 	void Update(GameManager* gamaManager) override;
 	void Draw(GameManager* gamaManager) override;
+
+	void AddPopcornList(Popcorn* popcorn);
 
 
 private:
@@ -94,6 +97,9 @@ private:
 	std::unique_ptr<Enemy> enemy_ = nullptr;
 	std::list<Enemy*> enemys_;
 	uint32_t enemysCountTimer_;
+
+	// ポップコーン
+	std::list<Popcorn*> popcorns_;
 
 	// コリジョンマネージャー
 	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;

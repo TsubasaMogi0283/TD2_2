@@ -10,6 +10,7 @@
 
 
 class Player;
+class GameScene;
 
 struct PlayerHitBoxProperty {
 	std::unique_ptr<Model> model = nullptr;
@@ -113,4 +114,5 @@ private:
 	std::list<Popcorn*>popcornLeft_;
 
 
+	GameScene* gameScene = nullptr;
 };

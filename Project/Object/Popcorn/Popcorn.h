@@ -1,5 +1,6 @@
 #pragma once
 #include <Polygon/Model/Model.h>
+#include "CollisionManager/CollisionManager.h"
 
 class Popcorn{
 	
@@ -29,7 +30,10 @@ private:
 	void DisplayText();
 
 
-
+	/// <summary>
+	/// スフィアの計算
+	/// </summary>
+	void CalcSphere();
 
 
 private:
@@ -51,5 +55,8 @@ private:
 
 	int deleteTime_ = 60;
 	bool isDead_ = false;
+
+	float radius;
+	Sphere sphere;
 };
 

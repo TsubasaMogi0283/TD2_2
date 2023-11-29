@@ -438,6 +438,10 @@ void GameScene::CheckAllCollision() {
 	// 衝突判定
 	collisionManager_->CheckAllCollision();
 }
+void GameScene::AddPopcornList(Popcorn* popcorn) {
+
+	popcorns_.push_back(popcorn);
+}
 
 GameScene::~GameScene() {
 

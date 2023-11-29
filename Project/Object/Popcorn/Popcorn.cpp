@@ -11,6 +11,7 @@ void Popcorn::Initialize(Vector3 position,Vector3 move){
 	this->move_ = move;
 	
 	const float SCALE_SIZE = 0.2f;
+	radius = SCALE_SIZE;
 	this->scale_ = { SCALE_SIZE,SCALE_SIZE,SCALE_SIZE };
 
 	model_ = Model::Create("Resources/Popcorn", "Popcorn.obj");
@@ -43,6 +44,8 @@ void Popcorn::Update(){
 	model_->SetScale(scale_);
 	model_->SetTranslate(position_);
 	DisplayText();
+
+	CalcSphere();
 }
 
 void Popcorn::Draw(){
@@ -54,3 +57,13 @@ Popcorn::~Popcorn(){
 }
 
 
+/// <summary>
+/// スフィアの計算
+/// </summary>
+void Popcorn::CalcSphere() {
+
+	sphere = {
+		.center = position_,
+		.radius = radius,
+	};
+}
