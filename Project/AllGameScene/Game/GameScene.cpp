@@ -265,8 +265,8 @@ void GameScene::Draw(GameManager* gamaManager) {
 	player_->Draw();
 
 	switch (phaseNo_) {
-	default:
 	case Ready:
+	default:
 		if (readyTime_ > 0 && readyTime_ <= 60 * 2) {
 			ready_->Draw();
 

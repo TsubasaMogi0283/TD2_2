@@ -4,6 +4,8 @@
 #include "Polygon/Sprite/Sprite.h"
 #include "Polygon/Model/Model.h"
 
+#include <Xinput.h>
+
 class SelectScene : public IGameScene{
 public:
 
@@ -56,6 +58,15 @@ private:
 
 	bool isFadeIn_ = true;
 	bool isFadeOut_ = false;
+
+	//コントローラー
+	XINPUT_STATE joyState{};
+
+	int triggerButtonLeftTime;
+
+	int triggerButtonRightTime;
+
+	int triggerButtonBTime;
 
 };
 

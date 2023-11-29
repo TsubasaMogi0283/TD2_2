@@ -80,6 +80,12 @@ void SelectScene::Update(GameManager* gamaManager){
 	corn_->SetTranslate(cornPosition_);
 
 	
+	// コントローラー
+	if (Input::GetInstance()->GetJoystickState(joyState)) {
+		//左ボタン
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) {
+			triggerButtonLeftTime += 1;
+
 
 	if (isFadeIn_ == true) {
 		transparency_ += 0.05f;
@@ -97,6 +103,34 @@ void SelectScene::Update(GameManager* gamaManager){
 		
 		//ゲームへ
 		gameMode_->SetTransparency(transparency_);
+
+		}
+		//右ボタン
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) {
+			triggerButtonRightTime += 1;
+
+		}
+		//Bボタン
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+			triggerButtonBTime += 1;
+
+		}
+
+		//押していない時
+		if ((joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) == 0) {
+			triggerButtonRightTime = 0;
+		}
+		if ((joyState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) == 0) {
+			triggerButtonLeftTime = 0;
+		}
+		if ((joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) == 0) {
+			triggerButtonBTime = 0;
+		}
+	}
+
+	//選択
+	if (Input::GetInstance()->IsTriggerKey(DIK_LEFT) == true || triggerButtonLeftTime == 1) {
+
 		
 		//スコアアタック
 		scoreAttackMode_->SetTransparency(transparency_);
@@ -135,6 +169,10 @@ void SelectScene::Update(GameManager* gamaManager){
 			else {
 				cursorPosition_.x -= ICON_INTERVAL_.x;
 			}
+	}
+	if (Input::GetInstance()->IsTriggerKey(DIK_RIGHT) == true || triggerButtonRightTime == 1) {
+		if (cursorPosition_.x > INITIALE_POSITION.x*2) {
+
 
 		}
 		if (Input::GetInstance()->IsTriggerKey(DIK_RIGHT) == true) {
@@ -153,6 +191,11 @@ void SelectScene::Update(GameManager* gamaManager){
 				isToTitle_ = true;
 				isFadeOut_ = false;
 			}
+
+	if (cursorPosition_.x == ICON_INTERVAL_.x) {
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+			isToTitle_ = true;
+
 		}
 		if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x) {
 			if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true) {
@@ -178,7 +221,11 @@ void SelectScene::Update(GameManager* gamaManager){
 
 		
 
-			
+	if (cursorPosition_.x == INITIALE_POSITION.x + ICON_INTERVAL_.x) {
+		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+			isToGame_ = true;
+		}
+
 		
 		if (isToGame_ == true) {
 			transparency_ -= 0.05f;
