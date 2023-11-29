@@ -6,7 +6,7 @@
 #include "AllGameScene/Result/Lose/LoseScene.h"
 #include "AllGameScene/Game/GameScene.h"
 #include "AllGameScene/Select/SelectScene.h"
-
+#include "AllGameScene/Result/ResultScene.h"
 
 //コンストラクタ
 GameManager::GameManager() {

@@ -143,6 +143,9 @@ void ScoreAttackScene::FinishUpdate() {
 			
 			
 		}
+
+		// スコアをRecordシングルトンに保存
+		Record::GetInstance()->SetScore(score_->GetScore());
 	}
 }
 
@@ -207,11 +210,7 @@ void ScoreAttackScene::Update(GameManager* gamaManager) {
 		
 		break;
 
-	};
-
-	
-
-	
+	};	
 	
 	//シーンチェンジ
 	if (loseLodingTime_ >= 60) {

@@ -1,5 +1,6 @@
 #pragma once
 #include "Polygon/Sprite/Sprite.h"
+
 #include <memory>
 
 class CollisionManager;
@@ -31,8 +32,25 @@ public:
 	}
 
 	void SetCollisionManager(CollisionManager* player) { collisionManager_ = player; }
+
 	void SetPlayerHitBox(PlayerHitBox* hitBox) {
 		playerHitBox_ = hitBox;
+
+	Vector2 GetScoreBackSizeScale() const {
+		return scoreBackSize_;
+	}
+
+	void SetScoreBackSize(Vector2 size) {
+		scoreBackSize_ = size;
+	}
+
+	Vector2 GetScoreScale() const {
+		return setScale_;
+	}
+
+	void SetScoreScale(Vector2 scale) {
+		setScale_ = scale;
+
 	}
 
 private:
@@ -66,5 +84,7 @@ private:
 	bool isUpScore_ = false;
 	bool isKillEnemy_;
 	int killCount_ = 0;
+	Vector2 setScale_ = { 1.0f,1.0f };
+
 };
 

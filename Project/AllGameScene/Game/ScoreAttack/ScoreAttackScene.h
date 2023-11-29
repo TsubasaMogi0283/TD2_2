@@ -19,6 +19,7 @@
 #include <Object/CountDown/CountDown.h>
 #include <Object/Score/Score.h>
 #include <AllGameScene/GameManager/IGamePlayScene.h>
+#include <Object/Record/Record.h>
 
 
 //StatePatternを使う時は必ず前方宣言をするように
