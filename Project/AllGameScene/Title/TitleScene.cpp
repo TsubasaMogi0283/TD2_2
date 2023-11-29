@@ -26,6 +26,16 @@ void TitleScene::Initialize(GameManager* gamaManager) {
 	startText_.reset(Sprite::Create(startTextureHandle, { 0.0f,0.0f }));
 	backGround_.reset(Sprite::Create(backTextureHandle, { 0.0f, 0.0f }));
 
+
+	//BGM
+	bgm_ = Audio::GetInstance();
+	titleBGMHandle_ = bgm_->LoadWave("Resources/Audio/BGM/TitleSelect.wav");
+	bgm_->PlayWave(titleBGMHandle_, true);
+
+	//SE
+	decideSE_ = Audio::GetInstance();
+	decideSEHandle_ = decideSE_->LoadWave("Resources/Audio/Deside/Decide.wav");
+
 }
 
 void TitleScene::ShowImGui() {
@@ -82,6 +92,8 @@ void TitleScene::Update(GameManager* gamaManager) {
 		}
 
 		if (Input::GetInstance()->IsTriggerKey(DIK_SPACE) == true || triggerButtonBTime == 1) {
+			decideSE_->PlayWave(decideSEHandle_, false);
+			bgm_->StopWave(titleBGMHandle_);
 			isFadeOut_ = true;
 			
 		}
