@@ -38,6 +38,9 @@ private:
 
 	//カーソル
 	std::unique_ptr<Sprite> cursor_ = nullptr;
+
+	//選択Text
+	std::unique_ptr<Sprite> selectText_ = nullptr;
 	
 	//とうもろこし
 	std::unique_ptr<Model> corn_ = nullptr;

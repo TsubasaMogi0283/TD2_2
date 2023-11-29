@@ -20,8 +20,10 @@ void SelectScene::Initialize(GameManager* gamaManager){
 	uint32_t whiteTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/White.png");
 	whiteBack_.reset(Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
 
-	
-	
+	//選択Text
+	selectText_ = std::make_unique<Sprite>();
+	uint32_t selectTextTextureHandle = TextureManager::GetInstance()->LoadTexture("Resources/Select/SelectText.png");
+	selectText_.reset(Sprite::Create(selectTextTextureHandle, { 0.0f,0.0f }));
 
 	//タイトル
 	returnToTile_ = std::make_unique<Sprite>();
@@ -288,6 +290,9 @@ void SelectScene::Update(GameManager* gamaManager){
 
 void SelectScene::Draw(GameManager* gamaManager){
 	whiteBack_->Draw();
+
+	//選択Text
+	selectText_->Draw();
 
 	//タイトル
 	returnToTile_->Draw();
