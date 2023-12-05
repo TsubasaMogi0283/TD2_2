@@ -15,8 +15,9 @@ void GameScene::Initialize(GameManager* gamaManager) {
 
 	mainBGM_ = Audio::GetInstance();
 	mainBgmHandle_ = mainBGM_->LoadWave("Resources/Audio/BGM/MainGame.wav");
-	mainBGM_->PlayWave(mainBgmHandle_, true);
 	mainBGM_->ChangeVolume(mainBgmHandle_, 0.2f);
+	mainBGM_->PlayWave(mainBgmHandle_, true);
+	
 
 	//とうもろこし
 	corn_ = std::make_unique<Corn>();
