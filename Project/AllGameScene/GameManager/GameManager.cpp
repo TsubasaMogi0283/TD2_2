@@ -1,12 +1,7 @@
 #include "GameManager.h"
 
 #include "AllGameScene/SampleScene/SampleScene.h"
-#include "AllGameScene/Title/TitleScene.h"
-#include "AllGameScene/Result/Win/WinScene.h"
-#include "AllGameScene/Result/Lose/LoseScene.h"
-#include "AllGameScene/Game/GameScene.h"
-#include "AllGameScene/Select/SelectScene.h"
-#include "AllGameScene/Result/ResultScene.h"
+#include "AllGameScene/Demo/DemoScene.h"
 
 //コンストラクタ
 GameManager::GameManager() {
@@ -40,7 +35,7 @@ void GameManager::Initialize() {
 	audio_->Initialize();
 
 	//シーンごとに動作確認したいときはここを変えてね
-	currentGamaScene_ = new ResultScene();
+	currentGamaScene_ = new DemoScene();
 
 	currentGamaScene_->Initialize(this);
 

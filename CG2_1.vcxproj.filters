@@ -66,17 +66,8 @@
     <ClCompile Include="Project\CollisionManager\CollisionManager.cpp">
       <Filter>Object\CollisionManager</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Object\Corn\Corn.cpp">
-      <Filter>Object\Stage\Corn</Filter>
-    </ClCompile>
     <ClCompile Include="Ellysia\ConvertFunction\ConvertLog\LogConvert.cpp">
       <Filter>Ellysia\Convert</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Enemy\Enemy.cpp">
-      <Filter>Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Lamp\Lamp.cpp">
-      <Filter>Object\Stage\Lamp</Filter>
     </ClCompile>
     <ClCompile Include="Ellysia\Polygon\Model\Model.cpp">
       <Filter>Ellysia\Polygone\Model</Filter>
@@ -92,12 +83,6 @@
     </ClCompile>
     <ClCompile Include="Ellysia\PipelineManager\PipelineManager.cpp">
       <Filter>Ellysia\PipelineManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\Lose\LoseScene.cpp">
-      <Filter>GameManager\Scene\Lose</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\ResultScene.cpp">
-      <Filter>GameManager\Scene\Result</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ellysia\TextureManager\TextureManager.cpp">
@@ -127,68 +112,8 @@
     <ClCompile Include="Ellysia\WorldTransform\WorldTransform.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Object\Oven\Oven.cpp">
-      <Filter>Object\Stage\Oven</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Popcorn\Popcorn.cpp">
-      <Filter>Object\Popcorn</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\SamplePlayer\SamplePlayer.cpp">
-      <Filter>Object\SamplePlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\CountDown\CountDown.cpp">
-      <Filter>Object\CountDown</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Score\Score.cpp">
-      <Filter>Object\Score</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Result\Win\WinScene.cpp">
-      <Filter>GameManager\Scene\Win</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Title\TitleScene.cpp">
-      <Filter>GameManager\Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\SampleScene\SampleScene.cpp">
-      <Filter>GameManager\Scene\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Select\SelectScene.cpp">
-      <Filter>GameManager\Scene\Select</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\Play\PlayScene.cpp">
-      <Filter>GameManager\Scene\Game\Main\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\Ready\ReadyScene.cpp">
-      <Filter>GameManager\Scene\Game\Main\Ready</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\GameScene.cpp">
-      <Filter>GameManager\Scene\Game\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.cpp">
-      <Filter>GameManager\Scene\Game\ScoreAttack</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Record\Record.cpp">
-      <Filter>Object\Score\Record</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Player\Player.cpp">
-      <Filter>Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Player\Particle\PlayerParticle.cpp">
-      <Filter>Object\Player\Paricle</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Player\HitBox\PlayerHitBox.cpp">
-      <Filter>Object\Player\HitBox</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Enemy\State\Approach\EnemyApproachState.cpp">
-      <Filter>Object\Enemy\State\Approach</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Enemy\State\Attack\EnemyAttackState.cpp">
-      <Filter>Object\Enemy\State\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Enemy\State\Wandering\EnemyWanderingState.cpp">
-      <Filter>Object\Enemy\State\Wandering</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Object\Score\ResultScore\ResultScore.cpp">
-      <Filter>Object\Score</Filter>
+    <ClCompile Include="Project\AllGameScene\Demo\DemoScene.cpp">
+      <Filter>GameManager\Scene\Demo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,17 +180,8 @@
     <ClInclude Include="Project\CollisionManager\CollisionManager.h">
       <Filter>Object\CollisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Object\Corn\Corn.h">
-      <Filter>Object\Stage\Corn</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\ConvertFunction\ConvertLog\LogConvert.h">
       <Filter>Ellysia\Convert</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Enemy\Enemy.h">
-      <Filter>Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Lamp\Lamp.h">
-      <Filter>Object\Stage\Lamp</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Polygon\Model\Model.h">
       <Filter>Ellysia\Polygone\Model</Filter>
@@ -291,14 +207,8 @@
     <ClInclude Include="Ellysia\PipelineManager\PipelineManager.h">
       <Filter>Ellysia\PipelineManager</Filter>
     </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\Lose\LoseScene.h">
-      <Filter>GameManager\Scene\Lose</Filter>
-    </ClInclude>
     <ClInclude Include="Ellysia\Audio\RiffHeader\RiffHeader.h">
       <Filter>Ellysia\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\ResultScene.h">
-      <Filter>GameManager\Scene\Result</Filter>
     </ClInclude>
     <ClInclude Include="Ellysia\Math\Vector\SphereStruct.h">
       <Filter>Ellysia</Filter>
@@ -366,77 +276,8 @@
     <ClInclude Include="Ellysia\Math\Matrix\Matrix\WorldViewMatrix.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Object\Oven\Oven.h">
-      <Filter>Object\Stage\Oven</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Popcorn\Popcorn.h">
-      <Filter>Object\Popcorn</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\SamplePlayer\SamplePlayer.h">
-      <Filter>Object\SamplePlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\CountDown\CountDown.h">
-      <Filter>Object\CountDown</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Score\Score.h">
-      <Filter>Object\Score</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Result\Win\WinScene.h">
-      <Filter>GameManager\Scene\Win</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Title\TitleScene.h">
-      <Filter>GameManager\Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\SampleScene\SampleScene.h">
-      <Filter>GameManager\Scene\Sample</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Select\SelectScene.h">
-      <Filter>GameManager\Scene\Select</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\GameManager\IGameScene.h">
-      <Filter>GameManager\Scene\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\GameManager\IGamePlayScene.h">
-      <Filter>GameManager\Scene\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\Play\PlayScene.h">
-      <Filter>GameManager\Scene\Game\Main\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\Ready\ReadyScene.h">
-      <Filter>GameManager\Scene\Game\Main\Ready</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\GameScene.h">
-      <Filter>GameManager\Scene\Game\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\AllGameScene\Game\ScoreAttack\ScoreAttackScene.h">
-      <Filter>GameManager\Scene\Game\ScoreAttack</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Record\Record.h">
-      <Filter>Object\Score\Record</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Player\Player.h">
-      <Filter>Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Player\Particle\PlayerParticle.h">
-      <Filter>Object\Player\Paricle</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Player\HitBox\PlayerHitBox.h">
-      <Filter>Object\Player\HitBox</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Enemy\State\IEnemyMoveState.h">
-      <Filter>Object\Enemy\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Enemy\State\Approach\EnemyApproachState.h">
-      <Filter>Object\Enemy\State\Approach</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Enemy\State\Attack\EnemyAttackState.h">
-      <Filter>Object\Enemy\State\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Enemy\State\Wandering\EnemyWanderingState.h">
-      <Filter>Object\Enemy\State\Wandering</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Object\Score\ResultScore\ResultScore.h">
-      <Filter>Object\Score</Filter>
+    <ClInclude Include="Project\AllGameScene\Demo\DemoScene.h">
+      <Filter>GameManager\Scene\Demo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -478,9 +319,6 @@
     <Filter Include="GameManager\Scene">
       <UniqueIdentifier>{df603c16-439e-47a2-9c2c-4a8e3cd34ac0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameManager\Scene\Game">
-      <UniqueIdentifier>{9d11e977-b399-4e4d-a64b-17d74e344f49}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ImGui">
       <UniqueIdentifier>{9905aeaf-2a8a-46ac-beab-fa38f5065526}</UniqueIdentifier>
     </Filter>
@@ -493,9 +331,6 @@
     <Filter Include="Object\CollisionManager">
       <UniqueIdentifier>{a5f6cfd9-efa4-480c-82c3-486126ff0add}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Enemy">
-      <UniqueIdentifier>{b872413e-dcc8-4e27-b96e-761ac6738d69}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{30a29118-9e36-4c45-87b4-f85e67becb88}</UniqueIdentifier>
     </Filter>
@@ -504,12 +339,6 @@
     </Filter>
     <Filter Include="Ellysia\PipelineManager">
       <UniqueIdentifier>{78d35fae-67b7-44be-83c8-605fe8bcbd13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Lose">
-      <UniqueIdentifier>{f84c0e9a-77f1-4101-9a4f-505e568830bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Result">
-      <UniqueIdentifier>{62fa34f1-2147-4191-a5de-84f6470a7e63}</UniqueIdentifier>
     </Filter>
     <Filter Include="Ellysia\Polygone">
       <UniqueIdentifier>{1e0b5a4b-7e05-4260-bb91-f583c5b07d1d}</UniqueIdentifier>
@@ -538,80 +367,11 @@
     <Filter Include="Math\Vector">
       <UniqueIdentifier>{6f50afcd-072e-4f63-a883-580815f01cca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Player">
-      <UniqueIdentifier>{29007251-23ba-4e0c-83dc-6475302320e9}</UniqueIdentifier>
+    <Filter Include="GameManager\Scene\Demo">
+      <UniqueIdentifier>{972ae035-0fe5-4f61-9575-7d2af4252326}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Popcorn">
-      <UniqueIdentifier>{6634f24c-bd5c-4cf4-97e1-3c4b0adfd6f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\SamplePlayer">
-      <UniqueIdentifier>{2abb7856-db44-4310-ba6e-e54abbbc64b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\CountDown">
-      <UniqueIdentifier>{4be77b51-c5ba-43ea-b702-682300069b1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Score">
-      <UniqueIdentifier>{32029754-1c9d-4db2-a9cf-f1ff6495b736}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Stage">
-      <UniqueIdentifier>{17e807d8-50d5-4fdf-9736-a7b119753b1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Stage\Corn">
-      <UniqueIdentifier>{37579799-6d38-4354-bca6-1e15ed8fb26f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Stage\Oven">
-      <UniqueIdentifier>{181c8a95-9c04-4efa-9935-2c68d1033f75}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Stage\Lamp">
-      <UniqueIdentifier>{5bdd3bc6-b005-4567-ad6a-c88fdcfe690c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Win">
-      <UniqueIdentifier>{277b5f31-6d28-4e16-ade1-0019b5561d1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Title">
-      <UniqueIdentifier>{3987aa3b-d683-4661-98c6-50e2844ff21f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Sample">
-      <UniqueIdentifier>{31137849-dc56-4635-932c-f0757a45d975}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Select">
-      <UniqueIdentifier>{947b4c0f-5f47-4524-9ef0-11338246a076}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Interface">
-      <UniqueIdentifier>{5b1dca75-3140-4653-a958-218284dd294b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Game\Main">
-      <UniqueIdentifier>{33b72b4f-8c7a-4aa7-935d-a9b290affaab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Game\Main\Play">
-      <UniqueIdentifier>{22c5cd0a-2317-459f-9ff1-4455eea7a9bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Game\Main\Ready">
-      <UniqueIdentifier>{fb97fd13-8f3f-4d19-99a5-3bbb695270c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManager\Scene\Game\ScoreAttack">
-      <UniqueIdentifier>{4d963fec-fa77-429a-9a6e-db1ed0e63a29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Score\Record">
-      <UniqueIdentifier>{89de5ab1-0143-4a02-9d52-4528d02467eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Player\Paricle">
-      <UniqueIdentifier>{6bd4783f-a9e2-4ab3-8dc0-429caa738b81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Player\HitBox">
-      <UniqueIdentifier>{57768f86-0130-46f4-afe9-6b8a1e2709e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Enemy\State">
-      <UniqueIdentifier>{ca363eb2-a711-46c2-acd4-1695c60f396e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Enemy\State\Approach">
-      <UniqueIdentifier>{f5b73bf1-5bcc-4453-8250-5e9c8f61436a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Enemy\State\Attack">
-      <UniqueIdentifier>{4578ce09-55b0-4ec7-a7fe-95bf19688209}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Enemy\State\Wandering">
-      <UniqueIdentifier>{eccc5eef-12ed-492a-8014-1ee028941679}</UniqueIdentifier>
+    <Filter Include="Object\DemoPlayer">
+      <UniqueIdentifier>{b55f2bd9-1e67-40fb-8110-808913370026}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
