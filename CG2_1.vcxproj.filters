@@ -115,6 +115,12 @@
     <ClCompile Include="Project\AllGameScene\Demo\DemoScene.cpp">
       <Filter>GameManager\Scene\Demo</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Object\DemoPlayer\DemoPlayer.cpp">
+      <Filter>Object\DemoPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Object\DemoGround\DemoGround.cpp">
+      <Filter>Object\DemoGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellysia\Audio\Audio.h">
@@ -279,6 +285,12 @@
     <ClInclude Include="Project\AllGameScene\Demo\DemoScene.h">
       <Filter>GameManager\Scene\Demo</Filter>
     </ClInclude>
+    <ClInclude Include="Project\Object\DemoPlayer\DemoPlayer.h">
+      <Filter>Object\DemoPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Object\DemoGround\DemoGround.h">
+      <Filter>Object\DemoGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Object2d.hlsli">
@@ -372,6 +384,9 @@
     </Filter>
     <Filter Include="Object\DemoPlayer">
       <UniqueIdentifier>{b55f2bd9-1e67-40fb-8110-808913370026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\DemoGround">
+      <UniqueIdentifier>{8eca511f-910f-4c97-828d-fc00591a9094}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

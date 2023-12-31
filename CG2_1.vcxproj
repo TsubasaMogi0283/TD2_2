@@ -124,6 +124,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\AllGameScene\Demo\DemoScene.cpp" />
     <ClCompile Include="Project\AllGameScene\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\CollisionManager\CollisionManager.cpp" />
+    <ClCompile Include="Project\Object\DemoGround\DemoGround.cpp" />
+    <ClCompile Include="Project\Object\DemoPlayer\DemoPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -202,6 +204,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\AllGameScene\Demo\DemoScene.h" />
     <ClInclude Include="Project\AllGameScene\GameManager\GameManager.h" />
     <ClInclude Include="Project\CollisionManager\CollisionManager.h" />
+    <ClInclude Include="Project\Object\DemoGround\DemoGround.h" />
+    <ClInclude Include="Project\Object\DemoPlayer\DemoPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Ellysia\externals\imGui\LICENSE.txt" />
